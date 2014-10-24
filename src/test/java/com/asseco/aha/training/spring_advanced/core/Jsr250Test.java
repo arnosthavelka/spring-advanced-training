@@ -12,6 +12,8 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import com.asseco.aha.training.spring_advanced.core.scope.TokenBean;
+
 @RunWith(SpringJUnit4ClassRunner.class)
 // @SpringApplicationConfiguration(classes = Jsr250Test.Context.class)
 @ContextConfiguration

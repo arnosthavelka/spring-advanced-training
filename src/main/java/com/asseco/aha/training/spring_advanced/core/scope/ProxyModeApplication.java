@@ -1,4 +1,4 @@
-package com.asseco.aha.training.spring_advanced.core;
+package com.asseco.aha.training.spring_advanced.core.scope;
 
 import java.util.UUID;
 
@@ -35,11 +35,13 @@ public class ProxyModeApplication {
     }
 
     @Bean
-    public TokenBean beanSingleton() {
+    public TokenBean beanSingleton(final TokenBean beanPrototype) {
+        // public TokenBean beanSingleton() {
         return new TokenBean() {
             @Override
             public String getToken() {
-                return beanPrototype().toString();
+                return beanPrototype.toString();
+                // return beanPrototype().toString();
             }
         };
     }

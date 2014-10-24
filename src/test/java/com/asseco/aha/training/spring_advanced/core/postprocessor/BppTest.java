@@ -1,4 +1,4 @@
-package com.asseco.aha.training.spring_advanced.core;
+package com.asseco.aha.training.spring_advanced.core.postprocessor;
 
 import org.junit.Assert;
 import org.junit.Test;
