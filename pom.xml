@@ -18,10 +18,24 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<start-class>com.asseco.aha.training.spring_advanced.sb.SpringBootApplication</start-class>
+		<java.version>1.7</java.version>
+	</properties>
+
 	<dependencies>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-aop</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-rest</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-actuator</artifactId>
 		</dependency>
 		<!-- dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -38,13 +52,8 @@
 		</dependency>
 	</dependencies>
 
-	<properties>
-		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<start-class>com.asseco.aha.training.spring-advanced.Application</start-class>
-		<java.version>1.7</java.version>
-	</properties>
-
 	<build>
+		<finalName>spring-advanced-training</finalName>
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
