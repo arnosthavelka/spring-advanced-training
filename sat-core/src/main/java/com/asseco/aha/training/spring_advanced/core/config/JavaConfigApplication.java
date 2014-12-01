@@ -44,4 +44,9 @@ public class JavaConfigApplication {
         return bean;
     }
 
+    @Bean
+    public User userArny() {
+        return new User("Arny");
+    }
+
 }

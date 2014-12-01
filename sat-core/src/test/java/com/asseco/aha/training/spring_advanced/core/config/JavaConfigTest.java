@@ -1,6 +1,7 @@
 package com.asseco.aha.training.spring_advanced.core.config;
 
-import org.junit.Assert;
+import static org.junit.Assert.assertEquals;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;
@@ -28,18 +29,27 @@ public class JavaConfigTest {
     @Qualifier("randomGreeting")
     private String randomBean;
 
+    @Autowired
+    @Qualifier("userArny")
+    private User userArny;
+
     @Test
     public void testHello() {
-        Assert.assertEquals("Hello all!", helloBean);
+        assertEquals("Hello all!", helloBean);
     }
 
     @Test
     public void testHi() {
-        Assert.assertEquals("Hi all!", hiBean);
+        assertEquals("Hi all!", hiBean);
     }
 
     @Test
     public void testRandom() {
         LOG.info(randomBean.toString());
+    }
+
+    @Test
+    public void testUserInstance() {
+        assertEquals("Arny", userArny.getName());
     }
 }
