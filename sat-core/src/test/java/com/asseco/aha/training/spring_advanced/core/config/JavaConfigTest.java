@@ -1,6 +1,8 @@
 package com.asseco.aha.training.spring_advanced.core.config;
 
-import static org.junit.Assert.assertEquals;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.equalTo;
+import static org.hamcrest.Matchers.is;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -35,12 +37,13 @@ public class JavaConfigTest {
 
     @Test
     public void testHello() {
-        assertEquals("Hello all!", helloBean);
+        assertThat(helloBean, equalTo("Hello all!"));
+        // assertEquals("Hello all!", helloBean);
     }
 
     @Test
     public void testHi() {
-        assertEquals("Hi all!", hiBean);
+        assertThat(hiBean, is(equalTo("Hi all!")));
     }
 
     @Test
@@ -50,6 +53,6 @@ public class JavaConfigTest {
 
     @Test
     public void testUserInstance() {
-        assertEquals("Arny", userArny.getName());
+        assertThat(userArny.getName(), is(equalTo("Arny")));
     }
 }
