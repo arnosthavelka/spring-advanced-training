@@ -8,9 +8,11 @@ import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.FilterType;
+import org.springframework.stereotype.Component;
 
 @Configuration
-@ComponentScan("com.asseco.aha.training.spring_advanced.core.config")
+@ComponentScan(basePackages = { "com.asseco.aha.training.spring_advanced.core.config" }, excludeFilters = @ComponentScan.Filter(type = FilterType.ANNOTATION, value = Component.class))
 @EnableAutoConfiguration
 public class JavaConfigApplication {
 
