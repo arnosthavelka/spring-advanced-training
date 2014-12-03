@@ -10,7 +10,7 @@ import org.springframework.test.context.ActiveProfiles;
 public class RichardConfigTest extends MyConfigTest {
 
     @Test
-    public void testHello() {
+    public void testUser() {
         assertThat(user.getName(), equalTo("Richard"));
     }
 }

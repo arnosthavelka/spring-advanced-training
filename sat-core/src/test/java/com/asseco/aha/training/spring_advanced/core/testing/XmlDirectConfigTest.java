@@ -1,4 +1,4 @@
-package com.asseco.aha.training.spring_advanced.core.config;
+package com.asseco.aha.training.spring_advanced.core.testing;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
@@ -7,12 +7,14 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.test.context.ContextConfiguration;
+import org.springframework.boot.test.SpringApplicationConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-@ContextConfiguration
+import com.asseco.aha.training.spring_advanced.core.config.User;
+
 @RunWith(SpringJUnit4ClassRunner.class)
-public class XmlDefaultConfigTest {
+@SpringApplicationConfiguration(locations = "classpath:spring/xml-config.xml")
+public class XmlDirectConfigTest {
 
     @Autowired
     @Qualifier("user")
@@ -20,7 +22,7 @@ public class XmlDefaultConfigTest {
 
     @Test
     public void testHello() {
-        assertThat(user.getName(), equalTo("Michel"));
+        assertThat(user.getName(), equalTo("Arny"));
     }
 
 }
