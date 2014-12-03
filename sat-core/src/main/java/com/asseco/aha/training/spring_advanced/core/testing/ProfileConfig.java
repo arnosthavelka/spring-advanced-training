@@ -7,7 +7,7 @@ import org.springframework.context.annotation.Configuration;
 import com.asseco.aha.training.spring_advanced.core.config.User;
 
 @Configuration
-public class MyConfig {
+public class ProfileConfig {
 
     @Autowired
     private User user;

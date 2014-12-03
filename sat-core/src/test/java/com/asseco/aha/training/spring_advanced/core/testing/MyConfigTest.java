@@ -9,7 +9,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import com.asseco.aha.training.spring_advanced.core.config.User;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@SpringApplicationConfiguration(classes = { MyConfig.class, RichardConfig.class, BarbaraConfig.class })
+@SpringApplicationConfiguration(classes = { ProfileConfig.class, RichardConfig.class, BarbaraConfig.class })
 public abstract class MyConfigTest {
 
     @Autowired
