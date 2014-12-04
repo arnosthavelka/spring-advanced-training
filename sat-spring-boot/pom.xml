@@ -3,11 +3,11 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
-	<artifactId>sat-core</artifactId>
+	<artifactId>sat-spring-boot</artifactId>
 	<packaging>jar</packaging>
 
-	<name>spring-advanced-core</name>
-	<description>Demonstration of Spring framework</description>
+	<name>spring-spring-boot</name>
+	<description>Demonstration of Spring Boot</description>
 
 	<parent>
 		<groupId>com.asseco.aha.training.spring-advanced</groupId>
@@ -16,7 +16,7 @@
 	</parent>
 
 	<properties>
-		<start-class>com.asseco.aha.training.spring_advanced.core.Application</start-class>
+		<start-class>com.asseco.aha.training.spring_advanced.sb.SpringBootApplication</start-class>
 	</properties>
 
 	<dependencies>
@@ -33,10 +33,14 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
+		<dependency>
+			<groupId> org.springframework.boot</groupId>
+			<artifactId>spring-boot-actuator</artifactId>
+		</dependency>
 	</dependencies>
 
 	<build>
-		<finalName>spring-advanced-core</finalName>
+		<finalName>sat-spring-boot</finalName>
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
