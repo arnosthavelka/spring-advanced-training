@@ -3,11 +3,11 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
-	<artifactId>sat-spring-boot</artifactId>
+	<artifactId>sat-spring-boot-admin</artifactId>
 	<packaging>jar</packaging>
 
-	<name>spring-spring-boot</name>
-	<description>Demonstration of Spring Boot</description>
+	<name>spring-spring-boot-admin</name>
+	<description>Demonstration of Spring Boot Admin Console</description>
 
 	<parent>
 		<groupId>com.asseco.aha.training.spring-advanced</groupId>
@@ -16,7 +16,7 @@
 	</parent>
 
 	<properties>
-		<start-class>com.asseco.aha.training.spring_advanced.sb.SpringBootApplication</start-class>
+		<start-class>com.asseco.aha.training.spring_advanced.sba.AdminServerApplication</start-class>
 	</properties>
 
 	<dependencies>
@@ -29,23 +29,14 @@
 			<artifactId>spring-boot-starter-data-rest</artifactId>
 		</dependency>
 		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-test</artifactId>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId> org.springframework.boot</groupId>
-			<artifactId>spring-boot-actuator</artifactId>
-		</dependency>
-		<dependency>
 			<groupId>de.codecentric</groupId>
-			<artifactId>spring-boot-starter-admin-client</artifactId>
+			<artifactId>spring-boot-admin-server</artifactId>
 			<version>1.0.5</version>
-		</dependency>		
+		</dependency>
 	</dependencies>
 
 	<build>
-		<finalName>sat-spring-boot</finalName>
+		<finalName>sat-spring-boot-admin</finalName>
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
