@@ -8,10 +8,10 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 @ComponentScan(basePackages = "com.asseco.aha.training.spring_advanced.jdbc")
 @EnableAutoConfiguration
-public class JdbcPlainApplication {
+public class JdbcApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(JdbcPlainApplication.class, args);
+        SpringApplication.run(JdbcApplication.class, args);
     }
 
 }

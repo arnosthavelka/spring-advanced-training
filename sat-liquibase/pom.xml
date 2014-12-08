@@ -3,11 +3,11 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
-	<artifactId>sat-jdbc</artifactId>
+	<artifactId>sat-liquibase</artifactId>
 	<packaging>jar</packaging>
 
-	<name>spring-advanced-jdbc</name>
-	<description>Demonstration JDBC in Spring framework</description>
+	<name>spring-advanced-liquibase</name>
+	<description>Demonstration Liquibase usage in Spring framework</description>
 
 	<parent>
 		<groupId>com.asseco.aha.training.spring-advanced</groupId>
@@ -16,7 +16,7 @@
 	</parent>
 
 	<properties>
-		<start-class>com.asseco.aha.training.spring_advanced.jdbc.JdbcApplication</start-class>
+		<start-class>com.asseco.aha.training.spring_advanced.liquibase.LiquibaseApplication</start-class>
 	</properties>
 
 	<dependencies>
@@ -27,6 +27,10 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-jdbc</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.liquibase</groupId>
+			<artifactId>liquibase-core</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
