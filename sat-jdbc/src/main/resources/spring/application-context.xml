@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:ctx="http://www.springframework.org/schema/context"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:jdbc="http://www.springframework.org/schema/jdbc"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="
+         http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
+         http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.2.xsd
+         http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.2.xsd
+         http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.2.xsd
+         http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc-3.2.xsd">
+
+	<!-- Loading test properties.>
+	<ctx:property-placeholder location="classpath:/META-INF/test.properties" /-->
+
+	<!-- Embedded (in-memory) database. -->
+	<jdbc:embedded-database id="dataSourceNT" type="HSQL">
+		<jdbc:script location="classpath:db/db_schema.sql" encoding="UTF-8"/>
+		<jdbc:script location="classpath:db/db_test-data.sql" encoding="UTF-8"/>
+	</jdbc:embedded-database>
+
+	<!-- JPA Transaction Manager configuration. -->
+	<bean id="transactionManagerNT" class="org.springframework.orm.jpa.JpaTransactionManager" p:entityManagerFactory-ref="entityManagerFactoryNT"/>
+
+	<!-- Local Entity Manager Factory configuration. -->
+	<bean id="entityManagerFactoryNT" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean"
+		p:persistenceProviderClass="org.hibernate.ejb.HibernatePersistence" 
+		p:packagesToScan="com.asseco.csu.sms.klas.server.nt.persistence.entity"
+		p:persistenceUnitName="csu_sms_klas_nt" 
+		p:dataSource-ref="dataSourceNT" 
+		p:jpaVendorAdapter-ref="jpaVendorAdapterNT"/>
+
+	<bean id="jpaVendorAdapterNT" class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
+		<property name="database" value="HSQL" />
+		<property name="showSql" value="true" />
+		<property name="generateDdl" value="false" />
+	</bean>
+
+</beans>
