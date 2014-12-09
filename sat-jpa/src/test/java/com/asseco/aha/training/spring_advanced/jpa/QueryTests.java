@@ -15,21 +15,28 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.asseco.aha.training.spring_advanced.jpa.domain.City;
 import com.asseco.aha.training.spring_advanced.jpa.repository.CityRepository;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringApplicationConfiguration(classes = JpaApplication.class)
+@Transactional(readOnly = true)
 // TODO:
-// 1. JPA named queryhttp://docs.spring.io/spring-data/data-jpa/docs/1.0.x/reference/html/#jpa.query-methods.query-creation
 // 2. advanced search http://spring.io/blog/2011/04/26/advanced-spring-data-jpa-specifications-and-querydsl/
-public class JpaTests {
+public class QueryTests {
 
-    private Logger LOG = LoggerFactory.getLogger(JpaTests.class);
+    private Logger LOG = LoggerFactory.getLogger(QueryTests.class);
 
     @Autowired
     CityRepository cityRepository;
+
+    @Test
+    public void testCount() {
+        long count = cityRepository.count();
+        assertThat(15L, equalTo(count));
+    }
 
     @Test
     public void testPaging() {
