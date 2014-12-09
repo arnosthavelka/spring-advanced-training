@@ -5,7 +5,7 @@ insert into city(country, name, state) values ('Australia', 'Sydney', 'New South
 -- AMERICA
 insert into city(country, name, state) values ('Canada', 'Montreal', 'Quebec')
 insert into city(country, name, state) values ('USA', 'Atlanta', 'GA')
-insert into city(country, name, state) values ('USA', 'Chicago', 'IL')
+insert into city(country, name, state) values ('USA', 'Chicago', '')
 insert into city(country, name, state) values ('USA', 'Miami', 'FL')
 insert into city(country, name, state) values ('USA', 'New York', 'NY')
 insert into city(country, name, state) values ('USA', 'San Francisco', 'CA')
