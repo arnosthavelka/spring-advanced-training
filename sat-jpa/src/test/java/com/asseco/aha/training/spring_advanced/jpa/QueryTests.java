@@ -33,15 +33,15 @@ public class QueryTests {
     @Test
     public void testCount() {
         long count = cityRepository.count();
-        assertThat(15L, equalTo(count));
+        assertThat(count, equalTo(15L));
     }
 
     @Test
     public void testPaging() {
         Page<City> page = cityRepository.findAll(new PageRequest(0, 5));
-        assertThat(5, equalTo(page.getSize()));
-        assertThat(15L, equalTo(page.getTotalElements()));
-        assertThat(3, equalTo(page.getTotalPages()));
+        assertThat(page.getSize(), equalTo(5));
+        assertThat(page.getTotalElements(), equalTo(15L));
+        assertThat(page.getTotalPages(), equalTo(3));
         LOG.debug("\n### testPagingt output");
         for (City city : page.getContent()) {
             LOG.debug(city.toString());
@@ -51,7 +51,7 @@ public class QueryTests {
     @Test
     public void testSorting() {
         Page<City> page = cityRepository.findAll(new PageRequest(0, 5, Sort.Direction.DESC, "country", "name"));
-        assertThat(5, equalTo(page.getSize()));
+        assertThat(page.getSize(), equalTo(5));
         LOG.debug("\n### testSorting output");
         for (City city : page.getContent()) {
             LOG.debug(city.toString());
@@ -61,25 +61,25 @@ public class QueryTests {
     @Test
     public void testCityByName() {
         City city = cityRepository.findByNameAndCountryAllIgnoringCase("Tokyo", "Japan");
-        assertThat("Tokyo", equalTo(city.getName()));
-        assertThat("Japan", equalTo(city.getCountry()));
+        assertThat(city.getName(), equalTo("Tokyo"));
+        assertThat(city.getCountry(), equalTo("Japan"));
     }
 
     @Test
     public void testQueryCityByName() {
         City city = cityRepository.findByName("Miami");
-        assertThat("Miami", equalTo(city.getName()));
-        assertThat("USA", equalTo(city.getCountry()));
+        assertThat(city.getName(), equalTo("Miami"));
+        assertThat(city.getCountry(), equalTo("USA"));
     }
 
     @Test
     public void testQueryCityAndCountry() {
         List<City> result = cityRepository.findByNameAndCountry("% %", "USA");
-        assertThat(2, equalTo(result.size()));
+        assertThat(result.size(), equalTo(2));
 
         City newYork = result.get(0);
-        assertThat("New York", equalTo(newYork.getName()));
-        assertThat("USA", equalTo(newYork.getCountry()));
+        assertThat(newYork.getName(), equalTo("New York"));
+        assertThat(newYork.getCountry(), equalTo("USA"));
     }
 
 }

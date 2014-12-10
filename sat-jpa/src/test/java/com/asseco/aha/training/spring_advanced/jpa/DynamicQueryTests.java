@@ -32,10 +32,10 @@ public class DynamicQueryTests {
     @Test
     public void testCitiesWithState() {
         List<City> result = cityRepository.findAll(cityHasState(), new Sort("country", "name"));
-        assertThat(9, equalTo(result.size()));
+        assertThat(result.size(), equalTo(9));
         City newYork = result.get(0);
-        assertThat("Brisbane", equalTo(newYork.getName()));
-        assertThat("Australia", equalTo(newYork.getCountry()));
+        assertThat(newYork.getName(), equalTo("Brisbane"));
+        assertThat(newYork.getCountry(), equalTo("Australia"));
     }
 
     @Test
