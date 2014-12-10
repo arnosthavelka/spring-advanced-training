@@ -7,7 +7,7 @@ import org.junit.Test;
 import org.springframework.test.context.ActiveProfiles;
 
 @ActiveProfiles("richard")
-public class RichardConfigTest extends MyConfigTest {
+public class RichardConfigTest extends AbstractConfigTest {
 
     @Test
     public void testUser() {

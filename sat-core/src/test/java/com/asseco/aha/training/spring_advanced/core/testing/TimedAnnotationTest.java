@@ -16,7 +16,7 @@ public class TimedAnnotationTest {
     @Test
     @Timed(millis = 100)
     public void testOkTime() {
-        assertThat(Boolean.TRUE, equalTo(1 == 1));
+        assertThat(true, equalTo(Boolean.TRUE));
     }
 
     @Test()
@@ -24,14 +24,14 @@ public class TimedAnnotationTest {
     public void testSpringTimeout() throws InterruptedException {
         Thread.sleep(50);
         // Thread.sleep(120);
-        assertThat(Boolean.TRUE, equalTo(1 == 1));
+        assertThat(true, equalTo(Boolean.TRUE));
     }
 
     @Test(timeout = 100)
     public void testJUnitTimeout() throws InterruptedException {
         Thread.sleep(50);
         // Thread.sleep(120);
-        assertThat(Boolean.TRUE, equalTo(1 == 1));
+        assertThat(true, equalTo(Boolean.TRUE));
     }
 
 }

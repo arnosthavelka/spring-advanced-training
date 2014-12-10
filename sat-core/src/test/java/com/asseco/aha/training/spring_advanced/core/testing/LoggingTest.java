@@ -48,11 +48,11 @@ public class LoggingTest {
 
     @Test
     public void testOk() {
-        assertThat(10, equalTo(5 + 5));
+        assertThat(5 + 5, equalTo(10));
     }
 
     @Test
     public void testFailure() {
-        assertThat(10, not(equalTo(5 + 6)));
+        assertThat(5 + 6, not(equalTo(10)));
     }
 }

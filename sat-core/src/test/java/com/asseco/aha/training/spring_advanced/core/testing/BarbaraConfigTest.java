@@ -9,7 +9,7 @@ import org.springframework.test.annotation.IfProfileValue;
 import org.springframework.test.context.ActiveProfiles;
 
 @ActiveProfiles("barbara")
-public class BarbaraConfigTest extends MyConfigTest {
+public class BarbaraConfigTest extends AbstractConfigTest {
 
     @Test
     public void testUserOK() {

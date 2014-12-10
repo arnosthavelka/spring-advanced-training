@@ -12,7 +12,7 @@ import org.springframework.context.annotation.FilterType;
 import org.springframework.stereotype.Component;
 
 @Configuration
-@ComponentScan(basePackages = { "com.asseco.aha.training.spring_advanced.core.config" }, excludeFilters = @ComponentScan.Filter(type = FilterType.ANNOTATION, value = Component.class))
+@ComponentScan(basePackages = { "com.asseco.aha.training.spring_advanced.core.testing" }, excludeFilters = @ComponentScan.Filter(type = FilterType.ANNOTATION, value = Component.class))
 @EnableAutoConfiguration
 public class JavaConfigApplication {
 
