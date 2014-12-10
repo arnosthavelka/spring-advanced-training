@@ -23,7 +23,7 @@ import com.asseco.aha.training.spring_advanced.jpa.repository.CityRepository;
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringApplicationConfiguration(classes = JpaApplication.class)
 @Transactional(readOnly = true)
-// @see advanced search http://spring.io/blog/2011/04/26/advanced-spring-data-jpa-specifications-and-querydsl/
+// @see http://spring.io/blog/2011/04/26/advanced-spring-data-jpa-specifications-and-querydsl/
 public class DynamicQueryTests {
 
     @Autowired

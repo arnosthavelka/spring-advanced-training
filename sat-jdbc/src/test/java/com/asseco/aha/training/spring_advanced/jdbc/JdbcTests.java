@@ -20,7 +20,7 @@ public class JdbcTests {
     @Test
     public void testCount() {
         Integer count = jdbcTemplate.queryForObject("select count(*) from CATCIS", Integer.class);
-        assertThat(7, equalTo(count));
+        assertThat(count, equalTo(7));
     }
 
 }
