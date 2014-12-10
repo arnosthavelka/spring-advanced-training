@@ -31,12 +31,12 @@ public class CitySpecifications {
         };
     }
 
-    public static Specification<City> cityFromUSA() {
+    public static Specification<City> cityFromState(final String state) {
         return new Specification<City>() {
 
             @Override
             public Predicate toPredicate(Root<City> root, CriteriaQuery<?> query, CriteriaBuilder cb) {
-                return cb.equal(root.get("country"), "USA");
+                return cb.equal(root.get("country"), state);
             }
         };
     }

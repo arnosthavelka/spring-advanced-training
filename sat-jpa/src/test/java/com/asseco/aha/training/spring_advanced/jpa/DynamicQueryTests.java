@@ -1,6 +1,6 @@
 package com.asseco.aha.training.spring_advanced.jpa;
 
-import static com.asseco.aha.training.spring_advanced.jpa.repository.CitySpecifications.cityFromUSA;
+import static com.asseco.aha.training.spring_advanced.jpa.repository.CitySpecifications.cityFromState;
 import static com.asseco.aha.training.spring_advanced.jpa.repository.CitySpecifications.cityHasNoState;
 import static com.asseco.aha.training.spring_advanced.jpa.repository.CitySpecifications.cityHasState;
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -28,7 +28,7 @@ public class DynamicQueryTests extends AbstractCityTests {
 
     @Test
     public void testCitiesWithoutStateInUsa() {
-        List<City> result = cityRepository.findAll(where(cityHasNoState()).and(cityFromUSA()), new Sort("country", "name"));
+        List<City> result = cityRepository.findAll(where(cityHasNoState()).and(cityFromState("USA")), new Sort("country", "name"));
         assertThat(result.size(), equalTo(1));
         City newYork = result.get(0);
         assertThat(newYork.getName(), equalTo("Chicago"));
