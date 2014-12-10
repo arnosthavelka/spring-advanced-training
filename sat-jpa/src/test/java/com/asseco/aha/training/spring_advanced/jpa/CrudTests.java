@@ -23,12 +23,11 @@ public class CrudTests extends AbstractCityTests {
 
     @Test
     public void testDelete() {
-        City city = new City("Wien", "Austria", "");
-        city = cityRepository.saveAndFlush(city);
+        City city = cityRepository.findByName("Prague");
         long count = cityRepository.count();
-        assertThat(count, equalTo(16L));
+        assertThat(count, equalTo(15L));
         cityRepository.delete(city);
         count = cityRepository.count();
-        assertThat(count, equalTo(15L));
+        assertThat(count, equalTo(14L));
     }
 }
