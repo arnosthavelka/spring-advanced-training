@@ -10,7 +10,7 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 
 @Entity
-@NamedQueries({ @NamedQuery(name = "City.findByName", query = "select c from City c where c.name = ?1"),
+@NamedQueries(value = { @NamedQuery(name = "City.findByName", query = "select c from City c where c.name = ?1"),
         @NamedQuery(name = "City.findByNameAndCountry", query = "select c from City c where c.name like ?1 and c.country = ?2") })
 public class City implements Serializable {
 

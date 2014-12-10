@@ -10,24 +10,12 @@ import static org.springframework.data.jpa.domain.Specifications.where;
 import java.util.List;
 
 import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.SpringApplicationConfiguration;
 import org.springframework.data.domain.Sort;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.springframework.transaction.annotation.Transactional;
 
 import com.asseco.aha.training.spring_advanced.jpa.domain.City;
-import com.asseco.aha.training.spring_advanced.jpa.repository.CityRepository;
 
-@RunWith(SpringJUnit4ClassRunner.class)
-@SpringApplicationConfiguration(classes = JpaApplication.class)
-@Transactional(readOnly = true)
 // @see http://spring.io/blog/2011/04/26/advanced-spring-data-jpa-specifications-and-querydsl/
-public class DynamicQueryTests {
-
-    @Autowired
-    CityRepository cityRepository;
+public class DynamicQueryTests extends AbstractCityTests {
 
     @Test
     public void testCitiesWithState() {
