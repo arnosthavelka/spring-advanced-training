@@ -7,6 +7,7 @@ import javax.websocket.server.PathParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.asseco.aha.training.spring_advanced.rest.domain.City;
@@ -22,7 +23,7 @@ public class CityController {
     /*
      * http://localhost:8080/city/, http://localhost:8080/city/?country=Spain, http://localhost:8080/city/?sorting=id
      */
-    @RequestMapping("/")
+    @RequestMapping(value = "/", method = RequestMethod.GET)
     public List<City> list(@PathParam("country") String country, @PathParam("sorting") String sorting) {
         return cityService.list(country, sorting);
     }
@@ -30,7 +31,7 @@ public class CityController {
     /*
      * http://localhost:8080/city/105
      */
-    @RequestMapping(value = "/{id}")
+    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public City item(@PathVariable("id") long id) {
         return cityService.item(id);
     }
