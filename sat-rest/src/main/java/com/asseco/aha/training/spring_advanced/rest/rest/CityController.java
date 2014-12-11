@@ -30,7 +30,7 @@ public class CityController {
     /*
      * http://localhost:8080/city/105
      */
-    @RequestMapping(value = "/{id}", produces = { /* "application/xml", */"application/json" })
+    @RequestMapping(value = "/{id}")
     public City item(@PathVariable("id") long id) {
         return cityService.item(id);
     }
