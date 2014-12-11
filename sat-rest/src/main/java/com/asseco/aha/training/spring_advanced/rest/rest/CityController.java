@@ -26,7 +26,7 @@ public class CityController {
     /*
      * http://localhost:8080/city/, http://localhost:8080/city/?country=Spain, http://localhost:8080/city/?sorting=id
      */
-    @RequestMapping(value = "/", method = RequestMethod.GET)
+    @RequestMapping(value = "/", method = RequestMethod.GET, produces = { MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE })
     @JsonView(View.Summary.class)
     public List<City> list(@PathParam("country") String country, @PathParam("sorting") String sorting) {
         return cityService.list(country, sorting);
