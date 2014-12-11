@@ -4,16 +4,14 @@ import java.util.UUID;
 
 import org.springframework.beans.factory.config.ConfigurableBeanFactory;
 import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Scope;
 import org.springframework.context.annotation.ScopedProxyMode;
 
-@Configuration
+@SpringBootApplication
 @ComponentScan("com.asseco.aha.training.spring_advanced.core.scope")
-@EnableAutoConfiguration
 public class ScopeApplication {
 
     public static void main(String[] args) {

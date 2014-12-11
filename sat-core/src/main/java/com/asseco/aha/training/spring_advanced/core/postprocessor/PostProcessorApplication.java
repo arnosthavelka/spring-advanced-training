@@ -3,14 +3,12 @@ package com.asseco.aha.training.spring_advanced.core.postprocessor;
 import org.springframework.beans.factory.config.BeanFactoryPostProcessor;
 import org.springframework.beans.factory.config.BeanPostProcessor;
 import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.Configuration;
 
-@Configuration
+@SpringBootApplication
 @ComponentScan("com.asseco.aha.training.spring_advanced.core.postprocessor")
-@EnableAutoConfiguration
 public class PostProcessorApplication {
 
     public static void main(String[] args) {
