@@ -8,6 +8,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
 @Entity
+// @JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" }) -- for repository getOne
 public class City implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -63,8 +64,8 @@ public class City implements Serializable {
         return id;
     }
 
-    @Override
-    public String toString() {
-        return String.format("%s [%d]", getName(), getCountry());
-    }
+    // @Override
+    // public String toString() {
+    // return String.format("%s [%d]", getName(), getCountry());
+    // }
 }
