@@ -22,4 +22,11 @@ public class RestApplication extends WebMvcConfigurerAdapter {
         configurer.favorPathExtension(false).favorParameter(true).parameterName("mediaType").defaultContentType(MediaType.APPLICATION_JSON)
                 .mediaType("xml", MediaType.APPLICATION_XML).mediaType("json", MediaType.APPLICATION_JSON);
     }
+
+    // @Bean
+    // public Jackson2ObjectMapperBuilder jacksonBuilder() {
+    // Jackson2ObjectMapperBuilder builder = new Jackson2ObjectMapperBuilder();
+    // builder.indentOutput(true).dateFormat(new SimpleDateFormat("yyyy-MM-dd"));
+    // return builder;
+    // }
 }

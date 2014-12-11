@@ -6,10 +6,12 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.xml.bind.annotation.XmlRootElement;
+
+import com.asseco.aha.training.spring_advanced.rest.rest.json.View;
+import com.fasterxml.jackson.annotation.JsonView;
 
 @Entity
-@XmlRootElement
+// @XmlRootElement - no needed when library jackson-dataformat-xml is used
 // @JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" }) -- for repository getOne
 public class City implements Serializable {
 
@@ -17,9 +19,11 @@ public class City implements Serializable {
 
     @Id
     @GeneratedValue
+    @JsonView(View.Summary.class)
     private Long id;
 
     @Column(nullable = false)
+    @JsonView(View.Summary.class)
     private String name;
 
     @Column(nullable = false)
