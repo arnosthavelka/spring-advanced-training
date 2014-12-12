@@ -6,7 +6,7 @@
 	<artifactId>sat-rest</artifactId>
 	<packaging>jar</packaging>
 
-	<name>spring-rest</name>
+	<name>spring-advanced-rest</name>
 	<description>Demonstration of REST  in Spring Boot</description>
 
 	<parent>
@@ -45,14 +45,31 @@
 		<dependency>
 			<groupId>com.fasterxml.jackson.dataformat</groupId>
 			<artifactId>jackson-dataformat-xml</artifactId>
-			<version>2.4.0</version>
 		</dependency>
 		<dependency>
 			<groupId>org.codehaus.woodstox</groupId>
 			<artifactId>woodstox-core-asl</artifactId>
 			<version>4.4.1</version>
 		</dependency>
+		<dependency>
+			<groupId>com.mangofactory</groupId>
+			<artifactId>swagger-springmvc</artifactId>
+			<version>0.9.1</version>
+		</dependency>
+		<dependency>
+		  <groupId>org.ajar</groupId>
+		  <artifactId>swagger-spring-mvc-ui</artifactId>
+		  <version>0.2</version>
+		</dependency>
 	</dependencies>
+
+	<repositories>
+		<repository>
+			<id>oss-jfrog-artifactory</id>
+			<name>oss-jfrog-artifactory-releases</name>
+			<url>http://oss.jfrog.org/artifactory/oss-release-local</url>
+		</repository>
+	</repositories>
 
 	<build>
 		<finalName>sat-spring-boot</finalName>

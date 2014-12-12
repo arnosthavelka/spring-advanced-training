@@ -1,18 +1,28 @@
 package com.asseco.aha.training.spring_advanced.rest;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.Bean;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
+
+import com.mangofactory.swagger.configuration.SpringSwaggerConfig;
+import com.mangofactory.swagger.plugin.EnableSwagger;
+import com.mangofactory.swagger.plugin.SwaggerSpringMvcPlugin;
+import com.wordnik.swagger.model.ApiInfo;
 
 @SpringBootApplication
 @EnableTransactionManagement
-// @EnableWebMvc
+@EnableSwagger
 /**
- * Links for content negotiation:
+ * #content negotiation:
  * http://hmkcode.com/spring-mvc-view-json-xml-pdf-or-excel/
  * http://spring.io/blog/2013/05/11/content-negotiation-using-spring-mvc/
  * https://spring.io/blog/2013/06/03/content-negotiation-using-views
  * http://www.baeldung.com/spring-httpmessageconverter-rest
+ * #swagger
+ * http://java.dzone.com/articles/how-configure-swagger-generate
+ * http://www.dzone.com/links/r/spring_rest_api_with_swagger_exposing_documentati.html
  */
 public class RestApplication /* extends WebMvcConfigurerAdapter */{
 
@@ -29,4 +39,20 @@ public class RestApplication /* extends WebMvcConfigurerAdapter */{
     // .mediaType("xml", MediaType.APPLICATION_XML).mediaType("json", MediaType.APPLICATION_JSON);
     // }
     //
+
+    @Autowired
+    private SpringSwaggerConfig springSwaggerConfig;
+
+    @Bean
+    // Don't forget the @Bean annotation
+    public SwaggerSpringMvcPlugin customImplementation() {
+        return new SwaggerSpringMvcPlugin(this.springSwaggerConfig).apiInfo(apiInfo()).includePatterns(".*city.*");
+    }
+
+    private ApiInfo apiInfo() {
+        ApiInfo apiInfo = new ApiInfo("spring-advanced-rest", "Demonstration of REST  in Spring Boot", null, "arnost.havelka@gmail.com",
+                null, null);
+        return apiInfo;
+    }
+
 }

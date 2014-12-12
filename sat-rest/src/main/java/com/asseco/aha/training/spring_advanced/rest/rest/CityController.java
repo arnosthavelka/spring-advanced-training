@@ -21,9 +21,15 @@ import com.asseco.aha.training.spring_advanced.rest.domain.City;
 import com.asseco.aha.training.spring_advanced.rest.rest.json.View;
 import com.asseco.aha.training.spring_advanced.rest.service.CityService;
 import com.fasterxml.jackson.annotation.JsonView;
+import com.wordnik.swagger.annotations.Api;
+import com.wordnik.swagger.annotations.ApiOperation;
+import com.wordnik.swagger.annotations.ApiParam;
+import com.wordnik.swagger.annotations.ApiResponse;
+import com.wordnik.swagger.annotations.ApiResponses;
 
 @RestController
 @RequestMapping("/city")
+@Api(value = "city", description = "Endpoint for city management")
 public class CityController {
 
     @Autowired
@@ -34,7 +40,10 @@ public class CityController {
      */
     @RequestMapping(value = "/", method = RequestMethod.GET, produces = { MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE })
     @JsonView(View.Summary.class)
-    public List<City> list(@PathParam("country") String country, @PathParam("sorting") String sorting) {
+    @ApiOperation(value = "Returns list of cities", notes = "Returns a list of found city details.", response = City.class)
+    @ApiResponses(value = { @ApiResponse(code = 200, message = "Successful retrieval of city detail", response = City.class) })
+    public List<City> list(@ApiParam(name = "country", required = false) @PathParam("country") String country,
+            @PathParam("sorting") String sorting) {
         return cityService.list(country, sorting);
     }
 
