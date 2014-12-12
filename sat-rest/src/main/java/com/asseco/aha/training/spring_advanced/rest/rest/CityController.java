@@ -85,8 +85,22 @@ public class CityController {
     @RequestMapping(value = "/{id}", method = RequestMethod.POST, consumes = { MediaType.APPLICATION_JSON_VALUE,
             MediaType.APPLICATION_XML_VALUE })
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void update(@RequestBody City city) {
+    public void update(@RequestBody City city, @PathVariable long id) {
+        if (id != city.getId()) {
+            throw new CityIntegrityException(String.format("Integrity error [pathId=%d, cityId=%d]!", id, city.getId()));
+        }
+
         cityService.save(city);
+    }
+
+    @ResponseStatus(HttpStatus.CONFLICT)
+    class CityIntegrityException extends RuntimeException {
+
+        private static final long serialVersionUID = 1L;
+
+        public CityIntegrityException(String message) {
+            super(message);
+        }
     }
 
     /*
