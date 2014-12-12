@@ -24,13 +24,11 @@ public class CityServiceImpl implements CityService {
      */
     @Override
     public List<City> list(String country, String sorting) {
+        Sort sort = new Sort(Sort.Direction.ASC, sorting == null ? "id" : sorting);
         if (country == null) {
-            return cityRepository.findAll(new Sort(Sort.Direction.ASC, "country", "name"));
+            return cityRepository.findAll(sort);
         } else {
-            if (sorting == null) {
-                sorting = "name";
-            }
-            return cityRepository.findByCountry(country, new Sort(Sort.Direction.ASC, sorting));
+            return cityRepository.findByCountry(country, sort);
         }
     }
 

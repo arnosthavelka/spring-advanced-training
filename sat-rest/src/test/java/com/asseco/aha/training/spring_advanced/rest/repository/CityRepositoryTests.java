@@ -1,4 +1,4 @@
-package com.asseco.aha.training.spring_advanced.rest;
+package com.asseco.aha.training.spring_advanced.rest.repository;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
@@ -10,7 +10,7 @@ import org.springframework.data.domain.Sort;
 
 import com.asseco.aha.training.spring_advanced.rest.domain.City;
 
-public class CityQueryTests extends AbstractCityTests {
+public class CityRepositoryTests extends AbstractCityTests {
 
     @Test
     public void testCount() {
