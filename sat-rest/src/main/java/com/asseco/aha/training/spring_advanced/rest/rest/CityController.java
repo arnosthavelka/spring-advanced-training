@@ -39,21 +39,12 @@ public class CityController {
     }
 
     /*
-     * http://localhost:8080/city/105
-     */
-    @RequestMapping(value = "/{id}", method = RequestMethod.GET, produces = { MediaType.APPLICATION_JSON_VALUE,
-            MediaType.APPLICATION_XML_VALUE })
-    public City item(@PathVariable("id") long id) {
-        return cityService.item(id);
-    }
-
-    /*
-     * http://localhost:8080/city/ + JSON input
+     * http://localhost:8080/city/ + content
      */
     @RequestMapping(value = "/", method = RequestMethod.PUT, consumes = { MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE })
-    @ResponseStatus(value = HttpStatus.CREATED)
+    @ResponseStatus(HttpStatus.CREATED)
     public void insert(@RequestBody City city, HttpServletRequest request, HttpServletResponse response) {
-        Long id = cityService.insert(city);
+        Long id = cityService.save(city);
         response.addHeader("Location", getNewLocation(request, id));
     }
 
@@ -63,4 +54,48 @@ public class CityController {
         return template.expand(id).toASCIIString();
 
     }
+
+    /*
+     * http://localhost:8080/city/105
+     */
+    @RequestMapping(value = "/{id}", method = RequestMethod.GET, produces = { MediaType.APPLICATION_JSON_VALUE,
+            MediaType.APPLICATION_XML_VALUE })
+    public City item(@PathVariable("id") long id) {
+        City city = cityService.item(id);
+        if (city == null) {
+            throw new CityNotFoundException(String.format("City [id=%d] was not found!", id));
+        }
+
+        return city;
+    }
+
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    class CityNotFoundException extends RuntimeException {
+
+        private static final long serialVersionUID = 1L;
+
+        public CityNotFoundException(String message) {
+            super(message);
+        }
+    }
+
+    /*
+     * http://localhost:8080/city/100 + content
+     */
+    @RequestMapping(value = "/{id}", method = RequestMethod.POST, consumes = { MediaType.APPLICATION_JSON_VALUE,
+            MediaType.APPLICATION_XML_VALUE })
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void update(@RequestBody City city) {
+        cityService.save(city);
+    }
+
+    /*
+     * http://localhost:8080/city/100
+     */
+    @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void delete(@PathVariable long id) {
+        cityService.delete(id);
+    }
+
 }

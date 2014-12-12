@@ -49,8 +49,20 @@ public class CityServiceImpl implements CityService {
      * com.asseco.aha.training.spring_advanced.rest.service.CityService#insert(com.asseco.aha.training.spring_advanced.rest.domain.City)
      */
     @Override
-    public long insert(City city) {
+    public long save(City city) {
         City savedEntity = cityRepository.save(city);
         return savedEntity.getId();
     }
+
+    /*
+     * (non-Javadoc)
+     * 
+     * @see
+     * com.asseco.aha.training.spring_advanced.rest.service.CityService#delete(com.asseco.aha.training.spring_advanced.rest.domain.City)
+     */
+    @Override
+    public void delete(long id) {
+        cityRepository.delete(id);
+    }
+
 }

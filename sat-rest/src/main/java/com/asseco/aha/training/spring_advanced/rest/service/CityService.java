@@ -10,6 +10,8 @@ public interface CityService {
 
     City item(long id);
 
-    long insert(City city);
+    long save(City city);
+
+    void delete(long id);
 
 }
