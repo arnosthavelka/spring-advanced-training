@@ -6,8 +6,10 @@ import com.asseco.aha.training.spring_advanced.rest.domain.City;
 
 public interface CityService {
 
-    public abstract List<City> list(String country, String sorting);
+    List<City> list(String country, String sorting);
 
-    public abstract City item(long id);
+    City item(long id);
+
+    long insert(City city);
 
 }

@@ -42,4 +42,15 @@ public class CityServiceImpl implements CityService {
         return cityRepository.findOne(id);
     }
 
+    /*
+     * (non-Javadoc)
+     * 
+     * @see
+     * com.asseco.aha.training.spring_advanced.rest.service.CityService#insert(com.asseco.aha.training.spring_advanced.rest.domain.City)
+     */
+    @Override
+    public long insert(City city) {
+        City savedEntity = cityRepository.save(city);
+        return savedEntity.getId();
+    }
 }

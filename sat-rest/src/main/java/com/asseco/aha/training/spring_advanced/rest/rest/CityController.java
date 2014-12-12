@@ -2,14 +2,20 @@ package com.asseco.aha.training.spring_advanced.rest.rest;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.websocket.server.PathParam;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.util.UriTemplate;
 
 import com.asseco.aha.training.spring_advanced.rest.domain.City;
 import com.asseco.aha.training.spring_advanced.rest.rest.json.View;
@@ -39,5 +45,22 @@ public class CityController {
             MediaType.APPLICATION_XML_VALUE })
     public City item(@PathVariable("id") long id) {
         return cityService.item(id);
+    }
+
+    /*
+     * http://localhost:8080/city/ + JSON input
+     */
+    @RequestMapping(value = "/", method = RequestMethod.PUT, consumes = { MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE })
+    @ResponseStatus(value = HttpStatus.CREATED)
+    public void insert(@RequestBody City city, HttpServletRequest request, HttpServletResponse response) {
+        Long id = cityService.insert(city);
+        response.addHeader("Location", getNewLocation(request, id));
+    }
+
+    private String getNewLocation(HttpServletRequest request, Long id) {
+        StringBuffer url = request.getRequestURL();
+        UriTemplate template = new UriTemplate(url.append("/{childId}").toString());
+        return template.expand(id).toASCIIString();
+
     }
 }

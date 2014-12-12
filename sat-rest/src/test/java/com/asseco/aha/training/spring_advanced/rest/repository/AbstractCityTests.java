@@ -4,7 +4,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.asseco.aha.training.spring_advanced.rest.AbstractTests;
-import com.asseco.aha.training.spring_advanced.rest.repository.CityRepository;
 
 @Transactional(readOnly = true)
 public abstract class AbstractCityTests extends AbstractTests {
