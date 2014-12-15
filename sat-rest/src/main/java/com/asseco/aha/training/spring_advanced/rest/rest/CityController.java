@@ -40,10 +40,10 @@ public class CityController {
      */
     @RequestMapping(value = "/", method = RequestMethod.GET, produces = { MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE })
     @JsonView(View.Summary.class)
-    @ApiOperation(value = "Returns list of cities", notes = "Returns a list of found city details.", response = City.class)
-    @ApiResponses(value = { @ApiResponse(code = 200, message = "Successful retrieval of city detail", response = City.class) })
+    @ApiOperation(value = "Returns list of cities", notes = "Returns a list of found city details.", response = City.class, responseContainer = "List")
+    @ApiResponses(value = { @ApiResponse(code = 200, message = "Successful retrieval of the list of cities (with simple detail)") })
     public List<City> list(@ApiParam(name = "country", required = false) @PathParam("country") String country,
-            @PathParam("sorting") String sorting) {
+            @ApiParam(name = "sorting", required = false) @PathParam("sorting") String sorting) {
         return cityService.list(country, sorting);
     }
 
@@ -52,6 +52,8 @@ public class CityController {
      */
     @RequestMapping(value = "/", method = RequestMethod.PUT, consumes = { MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE })
     @ResponseStatus(HttpStatus.CREATED)
+    @ApiOperation(value = "Create the city", notes = "Create the city with defined attributes (ID is erased if defined)", response = Void.class)
+    @ApiResponses(value = { @ApiResponse(code = 201, message = "Successful creation of the city") })
     public void insert(@RequestBody City city, HttpServletRequest request, HttpServletResponse response) {
         Long id = cityService.save(city);
         response.addHeader("Location", getNewLocation(request, id));
@@ -69,6 +71,9 @@ public class CityController {
      */
     @RequestMapping(value = "/{id}", method = RequestMethod.GET, produces = { MediaType.APPLICATION_JSON_VALUE,
             MediaType.APPLICATION_XML_VALUE })
+    @ApiOperation(value = "Returns city", notes = "Returns the city specified by ID .", response = City.class)
+    @ApiResponses(value = { @ApiResponse(code = 200, message = "Successful retrieval of city detail (full detail)"),
+            @ApiResponse(code = 404, message = "City with given ID does not exist") })
     public City item(@PathVariable("id") long id) {
         City city = cityService.item(id);
         if (city == null) {
@@ -94,6 +99,9 @@ public class CityController {
     @RequestMapping(value = "/{id}", method = RequestMethod.POST, consumes = { MediaType.APPLICATION_JSON_VALUE,
             MediaType.APPLICATION_XML_VALUE })
     @ResponseStatus(HttpStatus.NO_CONTENT)
+    @ApiOperation(value = "Update the city", notes = "Update the city with defined attributes (for defined ID)", response = Void.class)
+    @ApiResponses(value = { @ApiResponse(code = 204, message = "Successful update of the city"),
+            @ApiResponse(code = 409, message = "When ID in path is not equal to ID in the content (body)") })
     public void update(@RequestBody City city, @PathVariable long id) {
         if (id != city.getId()) {
             throw new CityIntegrityException(String.format("Integrity error [pathId=%d, cityId=%d]!", id, city.getId()));
@@ -117,6 +125,8 @@ public class CityController {
      */
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
     @ResponseStatus(HttpStatus.NO_CONTENT)
+    @ApiOperation(value = "Delete the city", notes = "Delete the city defined by ID)", response = Void.class)
+    @ApiResponses(value = { @ApiResponse(code = 201, message = "Successful deletion of the city") })
     public void delete(@PathVariable long id) {
         cityService.delete(id);
     }
