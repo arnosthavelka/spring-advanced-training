@@ -15,3 +15,7 @@ spring:
 sat-rest:
     cfg:
         author: Arny
+        
+endpoints:
+    jolokia:
+        enabled: true
