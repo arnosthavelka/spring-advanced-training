@@ -8,3 +8,10 @@ spring:
     jackson:
         serialization:
             indent_output: true
+    jmx:
+        enabled: true
+        default_domain: com.asseco.aha.training.sat-rest
+
+sat-rest:
+    cfg:
+        author: Arny
