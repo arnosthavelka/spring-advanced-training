@@ -126,7 +126,7 @@ public class CityController {
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @ApiOperation(value = "Delete the city", notes = "Delete the city defined by ID)", response = Void.class)
-    @ApiResponses(value = { @ApiResponse(code = 201, message = "Successful deletion of the city") })
+    @ApiResponses(value = { @ApiResponse(code = 204, message = "Successful deletion of the city") })
     public void delete(@PathVariable long id) {
         cityService.delete(id);
     }
