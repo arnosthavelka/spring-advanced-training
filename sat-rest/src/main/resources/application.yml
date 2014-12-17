@@ -11,6 +11,11 @@ spring:
     jmx:
         enabled: true
         default_domain: com.asseco.aha.training.sat-rest
+    jpa:
+        show-sql: true
+        properties:
+            hibernate:
+                generate_statistics: true
 
 sat-rest:
     cfg:
