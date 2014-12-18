@@ -3,6 +3,7 @@ package com.asseco.aha.training.spring_advanced.rest.service;
 import javax.persistence.EntityManager;
 
 import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 import org.hibernate.stat.EntityStatistics;
 import org.hibernate.stat.Statistics;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,10 +17,15 @@ public class StatServiceImpl implements StatService {
     @Autowired
     private EntityManager em;
 
-    private Statistics getStatistics() {
+    public Statistics getStatistics() {
         Session session = (Session) this.em.getDelegate();
         // session.getSessionFactory().getStatistics().setStatisticsEnabled(true);
         return session.getSessionFactory().getStatistics();
+    }
+
+    public SessionFactory getSessionFactory() {
+        Session session = (Session) this.em.getDelegate();
+        return session.getSessionFactory();
     }
 
     /*

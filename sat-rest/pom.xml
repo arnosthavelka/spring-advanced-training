@@ -94,7 +94,7 @@
 	</repositories>
 
 	<build>
-		<finalName>sat-spring-boot</finalName>
+		<finalName>sat-rest</finalName>
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>

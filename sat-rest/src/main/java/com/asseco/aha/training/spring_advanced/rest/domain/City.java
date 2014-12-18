@@ -75,8 +75,8 @@ public class City implements Serializable {
         return id;
     }
 
-    // @Override
-    // public String toString() {
-    // return String.format("%s [%d]", getName(), getCountry());
-    // }
+    @Override
+    public String toString() {
+        return String.format("%s/%s [id=%d]", getCountry(), getName(), getId());
+    }
 }

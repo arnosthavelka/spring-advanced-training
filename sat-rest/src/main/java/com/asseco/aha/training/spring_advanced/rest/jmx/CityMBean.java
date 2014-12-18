@@ -32,10 +32,14 @@ public class CityMBean {
         this.author = author;
     }
 
-    @ManagedOperation(description = "Get City by ID")
-    public String getCityNameById(int id) {
+    @ManagedOperation(description = "Get City name by ID")
+    public String getCityName(int id) {
         City city = cityService.item(id);
         return city.getName();
     }
 
+    @ManagedOperation(description = "Get City by ID")
+    public City getCity(int id) {
+        return cityService.item(id);
+    }
 }
