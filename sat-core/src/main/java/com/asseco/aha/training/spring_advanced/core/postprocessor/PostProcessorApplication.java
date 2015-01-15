@@ -5,10 +5,8 @@ import org.springframework.beans.factory.config.BeanPostProcessor;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
 
 @SpringBootApplication
-@ComponentScan("com.asseco.aha.training.spring_advanced.core.postprocessor")
 public class PostProcessorApplication {
 
     public static void main(String[] args) {
