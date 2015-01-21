@@ -26,6 +26,17 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 
+	<repositories>
+	    <repository>
+	        <id>spring-advanced-training-mvn-repo</id>
+	        <url>https://raw.github.com/arnosthavelka/spring-advanced-training/mvn-repo/</url>
+	        <snapshots>
+	            <enabled>true</enabled>
+	            <updatePolicy>always</updatePolicy>
+	        </snapshots>
+	    </repository>
+	</repositories>
+
 	<distributionManagement>
 		<repository>
 			<id>internal.repo</id>
