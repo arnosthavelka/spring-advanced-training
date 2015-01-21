@@ -1,5 +1,0 @@
-yaml:
-    foo:
-        value: Yaml foo value
-        name: Bruno
-    desc: Sample YAML configuration

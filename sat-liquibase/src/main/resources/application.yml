@@ -1,7 +1,0 @@
-spring:
-    datasource:
-        platform:H2
-        url=jdbc:h2:mem
-        username=sa
-        password=
-        driverClassName=org.h2.Driver.class
