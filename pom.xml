@@ -5,7 +5,7 @@
 
 	<groupId>com.asseco.aha.training.spring-advanced</groupId>
 	<artifactId>sat-parent</artifactId>
-	<version>0.0.2-SNAPSHOT</version>
+	<version>0.0.2</version>
 	<packaging>pom</packaging>
 
 	<name>spring-advanced-parent</name>
