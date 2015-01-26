@@ -1,4 +1,4 @@
-package com.asseco.aha.training.spring_advanced.rest.rest;
+package com.asseco.aha.training.spring_advanced.rest.rest.hateoas;
 
 import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
 import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
@@ -7,22 +7,19 @@ import org.springframework.hateoas.mvc.ResourceAssemblerSupport;
 import org.springframework.stereotype.Component;
 
 import com.asseco.aha.training.spring_advanced.rest.domain.City;
+import com.asseco.aha.training.spring_advanced.rest.rest.CityHateoasController;
 
 @Component
-public class CityResourceAssembler extends ResourceAssemblerSupport<City, CityResource> {
+public class SimpleCityResourceAssembler extends ResourceAssemblerSupport<City, SimpleCityResource> {
 
-	public CityResourceAssembler() {
-		super(CityHateoasController.class, CityResource.class);
+	public SimpleCityResourceAssembler() {
+		super(CityHateoasController.class, SimpleCityResource.class);
 	}
 
 	@Override
-	public CityResource toResource(City entity) {
-		CityResource resource = instantiateResource(entity);
-		resource.setCity(entity);
-
+	public SimpleCityResource toResource(City entity) {
+		SimpleCityResource resource = new SimpleCityResource(entity);
 		resource.add(linkTo(methodOn(CityHateoasController.class).item(entity.getId())).withSelfRel());
-		resource.add(linkTo(CityHateoasController.class).slash(entity.getId()).withRel("delete"));
-
 		return resource;
 	}
 
