@@ -83,7 +83,13 @@
 	        <groupId>org.springframework.boot</groupId>
 	        <artifactId>spring-boot-starter-actuator</artifactId>
 	    </dependency>
-    </dependencies>
+	    <dependency>
+	    	<groupId>org.springframework.boot</groupId>
+	    	<artifactId>
+	    		spring-boot-starter-cloud-connectors
+	    	</artifactId>
+	    </dependency>
+	</dependencies>
 
 	<repositories>
 		<repository>

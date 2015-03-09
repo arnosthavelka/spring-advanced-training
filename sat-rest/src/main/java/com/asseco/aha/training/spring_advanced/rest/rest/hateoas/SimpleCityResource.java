@@ -1,9 +1,9 @@
 package com.asseco.aha.training.spring_advanced.rest.rest.hateoas;
 
+import org.springframework.cloud.cloudfoundry.com.fasterxml.jackson.annotation.JsonRootName;
 import org.springframework.hateoas.ResourceSupport;
 
 import com.asseco.aha.training.spring_advanced.rest.domain.City;
-import com.fasterxml.jackson.annotation.JsonRootName;
 
 @JsonRootName("city")
 public class SimpleCityResource extends ResourceSupport {
