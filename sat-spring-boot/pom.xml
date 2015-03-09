@@ -12,7 +12,7 @@
 	<parent>
 		<groupId>com.asseco.aha.training.spring-advanced</groupId>
 		<artifactId>sat-parent</artifactId>
-		<version>0.0.2-SNAPSHOT</version>
+		<version>0.0.3</version>
 	</parent>
 
 	<properties>
@@ -40,8 +40,8 @@
 		<dependency>
 			<groupId>de.codecentric</groupId>
 			<artifactId>spring-boot-starter-admin-client</artifactId>
-			<version>1.1.1</version>
-		</dependency>		
+			<version>1.1.2</version>
+		</dependency>
 	</dependencies>
 
 	<build>
@@ -50,8 +50,31 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
+				<configuration>
+			        <requiresUnpack>
+			            <dependency>
+			                <groupId>com.netflix.eureka</groupId>
+			                <artifactId>eureka-core</artifactId>
+			            </dependency>
+			            <dependency>
+			                <groupId>com.netflix.eureka</groupId>
+			                <artifactId>eureka-client</artifactId>
+			            </dependency>
+			        </requiresUnpack>
+			    </configuration>				
 			</plugin>
 		</plugins>
 	</build>
 
+	<repositories>
+		<repository>
+			<id>spring-milestones</id>
+			<name>Spring Milestones</name>
+			<url>http://repo.spring.io/milestone</url>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+		</repository>
+	</repositories>
+	
 </project>
