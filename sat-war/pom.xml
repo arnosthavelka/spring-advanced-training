@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<artifactId>sat-war</artifactId>
+	<packaging>war</packaging>
+
+	<name>spring-advanced-war</name>
+	<description>Example of deployment of Spring Boot application to AS</description>
+
+	<parent>
+		<groupId>com.asseco.aha.training.spring-advanced</groupId>
+		<artifactId>sat-parent</artifactId>
+		<version>0.0.4</version>
+	</parent>
+
+	<properties>
+		<start-class>com.asseco.aha.training.spring_advanced.war.WarApplication</start-class>
+	</properties>
+
+	<dependencies>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-aop</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-rest</artifactId>
+		</dependency>
+		<!-- Exclusion of embedded Tomcat since the deployment is to AS -->
+	    <dependency>
+	        <groupId>org.springframework.boot</groupId>
+	        <artifactId>spring-boot-starter-tomcat</artifactId>
+	        <scope>provided</scope>
+	    </dependency>	    
+	</dependencies>
+
+	<build>
+		<finalName>${project.name}</finalName>
+		<plugins>
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+			</plugin>
+			<plugin>
+				<groupId>org.wildfly.plugins</groupId>
+				<artifactId>wildfly-maven-plugin</artifactId>
+				<version>1.0.2.Final</version>
+				<configuration>
+					<serverId>wildfly-as</serverId>
+					<hostname>localhost</hostname>
+					<username>admin</username>
+				</configuration>
+			</plugin>			
+		</plugins>
+	</build>
+
+</project>
