@@ -7,11 +7,11 @@ import org.crsh.cli.Command
 // auth: user/<password from spring console> (it can be handled by Spring Security)
 // usage e.g. "hello -n Bob"
 
-class hello {
+class hellog {
 
-    @Usage("Say Hello")
+    @Usage("Hello Groovy")
     @Command
-    def main(@Usage("specify name") @Option(names=["n","name"]) String name) {
+    def main(@Usage("Specify name") @Option(names=["n","name"]) String name) {
     	if (name == null) {
     		name = "Arny";
     	}
