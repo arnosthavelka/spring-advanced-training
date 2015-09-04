@@ -27,17 +27,14 @@ public class AbstractConditionalTest {
 	private List<Drink> drinks;
 
 	@Test
-	public void listAllDrinks() {
+	public void testDrinks() {
 		assertThat(drinks, not(empty()));
 		assertThat(drinks.size(), equalTo(2));
-		listAllBeans();
+		printBeans();
 	}
 
-	private void listAllBeans() {
-		for (Drink drink : drinks) {
-			LOG.info("bean {}", drink.getName());
-		}
-
+	private void printBeans() {
+		drinks.stream().forEach(d -> LOG.info("bean {}", d.getName()));
 	}
 
 }
