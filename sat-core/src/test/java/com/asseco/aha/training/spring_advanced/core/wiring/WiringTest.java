@@ -2,7 +2,6 @@ package com.asseco.aha.training.spring_advanced.core.wiring;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
-import static org.hamcrest.Matchers.is;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -32,17 +31,17 @@ public class WiringTest {
 
 	@Test
 	public void testPrimaryBean() {
-		assertThat(tea.getName(), is(equalTo("Tea")));
+		assertThat(tea.getName(), equalTo("Tea"));
 	}
 
 	@Test
 	public void testBeverage() {
-		assertThat(beverage.getName(), is(equalTo("Cola")));
+		assertThat(beverage.getName(), equalTo("Cola"));
     }
 
 	@Test
 	public void testBeer() {
-		assertThat(beer.getName(), is(equalTo("Beer")));
+		assertThat(beer.getName(), equalTo("Beer"));
 	}
 
 }
