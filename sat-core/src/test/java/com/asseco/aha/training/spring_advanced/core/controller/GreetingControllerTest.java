@@ -23,7 +23,7 @@ import com.asseco.aha.training.spring_advanced.core.Controller.ControllerApplica
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringApplicationConfiguration(classes = { ControllerApplication.class })
 @WebAppConfiguration
-public class ControllerApplicationTest {
+public class GreetingControllerTest {
 
 	@Autowired
 	private WebApplicationContext webApplicationContext;
