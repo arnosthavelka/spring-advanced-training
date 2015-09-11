@@ -4,7 +4,6 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<artifactId>sat-core</artifactId>
-	<packaging>jar</packaging>
 
 	<name>spring-advanced-core</name>
 	<description>Demonstration of Spring framework</description>
@@ -37,7 +36,12 @@
 			<groupId>com.jayway.jsonpath</groupId>
 			<artifactId>json-path</artifactId>
 			<scope>test</scope>
-		</dependency>		
+		</dependency>
+		<dependency>
+		    <groupId>org.apache.tomcat.embed</groupId>
+		    <artifactId>tomcat-embed-jasper</artifactId>
+		    <scope>provided</scope>
+		</dependency>
 	</dependencies>
 
 	<build>
@@ -50,4 +54,5 @@
 		</plugins>
 	</build>
 
+	<packaging>war</packaging>
 </project>
