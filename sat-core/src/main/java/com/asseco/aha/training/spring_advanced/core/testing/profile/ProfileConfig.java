@@ -1,4 +1,4 @@
-package com.asseco.aha.training.spring_advanced.core.testing;
+package com.asseco.aha.training.spring_advanced.core.testing.profile;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;

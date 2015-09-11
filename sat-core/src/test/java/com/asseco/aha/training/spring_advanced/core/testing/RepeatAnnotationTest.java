@@ -12,6 +12,8 @@ import org.springframework.boot.test.SpringApplicationConfiguration;
 import org.springframework.test.annotation.Repeat;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import com.asseco.aha.training.spring_advanced.core.testing.profile.PackageConfig;
+
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringApplicationConfiguration(classes = { PackageConfig.class })
 public class RepeatAnnotationTest {

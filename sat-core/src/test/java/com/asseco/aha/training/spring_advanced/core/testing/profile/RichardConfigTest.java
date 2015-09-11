@@ -1,4 +1,4 @@
-package com.asseco.aha.training.spring_advanced.core.testing;
+package com.asseco.aha.training.spring_advanced.core.testing.profile;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
