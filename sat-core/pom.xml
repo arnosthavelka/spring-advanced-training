@@ -4,6 +4,7 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<artifactId>sat-core</artifactId>
+	<packaging>war</packaging>
 
 	<name>spring-advanced-core</name>
 	<description>Demonstration of Spring framework</description>
@@ -54,5 +55,4 @@
 		</plugins>
 	</build>
 
-	<packaging>war</packaging>
 </project>
