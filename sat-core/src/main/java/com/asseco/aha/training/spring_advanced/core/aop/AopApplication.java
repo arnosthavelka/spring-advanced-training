@@ -5,8 +5,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
 import com.asseco.aha.training.spring_advanced.core.wiring.Drink;
-import com.asseco.aha.training.spring_advanced.core.wiring.bean.Beer;
-import com.asseco.aha.training.spring_advanced.core.wiring.bean.Tea;
 
 @SpringBootApplication
 public class AopApplication {
@@ -17,12 +15,26 @@ public class AopApplication {
 
     @Bean
 	public Drink tea() {
-		return new Tea();
+		return new Drink() {
+
+			@Override
+			public String getName() {
+				return "Tea";
+			}
+
+		};
     }
 
     @Bean
-	public Drink beer() {
-		return new Beer();
+	public EnjoyableDrink beer() {
+		return new EnjoyableDrink() {
+
+			@Override
+			public String getName() {
+				return "Beer";
+			}
+
+		};
     }
 
 }
