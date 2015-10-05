@@ -9,7 +9,6 @@ import org.junit.Test;
 
 import com.asseco.aha.training.spring_advanced.jpa.domain.City;
 
-// @see http://spring.io/blog/2011/04/26/advanced-spring-data-jpa-specifications-and-querydsl/
 public class MixedQueryTests extends AbstractCityTests {
 
     @Test
