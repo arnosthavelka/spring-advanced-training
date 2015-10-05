@@ -11,7 +11,17 @@ import org.springframework.data.repository.query.Param;
 
 import com.asseco.aha.training.spring_advanced.jpa.domain.City;
 
-public interface CityRepository extends JpaRepository<City, Long>, JpaSpecificationExecutor<City> {
+/**
+ * Spring Data JPA implementation as:
+ * <ol>
+ * <li>Default implementation (methods defined by <code>JpaRepository</code> or
+ * by this interface)</li>
+ * <li>Mixed implementation (methods defined and implemented separately)</li>
+ * <li>Dynamic queries from <code>JpaSpecificationExecutor</code> (used in
+ * <code>DynamicQueryTests</code>)</li>
+ * </ol>
+ */
+public interface CityRepository extends JpaRepository<City, Long>, CityService, JpaSpecificationExecutor<City> {
 
     // Page<City> findAll(Pageable pageable); - just for Repository interface
 
