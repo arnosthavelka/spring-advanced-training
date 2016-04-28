@@ -2,25 +2,24 @@
 # http://docs.spring.io/spring-boot/docs/current/reference/html/common-application-properties.html
 
 server:
-    port: 8080
+  port: 8080
 
 spring:
-    jackson:
-        serialization:
-            indent_output: true
-    jmx:
-        enabled: true
-        default_domain: com.asseco.aha.training.sat-rest
-    jpa:
-        show-sql: true
-        properties:
-            hibernate:
-                generate_statistics: true
-
+  jackson:
+    serialization:
+      indent-output: true
+  jmx:
+    enabled: true
+    default-domain: com.asseco.aha.training.sat-rest
+  jpa:
+    show-sql: true
+    properties:
+      hibernate:
+      generate_statistics: true
 sat-rest:
-    cfg:
-        author: Arny
+  cfg:
+    author: Arny
         
 endpoints:
-    jolokia:
-        enabled: true
+  jolokia:
+    enabled: true

@@ -4,17 +4,19 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
 
 import org.junit.Test;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.IntegrationTest;
-import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.web.client.RestTemplate;
 
 import com.asseco.aha.training.spring_advanced.rest.AbstractTests;
 import com.asseco.aha.training.spring_advanced.rest.domain.City;
 
-@WebAppConfiguration
-@IntegrationTest
+@IntegrationTest("server.port:0")
 public class CityControllerTests extends AbstractTests {
 
+	@Value("${local.server.port}")
+    private int port;
+	
     private void verifyCity(City city, long id, String name) {
         assertThat(city.getId(), equalTo(id));
         assertThat(city.getName(), equalTo(name));
@@ -22,7 +24,7 @@ public class CityControllerTests extends AbstractTests {
 
     @Test
     public void testCityById() {
-        String URI = "http://localhost:8080/city/{id}";
+        String URI = String.format("http://localhost:%s/city/{id}", port);
         RestTemplate restTemplate = new RestTemplate();
         City city = restTemplate.getForObject(URI, City.class, "100");
         assertThat(city.getName(), equalTo("Prague"));
@@ -30,7 +32,7 @@ public class CityControllerTests extends AbstractTests {
 
     @Test
     public void testCityFindAll() {
-        String URI = "http://localhost:8080/city/";
+        String URI = String.format("http://localhost:%s/city/", port);
         RestTemplate restTemplate = new RestTemplate();
         City[] data = restTemplate.getForObject(URI, City[].class);
         assertThat(data.length, equalTo(6));
@@ -40,7 +42,7 @@ public class CityControllerTests extends AbstractTests {
 
     @Test
     public void testCityFindAllWithSorting() {
-        String URI = "http://localhost:8080/city/?sorting=name";
+        String URI = String.format("http://localhost:%s/city/?sorting=name", port);
         RestTemplate restTemplate = new RestTemplate();
         City[] data = restTemplate.getForObject(URI, City[].class);
         assertThat(data.length, equalTo(6));
@@ -50,7 +52,7 @@ public class CityControllerTests extends AbstractTests {
 
     @Test
     public void testCityFindByCountry() {
-        String URI = "http://localhost:8080/city/?country=UK";
+        String URI = String.format("http://localhost:%s/city/?country=UK", port);
         RestTemplate restTemplate = new RestTemplate();
         City[] data = restTemplate.getForObject(URI, City[].class);
         assertThat(data.length, equalTo(1));

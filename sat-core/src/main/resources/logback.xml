@@ -1,5 +1,7 @@
 <configuration debug="false" scan="true">
 
+	<property name="LOG_PATH" value="target/logs" />
+	
 	<appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
 		<encoder>
 			<pattern>%date{HH:mm:ss.SSS} [%thread] %-5level %logger{50} - %message%n</pattern>
@@ -8,7 +10,7 @@
 
 	<appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
 		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-			<fileNamePattern>target/logs/core-%d{yyyy-MM-dd}.%i.log</fileNamePattern>
+			<fileNamePattern>${LOG_PATH}/core-%d{yyyy-MM-dd}.%i.log</fileNamePattern>
 			<maxHistory>30</maxHistory>
 			<timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
 				<maxFileSize>2MB</maxFileSize>
@@ -20,14 +22,18 @@
 		</encoder>
 	</appender>
 
+    <appender name="ASYNC" class="ch.qos.logback.classic.AsyncAppender">
+        <appender-ref ref="FILE" />
+    </appender>	
+
 	<root level="INFO">
 		<appender-ref ref="STDOUT" />
-		<appender-ref ref="FILE" />
+		<appender-ref ref="ASYNC" />
 	</root>
 
 	<logger name="com.asseco.aha.training.spring_advanced.core" level="DEBUG" additivity="false">
 		<appender-ref ref="STDOUT" />
-		<appender-ref ref="FILE" />
+		<appender-ref ref="ASYNC" />
 	</logger>
 
 </configuration>
