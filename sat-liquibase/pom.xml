@@ -12,11 +12,11 @@
 	<parent>
 		<groupId>com.asseco.aha.training.spring-advanced</groupId>
 		<artifactId>sat-parent</artifactId>
-		<version>0.0.6</version>
+		<version>0.1.0</version>
 	</parent>
 
 	<properties>
-		<start-class>com.asseco.aha.training.spring_advanced.liquibase.LiquibaseApplication</start-class>
+		<start-class>com.github.aha.sat.liquibase.LiquibaseApplication</start-class>
 	</properties>
 
 	<dependencies>
