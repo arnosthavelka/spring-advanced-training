@@ -12,14 +12,18 @@
 	<parent>
 		<groupId>com.asseco.aha.training.spring-advanced</groupId>
 		<artifactId>sat-parent</artifactId>
-		<version>0.0.6</version>
+		<version>0.1.0</version>
 	</parent>
 
 	<properties>
-		<start-class>com.asseco.aha.training.spring_advanced.rest.RestApplication</start-class>
+		<start-class>com.github.aha.sat.rest.RestApplication</start-class>
 	</properties>
 
 	<dependencies>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-aop</artifactId>

@@ -10,7 +10,7 @@ spring:
       indent-output: true
   jmx:
     enabled: true
-    default-domain: com.asseco.aha.training.sat-rest
+    default-domain: com.github.aha.sat.rest
   jpa:
     show-sql: true
     properties:
