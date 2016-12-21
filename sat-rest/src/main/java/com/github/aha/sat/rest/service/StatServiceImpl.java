@@ -30,8 +30,7 @@ public class StatServiceImpl implements StatService {
 
     /*
      * (non-Javadoc)
-     * 
-     * @see com.asseco.aha.training.spring_advanced.rest.service.StatService#getEntityNames()
+     * @see com.github.aha.sat.rest.service.StatService#getEntityNames()
      */
     @Override
     public String[] getEntityNames() {
@@ -40,8 +39,7 @@ public class StatServiceImpl implements StatService {
 
     /*
      * (non-Javadoc)
-     * 
-     * @see com.asseco.aha.training.spring_advanced.rest.service.StatService#getQueries()
+     * @see com.github.aha.sat.rest.service.StatService#getQueries()
      */
     @Override
     public String[] getQueries() {
@@ -50,11 +48,10 @@ public class StatServiceImpl implements StatService {
 
     /*
      * (non-Javadoc)
-     * 
-     * @see com.asseco.aha.training.spring_advanced.rest.service.StatService#getEntityStatistics(java.lang.String)
+     * @see com.github.aha.sat.rest.service.StatService#getEntityStatistics(java.lang.String)
      */
     @Override
     public EntityStatistics getEntityStatistics(String entityName) {
-        return getStatistics().getEntityStatistics("com.asseco.aha.training.spring_advanced.rest.domain." + entityName);
+        return getStatistics().getEntityStatistics("com.github.aha.sat.rest.domain." + entityName);
     }
 }

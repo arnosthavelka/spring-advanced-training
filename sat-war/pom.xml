@@ -10,13 +10,13 @@
 	<description>Example of deployment of Spring Boot application to AS</description>
 
 	<parent>
-		<groupId>com.asseco.aha.training.spring-advanced</groupId>
+		<groupId>com.github.aha.sat</groupId>
 		<artifactId>sat-parent</artifactId>
 		<version>0.1.0</version>
 	</parent>
 
 	<properties>
-		<start-class>com.asseco.aha.training.spring_advanced.war.WarApplication</start-class>
+		<start-class>com.github.aha.sat.war.WarApplication</start-class>
 	</properties>
 
 	<dependencies>

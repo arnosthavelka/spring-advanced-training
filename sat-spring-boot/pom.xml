@@ -10,7 +10,7 @@
 	<description>Demonstration of Spring Boot</description>
 
 	<parent>
-		<groupId>com.asseco.aha.training.spring-advanced</groupId>
+		<groupId>com.github.aha.sat</groupId>
 		<artifactId>sat-parent</artifactId>
 		<version>0.1.0</version>
 	</parent>
@@ -57,7 +57,7 @@
 	</dependencies>
 
 	<build>
-		<finalName>sat-spring-boot</finalName>
+		<finalName>${project.name}</finalName>
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>

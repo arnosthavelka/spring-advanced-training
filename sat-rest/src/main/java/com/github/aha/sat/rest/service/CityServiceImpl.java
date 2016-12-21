@@ -19,8 +19,7 @@ public class CityServiceImpl implements CityService {
 
     /*
      * (non-Javadoc)
-     * 
-     * @see com.asseco.aha.training.spring_advanced.rest.service.CityService#list(java.lang.String, java.lang.String)
+     * @see com.github.aha.sat.rest.service.CityService#list(java.lang.String, java.lang.String)
      */
     @Override
     public List<City> list(String country, String sorting) {
@@ -34,8 +33,7 @@ public class CityServiceImpl implements CityService {
 
     /*
      * (non-Javadoc)
-     * 
-     * @see com.asseco.aha.training.spring_advanced.rest.service.CityService#item(long)
+     * @see com.github.aha.sat.rest.service.CityService#item(long)
      */
     @Override
     public City item(long id) {
@@ -44,9 +42,7 @@ public class CityServiceImpl implements CityService {
 
     /*
      * (non-Javadoc)
-     * 
-     * @see
-     * com.asseco.aha.training.spring_advanced.rest.service.CityService#insert(com.asseco.aha.training.spring_advanced.rest.domain.City)
+     * @see com.github.aha.sat.rest.service.CityService#save(com.github.aha.sat.rest.domain.City)
      */
     @Override
     public long save(City city) {
@@ -56,9 +52,7 @@ public class CityServiceImpl implements CityService {
 
     /*
      * (non-Javadoc)
-     * 
-     * @see
-     * com.asseco.aha.training.spring_advanced.rest.service.CityService#delete(com.asseco.aha.training.spring_advanced.rest.domain.City)
+     * @see com.github.aha.sat.rest.service.CityService#delete(long)
      */
     @Override
     public void delete(long id) {

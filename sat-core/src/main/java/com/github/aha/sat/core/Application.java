@@ -5,7 +5,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ComponentScan;
 
 @SpringBootApplication
-@ComponentScan(basePackages = "com.asseco.aha.training.spring_advanced.dummy")
+@ComponentScan(basePackages = "com.github.aha.sat.dummy")
 public class Application {
 
     public static void main(String[] args) {

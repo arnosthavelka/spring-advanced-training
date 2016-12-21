@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class BeanEnhancer {
 
-	@DeclareParents(value = "com.asseco.aha.training.spring_advanced.core.aop.EnjoyableDrink+", defaultImpl = EnjoyableImpl.class)
+	@DeclareParents(value = "com.github.aha.sat.core.aop.EnjoyableDrink+", defaultImpl = EnjoyableImpl.class)
 	public static Enjoyable enjoyable;
 
 }

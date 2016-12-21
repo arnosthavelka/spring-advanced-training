@@ -13,7 +13,7 @@ import com.github.aha.sat.rest.service.CityService;
 @Component
 @ManagedResource(description = "MBean about entity City")
 // objectName = "sat-rest:jmx=CityMBean",
-// jolokia: http://localhost:8080/jolokia/read/com.asseco.aha.training.sat-rest:name=cityMBean,type=CityMBean
+// jolokia: http://localhost:8080/jolokia/read/com.github.aha.sat.sat-rest:name=cityMBean,type=CityMBean
 public class CityMBean {
 
     @Autowired

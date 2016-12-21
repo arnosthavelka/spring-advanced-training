@@ -17,9 +17,7 @@ public class CityServiceImpl implements CityService {
 
 	/*
 	 * (non-Javadoc)
-	 * 
-	 * @see com.asseco.aha.training.spring_advanced.jpa.repository.CityService#
-	 * findByState(java.lang.String)
+	 * @see com.github.aha.sat.jpa.repository.CityService#findByState(java.lang.String)
 	 */
 	public List<City> findByState(String state) {
 		TypedQuery<City> query = em.createQuery(JPQL, City.class);

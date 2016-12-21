@@ -11,7 +11,7 @@ import org.springframework.context.annotation.FilterType;
 import org.springframework.stereotype.Component;
 
 @SpringBootApplication
-@ComponentScan(basePackages = { "com.asseco.aha.training.spring_advanced.core.testing" }, excludeFilters = @ComponentScan.Filter(type = FilterType.ANNOTATION, value = Component.class))
+@ComponentScan(basePackages = { "com.github.aha.sat.core.testing" }, excludeFilters = @ComponentScan.Filter(type = FilterType.ANNOTATION, value = Component.class))
 public class JavaConfigApplication {
 
     public static void main(String[] args) {

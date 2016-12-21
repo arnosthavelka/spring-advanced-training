@@ -11,7 +11,7 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.context.annotation.ScopedProxyMode;
 
 @SpringBootApplication
-@ComponentScan("com.asseco.aha.training.spring_advanced.core.scope")
+@ComponentScan("com.github.aha.sat.core.scope")
 public class ScopeApplication {
 
     public static void main(String[] args) {

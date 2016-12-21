@@ -1,4 +1,4 @@
-package com.asseco.aha.training.spring_advanced.war;
+package com.github.aha.sat.war;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
