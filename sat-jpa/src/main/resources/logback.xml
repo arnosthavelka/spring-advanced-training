@@ -33,7 +33,7 @@
 		<appender-ref ref="ASYNC" />
 	</root>
 
-	<logger name="com.asseco.aha.training.spring_advanced.jpa" level="DEBUG" additivity="false">
+	<logger name="com.github.aha.sat.jpa" level="DEBUG" additivity="false">
 		<appender-ref ref="STDOUT" />
 		<appender-ref ref="ASYNC" />
 	</logger>
