@@ -4,13 +4,13 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
 
 import org.junit.Test;
-import org.springframework.test.context.transaction.TransactionConfiguration;
+import org.springframework.test.annotation.Rollback;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.asseco.aha.training.spring_advanced.jpa.domain.City;
 
 @Transactional(readOnly = false)
-@TransactionConfiguration(defaultRollback = true)
+@Rollback
 public class CrudTests extends AbstractCityTests {
 
     @Test

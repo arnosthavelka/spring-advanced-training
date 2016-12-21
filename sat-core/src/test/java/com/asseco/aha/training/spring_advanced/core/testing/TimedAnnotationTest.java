@@ -5,14 +5,14 @@ import static org.hamcrest.Matchers.equalTo;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.springframework.boot.test.SpringApplicationConfiguration;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.Timed;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.context.junit4.SpringRunner;
 
 import com.asseco.aha.training.spring_advanced.core.testing.profile.PackageConfig;
 
-@RunWith(SpringJUnit4ClassRunner.class)
-@SpringApplicationConfiguration(classes = { PackageConfig.class })
+@RunWith(SpringRunner.class)
+@SpringBootTest(classes = { PackageConfig.class })
 public class TimedAnnotationTest {
 
     @Test

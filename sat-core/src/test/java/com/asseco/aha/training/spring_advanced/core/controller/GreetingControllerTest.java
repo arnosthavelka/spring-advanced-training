@@ -10,9 +10,9 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.SpringApplicationConfiguration;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
@@ -20,8 +20,8 @@ import org.springframework.web.context.WebApplicationContext;
 
 import com.asseco.aha.training.spring_advanced.core.Controller.ControllerApplication;
 
-@RunWith(SpringJUnit4ClassRunner.class)
-@SpringApplicationConfiguration(classes = { ControllerApplication.class })
+@RunWith(SpringRunner.class)
+@SpringBootTest(classes = { ControllerApplication.class })
 @WebAppConfiguration
 public class GreetingControllerTest {
 
@@ -42,14 +42,14 @@ public class GreetingControllerTest {
 	@Test
 	public void testArny() throws Exception {
 		mockMvc.perform(get("/arny").contentType(contentType)).andExpect(status().isOk())
-				.andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
+				.andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
 				.andExpect(content().string("Hello!"));
 	}
 
 	@Test
 	public void testJuan() throws Exception {
 		mockMvc.perform(get("/juan").contentType(contentType)).andExpect(status().isOk())
-				.andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
+				.andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
 				.andExpect(content().string("Cao!"));
 	}
 }
