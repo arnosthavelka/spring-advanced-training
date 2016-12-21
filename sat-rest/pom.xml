@@ -50,16 +50,11 @@
 			<groupId>com.fasterxml.jackson.dataformat</groupId>
 			<artifactId>jackson-dataformat-xml</artifactId>
 		</dependency>
-		<dependency>
-			<groupId>org.codehaus.woodstox</groupId>
-			<artifactId>woodstox-core-asl</artifactId>
-			<version>4.4.1</version>
-		</dependency>
 		<!-- Enable Swagger -->
 		<dependency>
 			<groupId>com.mangofactory</groupId>
 			<artifactId>swagger-springmvc</artifactId>
-			<version>0.9.3</version>
+			<version>1.0.0</version>
 		</dependency>
 		<dependency>
 		    <groupId>org.scala-lang</groupId>
@@ -70,7 +65,7 @@
 		<dependency>
 		  <groupId>org.ajar</groupId>
 		  <artifactId>swagger-spring-mvc-ui</artifactId>
-		  <version>0.2</version>
+		  <version>0.4</version>
 		</dependency>
 		<!-- Enable JMX -->
 		<dependency>
@@ -87,6 +82,7 @@
 	        <groupId>org.springframework.boot</groupId>
 	        <artifactId>spring-boot-starter-actuator</artifactId>
 	    </dependency>
+	    <!-- due to @JsonRootName -->
 	    <dependency>
 	    	<groupId>org.springframework.boot</groupId>
 	    	<artifactId>
@@ -96,6 +92,7 @@
 	</dependencies>
 
 	<repositories>
+		<!-- due to swagger-spring-mvc-ui -->
 		<repository>
 			<id>oss-jfrog-artifactory</id>
 			<name>oss-jfrog-artifactory-releases</name>
