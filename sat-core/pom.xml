@@ -16,7 +16,7 @@
 	</parent>
 
 	<properties>
-		<start-class>com.asseco.aha.training.spring_advanced.core.Application</start-class>
+		<start-class>com.github.aha.sat.core.Application</start-class>
 	</properties>
 
 	<dependencies>
