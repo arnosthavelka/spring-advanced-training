@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class GreetingController {
 
     /*
-     * http://localhost:8080/city/, http://localhost:8080/city/?country=Spain, http://localhost:8080/city/?sorting=id
+     * http://localhost:8080/spring-advanced-war/greeting?name=aha
      */
 	@RequestMapping(value = "/greeting", method = RequestMethod.GET)
 	public String list(@PathParam("name") String name) {
