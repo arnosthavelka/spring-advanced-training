@@ -1,108 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>com.github.aha.sat</groupId>
-	<artifactId>sat-parent</artifactId>
-	<version>0.2.0</version>
+	<artifactId>sat-root</artifactId>
+	<version>0.3.0-SNAPSHOT</version>
 	<packaging>pom</packaging>
 
 	<name>spring-advanced-parent</name>
-	<description>Parent project for spring advanced training</description>
+	<description>Umbrella for SAT projects</description>
 
-	<properties>
-		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<java.version>1.8</java.version>
-		<spring-boot-admin.version>1.5.4</spring-boot-admin.version>
-		<!-- github server corresponds to entry in ~/.m2/settings.xml -->
-		<github.global.server>github</github.global.server>
-	</properties>
-
-	<parent>
-		<groupId>org.springframework.boot</groupId>
-		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>1.5.2.RELEASE</version>
-		<relativePath/> <!-- lookup parent from repository -->
-	</parent>
-
-	<repositories>
-	    <repository>
-	        <id>spring-advanced-training-mvn-repo</id>
-	        <url>https://raw.github.com/arnosthavelka/spring-advanced-training/mvn-repo/</url>
-	        <snapshots>
-	            <enabled>true</enabled>
-	            <updatePolicy>always</updatePolicy>
-	        </snapshots>
-	        <releases>
-	        	<enabled>true</enabled>
-	        </releases>
-	    </repository>
-	</repositories>
-
-	<distributionManagement>
-		<repository>
-			<id>internal.repo</id>
-			<name>Temporary Staging Repository</name>
-			<url>file://${project.build.directory}/mvn-repo</url>
-		</repository>
-	</distributionManagement>
-
-	<dependencies>
-		<!-- Testing -->
-		<dependency>
-			<groupId>junit</groupId>
-			<artifactId>junit</artifactId>
-			<scope>test</scope>
-		</dependency>
-	</dependencies>
-
-	<build>
-		<plugins>
-			<plugin>
-				<groupId>org.springframework.boot</groupId>
-				<artifactId>spring-boot-maven-plugin</artifactId>
-			</plugin>
-			<plugin>
-			    <groupId>external.atlassian.jgitflow</groupId>
-			    <artifactId>jgitflow-maven-plugin</artifactId>
-			    <version>1.0-m5.1</version>
-			    <configuration>
-					<!-- Prevents deployments since there's not maven repo -->
-					<noDeploy>true</noDeploy>
-			    </configuration>
-			</plugin>		
-			<plugin>
-				<artifactId>maven-deploy-plugin</artifactId>
-				<configuration>
-					<altDeploymentRepository>internal.repo::default::file://${project.build.directory}/mvn-repo</altDeploymentRepository>
-				</configuration>
-			</plugin>
-	        <plugin>
-	            <groupId>com.github.github</groupId>
-	            <artifactId>site-maven-plugin</artifactId>
-	            <version>0.12</version>
-	            <configuration>
-	                <message>Maven artifacts for ${project.version}</message>  <!-- git commit message -->
-	                <noJekyll>true</noJekyll>                                  <!-- disable webpage processing -->
-	                <outputDirectory>${project.build.directory}/mvn-repo</outputDirectory> <!-- matches distribution management repository url above -->
-	                <branch>refs/heads/mvn-repo</branch>                       <!-- remote branch name -->
-	                <includes><include>**/*</include></includes>
-	                <merge>true</merge>                                        <!-- don't delete old artifacts -->
-	                <repositoryName>spring-advanced-training</repositoryName>      <!-- github repo name -->
-	                <repositoryOwner>arnosthavelka</repositoryOwner>    <!-- github username  -->
-	            </configuration>
-	            <executions>
-	              <!-- run site-maven-plugin's 'site' target as part of the build's normal 'deploy' phase -->
-	              <execution>
-	                <goals>
-	                  <goal>site</goal>
-	                </goals>
-	                <phase>deploy</phase>
-	              </execution>
-	            </executions>
-	        </plugin>			
-		</plugins>
-	</build>
+	<modules>
+		<module>sat-parent</module>
+		<module>sat-core</module>
+	</modules>
 
 </project>

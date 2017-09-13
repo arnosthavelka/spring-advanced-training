@@ -8,16 +8,15 @@ import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 import javax.annotation.Resource;
 
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.github.aha.sat.core.scope.TokenBean;
 
-@RunWith(SpringJUnit4ClassRunner.class)
+@SpringBootTest
 // @SpringApplicationConfiguration(classes = Jsr250Test.Context.class)
 @ContextConfiguration
 // source: http://www.java2blog.com/2012/09/spring-jsr-250-annotations.html

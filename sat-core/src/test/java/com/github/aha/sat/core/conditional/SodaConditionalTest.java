@@ -1,10 +1,10 @@
 package com.github.aha.sat.core.conditional;
 
-import org.junit.BeforeClass;
+import org.junit.jupiter.api.BeforeAll;
 
 public class SodaConditionalTest extends AbstractConditionalTest {
 
-	@BeforeClass
+	@BeforeAll
 	public static void init() {
 		System.setProperty("soda", "aha");
 	}

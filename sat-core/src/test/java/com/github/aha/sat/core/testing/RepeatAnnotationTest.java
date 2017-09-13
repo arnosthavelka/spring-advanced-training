@@ -5,17 +5,13 @@ import static org.hamcrest.Matchers.equalTo;
 
 import java.util.Random;
 
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.Repeat;
-import org.springframework.test.context.junit4.SpringRunner;
 
-import com.github.aha.sat.core.testing.Calc;
 import com.github.aha.sat.core.testing.profile.PackageConfig;
 
-@RunWith(SpringRunner.class)
 @SpringBootTest(classes = { PackageConfig.class })
 public class RepeatAnnotationTest {
 
