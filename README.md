@@ -1,7 +1,7 @@
 spring-advanced-training
 ========================
 
-Sample projects (source codes) for my training [Spring - Advanced](http://arnosthavelka.github.io/presentation/spring-advanced/index.html) and [Spring Boot](http://arnosthavelka.github.io/presentation/spring-boot/index.html). All these projects are based on Spring Boot 1.4 & Java 8.
+Sample projects (source codes) for my training [Spring - Advanced](http://arnosthavelka.github.io/presentation/spring-advanced/index.html) and [Spring Boot](http://arnosthavelka.github.io/presentation/spring-boot/index.html). All these projects are based on Spring Boot 1.5.7 & Java 8.
 
 #Agenda
 * Spring Core - some necessary basics and hints
@@ -36,10 +36,12 @@ Usage of Spring Boot, including:
 * Advanced metrics (from dropwizard)
 * Modified Health service
 
+_Note: Requires running spring-spring-boot-admin_
+
 ## sat-spring-boot-admin
 Usage of Spring Boot Admin to monitor SB applications.
 
-_Note: Requires running spring-spring-boot.jar._
+_Note: Not working now (on SB 1.5.7)
 
 ## sat-war
 Example of deplying Spring Boot to application server (as WAR). 
