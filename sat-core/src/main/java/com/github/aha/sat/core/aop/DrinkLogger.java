@@ -7,15 +7,14 @@ import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.annotation.Pointcut;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
+
+import lombok.extern.slf4j.Slf4j;
 
 @Aspect
 @Component
+@Slf4j
 public class DrinkLogger {
-
-	private static final Logger LOG = LoggerFactory.getLogger(DrinkLogger.class);
 
 	@Pointcut("execution(* com.github.aha.sat..Tea.*())")
 	private void teaUsage() {
@@ -24,12 +23,12 @@ public class DrinkLogger {
 
 	@Before("teaUsage()")
 	public void logTeaUsage(JoinPoint joinPoint) {
-		LOG.info("Tea drink is being used...");
+		log.info("Tea drink is being used by {} method ...", joinPoint.getSignature().getName());
 	}
 
 	@After("execution(* com.github.aha.sat.core.wiring.Drink.*())")
-	public void logAnyDrinkUsage(JoinPoint jp) {
-		LOG.info("Drink {} was just used...", jp.getTarget().getClass().getSimpleName());
+	public void logAnyDrinkUsage(JoinPoint joinPoint) {
+		log.info("Drink instance was just used by {}", joinPoint.getTarget().getClass().getSimpleName());
 	}
 
 	@Around("execution(* com.github.aha.sat..*Controller.*(..))")
@@ -37,9 +36,9 @@ public class DrinkLogger {
 		Object value = null;
 		try {
 			value = pjp.proceed();
-			LOG.info("Controller method '{}' returned '{}'", pjp.getSignature().getName(), value);
+			log.info("Controller method '{}' returned '{}'", pjp.getSignature().getName(), value);
 		} catch (Throwable e) {
-			LOG.error("AOP around aspect error", e);
+			log.error("AOP around aspect error", e);
 		}
 		return value;
 	}

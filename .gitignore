@@ -16,6 +16,7 @@ hs_err_pid*
 .classpath
 .project
 .springBeans
+.factorypath
 
 # maven
 target
