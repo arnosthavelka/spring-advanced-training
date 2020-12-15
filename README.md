@@ -1,7 +1,8 @@
 spring-advanced-training
 ========================
 
-Sample projects (source codes) for my training [Spring - Advanced](http://arnosthavelka.github.io/presentation/spring-advanced/index.html) and [Spring Boot](http://arnosthavelka.github.io/presentation/spring-boot/index.html). All these projects are based on Spring Boot 1.5.7 & Java 8.
+Sample projects (source codes) for my training [Spring - Advanced](http://arnosthavelka.github.io/presentation/spring-advanced/index.html) and [Spring Boot](http://arnosthavelka.github.io/presentation/spring-boot/index.html). 
+All these projects are based on Spring Boot 2.4.1 & Java 15.
 
 #Agenda
 * Spring Core - some necessary basics and hints
