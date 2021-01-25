@@ -1,4 +1,4 @@
-package com.github.aha.sat.core.testing;
+package com.github.aha.sat.core.testing.calc;
 
 import static java.time.Duration.ofMillis;
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -8,8 +8,6 @@ import static org.junit.jupiter.api.Assertions.assertTimeout;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.Timed;
-
-import com.github.aha.sat.core.testing.profile.PackageConfig;
 
 @SpringBootTest(classes = { PackageConfig.class })
 public class TimedAnnotationTest {

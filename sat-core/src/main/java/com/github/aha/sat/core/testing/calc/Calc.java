@@ -1,4 +1,4 @@
-package com.github.aha.sat.core.testing;
+package com.github.aha.sat.core.testing.calc;
 
 import org.springframework.stereotype.Service;
 
