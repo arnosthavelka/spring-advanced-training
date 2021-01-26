@@ -1,5 +1,6 @@
-spring-advanced-training
-========================
+# spring-advanced-training
+
+[![Travis Build Status][travis-image]][travis-url-main] [![Sonar quality gate][sonar-quality-gate]][sonar-url] [![Sonar coverage][sonar-coverage]][sonar-url] [![Sonar bugs][sonar-bugs]][sonar-url] [![Sonar vulnerabilities][sonar-vulnerabilities]][sonar-url] [![MIT licensed][mit-badge]](./LICENSE.txt)
 
 Sample projects (source codes) for my training [Spring - Advanced](http://arnosthavelka.github.io/presentation/spring-advanced/index.html) and [Spring Boot](http://arnosthavelka.github.io/presentation/spring-boot/index.html). 
 All these projects are based on Spring Boot 2.4.1 & Java 15.
@@ -46,3 +47,13 @@ _Note: Not working now (on SB 1.5.7)
 
 ## sat-war
 Example of deplying Spring Boot to application server (as WAR). 
+
+[travis-url-main]: https://github.com/arnosthavelka/spring-advanced-training
+[travis-image]: https://travis-ci.org/arnosthavelka/spring-advanced-training.svg?branch=master
+
+[sonar-url]: https://sonarcloud.io/dashboard?id=arnosthavelka_spring-advanced-training
+[sonar-quality-gate]: https://sonarcloud.io/api/project_badges/measure?project=arnosthavelka_spring-advanced-training&metric=alert_status
+[sonar-coverage]: https://sonarcloud.io/api/project_badges/measure?project=arnosthavelka_spring-advanced-training&metric=coverage
+[sonar-bugs]: https://sonarcloud.io/api/project_badges/measure?project=arnosthavelka_spring-advanced-training&metric=bugs
+[sonar-vulnerabilities]: https://sonarcloud.io/api/project_badges/measure?project=arnosthavelka_spring-advanced-training&metric=vulnerabilities
+[mit-badge]: https://img.shields.io/badge/license-MIT-maroon.svg
