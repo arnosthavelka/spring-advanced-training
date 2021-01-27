@@ -6,7 +6,6 @@
 	<artifactId>sat-core</artifactId>
 	<packaging>war</packaging>
 
-	<name>spring-advanced-core</name>
 	<description>Demonstration of Spring Core</description>
 
 	<parent>

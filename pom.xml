@@ -9,7 +9,6 @@
 	<version>0.3.0-SNAPSHOT</version>
 	<packaging>pom</packaging>
 
-	<name>spring-advanced-parent</name>
 	<description>Umbrella for SAT projects</description>
 
 	<modules>
