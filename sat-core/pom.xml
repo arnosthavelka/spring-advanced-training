@@ -3,17 +3,17 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
-	<artifactId>sat-core</artifactId>
-	<packaging>war</packaging>
-
-	<description>Demonstration of Spring Core</description>
-
 	<parent>
 		<groupId>com.github.aha.sat</groupId>
 		<artifactId>sat-parent</artifactId>
-		<version>0.3.0-snapshot</version>
-		<relativePath>../sat-parent/pom.xml</relativePath>
+		<version>0.3.0-SNAPSHOT</version>
+		<relativePath>../sat-parent</relativePath>
 	</parent>
+
+	<artifactId>sat-core</artifactId>
+	<packaging>jar</packaging>
+
+	<description>Demonstration of Spring Core</description>
 
 	<properties>
 		<start-class>com.github.aha.sat.core.Application</start-class>
@@ -32,16 +32,6 @@
 
 	<build>
 		<finalName>${project.name}</finalName>
-		<plugins>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-compiler-plugin</artifactId>
-			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-surefire-plugin</artifactId>
-			</plugin>
-		</plugins>
 	</build>
 
 </project>
