@@ -1,10 +1,10 @@
 package com.github.aha.sat.core.aop;
 
-import java.util.Random;
+import java.security.SecureRandom;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.github.aha.sat.core.wiring.Drink;
@@ -20,9 +20,9 @@ public class TestController {
 	@Qualifier("beer")
 	private Drink beer;
 
-	@RequestMapping("/drink")
+	@GetMapping("/drink")
 	public String test() {
-		int val = new Random().nextInt(2);
+		int val = new SecureRandom().nextInt(2);
 		return val == 1 ? getName(tea) : getName(beer);
 	}
 

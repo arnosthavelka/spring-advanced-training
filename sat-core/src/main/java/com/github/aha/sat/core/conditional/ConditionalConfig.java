@@ -16,45 +16,25 @@ public class ConditionalConfig {
 	@Bean
 	@Conditional(AlcoholCondition.class)
 	public Drink beer()	{
-		return new Drink() {
-			@Override
-			public String getName() {
-				return "Beer";
-			}
-		};
+		return () -> "Beer";
 	}
 
 	@Bean
 	@Conditional(AlcoholCondition.class)
 	public Drink wine() {
-		return new Drink() {
-			@Override
-			public String getName() {
-				return "Wine";
-			}
-		};
+		return () -> "Wine";
 	}
 
 	@Bean
 	@Conditional(SodaCondition.class)
 	public Drink cola() {
-		return new Drink() {
-			@Override
-			public String getName() {
-				return "cola";
-			}
-		};
+		return () -> "cola";
 	}
 
 	@Bean
 	@Conditional(SodaCondition.class)
 	public Drink fanta() {
-		return new Drink() {
-			@Override
-			public String getName() {
-				return "fanta";
-			}
-		};
+		return () -> "fanta";
 	}
 
 }

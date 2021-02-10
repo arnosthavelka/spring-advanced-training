@@ -15,26 +15,12 @@ public class AopApplication {
 
     @Bean
 	public Drink tea() {
-		return new Drink() {
-
-			@Override
-			public String getName() {
-				return "Tea";
-			}
-
-		};
+		return () -> "Tea";
     }
 
     @Bean
 	public EnjoyableDrink beer() {
-		return new EnjoyableDrink() {
-
-			@Override
-			public String getName() {
-				return "Beer";
-			}
-
-		};
+		return () -> "Beer";
     }
 
 }
