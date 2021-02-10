@@ -7,7 +7,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import com.github.aha.sat.core.config.User;
 
 @SpringBootTest(classes = { ProfileConfig.class, RichardConfig.class, BarbaraConfig.class })
-public abstract class AbstractConfigTest {
+abstract class AbstractConfigTest {
 
     @Autowired
     @Qualifier("user")

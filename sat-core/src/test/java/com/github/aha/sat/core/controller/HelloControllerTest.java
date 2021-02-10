@@ -13,10 +13,10 @@ import org.springframework.web.servlet.view.InternalResourceView;
 
 @SpringBootTest(classes = { ControllerApplication.class })
 @WebAppConfiguration
-public class HelloControllerTest {
+class HelloControllerTest {
 
 	@Test
-	public void test() throws Exception {
+	void test() throws Exception {
 		HelloController controller = new HelloController();
 		MockMvc mockMvc = standaloneSetup(controller)
 				.setSingleView(new InternalResourceView("/WEB-INF/jsp/hello.jsp")).build();

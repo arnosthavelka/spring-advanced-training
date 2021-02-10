@@ -22,7 +22,7 @@ abstract class AbstractConditionalTest {
 	private List<Drink> drinks;
 
 	@Test
-	public void testDrinks() {
+	void testDrinks() {
 		assertThat(drinks, not(empty()));
 		assertThat(drinks.size(), equalTo(2));
 		printBeans();

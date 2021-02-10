@@ -9,10 +9,10 @@ import org.springframework.test.annotation.IfProfileValue;
 import org.springframework.test.context.ActiveProfiles;
 
 @ActiveProfiles("barbara")
-public class BarbaraConfigTest extends AbstractConfigTest {
+class BarbaraConfigTest extends AbstractConfigTest {
 
     @Test
-    public void testUserOK() {
+	void testUserOK() {
         assertThat(user.getName(), equalTo("Barbara"));
         // for (Map.Entry<String, String> entry : System.getenv().entrySet()) {
         // System.out.println(entry.getKey() + "/" + entry.getValue());
@@ -22,7 +22,7 @@ public class BarbaraConfigTest extends AbstractConfigTest {
 
     @Test
     @IfProfileValue(name = "test-group", values = { "training" })
-    public void testUserFailure() {
+	void testUserFailure() {
         assertThat(user.getName(), not(equalTo("Arny")));
     }
 }

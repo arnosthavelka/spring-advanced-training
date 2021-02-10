@@ -19,7 +19,7 @@ import org.springframework.web.context.WebApplicationContext;
 
 @SpringBootTest(classes = { ControllerApplication.class })
 @WebAppConfiguration
-public class GreetingControllerTest {
+class GreetingControllerTest {
 
 	@Autowired
 	private WebApplicationContext webApplicationContext;
@@ -30,20 +30,20 @@ public class GreetingControllerTest {
 	private MockMvc mockMvc;
 
 	@BeforeEach
-	public void setup() {
+	void setup() {
 		mockMvc = MockMvcBuilders.webAppContextSetup(webApplicationContext).build();
 	}
 
 
 	@Test
-	public void testArny() throws Exception {
+	void testArny() throws Exception {
 		mockMvc.perform(get("/arny").contentType(contentType)).andExpect(status().isOk())
 				.andExpect(content().contentType(APPLICATION_JSON_VALUE))
 				.andExpect(content().string("Hello!"));
 	}
 
 	@Test
-	public void testJuan() throws Exception {
+	void testJuan() throws Exception {
 		mockMvc.perform(get("/juan").contentType(contentType)).andExpect(status().isOk())
 				.andExpect(content().contentType(APPLICATION_JSON_VALUE))
 				.andExpect(content().string("Cao!"));

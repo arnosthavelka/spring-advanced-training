@@ -12,7 +12,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest(classes = JavaConfigApplication.class)
-public class JavaConfigTest {
+class JavaConfigTest {
 
     private Logger LOG = LoggerFactory.getLogger(JavaConfigTest.class);
 
@@ -33,23 +33,23 @@ public class JavaConfigTest {
     private User userArny;
 
     @Test
-    public void testHello() {
+	void testHello() {
         assertThat(helloBean, equalTo("Hello all!"));
         // assertEquals("Hello all!", helloBean);
     }
 
     @Test
-    public void testHi() {
+	void testHi() {
         assertThat(hiBean, is(equalTo("Hi all!")));
     }
 
     @Test
-    public void testRandom() {
+	void testRandom() {
         LOG.info(randomBean.toString());
     }
 
     @Test
-    public void testUserInstance() {
+	void testUserInstance() {
         assertThat(userArny.getName(), is(equalTo("Arny")));
     }
 }

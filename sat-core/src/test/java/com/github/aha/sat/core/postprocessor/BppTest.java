@@ -10,14 +10,14 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest(classes = PostProcessorApplication.class)
-public class BppTest {
+class BppTest {
 
     @Autowired
     @Qualifier("hello")
     private String bean;
 
     @Test
-    public void contextLoads() {
+	void contextLoads() {
         assertThat(bean.toString(), is(equalTo("HI ALL!")));
         // Assert.assertEquals("HI ALL!", bean.toString());
     }

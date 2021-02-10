@@ -9,23 +9,23 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest(classes = { MapperApplication.class })
-public class JsonUserRepositoryTest {
+class JsonUserRepositoryTest {
 
     @Autowired
     private UserRepository repo;
     
 	@Test
-	public void testUsersCount() {
+	void testUsersCount() {
 		assertThat(repo.fetchAllUsers().size(), is(equalTo(3)));
 	}
 
 	@Test
-	public void testFirstUser() {
+	void testFirstUser() {
 		assertThat(repo.firstUser().getUserName(), is(equalTo("aha")));
 	}
 
 	@Test
-	public void testRisator() {
+	void testRisator() {
 		UserDTO user = repo.userByFirstNameAndLastName("Richard", "Strauss");
 		assertThat(user.getUserName(), is(equalTo("risator")));
 	}

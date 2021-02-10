@@ -10,24 +10,24 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.Timed;
 
 @SpringBootTest(classes = { PackageConfig.class })
-public class TimedAnnotationTest {
+class TimedAnnotationTest {
 
     @Test
     @Timed(millis = 100)
-    public void testOkTime() {
+	void testOkTime() {
         assertThat(true, equalTo(Boolean.TRUE));
     }
 
     @Test()
     @Timed(millis = 100)
-    public void testSpringTimeout() throws InterruptedException {
+	void testSpringTimeout() throws InterruptedException {
         Thread.sleep(50);
         // Thread.sleep(120);
         assertThat(true, equalTo(Boolean.TRUE));
     }
 
 	@Test
-    public void testJUnitTimeout() throws InterruptedException {
+	void testJUnitTimeout() throws InterruptedException {
 		assertTimeout(ofMillis(100), () -> {
 			Thread.sleep(50);
 			// Thread.sleep(120);

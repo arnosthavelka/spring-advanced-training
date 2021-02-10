@@ -6,13 +6,13 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.ApplicationContext;
 
 @SpringBootTest(classes = NotificationApplication.class)
-public class NotificationTest {
+class NotificationTest {
 
     @Autowired
 	private ApplicationContext ctx;
 
     @Test
-    public void contextLoads() {
+	void contextLoads() {
 		ctx.publishEvent(new CustomEvent(ctx, "First message"));
 		ctx.publishEvent(new CustomEvent(ctx, "Second message"));
     }

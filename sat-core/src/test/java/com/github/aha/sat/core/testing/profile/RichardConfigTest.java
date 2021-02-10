@@ -7,10 +7,10 @@ import org.junit.jupiter.api.Test;
 import org.springframework.test.context.ActiveProfiles;
 
 @ActiveProfiles("richard")
-public class RichardConfigTest extends AbstractConfigTest {
+class RichardConfigTest extends AbstractConfigTest {
 
     @Test
-    public void testUser() {
+	void testUser() {
         assertThat(user.getName(), equalTo("Richard"));
     }
 }

@@ -11,7 +11,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.Repeat;
 
 @SpringBootTest(classes = { PackageConfig.class })
-public class RepeatAnnotationTest {
+class RepeatAnnotationTest {
 
     private Random random = new Random();
 
@@ -20,7 +20,7 @@ public class RepeatAnnotationTest {
 
     @Test
     @Repeat(10)
-    public void testRepeatAnnotation() {
+	void testRepeatAnnotation() {
         int a = random.nextInt(10);
         int b = random.nextInt(10);
         int result = calc.add(a, b);

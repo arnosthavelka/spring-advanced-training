@@ -14,14 +14,14 @@ import com.github.aha.sat.core.config.User;
 
 @ExtendWith(SpringExtension.class)
 @ContextConfiguration(locations="classpath:spring/xml-config.xml")
-public class XmlDirectConfigTest {
+class XmlDirectConfigTest {
 
     @Autowired
     @Qualifier("user")
     private User user;
 
     @Test
-    public void testHello() {
+	void testHello() {
         assertThat(user.getName(), equalTo("Arny"));
     }
 

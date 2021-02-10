@@ -1,6 +1,6 @@
 package com.github.aha.sat.core.config;
 
-import java.util.Random;
+import java.security.SecureRandom;
 
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.SpringApplication;
@@ -30,7 +30,7 @@ public class JavaConfigApplication {
 
     @Bean
     public String randomGreeting() {
-        int val = new Random().nextInt(10) % 2;
+		int val = new SecureRandom().nextInt(10) % 2;
         return val == 0 ? hi() : hello();
     }
 

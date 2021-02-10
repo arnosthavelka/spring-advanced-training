@@ -12,7 +12,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import com.github.aha.sat.core.wiring.Drink;
 
 @SpringBootTest(classes = AopApplication.class)
-public class AopTest {
+class AopTest {
 
 	@Autowired
 	@Qualifier("tea")
@@ -23,12 +23,12 @@ public class AopTest {
 	private Drink beer;
 
 	@Test
-	public void testTea() {
+	void testTea() {
 		assertThat(tea.getName(), is(equalTo("Tea")));
 	}
 
 	@Test
-	public void testEnhancedBear() {
+	void testEnhancedBear() {
 		assertThat(beer.getName(), equalTo("Beer"));
 		if (beer instanceof Enjoyable) {
 			Enjoyable en = (Enjoyable) beer;

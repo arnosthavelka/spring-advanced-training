@@ -12,7 +12,7 @@ import com.github.aha.sat.core.wiring.trait.NonAlcoholic;
 import com.github.aha.sat.core.wiring.trait.Sparkling;
 
 @SpringBootTest(classes = WiringConfig.class)
-public class WiringTest {
+class WiringTest {
 
 	@Autowired
 	private Drink tea;
@@ -27,17 +27,17 @@ public class WiringTest {
 	private Drink beer;
 
 	@Test
-	public void testPrimaryBean() {
+	void testPrimaryBean() {
 		assertThat(tea.getName(), equalTo("Tea"));
 	}
 
 	@Test
-	public void testBeverage() {
+	void testBeverage() {
 		assertThat(beverage.getName(), equalTo("Cola"));
     }
 
 	@Test
-	public void testBeer() {
+	void testBeer() {
 		assertThat(beer.getName(), equalTo("Beer"));
 	}
 

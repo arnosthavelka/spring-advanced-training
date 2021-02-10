@@ -20,35 +20,35 @@ import com.github.aha.sat.core.scope.TokenBean;
 // @SpringApplicationConfiguration(classes = Jsr250Test.Context.class)
 @ContextConfiguration
 // source: http://www.java2blog.com/2012/09/spring-jsr-250-annotations.html
-public class Jsr250Test {
+class Jsr250Test {
 
     @Resource
     private TokenBean bean;
 
     @Test
-    public void contextLoads() {
+	public void contextLoads() {
         assertThat(bean.getToken(), is(equalTo("token")));
     }
 
     @Configuration
-    public static class Context {
+	static class Context {
 
         @Bean
-        public TokenBean myBean() {
+		public TokenBean myBean() {
             return new TokenBean() {
 
                 @PostConstruct
-                public void init() {
+				public void init() {
                     System.out.println("In init block of token");
                 }
 
                 @PreDestroy
-                public void destroy() {
+				public void destroy() {
                     System.out.println("In destroy block of token");
                 }
 
                 @Override
-                public String getToken() {
+				public String getToken() {
                     return "token";
                 }
             };

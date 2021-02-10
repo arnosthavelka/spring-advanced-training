@@ -10,14 +10,14 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest(classes = ScopeApplication.class)
-public class ProxyModeTest {
+class ProxyModeTest {
 
     @Autowired
     @Qualifier("beanSingleton")
     private TokenBean bean;
 
     @Test
-    public void contextLoads() {
+	void contextLoads() {
         assertThat(bean.getToken(), is(not(bean.getToken())));
         // Assert.assertNotEquals(bean.getToken(), bean.getToken());
     }
