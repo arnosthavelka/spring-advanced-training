@@ -33,7 +33,7 @@ public class ScopeApplication {
 
     @Bean
     public TokenBean beanSingleton(final TokenBean beanPrototype) {
-		return () -> beanPrototype.toString();
+		return beanPrototype::toString;
     }
 
 }

@@ -9,8 +9,8 @@ import com.github.aha.sat.core.config.User;
 @Configuration
 public class ProfileConfig {
 
-    @Autowired
-    private User user;
+	@Autowired
+	private User user;
 
     @Bean
     public User user() {

@@ -14,6 +14,7 @@
 	<modules>
 		<module>sat-parent</module>
 		<module>sat-core</module>
+		<module>sat-jdbc</module>
 	</modules>
 
 </project>

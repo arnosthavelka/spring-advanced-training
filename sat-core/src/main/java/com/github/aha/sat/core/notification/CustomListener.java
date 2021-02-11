@@ -1,18 +1,17 @@
 package com.github.aha.sat.core.notification;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.context.ApplicationListener;
 import org.springframework.stereotype.Component;
 
-@Component
-public class CustomListener implements ApplicationListener<CustomEvent> {
+import lombok.extern.slf4j.Slf4j;
 
-	private Logger LOG = LoggerFactory.getLogger(CustomListener.class);
+@Component
+@Slf4j
+public class CustomListener implements ApplicationListener<CustomEvent> {
 
 	@Override
 	public void onApplicationEvent(CustomEvent ce) {
-		LOG.info(ce.toString());
+		log.info(ce.toString());
 	}
 
 }
