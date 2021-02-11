@@ -9,10 +9,10 @@ import org.junit.jupiter.api.Test;
 
 import com.github.aha.sat.jpa.domain.City;
 
-public class MixedQueryTests extends AbstractCityTests {
+class MixedQueryTests extends AbstractCityTests {
 
     @Test
-    public void testCitiesWithState() {
+	void testCitiesWithState() {
 		List<City> result = cityRepository.findByState("CA");
 		assertThat(result.size(), equalTo(1));
         City sf = result.get(0);

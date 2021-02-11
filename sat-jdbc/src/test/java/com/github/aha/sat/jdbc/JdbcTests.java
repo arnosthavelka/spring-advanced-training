@@ -8,13 +8,13 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.jdbc.core.JdbcTemplate;
 
 @SpringBootTest(classes = JdbcApplication.class)
-public class JdbcTests {
+class JdbcTests {
 
     @Autowired
     JdbcTemplate jdbcTemplate;
 
     @Test
-    public void testCount() {
+	void testCount() {
         Integer count = jdbcTemplate.queryForObject("select count(*) from CATCIS", Integer.class);
 		assertThat(count).isEqualTo(7);
     }

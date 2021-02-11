@@ -13,10 +13,10 @@ import org.springframework.data.domain.Sort;
 
 import com.github.aha.sat.jpa.domain.City;
 
-public class DynamicQueryTests extends AbstractCityTests {
+class DynamicQueryTests extends AbstractCityTests {
 
     @Test
-    public void testCitiesWithState() {
+	void testCitiesWithState() {
 		List<City> result = cityRepository.findAll(cityHasState(), Sort.by("country", "name"));
         assertThat(result.size(), equalTo(9));
         City newYork = result.get(0);
@@ -25,7 +25,7 @@ public class DynamicQueryTests extends AbstractCityTests {
     }
 
     @Test
-    public void testCitiesWithoutStateInUsa() {
+	void testCitiesWithoutStateInUsa() {
 		List<City> result = cityRepository.findAll(cityHasNoState().and(cityFromState("USA")), Sort.by("country", "name"));
         assertThat(result.size(), equalTo(1));
         City newYork = result.get(0);
