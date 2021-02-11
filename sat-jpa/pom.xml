@@ -5,14 +5,13 @@
 
 	<artifactId>sat-jpa</artifactId>
 	<packaging>jar</packaging>
-
-	<name>spring-advanced-jpa</name>
 	<description>Demonstration JDBC in Spring framework</description>
 
 	<parent>
 		<groupId>com.github.aha.sat</groupId>
 		<artifactId>sat-parent</artifactId>
-		<version>0.2.0</version>
+		<version>0.3.0-SNAPSHOT</version>
+		<relativePath>../sat-parent</relativePath>
 	</parent>
 
 	<properties>

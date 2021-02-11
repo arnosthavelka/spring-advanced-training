@@ -5,7 +5,7 @@ import static org.hamcrest.Matchers.equalTo;
 
 import java.util.List;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import com.github.aha.sat.jpa.domain.City;
 

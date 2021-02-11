@@ -1,5 +1,7 @@
 package com.github.aha.sat.jpa.domain;
 
+import static javax.persistence.GenerationType.IDENTITY;
+
 import java.io.Serializable;
 
 import javax.persistence.Column;
@@ -17,7 +19,7 @@ public class City implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
-    @GeneratedValue
+	@GeneratedValue(strategy = IDENTITY)
     private Long id;
 
     @Column(nullable = false)

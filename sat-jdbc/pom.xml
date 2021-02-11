@@ -5,7 +5,6 @@
 
 	<artifactId>sat-jdbc</artifactId>
 	<packaging>jar</packaging>
-
 	<description>Demonstration JDBC in Spring framework</description>
 
 	<parent>

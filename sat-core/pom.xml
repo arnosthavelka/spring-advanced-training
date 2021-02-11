@@ -5,7 +5,6 @@
 
 	<artifactId>sat-core</artifactId>
 	<packaging>jar</packaging>
-
 	<description>Demonstration of Spring Core</description>
 
 	<parent>

@@ -12,13 +12,13 @@ import com.github.aha.sat.jpa.domain.City;
 public class CitySpecifications {
 
     public static Specification<City> cityHasState() {
-        return new Specification<City>() {
+		return new Specification<City>() {
 
-            @Override
-            public Predicate toPredicate(Root<City> root, CriteriaQuery<?> query, CriteriaBuilder cb) {
-                return cb.notEqual(root.get("state"), "");
-            }
-        };
+			@Override
+			public Predicate toPredicate(Root<City> root, CriteriaQuery<?> query, CriteriaBuilder cb) {
+				return cb.notEqual(root.get("state"), "");
+			}
+		};
     }
 
     public static Specification<City> cityHasNoState() {
