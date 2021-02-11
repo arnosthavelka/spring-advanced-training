@@ -1,6 +1,6 @@
 package com.github.aha.sat.core;
 
-import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatNoException;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -10,7 +10,7 @@ class ApplicationTests {
 
 	@Test
 	void contextLoads() {
-		assertThat(1 < 2).isTrue();
+		assertThatNoException();
 	}
 
 }

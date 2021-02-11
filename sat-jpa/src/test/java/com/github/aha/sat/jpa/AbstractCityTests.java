@@ -8,7 +8,7 @@ import com.github.aha.sat.jpa.repository.CityRepository;
 
 @SpringBootTest(classes = JpaApplication.class)
 @Transactional(readOnly = true)
-public abstract class AbstractCityTests {
+abstract class AbstractCityTests {
 
     @Autowired
     protected CityRepository cityRepository;

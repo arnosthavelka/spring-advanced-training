@@ -11,10 +11,10 @@ import com.github.aha.sat.jpa.domain.City;
 
 @Transactional(readOnly = false)
 @Rollback
-public class CrudTests extends AbstractCityTests {
+class CrudTests extends AbstractCityTests {
 
     @Test
-    public void testCreate() {
+	void testCreate() {
         City city = new City("Frankfurt", "Germany", "");
         cityRepository.save(city);
         long count = cityRepository.count();
@@ -22,7 +22,7 @@ public class CrudTests extends AbstractCityTests {
     }
 
     @Test
-    public void testDelete() {
+	void testDelete() {
         City city = cityRepository.findByName("Prague");
         long count = cityRepository.count();
         assertThat(count, equalTo(15L));

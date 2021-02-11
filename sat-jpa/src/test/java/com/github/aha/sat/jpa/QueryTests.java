@@ -13,16 +13,16 @@ import com.github.aha.sat.jpa.domain.City;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
-public class QueryTests extends AbstractCityTests {
+class QueryTests extends AbstractCityTests {
 
     @Test
-    public void testCount() {
+	void testCount() {
         long count = cityRepository.count();
         assertThat(count, equalTo(15L));
     }
 
     @Test
-    public void testPaging() {
+	void testPaging() {
 		Page<City> page = cityRepository.findAll(PageRequest.of(0, 5));
         assertThat(page.getSize(), equalTo(5));
         assertThat(page.getTotalElements(), equalTo(15L));
@@ -34,7 +34,7 @@ public class QueryTests extends AbstractCityTests {
     }
 
     @Test
-    public void testSorting() {
+	void testSorting() {
 		Page<City> page = cityRepository.findAll(PageRequest.of(0, 5, Sort.Direction.DESC, "country", "name"));
         assertThat(page.getSize(), equalTo(5));
 		log.debug("\n### testSorting output");
@@ -44,7 +44,7 @@ public class QueryTests extends AbstractCityTests {
     }
 
     @Test
-    public void testCityByName() {
+	void testCityByName() {
         City city = cityRepository.findByNameAndCountryAllIgnoringCase("Tokyo", "Japan");
         assertThat(city.getName(), equalTo("Tokyo"));
         assertThat(city.getCountry(), equalTo("Japan"));

@@ -22,7 +22,6 @@ public class ScopeApplication {
     @Bean
 	@Scope(value = SCOPE_PROTOTYPE, proxyMode = INTERFACES)
     public TokenBean beanPrototype() {
-//    	return () -> UUID.randomUUID().toString();
 		return new TokenBean() {
 			@Override
 			public String getToken() {

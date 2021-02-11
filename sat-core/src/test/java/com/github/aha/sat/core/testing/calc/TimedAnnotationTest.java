@@ -21,16 +21,14 @@ class TimedAnnotationTest {
     @Test()
     @Timed(millis = 100)
 	void testSpringTimeout() throws InterruptedException {
-        Thread.sleep(50);
-        // Thread.sleep(120);
+		Thread.sleep(50); // NOSONAR
         assertThat(true, equalTo(Boolean.TRUE));
     }
 
 	@Test
 	void testJUnitTimeout() throws InterruptedException {
 		assertTimeout(ofMillis(100), () -> {
-			Thread.sleep(50);
-			// Thread.sleep(120);
+			Thread.sleep(50); // NOSONAR
 			assertThat(true, equalTo(Boolean.TRUE));
 		});
     }

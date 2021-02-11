@@ -11,7 +11,7 @@ import org.junit.jupiter.api.Test;
 
 import com.github.aha.sat.jpa.domain.City;
 
-public class NamedQueryTests extends AbstractCityTests {
+class NamedQueryTests extends AbstractCityTests {
 
 	private void verifyCity(City city, String name, String country) {
 		assertThat(city.getName(), equalTo(name));
@@ -19,13 +19,13 @@ public class NamedQueryTests extends AbstractCityTests {
 	}
 
     @Test
-    public void testQueryCityByName() {
+	void testQueryCityByName() {
         City city = cityRepository.findByName("Miami");
         verifyCity(city, "Miami", "USA");
     }
 
     @Test
-    public void testEntityQueryCityAndCountry() {
+	void testEntityQueryCityAndCountry() {
         List<City> result = cityRepository.findByNameAndCountry("% %", "USA");
         assertThat(result.size(), equalTo(2));
 
@@ -34,7 +34,7 @@ public class NamedQueryTests extends AbstractCityTests {
     }
 
     @Test
-    public void testInterfaceQueryRetrieveByName() {
+	void testInterfaceQueryRetrieveByName() {
     	City city = cityRepository.retrieveByName("prague");
     	verifyCity(city, "Prague", "Czech Republic");
     	
