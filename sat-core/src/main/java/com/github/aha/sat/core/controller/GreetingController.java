@@ -1,13 +1,13 @@
 package com.github.aha.sat.core.controller;
 
+import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
+
 import java.util.HashMap;
 import java.util.Map;
 
 import org.springframework.boot.CommandLineRunner;
-import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -23,7 +23,7 @@ public class GreetingController implements CommandLineRunner {
 		data.put("juan", "Cao!");
 	}
 
-	@RequestMapping(value = "/{name}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	@GetMapping(value = "/{name}", produces = APPLICATION_JSON_VALUE)
 	public String sayHello(@PathVariable String name) {
 		return data.get(name.toLowerCase());
 	}

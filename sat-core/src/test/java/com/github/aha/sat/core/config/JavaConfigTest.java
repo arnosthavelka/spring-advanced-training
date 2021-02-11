@@ -1,20 +1,14 @@
 package com.github.aha.sat.core.config;
 
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.equalTo;
-import static org.hamcrest.Matchers.is;
+import static org.assertj.core.api.Assertions.assertThat;
 
 import org.junit.jupiter.api.Test;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest(classes = JavaConfigApplication.class)
 class JavaConfigTest {
-
-    private Logger LOG = LoggerFactory.getLogger(JavaConfigTest.class);
 
     @Autowired
     @Qualifier("helloGreeting")
@@ -34,22 +28,22 @@ class JavaConfigTest {
 
     @Test
 	void testHello() {
-        assertThat(helloBean, equalTo("Hello all!"));
-        // assertEquals("Hello all!", helloBean);
+		assertThat(helloBean).isEqualTo("Hello all!");
     }
 
     @Test
 	void testHi() {
-        assertThat(hiBean, is(equalTo("Hi all!")));
+		assertThat(hiBean).isEqualTo("Hi all!");
     }
 
     @Test
 	void testRandom() {
-        LOG.info(randomBean.toString());
+		assertThat(randomBean).isNotEmpty();
     }
 
     @Test
 	void testUserInstance() {
-        assertThat(userArny.getName(), is(equalTo("Arny")));
+		assertThat(userArny.getName()).isEqualTo("Arny");
     }
+
 }

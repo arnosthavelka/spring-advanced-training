@@ -12,21 +12,17 @@ import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.test.context.ContextConfiguration;
 
 import com.github.aha.sat.core.scope.TokenBean;
 
 @SpringBootTest
-// @SpringApplicationConfiguration(classes = Jsr250Test.Context.class)
-@ContextConfiguration
-// source: http://www.java2blog.com/2012/09/spring-jsr-250-annotations.html
 class Jsr250Test {
 
     @Resource
     private TokenBean bean;
 
     @Test
-	public void contextLoads() {
+	void contextLoads() {
         assertThat(bean.getToken(), is(equalTo("token")));
     }
 
