@@ -1,7 +1,6 @@
 package com.github.aha.sat.core.testing.profile;
 
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.equalTo;
+import static org.assertj.core.api.Assertions.assertThat;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.test.context.ActiveProfiles;
@@ -11,6 +10,6 @@ class RichardConfigTest extends AbstractConfigTest {
 
     @Test
 	void testUser() {
-        assertThat(user.getName(), equalTo("Richard"));
+		assertThat(user.getName()).isEqualTo("Richard");
     }
 }

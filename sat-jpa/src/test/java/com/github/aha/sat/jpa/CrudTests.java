@@ -1,7 +1,6 @@
 package com.github.aha.sat.jpa;
 
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.equalTo;
+import static org.assertj.core.api.Assertions.assertThat;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.test.annotation.Rollback;
@@ -18,16 +17,16 @@ class CrudTests extends AbstractCityTests {
         City city = new City("Frankfurt", "Germany", "");
         cityRepository.save(city);
         long count = cityRepository.count();
-        assertThat(count, equalTo(16L));
+		assertThat(count).isEqualTo(16L);
     }
 
     @Test
 	void testDelete() {
         City city = cityRepository.findByName("Prague");
         long count = cityRepository.count();
-        assertThat(count, equalTo(15L));
+		assertThat(count).isEqualTo(15L);
         cityRepository.delete(city);
         count = cityRepository.count();
-        assertThat(count, equalTo(14L));
+		assertThat(count).isEqualTo(14L);
     }
 }

@@ -18,7 +18,7 @@ public class DrinkLogger {
 
 	@Pointcut("execution(* com.github.aha.sat..Tea.*())")
 	private void teaUsage() {
-
+		log.info("Tea drink is used ...");
 	}
 
 	@Before("teaUsage()")

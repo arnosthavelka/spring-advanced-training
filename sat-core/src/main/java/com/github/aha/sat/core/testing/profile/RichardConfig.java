@@ -11,7 +11,7 @@ import com.github.aha.sat.core.config.User;
 public class RichardConfig {
 
     @Bean
-    public User userArny() {
+	public User user() {
         return new User("Richard");
     }
 
