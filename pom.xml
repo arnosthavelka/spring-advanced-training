@@ -15,6 +15,7 @@
 		<module>sat-parent</module>
 		<module>sat-core</module>
 		<module>sat-jdbc</module>
+		<module>sat-liquibase</module>
 	</modules>
 
 </project>
