@@ -1,13 +1,13 @@
 package com.github.aha.sat.rest.rest;
 
-import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
 
 import java.util.List;
 
 import javax.websocket.server.PathParam;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.hateoas.Resources;
+import org.springframework.hateoas.CollectionModel;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -44,34 +44,32 @@ public class CityHateoasController {
 	 * http://localhost:8080/city/resources/ http://localhost:8080/city/resources/?country=Spain, http://localhost:8080/city/resources/?sorting=id
 	 */
 	@RequestMapping(value = "/", method = RequestMethod.GET, produces = { "application/hal+json" })
-	public Resources<SimpleCityResource> list(
+	public CollectionModel<SimpleCityResource> list(
 			@ApiParam(name = "country", required = false) @PathParam("country") String country,
             @ApiParam(name = "sorting", required = false) @PathParam("sorting") String sorting) {
 		List<City> data = cityService.list(country, sorting);
 
-		List<SimpleCityResource> resources = simpleAssembler.toResources(data);
-		return new Resources<SimpleCityResource>(resources, linkTo(CityHateoasController.class).withSelfRel());
+		CollectionModel<SimpleCityResource> resources = simpleAssembler.toCollectionModel(data);
+		return CollectionModel.of(resources, linkTo(CityHateoasController.class).withSelfRel());
     }
 
 	@RequestMapping(value = "/all", method = RequestMethod.GET, produces = { "application/hal+json" })
-	public Resources<CityResource> listAll(
+	public CollectionModel<CityResource> listAll(
 			@ApiParam(name = "country", required = false) @PathParam("country") String country,
 			@ApiParam(name = "sorting", required = false) @PathParam("sorting") String sorting) {
 		List<City> data = cityService.list(country, sorting);
 
-		List<CityResource> resources = assembler.toResources(data);
-		return new Resources<CityResource>(resources, linkTo(CityHateoasController.class).withSelfRel());
+		CollectionModel<CityResource> resources = assembler.toCollectionModel(data);
+		return CollectionModel.of(resources, linkTo(CityHateoasController.class).withSelfRel());
 	}
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET, produces = { "application/hal+json" })
 	public CityResource item(@PathVariable("id") long id) {
-		// retrieve data
         City city = cityService.item(id);
         if (city == null) {
             throw new CityNotFoundException(String.format("City [id=%d] was not found!", id));
         }
-		// prepare resource
-		return assembler.toResource(city);
+		return assembler.toModel(city);
     }
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)

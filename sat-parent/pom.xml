@@ -13,6 +13,7 @@
 		<java.version>15</java.version>
 		<jacoco.version>0.8.6</jacoco.version>
 		<spring-boot-admin.version>2.3.1</spring-boot-admin.version>
+		<spring-cloud-connectors.version>2.2.13.RELEASE</spring-cloud-connectors.version>
 	</properties>
 	
 	<parent>

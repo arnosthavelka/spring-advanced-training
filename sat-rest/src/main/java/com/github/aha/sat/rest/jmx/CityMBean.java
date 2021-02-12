@@ -33,13 +33,13 @@ public class CityMBean {
     }
 
     @ManagedOperation(description = "Get City name by ID")
-    public String getCityName(int id) {
+	public String getCityName(Long id) {
         City city = cityService.item(id);
         return city.getName();
     }
 
     @ManagedOperation(description = "Get City by ID")
-    public City getCity(int id) {
+	public City getCity(Long id) {
         return cityService.item(id);
     }
 }

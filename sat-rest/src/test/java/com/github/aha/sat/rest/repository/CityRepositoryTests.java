@@ -5,7 +5,7 @@ import static org.hamcrest.Matchers.equalTo;
 
 import java.util.List;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.springframework.data.domain.Sort;
 
 import com.github.aha.sat.rest.domain.City;
@@ -37,7 +37,7 @@ public class CityRepositoryTests extends AbstractCityTests {
 
     @Test
     public void testCitiesByCountry() {
-        List<City> data = cityRepository.findByCountry("Czech Republic", new Sort(Sort.Direction.ASC, "name"));
+		List<City> data = cityRepository.findByCountry("Czech Republic", Sort.by(Sort.Direction.ASC, "name"));
         assertThat(data.size(), equalTo(1));
         // verify first city
         City city = data.get(0);

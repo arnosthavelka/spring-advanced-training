@@ -7,8 +7,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
-import org.springframework.hateoas.Identifiable;
-
 import com.fasterxml.jackson.annotation.JsonView;
 import com.github.aha.sat.rest.rest.json.View;
 import com.wordnik.swagger.annotations.ApiModel;
@@ -16,7 +14,7 @@ import com.wordnik.swagger.annotations.ApiModelProperty;
 
 @Entity
 @ApiModel
-public class City implements Serializable, Identifiable<Long> {
+public class City implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
