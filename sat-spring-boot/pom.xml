@@ -5,16 +5,15 @@
 
 	<artifactId>sat-spring-boot</artifactId>
 	<packaging>jar</packaging>
-
-	<name>spring-spring-boot</name>
 	<description>Demonstration of Spring Boot</description>
 
 	<parent>
 		<groupId>com.github.aha.sat</groupId>
 		<artifactId>sat-parent</artifactId>
-		<version>0.2.0</version>
+		<version>0.3.0-SNAPSHOT</version>
+		<relativePath>../sat-parent</relativePath>
 	</parent>
-
+	
 	<properties>
 		<start-class>com.github.aha.sat.sb.SbApplication</start-class>
 	</properties>
@@ -28,10 +27,10 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-rest</artifactId>
 		</dependency>
-		<dependency>
+		<!-- dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-remote-shell</artifactId>
-		</dependency>		
+		</dependency-->		
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
@@ -45,6 +44,11 @@
 			<groupId>de.codecentric</groupId>
 			<artifactId>spring-boot-admin-starter-client</artifactId>
 			<version>${spring-boot-admin.version}</version>
+		</dependency>
+		<!-- Java API -->
+		<dependency>
+			<groupId>javax.validation</groupId>
+			<artifactId>validation-api</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>org.jolokia</groupId>
@@ -78,15 +82,4 @@
 		</plugins>
 	</build>
 
-	<repositories>
-		<repository>
-			<id>spring-milestones</id>
-			<name>Spring Milestones</name>
-			<url>http://repo.spring.io/milestone</url>
-			<snapshots>
-				<enabled>false</enabled>
-			</snapshots>
-		</repository>
-	</repositories>
-	
 </project>

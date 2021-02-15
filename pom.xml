@@ -16,6 +16,8 @@
 		<module>sat-core</module>
 		<module>sat-jdbc</module>
 		<module>sat-liquibase</module>
+		<module>sat-spring-boot</module>
+		<module>sat-spring-boot-admin</module>
 	</modules>
 
 </project>

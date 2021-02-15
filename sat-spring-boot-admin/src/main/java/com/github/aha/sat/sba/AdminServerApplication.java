@@ -3,7 +3,7 @@ package com.github.aha.sat.sba;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-import de.codecentric.boot.admin.config.EnableAdminServer;
+import de.codecentric.boot.admin.server.config.EnableAdminServer;
 
 @SpringBootApplication
 @EnableAdminServer

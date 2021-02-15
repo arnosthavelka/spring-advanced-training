@@ -2,10 +2,9 @@ package com.github.aha.sat.sb.rest;
 
 import javax.validation.Valid;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.actuate.metrics.CounterService;
-import org.springframework.boot.actuate.metrics.GaugeService;
+//import org.springframework.boot.actuate.metrics.CounterService;
+//import org.springframework.boot.actuate.metrics.GaugeService;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,11 +18,11 @@ import com.github.aha.sat.sb.dto.User;
 @RestController
 public class HelloController {
 
-	@Autowired
-	private CounterService counterService;
-
-	@Autowired
-	private GaugeService gaugeService;
+//	@Autowired
+//	private CounterService counterService;
+//
+//	@Autowired
+//	private GaugeService gaugeService;
 
 	@Value("${hello.name:Arny}")
     private String name;
@@ -60,8 +59,8 @@ public class HelloController {
 	}
 
 	private void addMetric(String value) {
-		counterService.increment("hello." + value);
-		gaugeService.submit("hello.length", value.length());
+//		counterService.increment("hello." + value);
+//		gaugeService.submit("hello.length", value.length());
 	}
 
 }

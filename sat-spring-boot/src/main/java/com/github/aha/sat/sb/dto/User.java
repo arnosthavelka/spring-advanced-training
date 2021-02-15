@@ -2,8 +2,7 @@ package com.github.aha.sat.sb.dto;
 
 import javax.validation.constraints.Digits;
 import javax.validation.constraints.NotNull;
-
-import org.hibernate.validator.constraints.Length;
+import javax.validation.constraints.Size;
 
 public class User {
 
@@ -11,7 +10,7 @@ public class User {
 	@NotNull
 	private Integer id;
 
-	@Length(min = 3, max = 10)
+	@Size(min = 3, max = 10)
 	@NotNull
 	private String name;
 
