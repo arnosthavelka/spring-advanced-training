@@ -45,9 +45,6 @@ Usage of Spring Boot Admin to monitor SB applications.
 
 _Note: Not working now (on SB 1.5.7)
 
-## sat-war
-Example of deplying Spring Boot to application server (as WAR). 
-
 [travis-url-main]: https://github.com/arnosthavelka/spring-advanced-training
 [travis-image]: https://travis-ci.org/arnosthavelka/spring-advanced-training.svg?branch=master
 
