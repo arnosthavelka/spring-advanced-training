@@ -10,22 +10,4 @@ public class SbApplication {
         SpringApplication.run(SbApplication.class, args);
     }
 
-//	@Bean
-//	Validator beanValidation() {
-//		return new LocalValidatorFactoryBean();
-//	}
-	
-//    @Autowired
-//    private MetricRegistry registry;
-
-    /**
-     * @see http://blog.frankel.ch/become-a-devops-with-spring-boot
-     */
-//    @Bean
-//    public JmxReporter jmxReporter() {
-//        JmxReporter reporter = JmxReporter.forRegistry(registry).inDomain("appMetrics").build();
-//        reporter.start();
-//        return reporter;
-//    }
-    
 }

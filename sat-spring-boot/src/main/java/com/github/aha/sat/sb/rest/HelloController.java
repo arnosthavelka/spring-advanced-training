@@ -1,7 +1,11 @@
 package com.github.aha.sat.sb.rest;
 
+import java.util.concurrent.atomic.AtomicInteger;
+
+import javax.annotation.PostConstruct;
 import javax.validation.Valid;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 //import org.springframework.boot.actuate.metrics.CounterService;
 //import org.springframework.boot.actuate.metrics.GaugeService;
@@ -12,26 +16,30 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.github.aha.sat.sb.dto.User;
 
+import io.micrometer.jmx.JmxMeterRegistry;
+
 /**
  * http://localhost:8080/user?id=333&name=Roksana
- * 
- * @see http://kielczewski.eu/2015/01/application-metrics-with-spring-boot-actuator/
  */
 @RestController
 public class HelloController {
 
-//	@Autowired
-//	private CounterService counterService;
-//
-//	@Autowired
-//	private GaugeService gaugeService;
+	@Autowired
+	private JmxMeterRegistry registry;
 
 	@Value("${hello.name:Arny}")
     private String name;
 
+	private AtomicInteger userLength = new AtomicInteger(0);
+
+	@PostConstruct
+	void init() {
+		registry.gauge("hello.length", userLength);
+	}
+
 	@GetMapping("/hello")
     String hello() {
-		addMetric(name);
+		countForName(name);
         return String.format("Hello %s!", name);
     }
 
@@ -40,9 +48,10 @@ public class HelloController {
 		if (bindingResult.hasErrors()) {
 			return getErrorMessage(bindingResult);
 		}
-		String value = user.getName();
-		addMetric(value);
-		return String.format("Hello user %s [id=%d]!", value, user.getId());
+		String userName = user.getName();
+		countForName(userName);
+		userLength.set(userName.length());
+		return String.format("Hello user %s [id=%d]!", userName, user.getId());
 	}
 
 	private String getErrorMessage(BindingResult bindingResult) {
@@ -57,9 +66,8 @@ public class HelloController {
 		return sb.toString();
 	}
 
-	private void addMetric(String value) {
-//		counterService.increment("hello." + value);
-//		gaugeService.submit("hello.length", value.length());
+	private void countForName(String name) {
+		registry.counter("hello." + name).increment();
 	}
 
 }
