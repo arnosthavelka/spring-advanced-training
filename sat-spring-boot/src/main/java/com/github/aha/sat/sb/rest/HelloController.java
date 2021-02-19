@@ -7,8 +7,6 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-//import org.springframework.boot.actuate.metrics.CounterService;
-//import org.springframework.boot.actuate.metrics.GaugeService;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -38,13 +36,13 @@ public class HelloController {
 	}
 
 	@GetMapping("/hello")
-    String hello() {
+	public String hello() {
 		countForName(name);
         return String.format("Hello %s!", name);
     }
 
 	@GetMapping("/user")
-	String helloUser(@Valid User user, BindingResult bindingResult) {
+	public String helloUser(@Valid User user, BindingResult bindingResult) {
 		if (bindingResult.hasErrors()) {
 			return getErrorMessage(bindingResult);
 		}
@@ -55,7 +53,7 @@ public class HelloController {
 	}
 
 	private String getErrorMessage(BindingResult bindingResult) {
-		StringBuffer sb = new StringBuffer();
+		StringBuilder sb = new StringBuilder();
 		sb.append("Validation error [count=").append(bindingResult.getErrorCount()).append("]!<br/>");
 		sb.append("--------------------------------<br/>");
 		for (FieldError fieldError : bindingResult.getFieldErrors()) {
