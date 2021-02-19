@@ -25,9 +25,9 @@ public class YamlController {
         if ("value".equals(name)) {
             return value;
         } else if ("name".equals(name)) {
-            return fname.toString();
+			return fname;
         } else if ("desc".equals(name)) {
-            return desc.toString();
+			return desc;
         } else {
             return "Unknown parameter!";
         }

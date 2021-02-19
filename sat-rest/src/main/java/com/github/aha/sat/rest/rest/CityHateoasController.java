@@ -9,9 +9,10 @@ import javax.websocket.server.PathParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -43,7 +44,7 @@ public class CityHateoasController {
     /*
 	 * http://localhost:8080/city/resources/ http://localhost:8080/city/resources/?country=Spain, http://localhost:8080/city/resources/?sorting=id
 	 */
-	@RequestMapping(value = "/", method = RequestMethod.GET, produces = { "application/hal+json" })
+	@GetMapping(value = "/", produces = { "application/hal+json" })
 	public CollectionModel<SimpleCityResource> list(
 			@ApiParam(name = "country", required = false) @PathParam("country") String country,
             @ApiParam(name = "sorting", required = false) @PathParam("sorting") String sorting) {
@@ -53,7 +54,7 @@ public class CityHateoasController {
 		return CollectionModel.of(resources, linkTo(CityHateoasController.class).withSelfRel());
     }
 
-	@RequestMapping(value = "/all", method = RequestMethod.GET, produces = { "application/hal+json" })
+	@GetMapping(value = "/all", produces = { "application/hal+json" })
 	public CollectionModel<CityResource> listAll(
 			@ApiParam(name = "country", required = false) @PathParam("country") String country,
 			@ApiParam(name = "sorting", required = false) @PathParam("sorting") String sorting) {
@@ -63,7 +64,7 @@ public class CityHateoasController {
 		return CollectionModel.of(resources, linkTo(CityHateoasController.class).withSelfRel());
 	}
 
-	@RequestMapping(value = "/{id}", method = RequestMethod.GET, produces = { "application/hal+json" })
+	@GetMapping(value = "/{id}", produces = { "application/hal+json" })
 	public CityResource item(@PathVariable("id") long id) {
         City city = cityService.item(id);
         if (city == null) {
@@ -72,7 +73,7 @@ public class CityHateoasController {
 		return assembler.toModel(city);
     }
 
-	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
+	@DeleteMapping(value = "/{id}")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	public void delete(@PathVariable long id) {
 		cityService.delete(id);

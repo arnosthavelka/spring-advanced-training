@@ -7,8 +7,6 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-//import org.springframework.boot.actuate.metrics.CounterService;
-//import org.springframework.boot.actuate.metrics.GaugeService;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -55,7 +53,7 @@ public class HelloController {
 	}
 
 	private String getErrorMessage(BindingResult bindingResult) {
-		StringBuffer sb = new StringBuffer();
+		StringBuilder sb = new StringBuilder();
 		sb.append("Validation error [count=").append(bindingResult.getErrorCount()).append("]!<br/>");
 		sb.append("--------------------------------<br/>");
 		for (FieldError fieldError : bindingResult.getFieldErrors()) {
