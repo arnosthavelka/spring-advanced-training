@@ -1,4 +1,8 @@
-package com.github.aha.sat.rest.rest;
+package com.github.aha.sat.rest.city;
+
+import static org.springframework.http.HttpStatus.CREATED;
+import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
+import static org.springframework.http.MediaType.APPLICATION_XML_VALUE;
 
 import java.util.List;
 
@@ -9,7 +13,9 @@ import javax.websocket.server.PathParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -18,9 +24,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriTemplate;
 
 import com.fasterxml.jackson.annotation.JsonView;
-import com.github.aha.sat.rest.domain.City;
-import com.github.aha.sat.rest.rest.json.View;
-import com.github.aha.sat.rest.service.CityService;
+import com.github.aha.sat.rest.View;
 import com.wordnik.swagger.annotations.Api;
 import com.wordnik.swagger.annotations.ApiOperation;
 import com.wordnik.swagger.annotations.ApiParam;
@@ -38,7 +42,7 @@ public class CityController {
     /*
      * http://localhost:8080/city/, http://localhost:8080/city/?country=Spain, http://localhost:8080/city/?sorting=id
      */
-    @RequestMapping(value = "/", method = RequestMethod.GET, produces = { MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE })
+	@GetMapping(value = "/", produces = { APPLICATION_JSON_VALUE, APPLICATION_XML_VALUE })
     @JsonView(View.Summary.class)
     @ApiOperation(value = "Returns list of cities", notes = "Returns a list of found city details.", response = City.class, responseContainer = "List")
     @ApiResponses(value = { @ApiResponse(code = 200, message = "Successful retrieval of the list of cities (with simple detail)") })
@@ -50,8 +54,8 @@ public class CityController {
     /*
      * http://localhost:8080/city/ + content
      */
-    @RequestMapping(value = "/", method = RequestMethod.PUT, consumes = { MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE })
-    @ResponseStatus(HttpStatus.CREATED)
+	@PutMapping(value = "/", consumes = { APPLICATION_JSON_VALUE, APPLICATION_XML_VALUE })
+	@ResponseStatus(CREATED)
     @ApiOperation(value = "Create the city", notes = "Create the city with defined attributes (ID is erased if defined)", response = Void.class)
     @ApiResponses(value = { @ApiResponse(code = 201, message = "Successful creation of the city") })
     public void insert(@RequestBody City city, HttpServletRequest request, HttpServletResponse response) {
@@ -69,8 +73,7 @@ public class CityController {
     /*
      * http://localhost:8080/city/105
      */
-    @RequestMapping(value = "/{id}", method = RequestMethod.GET, produces = { MediaType.APPLICATION_JSON_VALUE,
-            MediaType.APPLICATION_XML_VALUE })
+	@GetMapping(value = "/{id}", produces = { APPLICATION_JSON_VALUE, APPLICATION_XML_VALUE })
     @ApiOperation(value = "Returns city", notes = "Returns the city specified by ID .", response = City.class)
     @ApiResponses(value = { @ApiResponse(code = 200, message = "Successful retrieval of city detail (full detail)"),
             @ApiResponse(code = 404, message = "City with given ID does not exist") })

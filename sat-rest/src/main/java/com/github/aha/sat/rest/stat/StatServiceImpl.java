@@ -1,4 +1,4 @@
-package com.github.aha.sat.rest.service;
+package com.github.aha.sat.rest.stat;
 
 import javax.persistence.EntityManager;
 

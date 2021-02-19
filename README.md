@@ -27,6 +27,7 @@ Usage of JDBC & [Liquibase](http://www.liquibase.org/) via Spring Boot and HSQL 
 
 ## sat-rest
 Accessing JPA data via REST sevice, including:
+* Actuator
 * Spring Data
 * [Swagger](http://swagger.io/) (REST documentation)
 * [Jolokia](https://jolokia.org/) (JMX over HTTP)
@@ -34,16 +35,14 @@ Accessing JPA data via REST sevice, including:
 ## sat-spring-boot
 Usage of Spring Boot, including:
 * Actuator
-* Remote Shell
-* Advanced metrics (from dropwizard)
+* Spring Boot Admin Client
+* Advanced metrics (Micrometer via JMX)
 * Modified Health service
 
 _Note: Requires running spring-spring-boot-admin_
 
 ## sat-spring-boot-admin
 Usage of Spring Boot Admin to monitor SB applications.
-
-_Note: Not working now (on SB 1.5.7)
 
 [travis-url-main]: https://github.com/arnosthavelka/spring-advanced-training
 [travis-image]: https://travis-ci.org/arnosthavelka/spring-advanced-training.svg?branch=master

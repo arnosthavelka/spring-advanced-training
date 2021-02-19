@@ -1,4 +1,4 @@
-package com.github.aha.sat.rest.service;
+package com.github.aha.sat.rest.city;
 
 import java.util.List;
 
@@ -6,9 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import com.github.aha.sat.rest.domain.City;
-import com.github.aha.sat.rest.repository.CityRepository;
 
 @Service
 @Transactional

@@ -1,4 +1,4 @@
-package com.github.aha.sat.rest.service;
+package com.github.aha.sat.rest.stat;
 
 import org.hibernate.SessionFactory;
 import org.hibernate.stat.EntityStatistics;

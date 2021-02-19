@@ -8,7 +8,7 @@ import java.util.List;
 import org.junit.jupiter.api.Test;
 import org.springframework.data.domain.Sort;
 
-import com.github.aha.sat.rest.domain.City;
+import com.github.aha.sat.rest.city.City;
 
 public class CityRepositoryTests extends AbstractCityTests {
 
