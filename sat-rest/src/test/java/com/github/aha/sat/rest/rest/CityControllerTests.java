@@ -10,7 +10,7 @@ import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 
 import com.github.aha.sat.rest.AbstractTests;
-import com.github.aha.sat.rest.domain.City;
+import com.github.aha.sat.rest.city.City;
 
 @SpringBootTest(webEnvironment=WebEnvironment.RANDOM_PORT)
 public class CityControllerTests extends AbstractTests {

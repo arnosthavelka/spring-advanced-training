@@ -1,4 +1,4 @@
-package com.github.aha.sat.rest.domain;
+package com.github.aha.sat.rest.city;
 
 import java.io.Serializable;
 
@@ -8,7 +8,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
 import com.fasterxml.jackson.annotation.JsonView;
-import com.github.aha.sat.rest.rest.json.View;
+import com.github.aha.sat.rest.View;
 import com.wordnik.swagger.annotations.ApiModel;
 import com.wordnik.swagger.annotations.ApiModelProperty;
 

@@ -1,4 +1,4 @@
-package com.github.aha.sat.rest.rest;
+package com.github.aha.sat.rest.stat;
 
 import org.hibernate.stat.EntityStatistics;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.github.aha.sat.rest.service.StatService;
 import com.wordnik.swagger.annotations.Api;
 import com.wordnik.swagger.annotations.ApiOperation;
 import com.wordnik.swagger.annotations.ApiResponse;

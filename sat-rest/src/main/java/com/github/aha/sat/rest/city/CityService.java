@@ -1,8 +1,6 @@
-package com.github.aha.sat.rest.service;
+package com.github.aha.sat.rest.city;
 
 import java.util.List;
-
-import com.github.aha.sat.rest.domain.City;
 
 public interface CityService {
 

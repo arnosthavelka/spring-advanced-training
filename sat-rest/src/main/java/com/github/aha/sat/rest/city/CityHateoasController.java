@@ -1,4 +1,4 @@
-package com.github.aha.sat.rest.rest;
+package com.github.aha.sat.rest.city;
 
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
 
@@ -16,12 +16,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.github.aha.sat.rest.domain.City;
-import com.github.aha.sat.rest.rest.hateoas.CityResource;
-import com.github.aha.sat.rest.rest.hateoas.CityResourceAssembler;
-import com.github.aha.sat.rest.rest.hateoas.SimpleCityResource;
-import com.github.aha.sat.rest.rest.hateoas.SimpleCityResourceAssembler;
-import com.github.aha.sat.rest.service.CityService;
+import com.github.aha.sat.rest.city.resource.CityResource;
+import com.github.aha.sat.rest.city.resource.CityResourceAssembler;
+import com.github.aha.sat.rest.city.resource.CitySimpleResource;
+import com.github.aha.sat.rest.city.resource.CitySimpleResourceAssembler;
 import com.wordnik.swagger.annotations.ApiParam;
 
 /**
@@ -39,18 +37,18 @@ public class CityHateoasController {
 	private CityResourceAssembler assembler;
 
 	@Autowired
-	private SimpleCityResourceAssembler simpleAssembler;
+	private CitySimpleResourceAssembler simpleAssembler;
 
     /*
 	 * http://localhost:8080/city/resources/ http://localhost:8080/city/resources/?country=Spain, http://localhost:8080/city/resources/?sorting=id
 	 */
 	@GetMapping(value = "/", produces = { "application/hal+json" })
-	public CollectionModel<SimpleCityResource> list(
+	public CollectionModel<CitySimpleResource> list(
 			@ApiParam(name = "country", required = false) @PathParam("country") String country,
             @ApiParam(name = "sorting", required = false) @PathParam("sorting") String sorting) {
 		List<City> data = cityService.list(country, sorting);
 
-		CollectionModel<SimpleCityResource> resources = simpleAssembler.toCollectionModel(data);
+		CollectionModel<CitySimpleResource> resources = simpleAssembler.toCollectionModel(data);
 		return CollectionModel.of(resources, linkTo(CityHateoasController.class).withSelfRel());
     }
 
