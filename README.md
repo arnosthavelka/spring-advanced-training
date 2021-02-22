@@ -29,6 +29,7 @@ Usage of JDBC & [Liquibase](http://www.liquibase.org/) via Spring Boot and HSQL 
 Accessing JPA data via REST sevice, including:
 * Actuator
 * Spring Data
+* HATEOAS
 * [Swagger](http://swagger.io/) (REST documentation)
 * [Jolokia](https://jolokia.org/) (JMX over HTTP)
 

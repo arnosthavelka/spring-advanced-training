@@ -1,6 +1,7 @@
 package com.github.aha.sat.rest.city;
 
 import static org.springframework.http.HttpStatus.CREATED;
+import static org.springframework.http.HttpStatus.NO_CONTENT;
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 import static org.springframework.http.MediaType.APPLICATION_XML_VALUE;
 
@@ -102,7 +103,7 @@ public class CityController {
      * http://localhost:8080/city/100 + content
      */
 	@PostMapping(value = "/{id}", consumes = { APPLICATION_JSON_VALUE, APPLICATION_XML_VALUE })
-    @ResponseStatus(HttpStatus.NO_CONTENT)
+	@ResponseStatus(NO_CONTENT)
     @ApiOperation(value = "Update the city", notes = "Update the city with defined attributes (for defined ID)", response = Void.class)
     @ApiResponses(value = { @ApiResponse(code = 204, message = "Successful update of the city"),
             @ApiResponse(code = 409, message = "When ID in path is not equal to ID in the content (body)") })
@@ -128,7 +129,7 @@ public class CityController {
      * http://localhost:8080/city/100
      */
 	@DeleteMapping(value = "/{id}")
-    @ResponseStatus(HttpStatus.NO_CONTENT)
+	@ResponseStatus(NO_CONTENT)
     @ApiOperation(value = "Delete the city", notes = "Delete the city defined by ID)", response = Void.class)
     @ApiResponses(value = { @ApiResponse(code = 204, message = "Successful deletion of the city") })
     public void delete(@PathVariable long id) {

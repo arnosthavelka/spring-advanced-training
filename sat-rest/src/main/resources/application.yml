@@ -1,10 +1,13 @@
-# for all configuration options look here:
-# http://docs.spring.io/spring-boot/docs/current/reference/html/common-application-properties.html
-
 server:
   port: 8080
 
 spring:
+  application:
+    name: @pom.artifactId@
+  boot:
+    admin:
+      client:
+        url: http://localhost:8085
   jackson:
     serialization:
       indent-output: true
@@ -16,10 +19,19 @@ spring:
     properties:
       hibernate:
       generate_statistics: true
+      
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    health:
+      show-details: always
+      show-components: always
+    jolokia:
+      enabled: true
+
 sat-rest:
   cfg:
     author: Arny
-        
-endpoints:
-  jolokia:
-    enabled: true
