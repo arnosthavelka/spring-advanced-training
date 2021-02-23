@@ -31,12 +31,12 @@ public class CityMBean {
 
     @ManagedOperation(description = "Get City name by ID")
 	public String getCityName(Long id) {
-        City city = cityService.item(id);
+        City city = cityService.getOne(id);
         return city.getName();
     }
 
     @ManagedOperation(description = "Get City by ID")
 	public City getCity(Long id) {
-        return cityService.item(id);
+        return cityService.getOne(id);
     }
 }
