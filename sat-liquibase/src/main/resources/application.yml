@@ -1,7 +1,0 @@
-spring:
-    datasource:
-        platform: HSQL
-        url: jdbc:hsqldb:mem:mydb
-        username: sa
-        password:
-        driverClassName: org.hsqldb.jdbcDriver

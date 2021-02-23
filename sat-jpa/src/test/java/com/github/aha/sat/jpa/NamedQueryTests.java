@@ -9,7 +9,7 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
-import com.github.aha.sat.jpa.domain.City;
+import com.github.aha.sat.jpa.city.City;
 
 class NamedQueryTests extends AbstractCityTests {
 

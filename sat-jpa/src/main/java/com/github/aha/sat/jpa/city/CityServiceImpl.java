@@ -1,12 +1,10 @@
-package com.github.aha.sat.jpa.repository;
+package com.github.aha.sat.jpa.city;
 
 import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
-
-import com.github.aha.sat.jpa.domain.City;
 
 public class CityServiceImpl implements CityService {
 

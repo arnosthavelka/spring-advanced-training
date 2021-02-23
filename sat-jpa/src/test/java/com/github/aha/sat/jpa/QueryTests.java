@@ -8,7 +8,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 
-import com.github.aha.sat.jpa.domain.City;
+import com.github.aha.sat.jpa.city.City;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -16,16 +16,18 @@ import lombok.extern.slf4j.Slf4j;
 class QueryTests extends AbstractCityTests {
 
     @Test
-	void testCount() {
+	void countCities() {
         long count = cityRepository.count();
-        assertThat(count, equalTo(15L));
+
+		assertThat(count, equalTo(13L));
     }
 
     @Test
-	void testPaging() {
+	void paginateCities() {
 		Page<City> page = cityRepository.findAll(PageRequest.of(0, 5));
+
         assertThat(page.getSize(), equalTo(5));
-        assertThat(page.getTotalElements(), equalTo(15L));
+		assertThat(page.getTotalElements(), equalTo(13L));
         assertThat(page.getTotalPages(), equalTo(3));
 		log.debug("\n### testPagingt output");
         for (City city : page.getContent()) {
@@ -34,8 +36,9 @@ class QueryTests extends AbstractCityTests {
     }
 
     @Test
-	void testSorting() {
+	void sortCities() {
 		Page<City> page = cityRepository.findAll(PageRequest.of(0, 5, Sort.Direction.DESC, "country", "name"));
+
         assertThat(page.getSize(), equalTo(5));
 		log.debug("\n### testSorting output");
         for (City city : page.getContent()) {
@@ -44,8 +47,9 @@ class QueryTests extends AbstractCityTests {
     }
 
     @Test
-	void testCityByName() {
+	void getCityByName() {
         City city = cityRepository.findByNameAndCountryAllIgnoringCase("Tokyo", "Japan");
+
         assertThat(city.getName(), equalTo("Tokyo"));
         assertThat(city.getCountry(), equalTo("Japan"));
     }

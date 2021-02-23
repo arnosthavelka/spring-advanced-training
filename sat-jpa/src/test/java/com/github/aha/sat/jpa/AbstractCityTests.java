@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.github.aha.sat.jpa.repository.CityRepository;
+import com.github.aha.sat.jpa.city.CityRepository;
 
 @SpringBootTest(classes = JpaApplication.class)
 @Transactional(readOnly = true)

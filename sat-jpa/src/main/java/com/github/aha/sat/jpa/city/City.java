@@ -1,4 +1,4 @@
-package com.github.aha.sat.jpa.domain;
+package com.github.aha.sat.jpa.city;
 
 import static javax.persistence.GenerationType.IDENTITY;
 
@@ -25,7 +25,7 @@ public class City implements Serializable {
     @Column(nullable = false)
     private String name;
 
-    @Column(nullable = false)
+	@Column(nullable = true)
     private String state;
 
     @Column(nullable = false)

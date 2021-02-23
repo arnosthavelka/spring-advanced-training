@@ -7,13 +7,14 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
-import com.github.aha.sat.jpa.domain.City;
+import com.github.aha.sat.jpa.city.City;
 
 class MixedQueryTests extends AbstractCityTests {
 
     @Test
-	void testCitiesWithState() {
-		List<City> result = cityRepository.findByState("CA");
+	void loadCitiesWithState() {
+		List<City> result = cityRepository.findByState("California");
+
 		assertThat(result.size(), equalTo(1));
         City sf = result.get(0);
 		assertThat(sf.getName(), equalTo("San Francisco"));

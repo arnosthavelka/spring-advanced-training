@@ -6,27 +6,30 @@ import org.junit.jupiter.api.Test;
 import org.springframework.test.annotation.Rollback;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.github.aha.sat.jpa.domain.City;
+import com.github.aha.sat.jpa.city.City;
 
 @Transactional(readOnly = false)
 @Rollback
 class CrudTests extends AbstractCityTests {
 
     @Test
-	void testCreate() {
+	void createEntity() {
+		long originalCount = cityRepository.count();
+
         City city = new City("Frankfurt", "Germany", "");
         cityRepository.save(city);
-        long count = cityRepository.count();
-		assertThat(count).isEqualTo(16L);
+
+		assertThat(cityRepository.count()).isEqualTo(originalCount + 1);
     }
 
     @Test
-	void testDelete() {
+	void deleteEntity() {
+		long originalCount = cityRepository.count();
+
         City city = cityRepository.findByName("Prague");
-        long count = cityRepository.count();
-		assertThat(count).isEqualTo(15L);
         cityRepository.delete(city);
-        count = cityRepository.count();
-		assertThat(count).isEqualTo(14L);
+
+		assertThat(cityRepository.count()).isEqualTo(originalCount - 1);
     }
+
 }
