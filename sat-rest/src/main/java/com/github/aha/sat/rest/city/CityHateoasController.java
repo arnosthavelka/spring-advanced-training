@@ -46,7 +46,7 @@ public class CityHateoasController {
 	public CollectionModel<CitySimpleResource> list(
 			@ApiParam(name = "country", required = false) @PathParam("country") String country,
             @ApiParam(name = "sorting", required = false) @PathParam("sorting") String sorting) {
-		List<City> data = cityService.list(country, sorting);
+		List<City> data = cityService.search(country, sorting);
 
 		CollectionModel<CitySimpleResource> resources = simpleAssembler.toCollectionModel(data);
 		return CollectionModel.of(resources, linkTo(CityHateoasController.class).withSelfRel());
@@ -56,7 +56,7 @@ public class CityHateoasController {
 	public CollectionModel<CityResource> listAll(
 			@ApiParam(name = "country", required = false) @PathParam("country") String country,
 			@ApiParam(name = "sorting", required = false) @PathParam("sorting") String sorting) {
-		List<City> data = cityService.list(country, sorting);
+		List<City> data = cityService.search(country, sorting);
 
 		CollectionModel<CityResource> resources = assembler.toCollectionModel(data);
 		return CollectionModel.of(resources, linkTo(CityHateoasController.class).withSelfRel());
@@ -64,7 +64,7 @@ public class CityHateoasController {
 
 	@GetMapping(value = "/{id}", produces = { "application/hal+json" })
 	public CityResource item(@PathVariable("id") long id) {
-        City city = cityService.item(id);
+        City city = cityService.getOne(id);
         if (city == null) {
             throw new CityNotFoundException(String.format("City [id=%d] was not found!", id));
         }
