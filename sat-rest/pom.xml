@@ -50,6 +50,23 @@
 			<groupId>com.fasterxml.jackson.dataformat</groupId>
 			<artifactId>jackson-dataformat-xml</artifactId>
 		</dependency>
+		
+		<!-- Java API -->
+		<dependency>
+			<groupId>javax.validation</groupId>
+			<artifactId>validation-api</artifactId>
+		</dependency>
+		<dependency>
+		    <groupId>org.hibernate.validator</groupId>
+		    <artifactId>hibernate-validator</artifactId>
+		</dependency>
+		
+		<!-- Runtime metrics -->
+		<dependency>
+		  <groupId>io.micrometer</groupId>
+		  <artifactId>micrometer-registry-jmx</artifactId>
+		</dependency>
+		
 		<!-- Enable Swagger -->
 		<dependency>
 			<groupId>com.mangofactory</groupId>
@@ -62,6 +79,7 @@
 		    <artifactId>swagger-spring-mvc-ui</artifactId>
 		    <version>0.4</version>
 		</dependency-->
+		
 		<!-- Enable JMX -->
 		<dependency>
 			<groupId>org.springframework.integration</groupId>

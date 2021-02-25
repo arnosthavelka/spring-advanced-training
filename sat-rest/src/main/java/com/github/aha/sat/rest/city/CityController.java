@@ -9,6 +9,7 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.validation.Valid;
 import javax.websocket.server.PathParam;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +27,7 @@ import org.springframework.web.util.UriTemplate;
 
 import com.fasterxml.jackson.annotation.JsonView;
 import com.github.aha.sat.rest.View;
+import com.github.aha.sat.rest.city.resource.CityPlainResource;
 import com.wordnik.swagger.annotations.Api;
 import com.wordnik.swagger.annotations.ApiOperation;
 import com.wordnik.swagger.annotations.ApiParam;
@@ -77,7 +79,8 @@ public class CityController {
 	@ResponseStatus(CREATED)
 	@ApiOperation(value = "Create the city", notes = "Create the city with defined attributes (ID is erased if defined)", response = Void.class)
 	@ApiResponses(value = { @ApiResponse(code = 201, message = "Successful creation of the city") })
-	public void create(@RequestBody CityPlainResource resource, HttpServletRequest request, HttpServletResponse response) {
+	public void create(@Valid @RequestBody CityPlainResource resource, HttpServletRequest request, HttpServletResponse response) {
+		// TODO evaluate validation errors -> see HelloController
 		Long id = cityService.save(null, resource).getId();
 		response.addHeader("Location", getNewLocation(request, id));
 	}
