@@ -19,21 +19,19 @@ import org.springframework.data.repository.query.Param;
  * <code>DynamicQueryTests</code>)</li>
  * </ol>
  */
-public interface CityRepository extends JpaRepository<City, Long>, CityService, JpaSpecificationExecutor<City> {
-
-    // Page<City> findAll(Pageable pageable); - just for Repository interface
+public interface CityRepository extends JpaRepository<City, Long>, JpaSpecificationExecutor<City> {
 
     Page<City> findByNameContainingAndCountryContainingAllIgnoringCase(String name, String country, Pageable pageable);
-
+	List<City> findByState(String state);
     City findByNameAndCountryAllIgnoringCase(String name, String country);
 
-    // query is defined by @NamedQuery (in the entity City)
-    City findByName(String name);
+	@Query("SELECT c FROM City c WHERE LOWER(c.name) = LOWER(:name)")
+	City retrieveByName(@Param("name") String name);
 
-    // query is defined by @NamedQuery (in the entity City)
+	/**
+	 * Next queries are defined by @NamedQuery (in the entity City)
+	 */
+    City findByName(String name);
     List<City> findByNameAndCountry(String name, String country);
     
-    @Query("SELECT c FROM City c WHERE LOWER(c.name) = LOWER(:name)")
-    City retrieveByName(@Param("name") String name);
-
 }
