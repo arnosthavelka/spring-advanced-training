@@ -10,6 +10,8 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.github.aha.sat.rest.city.resource.CityPlainResource;
+
 @Service
 @Transactional
 public class CityService {
