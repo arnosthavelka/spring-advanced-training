@@ -1,8 +1,5 @@
 package com.github.aha.sat.jpa;
 
-import static com.github.aha.sat.jpa.city.CitySpecifications.cityFromCountry;
-import static com.github.aha.sat.jpa.city.CitySpecifications.cityHasNoState;
-import static com.github.aha.sat.jpa.city.CitySpecifications.cityHasState;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.List;
@@ -11,8 +8,9 @@ import org.junit.jupiter.api.Test;
 import org.springframework.data.domain.Sort;
 
 import com.github.aha.sat.jpa.city.City;
+import com.github.aha.sat.jpa.city.CitySpecifications;
 
-class DynamicQueryTests extends AbstractCityTests {
+class DynamicQueryTests extends AbstractCityTests implements CitySpecifications {
 
     @Test
 	void testCitiesWithState() {

@@ -90,8 +90,7 @@ public class CityController {
 	@ApiResponses(value = { @ApiResponse(code = 200, message = "Successful update of the city"),
             @ApiResponse(code = 409, message = "When ID in path is not equal to ID in the content (body)") })
 	public City update(@PathVariable long id, CityPlainResource resource) {
-		City save = cityService.save(id, resource);
-		return save;
+		return cityService.save(id, resource);
     }
 
 	/*

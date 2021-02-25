@@ -19,7 +19,7 @@ import com.github.aha.sat.rest.city.City;
 import com.github.aha.sat.rest.city.CityRepository;
 
 @SpringBootTest(webEnvironment = RANDOM_PORT)
-public class CityControllerTests extends AbstractTests {
+class CityControllerTests extends AbstractTests {
 
 	static final String ROOT_URL = "/city/";
 
@@ -30,38 +30,38 @@ public class CityControllerTests extends AbstractTests {
 	CityRepository repository;
 
     @Test
-	public void getCityById() {
+	void getCityById() {
 		City city = restTemplate.getForObject(ROOT_URL + "{id}", City.class, "100");
 
 		assertThat(city.getName()).isEqualTo("Prague");
     }
 
     @Test
-	public void getCityByCountry() {
+	void getCityByCountry() {
 		City[] data = restTemplate.getForObject(ROOT_URL + "?country=UK", City[].class);
 
-		assertThat(data.length).isEqualTo(1);
+		assertThat(data).hasSize(1);
 		verifyCity(data[0], 104L, "London");
 	}
 
 	@Test
-	public void findAllCities() {
+	void findAllCities() {
 		City[] data = restTemplate.getForObject(ROOT_URL, City[].class);
 
-		assertThat(data.length).isEqualTo(6);
+		assertThat(data).hasSize(6);
         verifyCity(data[0], 100L, "Prague");
     }
 
     @Test
-	public void findAllSortedCities() {
+	void findAllSortedCities() {
 		City[] data = restTemplate.getForObject(ROOT_URL + "?sorting=name", City[].class);
 
-		assertThat(data.length).isEqualTo(6);
+		assertThat(data).hasSize(6);
         verifyCity(data[0], 102L, "Barcelona");
     }
 
 	@Test
-	public void createCity() {
+	void createCity() {
 		long originalCount = repository.count();
 
 		City city = new City("Berlin", "Germany", null);
@@ -77,7 +77,7 @@ public class CityControllerTests extends AbstractTests {
 	}
 
 	@Test
-	public void updateCity() {
+	void updateCity() {
 		var testState = "Test state";
 		var cityId = 100L;
 
