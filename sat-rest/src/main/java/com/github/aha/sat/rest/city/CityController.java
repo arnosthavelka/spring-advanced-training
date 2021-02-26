@@ -124,14 +124,4 @@ public class CityController {
 		}
 	}
 
-    @ResponseStatus(HttpStatus.CONFLICT)
-    class CityIntegrityException extends RuntimeException {
-
-        private static final long serialVersionUID = 1L;
-
-        public CityIntegrityException(String message) {
-            super(message);
-        }
-    }
-
 }
