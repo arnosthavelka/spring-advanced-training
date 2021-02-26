@@ -11,7 +11,7 @@ import com.github.aha.sat.rest.city.CityHateoasController;
 public class CityResource extends EntityModel<City> {
 
 	public CityResource(City entity) {
-		super(entity, linkTo(methodOn(CityHateoasController.class).item(entity.getId())).withSelfRel(), linkTo(
+		super(entity, linkTo(methodOn(CityHateoasController.class).getOne(entity.getId())).withSelfRel(), linkTo(
 				CityHateoasController.class).slash(entity.getId()).withRel("delete"));
 	}
 }
