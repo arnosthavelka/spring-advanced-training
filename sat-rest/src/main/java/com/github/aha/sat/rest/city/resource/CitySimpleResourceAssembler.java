@@ -19,7 +19,7 @@ public class CitySimpleResourceAssembler extends RepresentationModelAssemblerSup
 	@Override
 	public CitySimpleResource toModel(City entity) {
 		CitySimpleResource resource = new CitySimpleResource(entity);
-		resource.add(linkTo(methodOn(CityHateoasController.class).item(entity.getId())).withSelfRel());
+		resource.add(linkTo(methodOn(CityHateoasController.class).getOne(entity.getId())).withSelfRel());
 		return resource;
 	}
 

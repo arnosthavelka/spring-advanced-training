@@ -30,7 +30,7 @@ public class CityService {
 	}
 
 	public City getOne(Long id) {
-		return cityRepository.getOne(id);
+		return cityRepository.findById(id).orElseThrow(() -> new CityNotFoundException(String.format("City [id=%d] was not found!", id)));
 	}
 
 	public City save(Long cityId, CityPlainResource cityResource) {

@@ -13,7 +13,6 @@ import javax.validation.Valid;
 import javax.websocket.server.PathParam;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -64,12 +63,7 @@ public class CityController {
     @ApiResponses(value = { @ApiResponse(code = 200, message = "Successful retrieval of city detail (full detail)"),
             @ApiResponse(code = 404, message = "City with given ID does not exist") })
 	public City getOne(@PathVariable("id") long id) {
-        City city = cityService.getOne(id);
-        if (city == null) {
-            throw new CityNotFoundException(String.format("City [id=%d] was not found!", id));
-        }
-
-        return city;
+		return cityService.getOne(id);
     }
 
 	/*
@@ -80,7 +74,6 @@ public class CityController {
 	@ApiOperation(value = "Create the city", notes = "Create the city with defined attributes (ID is erased if defined)", response = Void.class)
 	@ApiResponses(value = { @ApiResponse(code = 201, message = "Successful creation of the city") })
 	public void create(@Valid @RequestBody CityPlainResource resource, HttpServletRequest request, HttpServletResponse response) {
-		// TODO evaluate validation errors -> see HelloController
 		Long id = cityService.save(null, resource).getId();
 		response.addHeader("Location", getNewLocation(request, id));
 	}
@@ -112,16 +105,6 @@ public class CityController {
 		UriTemplate template = new UriTemplate(url.append("/{childId}").toString());
 		return template.expand(id).toASCIIString();
 
-	}
-
-	@ResponseStatus(HttpStatus.NOT_FOUND)
-	class CityNotFoundException extends RuntimeException {
-
-		private static final long serialVersionUID = 1L;
-
-		public CityNotFoundException(String message) {
-			super(message);
-		}
 	}
 
 }
