@@ -1,11 +1,11 @@
 package com.github.aha.sat.rest.city.resource;
 
-import org.springframework.cloud.cloudfoundry.com.fasterxml.jackson.annotation.JsonRootName;
 import org.springframework.hateoas.RepresentationModel;
+import org.springframework.hateoas.server.core.Relation;
 
 import com.github.aha.sat.rest.city.City;
 
-@JsonRootName("city")
+@Relation(collectionRelation = "cities")
 public class CitySimpleResource extends RepresentationModel<CitySimpleResource> {
 
 	private String name;

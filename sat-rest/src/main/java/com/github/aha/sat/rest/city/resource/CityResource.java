@@ -4,6 +4,7 @@ import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 
 import org.springframework.hateoas.EntityModel;
+import org.springframework.hateoas.server.core.Relation;
 
 import com.github.aha.sat.rest.city.City;
 import com.github.aha.sat.rest.city.CityHateoasController;
@@ -11,6 +12,7 @@ import com.github.aha.sat.rest.city.CityHateoasController;
 import lombok.Getter;
 
 @Getter
+@Relation(collectionRelation = "cities")
 public class CityResource {
 
 	private long id;

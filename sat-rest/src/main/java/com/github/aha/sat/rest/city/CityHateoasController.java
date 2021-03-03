@@ -40,8 +40,8 @@ public class CityHateoasController {
 	public CollectionModel<CitySimpleResource> search(
 			@ApiParam(name = "country", required = false) @PathParam("country") String country,
             @ApiParam(name = "sorting", required = false) @PathParam("sorting") String sorting) {
-		List<City> data = cityService.search(country, sorting);
 
+		List<City> data = cityService.search(country, sorting);
 		List<CitySimpleResource> resources = data.stream().map(c -> {
 			CitySimpleResource resource = new CitySimpleResource(c);
 			resource.add(linkTo(methodOn(CityHateoasController.class).getOne(c.getId())).withSelfRel());
@@ -52,12 +52,12 @@ public class CityHateoasController {
     }
 
 	@GetMapping(value = "/all", produces = HAL_JSON_VALUE)
-	public CollectionModel<CityResource> searchAll(
+	public CollectionModel<EntityModel<CityResource>> searchAll(
 			@ApiParam(name = "country", required = false) @PathParam("country") String country,
 			@ApiParam(name = "sorting", required = false) @PathParam("sorting") String sorting) {
-		List<City> data = cityService.search(country, sorting);
 
-		List<CityResource> resources = data.stream().map(c -> new CityResource(c)).collect(toList());
+		List<City> data = cityService.search(country, sorting);
+		List<EntityModel<CityResource>> resources = data.stream().map(c -> new CityResource(c).toResource()).collect(toList());
 		return CollectionModel.of(resources, linkTo(CityHateoasController.class).withSelfRel());
 	}
 
