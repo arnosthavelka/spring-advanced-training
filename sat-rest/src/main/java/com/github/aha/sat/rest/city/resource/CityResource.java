@@ -8,10 +8,26 @@ import org.springframework.hateoas.EntityModel;
 import com.github.aha.sat.rest.city.City;
 import com.github.aha.sat.rest.city.CityHateoasController;
 
-public class CityResource extends EntityModel<City> {
+import lombok.Getter;
 
-	public CityResource(City entity) {
-		super(entity, linkTo(methodOn(CityHateoasController.class).getOne(entity.getId())).withSelfRel(), linkTo(
-				CityHateoasController.class).slash(entity.getId()).withRel("delete"));
+@Getter
+public class CityResource {
+
+	private long id;
+	private String name;
+	private String state;
+	private String country;
+
+	public CityResource(City city) {
+		this.id = city.getId();
+		this.name = city.getName();
+		this.state = city.getState();
+		this.country = city.getCountry();
+	}
+
+	public EntityModel<CityResource> toResource() {
+		return EntityModel.of(this,
+				linkTo(methodOn(CityHateoasController.class).getOne(id)).withSelfRel(),
+				linkTo(CityHateoasController.class).slash(id).withRel("delete"));
 	}
 }
