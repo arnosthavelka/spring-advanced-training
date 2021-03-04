@@ -13,18 +13,15 @@ import lombok.Getter;
 
 @Getter
 @Relation(collectionRelation = "cities")
-public class CityResource {
+public class CityResource extends CityBaseResource {
 
 	private long id;
-	private String name;
-	private String state;
-	private String country;
 
 	public CityResource(City city) {
 		this.id = city.getId();
-		this.name = city.getName();
-		this.state = city.getState();
-		this.country = city.getCountry();
+		setName(city.getName());
+		setState(city.getState());
+		setCountry(city.getCountry());
 	}
 
 	public EntityModel<CityResource> toResource() {

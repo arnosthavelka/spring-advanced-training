@@ -26,7 +26,7 @@ import org.springframework.web.util.UriTemplate;
 
 import com.fasterxml.jackson.annotation.JsonView;
 import com.github.aha.sat.rest.View;
-import com.github.aha.sat.rest.city.resource.CityPlainResource;
+import com.github.aha.sat.rest.city.resource.CityBaseResource;
 import com.wordnik.swagger.annotations.Api;
 import com.wordnik.swagger.annotations.ApiOperation;
 import com.wordnik.swagger.annotations.ApiParam;
@@ -73,7 +73,7 @@ public class CityController {
 	@ResponseStatus(CREATED)
 	@ApiOperation(value = "Create the city", notes = "Create the city with defined attributes (ID is erased if defined)", response = Void.class)
 	@ApiResponses(value = { @ApiResponse(code = 201, message = "Successful creation of the city") })
-	public void create(@Valid @RequestBody CityPlainResource resource, HttpServletRequest request, HttpServletResponse response) {
+	public void create(@Valid @RequestBody CityBaseResource resource, HttpServletRequest request, HttpServletResponse response) {
 		Long id = cityService.save(null, resource).getId();
 		response.addHeader("Location", getNewLocation(request, id));
 	}
@@ -85,7 +85,7 @@ public class CityController {
     @ApiOperation(value = "Update the city", notes = "Update the city with defined attributes (for defined ID)", response = Void.class)
 	@ApiResponses(value = { @ApiResponse(code = 200, message = "Successful update of the city"),
             @ApiResponse(code = 409, message = "When ID in path is not equal to ID in the content (body)") })
-	public City update(@PathVariable long id, CityPlainResource resource) {
+	public City update(@PathVariable long id, CityBaseResource resource) {
 		return cityService.save(id, resource);
     }
 

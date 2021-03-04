@@ -95,12 +95,6 @@
 	        <groupId>org.springframework.boot</groupId>
 	        <artifactId>spring-boot-starter-actuator</artifactId>
 	    </dependency>
-	    <!-- due to @JsonRootName -->
-		<dependency>
-		    <groupId>org.springframework.boot</groupId>
-		    <artifactId>spring-boot-starter-cloud-connectors</artifactId>
-		    <version>${spring-cloud-connectors.version}</version>
-		</dependency>
 	</dependencies>
 
 	<repositories>

@@ -10,7 +10,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.github.aha.sat.rest.city.resource.CityPlainResource;
+import com.github.aha.sat.rest.city.resource.CityBaseResource;
 
 @Service
 @Transactional
@@ -33,7 +33,7 @@ public class CityService {
 		return cityRepository.findById(id).orElseThrow(() -> new CityNotFoundException(String.format("City [id=%d] was not found!", id)));
 	}
 
-	public City save(Long cityId, CityPlainResource cityResource) {
+	public City save(Long cityId, CityBaseResource cityResource) {
 		var city = getOrCreateCity(cityId);
 		updateCity(city, cityResource);
 		return cityRepository.save(city);
@@ -46,7 +46,7 @@ public class CityService {
 		return cityRepository.getOne(cityId);
 	}
 
-	private void updateCity(City city, CityPlainResource cityResource) {
+	private void updateCity(City city, CityBaseResource cityResource) {
 		if (nonNull(cityResource.getName())) {
 			city.setName(cityResource.getName());
 		}

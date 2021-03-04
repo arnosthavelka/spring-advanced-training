@@ -6,7 +6,7 @@ import javax.validation.constraints.Size;
 import lombok.Data;
 
 @Data
-public class CityPlainResource {
+public class CityBaseResource {
 
 	@NotNull(message = "Name cannot be null")
 	@Size(min = 5, max = 20, message = "Name must be between 5 and 20 characters")
