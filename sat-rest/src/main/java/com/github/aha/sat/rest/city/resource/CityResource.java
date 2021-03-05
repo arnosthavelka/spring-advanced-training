@@ -9,9 +9,11 @@ import org.springframework.hateoas.server.core.Relation;
 import com.github.aha.sat.rest.city.City;
 import com.github.aha.sat.rest.city.CityHateoasController;
 
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 
 @Getter
+@EqualsAndHashCode(callSuper = false)
 @Relation(collectionRelation = "cities")
 public class CityResource extends CityBaseResource {
 

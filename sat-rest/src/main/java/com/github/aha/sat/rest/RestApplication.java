@@ -33,9 +33,7 @@ public class RestApplication /* extends WebMvcConfigurerAdapter */{
     }
 
     private ApiInfo apiInfo() {
-		return new ApiInfo("spring-advanced-rest", "Demonstration of REST in Spring Boot", null,
-				"arnost.havelka@gmail.com",
-                null, null);
+		return new ApiInfo("spring-advanced-rest", "Demonstration of REST in Spring Boot", null, "arnost.havelka@gmail.com", null, null);
     }
 
 }
