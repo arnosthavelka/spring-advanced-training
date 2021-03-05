@@ -22,27 +22,27 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.github.aha.sat.rest.city.resource.CityEntityResource;
 import com.github.aha.sat.rest.city.resource.CityResource;
-import com.wordnik.swagger.annotations.ApiParam;
 
 /**
  * Usage:
- * get city detail				- GET http://localhost:8080/city/resources/100 
- * search with minimal detail	- GET http://localhost:8080/city/resources & contentTyp=application/json 
- * search 						- GET http://localhost:8080/city/resources?country=Spain
- * search & sort 				- GET http://localhost:8080/city/resources?sorting=id
- * delete city					- DELETE http://localhost:8080/city/resources/100 
+ * get city detail				- GET http://localhost:8080/city/hateoas/100 
+ * search with minimal detail	- GET http://localhost:8080/city/hateoas & contentTyp=application/json 
+ * search 						- GET http://localhost:8080/city/hateoas?country=Spain
+ * search & sort 				- GET http://localhost:8080/city/hateoas?sorting=id
+ * delete city					- DELETE http://localhost:8080/city/hateoas/100 
  */
 @RestController
-@RequestMapping("/city/resources")
+@RequestMapping("/city/hateoas")
 public class CityHateoasController {
 
     @Autowired
     private CityService cityService;
 
 	@GetMapping(consumes = APPLICATION_JSON_VALUE, produces = HAL_JSON_VALUE)
-	public CollectionModel<CityEntityResource> search(
-			@ApiParam(name = "country", required = false) @PathParam("country") String country,
-            @ApiParam(name = "sorting", required = false) @PathParam("sorting") String sorting) {
+//	@JsonView(Detail.class)
+	// https://samkruglov.wordpress.com/2018/01/07/json-filtering-with-spring/
+	// https://stackoverflow.com/questions/19638550/how-does-jsonview-annotation-can-be-used-for-nested-entities
+	public CollectionModel<CityEntityResource> search(@PathParam("country") String country, @PathParam("sorting") String sorting) {
 
 		List<City> data = cityService.search(country, sorting);
 		List<CityEntityResource> resources = data.stream().map(CityEntityResource::new).collect(toList());
@@ -50,9 +50,7 @@ public class CityHateoasController {
     }
 
 	@GetMapping(produces = HAL_JSON_VALUE)
-	public CollectionModel<EntityModel<CityResource>> searchAll(
-			@ApiParam(name = "country", required = false) @PathParam("country") String country,
-			@ApiParam(name = "sorting", required = false) @PathParam("sorting") String sorting) {
+	public CollectionModel<EntityModel<CityResource>> searchAll(@PathParam("country") String country, @PathParam("sorting") String sorting) {
 
 		List<City> data = cityService.search(country, sorting);
 		List<EntityModel<CityResource>> resources = data.stream().map(c -> new CityResource(c).toResource()).collect(toList());

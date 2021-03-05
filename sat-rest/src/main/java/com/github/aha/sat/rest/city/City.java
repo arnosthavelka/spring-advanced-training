@@ -8,7 +8,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
 import com.fasterxml.jackson.annotation.JsonView;
-import com.github.aha.sat.rest.View;
+import com.github.aha.sat.rest.city.resource.CityProjections.Basic;
 import com.wordnik.swagger.annotations.ApiModel;
 import com.wordnik.swagger.annotations.ApiModelProperty;
 
@@ -20,12 +20,12 @@ public class City implements Serializable {
 
     @Id
     @GeneratedValue
-    @JsonView(View.Summary.class)
+	@JsonView(Basic.class)
     @ApiModelProperty(position = 1, required = true, value = "ID of the city")
     private Long id;
 
     @Column(nullable = false)
-    @JsonView(View.Summary.class)
+	@JsonView(Basic.class)
     @ApiModelProperty(position = 2, required = true, value = "Name of the city")
     private String name;
 
