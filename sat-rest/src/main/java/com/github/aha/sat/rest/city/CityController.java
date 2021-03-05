@@ -25,29 +25,33 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriTemplate;
 
 import com.fasterxml.jackson.annotation.JsonView;
-import com.github.aha.sat.rest.View;
 import com.github.aha.sat.rest.city.resource.CityBaseResource;
+import com.github.aha.sat.rest.city.resource.CityProjections.Basic;
 import com.wordnik.swagger.annotations.Api;
 import com.wordnik.swagger.annotations.ApiOperation;
 import com.wordnik.swagger.annotations.ApiParam;
 import com.wordnik.swagger.annotations.ApiResponse;
 import com.wordnik.swagger.annotations.ApiResponses;
 
+/**
+ * Usage:
+ * get city detail				- GET http://localhost:8080/city/swagger/105
+ * search 						- GET http://localhost:8080/city/swagger?country=Spain
+ * search & sort 				- GET http://localhost:8080/city/swagger?sorting=id
+ * create city					- POST http://localhost:8080/city/swagger/100 + content
+ * update city					- PUT http://localhost:8080/city/swagger/102?state=Valencia
+ * delete city					- DELETE http://localhost:8080/city/swagger/100 
+ */
 @RestController
-@RequestMapping("/city")
+@RequestMapping("/city/swagger")
 @Api(value = "city", description = "Endpoint for city management")
 public class CityController {
 
     @Autowired
     private CityService cityService;
 
-    /*
-	 * http://localhost:8080/city/
-	 * http://localhost:8080/city/?country=Spain,
-	 * http://localhost:8080/city/?sorting=id
-	 */
-	@GetMapping(value = "/", produces = { APPLICATION_JSON_VALUE, APPLICATION_XML_VALUE })
-    @JsonView(View.Summary.class)
+	@GetMapping(produces = { APPLICATION_JSON_VALUE, APPLICATION_XML_VALUE })
+	@JsonView(Basic.class)
     @ApiOperation(value = "Returns list of cities", notes = "Returns a list of found city details.", response = City.class, responseContainer = "List")
     @ApiResponses(value = { @ApiResponse(code = 200, message = "Successful retrieval of the list of cities (with simple detail)") })
 	public List<City> search(@ApiParam(name = "country", required = false) @PathParam("country") String country,
@@ -55,9 +59,6 @@ public class CityController {
         return cityService.search(country, sorting);
     }
 
-    /*
-     * http://localhost:8080/city/105
-     */
 	@GetMapping(value = "/{id}", produces = { APPLICATION_JSON_VALUE, APPLICATION_XML_VALUE })
     @ApiOperation(value = "Returns city", notes = "Returns the city specified by ID .", response = City.class)
     @ApiResponses(value = { @ApiResponse(code = 200, message = "Successful retrieval of city detail (full detail)"),
@@ -66,10 +67,7 @@ public class CityController {
 		return cityService.getOne(id);
     }
 
-	/*
-	 * http://localhost:8080/city/ + content
-	 */
-	@PostMapping(value = "/", consumes = { APPLICATION_JSON_VALUE, APPLICATION_XML_VALUE })
+	@PostMapping(consumes = { APPLICATION_JSON_VALUE, APPLICATION_XML_VALUE })
 	@ResponseStatus(CREATED)
 	@ApiOperation(value = "Create the city", notes = "Create the city with defined attributes (ID is erased if defined)", response = Void.class)
 	@ApiResponses(value = { @ApiResponse(code = 201, message = "Successful creation of the city") })
@@ -78,9 +76,6 @@ public class CityController {
 		response.addHeader("Location", getNewLocation(request, id));
 	}
 
-    /*
-	 * http://localhost:8080/city/102?state=Valencia
-	 */
 	@PutMapping(value = "/{id}")
     @ApiOperation(value = "Update the city", notes = "Update the city with defined attributes (for defined ID)", response = Void.class)
 	@ApiResponses(value = { @ApiResponse(code = 200, message = "Successful update of the city"),
@@ -89,9 +84,6 @@ public class CityController {
 		return cityService.save(id, resource);
     }
 
-	/*
-	 * http://localhost:8080/city/100
-	 */
 	@DeleteMapping(value = "/{id}")
 	@ResponseStatus(NO_CONTENT)
 	@ApiOperation(value = "Delete the city", notes = "Delete the city defined by ID)", response = Void.class)
