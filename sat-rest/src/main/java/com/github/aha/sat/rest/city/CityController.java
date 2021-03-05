@@ -34,12 +34,13 @@ import com.wordnik.swagger.annotations.ApiResponse;
 import com.wordnik.swagger.annotations.ApiResponses;
 
 /**
- * Usage: get city detail - GET http://localhost:8080/city/swagger/105 search -
- * GET http://localhost:8080/city/swagger?country=Spain search & sort - GET
- * http://localhost:8080/city/swagger?sorting=id create city - POST
- * http://localhost:8080/city/swagger/100 + content update city - PUT
- * http://localhost:8080/city/swagger/102?state=Valencia delete city - DELETE
- * http://localhost:8080/city/swagger/100
+ * Usage:
+ * get city detail				- GET http://localhost:8080/city/swagger/105
+ * search 						- GET http://localhost:8080/city/swagger?country=Spain
+ * search & sort 				- GET http://localhost:8080/city/swagger?sorting=id
+ * create city					- POST http://localhost:8080/city/swagger/100 + content
+ * update city					- PUT http://localhost:8080/city/swagger/102?state=Valencia
+ * delete city					- DELETE http://localhost:8080/city/swagger/100 
  */
 @RestController
 @RequestMapping("/city/swagger")
