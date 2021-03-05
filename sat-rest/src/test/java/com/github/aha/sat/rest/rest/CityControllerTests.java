@@ -21,7 +21,7 @@ import com.github.aha.sat.rest.city.CityRepository;
 @SpringBootTest(webEnvironment = RANDOM_PORT)
 class CityControllerTests extends AbstractTests {
 
-	static final String ROOT_URL = "/city/";
+	static final String ROOT_URL = "/city/swagger/";
 
 	@Autowired
 	TestRestTemplate restTemplate;
