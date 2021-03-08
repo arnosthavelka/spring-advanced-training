@@ -33,6 +33,7 @@ public class RestApplication /* extends WebMvcConfigurerAdapter */{
     }
 
     private ApiInfo apiInfo() {
+		// https://www.baeldung.com/swagger-2-documentation-for-spring-rest-api
 		return new ApiInfo("spring-advanced-rest", "Demonstration of REST in Spring Boot", null, "arnost.havelka@gmail.com", null, null);
     }
 
