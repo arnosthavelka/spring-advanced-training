@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.test.context.SpringBootTest;
 
-@SpringBootTest(classes = JavaConfigApplication.class)
+@SpringBootTest(classes = TestingConfigApplication.class)
 class JavaConfigTest {
 
     @Autowired
