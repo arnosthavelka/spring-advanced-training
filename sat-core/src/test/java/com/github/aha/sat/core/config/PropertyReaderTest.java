@@ -8,7 +8,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.ApplicationContext;
 
 @SpringBootTest(classes = { PropertyReader.class })
-public class PropertyReaderTest {
+class PropertyReaderTest {
 
 	@Autowired
 	ApplicationContext context;

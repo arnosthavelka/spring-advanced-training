@@ -19,7 +19,7 @@ import com.github.aha.sat.rest.city.City;
 import com.github.aha.sat.rest.city.CityRepository;
 
 @SpringBootTest(webEnvironment = RANDOM_PORT)
-class CityControllerTests extends AbstractTests {
+class CitySwaggerControllerTests extends AbstractTests {
 
 	static final String ROOT_URL = "/city/swagger/";
 
@@ -81,7 +81,8 @@ class CityControllerTests extends AbstractTests {
 		var testState = "Test state";
 		var cityId = 100L;
 
-		ResponseEntity<City> responseEntity = restTemplate.exchange(ROOT_URL + cityId + "?state=" + testState, PUT, null, City.class);
+		ResponseEntity<City> responseEntity = restTemplate.exchange(ROOT_URL + cityId + "?name=abcdef&state=" + testState + "&country=abc", PUT, null,
+				City.class);
 
 		City updatedCity = responseEntity.getBody();
 		assertThat(updatedCity.getId()).isEqualTo(cityId);
