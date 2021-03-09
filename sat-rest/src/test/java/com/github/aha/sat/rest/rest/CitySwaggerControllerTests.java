@@ -19,7 +19,7 @@ import com.github.aha.sat.rest.city.City;
 import com.github.aha.sat.rest.city.CityRepository;
 
 @SpringBootTest(webEnvironment = RANDOM_PORT)
-class CityControllerTests extends AbstractTests {
+class CitySwaggerControllerTests extends AbstractTests {
 
 	static final String ROOT_URL = "/city/swagger/";
 

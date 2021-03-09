@@ -17,7 +17,6 @@
 		<module>sat-jdbc</module>
 		<module>sat-jpa</module>
 		<module>sat-rest</module>
-		<module>sat-spring-boot</module>
 		<module>sat-spring-boot-admin</module>
 	</modules>
 

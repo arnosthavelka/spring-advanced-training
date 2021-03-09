@@ -13,6 +13,8 @@ import javax.validation.Valid;
 import javax.websocket.server.PathParam;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -45,7 +47,7 @@ import com.wordnik.swagger.annotations.ApiResponses;
 @RestController
 @RequestMapping("/city/swagger")
 @Api(value = "city", description = "Endpoint for city management")
-public class CityController {
+public class CitySwaggerController {
 
     @Autowired
     private CityService cityService;
@@ -80,9 +82,29 @@ public class CityController {
     @ApiOperation(value = "Update the city", notes = "Update the city with defined attributes (for defined ID)", response = Void.class)
 	@ApiResponses(value = { @ApiResponse(code = 200, message = "Successful update of the city"),
             @ApiResponse(code = 409, message = "When ID in path is not equal to ID in the content (body)") })
-	public City update(@PathVariable long id, CityBaseResource resource) {
+	public City update(@PathVariable long id, @Valid CityBaseResource resource, BindingResult bindingResult) {
+		validateInputs(bindingResult);
 		return cityService.save(id, resource);
     }
+
+	private void validateInputs(BindingResult bindingResult) {
+		if (bindingResult.hasErrors()) {
+			throw new CityValidationException(buildValidationErrorMessage(bindingResult));
+		}
+		
+	}
+
+	private String buildValidationErrorMessage(BindingResult bindingResult) {
+		StringBuilder sb = new StringBuilder();
+		sb.append("Validation errors found! [count=").append(bindingResult.getErrorCount()).append("]\n");
+		sb.append("--------------------------------\n");
+		for (FieldError fieldError : bindingResult.getFieldErrors()) {
+			sb.append("- attribute=").append(fieldError.getObjectName()).append(".").append(fieldError.getField());
+			sb.append(", message=").append(fieldError.getDefaultMessage()).append("\n");
+		}
+
+		return sb.toString();
+	}
 
 	@DeleteMapping(value = "/{id}")
 	@ResponseStatus(NO_CONTENT)
