@@ -1,0 +1,27 @@
+{"properties": [
+  {
+    "name": "custom.value.text",
+    "type": "java.lang.String",
+    "description": "Random text value"
+  },
+  {
+    "name": "custom.value.long-number",
+    "type": "java.lang.Long",
+    "description": "Random long value"
+  },
+  {
+    "name": "custom.value.number-less-than-ten",
+    "type": "java.lang.Integer",
+    "description": "Random value <= 10"
+  },
+  {
+    "name": "custom.value.small-number",
+    "type": "java.lang.Integer",
+    "description": "Random int value"
+  },
+  {
+    "name": "custom.value.number-in-range",
+    "type": "java.lang.Integer",
+    "description": "Random value between 1024,65536"
+  }
+]}

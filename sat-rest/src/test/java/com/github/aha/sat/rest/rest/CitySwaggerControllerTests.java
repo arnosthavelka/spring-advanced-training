@@ -14,12 +14,11 @@ import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 
-import com.github.aha.sat.rest.AbstractTests;
 import com.github.aha.sat.rest.city.City;
 import com.github.aha.sat.rest.city.CityRepository;
 
 @SpringBootTest(webEnvironment = RANDOM_PORT)
-class CitySwaggerControllerTests extends AbstractTests {
+class CitySwaggerControllerTests {
 
 	static final String ROOT_URL = "/city/swagger/";
 
@@ -81,7 +80,7 @@ class CitySwaggerControllerTests extends AbstractTests {
 		var testState = "Test state";
 		var cityId = 100L;
 
-		ResponseEntity<City> responseEntity = restTemplate.exchange(ROOT_URL + cityId + "?name=abcdef&state=" + testState + "&country=abc", PUT, null,
+		ResponseEntity<City> responseEntity = restTemplate.exchange(ROOT_URL + cityId + "?name=Prague&state=" + testState + "&country=abc", PUT, null,
 				City.class);
 
 		City updatedCity = responseEntity.getBody();
