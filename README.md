@@ -30,20 +30,12 @@ Usage of JDBC & [Liquibase](http://www.liquibase.org/) via Spring Boot and HSQL 
 
 ## sat-rest
 Accessing JPA data via REST sevice, including:
-* Actuator
-* Spring Data
-* HATEOAS
-* [Swagger](http://swagger.io/) (REST documentation)
-* [Jolokia](https://jolokia.org/) (JMX over HTTP)
-
-## sat-spring-boot
-Usage of Spring Boot, including:
-* Actuator
+* Actuator & Modified Health service
+* Spring Data & HATEOAS
 * Spring Boot Admin Client
 * Advanced metrics (Micrometer via JMX)
-* Modified Health service
-
-_Note: Requires running spring-spring-boot-admin_
+* [Swagger](http://swagger.io/) (REST documentation)
+* [Jolokia](https://jolokia.org/) (JMX over HTTP)
 
 ## sat-spring-boot-admin
 Usage of Spring Boot Admin to monitor SB applications.
