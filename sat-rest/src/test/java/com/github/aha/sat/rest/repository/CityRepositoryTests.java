@@ -7,11 +7,21 @@ import static org.junit.jupiter.api.Assertions.assertAll;
 import java.util.List;
 
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.domain.Sort;
+import org.springframework.transaction.annotation.Transactional;
 
+import com.github.aha.sat.rest.RestApplication;
 import com.github.aha.sat.rest.city.City;
+import com.github.aha.sat.rest.city.CityRepository;
 
-class CityRepositoryTests extends AbstractCityTests {
+@SpringBootTest(classes = RestApplication.class)
+@Transactional(readOnly = true)
+class CityRepositoryTests {
+
+	@Autowired
+	protected CityRepository cityRepository;
 
     @Test
 	void testCount() {
