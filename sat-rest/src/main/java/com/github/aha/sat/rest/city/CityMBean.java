@@ -7,10 +7,15 @@ import org.springframework.jmx.export.annotation.ManagedOperation;
 import org.springframework.jmx.export.annotation.ManagedResource;
 import org.springframework.stereotype.Component;
 
+/**
+ * Usage (objectName = "sat-rest:jmx=CityMBean"): 
+ * list MBeans 		- GET http://localhost:8080/actuator/jolokia/list
+ * get CityMBean	- GET http://localhost:8080/actuator/jolokia/read/com.github.aha.sat.rest:name=cityMBean,type=CityMBean
+ * get attribute	- GET http://localhost:8080/actuator/jolokia/read/com.github.aha.sat.rest:name=cityMBean,type=CityMBean/Author
+ * call method		- GET http://localhost:8080/actuator/jolokia/exec/com.github.aha.sat.rest:name=cityMBean,type=CityMBean/getCityName/100
+ */
 @Component
-@ManagedResource(description = "MBean about entity City")
-// objectName = "sat-rest:jmx=CityMBean",
-// jolokia: http://localhost:8080/jolokia/read/com.github.aha.sat.sat-rest:name=cityMBean,type=CityMBean
+@ManagedResource(description = "MBean for entity City")
 public class CityMBean {
 
     @Autowired
@@ -31,8 +36,7 @@ public class CityMBean {
 
     @ManagedOperation(description = "Get City name by ID")
 	public String getCityName(Long id) {
-        City city = cityService.getOne(id);
-        return city.getName();
+		return cityService.getOne(id).getName();
     }
 
     @ManagedOperation(description = "Get City by ID")
