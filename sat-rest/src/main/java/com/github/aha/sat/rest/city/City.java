@@ -9,8 +9,9 @@ import javax.persistence.Id;
 
 import com.fasterxml.jackson.annotation.JsonView;
 import com.github.aha.sat.rest.city.resource.CityProjections.Basic;
-import com.wordnik.swagger.annotations.ApiModel;
-import com.wordnik.swagger.annotations.ApiModelProperty;
+
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 
 @Entity
 @ApiModel
