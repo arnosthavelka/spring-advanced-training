@@ -6,7 +6,9 @@ import java.util.Collections;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Import;
 
+import springfox.bean.validators.configuration.BeanValidatorPluginsConfiguration;
 import springfox.documentation.builders.PathSelectors;
 import springfox.documentation.builders.RequestHandlerSelectors;
 import springfox.documentation.service.ApiInfo;
@@ -22,15 +24,8 @@ import springfox.documentation.spring.web.plugins.Docket;
  * @see https://www.baeldung.com/swagger-2-documentation-for-spring-rest-api
  */
 @Configuration
+@Import(BeanValidatorPluginsConfiguration.class)
 public class SpringFoxConfig {
-
-//    @Autowired
-//    private SpringSwaggerConfig springSwaggerConfig;
-//
-//    @Bean
-//    public SwaggerSpringMvcPlugin customImplementation() {
-//        return new SwaggerSpringMvcPlugin(this.springSwaggerConfig).apiInfo(apiInfo()).includePatterns(".*city.*");
-//    }
 
 	@Bean
 	public Docket api() {
@@ -54,8 +49,4 @@ public class SpringFoxConfig {
 				"License MIT", "https://github.com/arnosthavelka/spring-advanced-training/blob/master/LICENSE", Collections.emptyList());
 	}
 
-//	private ApiInfo apiInfoOld() {
-//		// https://www.baeldung.com/swagger-2-documentation-for-spring-rest-api
-//		return new ApiInfo("spring-advanced-rest", "Demonstration of REST in Spring Boot", null, "arnost.havelka@gmail.com", null, null);
-//	}
 }
