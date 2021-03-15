@@ -69,17 +69,11 @@
 		
 		<!-- Enable Swagger -->
 		<dependency>
-			<groupId>com.mangofactory</groupId>
-			<artifactId>swagger-springmvc</artifactId>
-			<version>1.0.2</version>
+			<groupId>io.springfox</groupId>
+			<artifactId>springfox-boot-starter</artifactId>
+			<version>${springfox.version}</version>
 		</dependency>
-		<!-- Include Swagger UI -->
-		<!-- dependency>
-		    <groupId>org.ajar</groupId>
-		    <artifactId>swagger-spring-mvc-ui</artifactId>
-		    <version>0.4</version>
-		</dependency-->
-		
+	
 		<!-- Enable JMX -->
 		<dependency>
 			<groupId>org.springframework.integration</groupId>
