@@ -31,8 +31,8 @@ public class SpringFoxConfig {
 	public Docket api() {
 		return new Docket(SWAGGER_2)
 				.select()
-				.apis(RequestHandlerSelectors.any())
-//				.paths(PathSelectors.ant("/city/swagger/*"))
+				.apis(RequestHandlerSelectors.basePackage("com.github.aha.sat.rest"))
+				.paths(PathSelectors.ant("/city/**"))
 //				.paths(PathSelectors.ant("/stat/*"))
 				.paths(PathSelectors.any())
 				.build()
