@@ -2,16 +2,11 @@ package com.github.aha.sat.core.postprocessor;
 
 import org.springframework.beans.factory.config.BeanFactoryPostProcessor;
 import org.springframework.beans.factory.config.BeanPostProcessor;
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 
-@SpringBootApplication
-public class PostProcessorApplication {
-
-    public static void main(String[] args) {
-        SpringApplication.run(PostProcessorApplication.class, args);
-    }
+@Configuration
+public class PostProcessorConfig {
 
     @Bean
     public BeanFactoryPostProcessor bfppLogger() {
