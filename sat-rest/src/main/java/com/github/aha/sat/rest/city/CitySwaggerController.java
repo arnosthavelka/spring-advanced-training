@@ -55,7 +55,7 @@ public class CitySwaggerController {
 
 	@GetMapping(produces = { APPLICATION_JSON_VALUE, APPLICATION_XML_VALUE })
 	@JsonView(Basic.class)
-    @ApiOperation(value = "Returns list of cities", notes = "Returns a list of found city details.", response = City.class, responseContainer = "List")
+	@ApiOperation(value = "Search cities", notes = "Return all found cities with basic details.", response = City.class, responseContainer = "List")
     @ApiResponses(value = { @ApiResponse(code = 200, message = "Successful retrieval of the list of cities (with simple detail)") })
 	public List<City> search(@ApiParam(name = "country", required = false) @PathParam("country") String country,
             @ApiParam(name = "sorting", required = false) @PathParam("sorting") String sorting) {
@@ -63,16 +63,18 @@ public class CitySwaggerController {
     }
 
 	@GetMapping(value = "/{id}", produces = { APPLICATION_JSON_VALUE, APPLICATION_XML_VALUE })
-    @ApiOperation(value = "Returns city", notes = "Returns the city specified by ID .", response = City.class)
-    @ApiResponses(value = { @ApiResponse(code = 200, message = "Successful retrieval of city detail (full detail)"),
-            @ApiResponse(code = 404, message = "City with given ID does not exist") })
+	@ApiOperation(value = "Get city by ID", notes = "Return the city or throw CityNotFoundException.", response = City.class)
+    @ApiResponses(value = { 
+    		@ApiResponse(code = 200, message = "Successful retrieval of city detail (full detail)"),
+            @ApiResponse(code = 404, message = "City with given ID does not exist") }
+    )
 	public City getOne(@PathVariable("id") long id) {
 		return cityService.getOne(id);
     }
 
 	@PostMapping(consumes = { APPLICATION_JSON_VALUE, APPLICATION_XML_VALUE })
 	@ResponseStatus(CREATED)
-	@ApiOperation(value = "Create the city", notes = "Create the city with defined attributes (ID is erased if defined)", response = Void.class)
+	@ApiOperation(value = "Create a city", notes = "Create a city based on data from CityBaseResource", response = Void.class)
 	@ApiResponses(value = { @ApiResponse(code = 201, message = "Successful creation of the city") })
 	public void create(@Valid @RequestBody CityBaseResource resource, HttpServletRequest request, HttpServletResponse response) {
 		Long id = cityService.save(null, resource).getId();
@@ -80,9 +82,11 @@ public class CitySwaggerController {
 	}
 
 	@PutMapping(value = "/{id}")
-    @ApiOperation(value = "Update the city", notes = "Update the city with defined attributes (for defined ID)", response = Void.class)
-	@ApiResponses(value = { @ApiResponse(code = 200, message = "Successful update of the city"),
-            @ApiResponse(code = 409, message = "When ID in path is not equal to ID in the content (body)") })
+	@ApiOperation(value = "Update the city", notes = "Update the city with the data from CityBaseResource", response = Void.class)
+	@ApiResponses(value = {
+			@ApiResponse(code = 200, message = "Successful update of the city"),
+			@ApiResponse(code = 404, message = "City with given ID does not exist") }
+	)
 	public City update(@PathVariable long id, @Valid CityBaseResource resource, BindingResult bindingResult) {
 		validateInputs(bindingResult);
 		return cityService.save(id, resource);
