@@ -16,6 +16,6 @@ class BppTest {
 
     @Test
 	void contextLoads() {
-		assertThat(bean.toString()).isEqualTo("HI ALL!");
+		assertThat(bean).hasToString("HI ALL!");
     }
 }

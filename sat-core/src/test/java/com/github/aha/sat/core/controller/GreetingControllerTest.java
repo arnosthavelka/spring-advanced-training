@@ -17,7 +17,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
-@SpringBootTest(classes = { ControllerApplication.class })
+@SpringBootTest
 @WebAppConfiguration
 class GreetingControllerTest {
 

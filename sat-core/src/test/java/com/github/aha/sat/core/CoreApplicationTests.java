@@ -5,8 +5,8 @@ import static org.assertj.core.api.Assertions.assertThatNoException;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
-@SpringBootTest(classes = Application.class)
-class ApplicationTests {
+@SpringBootTest(classes = CoreApplication.class)
+class CoreApplicationTests {
 
 	@Test
 	void contextLoads() {

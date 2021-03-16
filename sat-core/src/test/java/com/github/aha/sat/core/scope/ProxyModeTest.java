@@ -1,15 +1,13 @@
 package com.github.aha.sat.core.scope;
 
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.is;
-import static org.hamcrest.Matchers.not;
+import static org.assertj.core.api.Assertions.assertThat;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.test.context.SpringBootTest;
 
-@SpringBootTest(classes = ScopeApplication.class)
+@SpringBootTest(classes = ScopeConfig.class)
 class ProxyModeTest {
 
     @Autowired
@@ -18,7 +16,6 @@ class ProxyModeTest {
 
     @Test
 	void contextLoads() {
-        assertThat(bean.getToken(), is(not(bean.getToken())));
-        // Assert.assertNotEquals(bean.getToken(), bean.getToken());
+		assertThat(bean.getToken()).isNotEqualTo(bean.getToken());
     }
 }
