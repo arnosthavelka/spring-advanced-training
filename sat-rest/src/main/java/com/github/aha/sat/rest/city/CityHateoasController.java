@@ -39,9 +39,6 @@ public class CityHateoasController {
     private CityService cityService;
 
 	@GetMapping(consumes = APPLICATION_JSON_VALUE, produces = HAL_JSON_VALUE)
-//	@JsonView(Detail.class)
-	// https://samkruglov.wordpress.com/2018/01/07/json-filtering-with-spring/
-	// https://stackoverflow.com/questions/19638550/how-does-jsonview-annotation-can-be-used-for-nested-entities
 	public CollectionModel<CityEntityResource> search(@PathParam("country") String country, @PathParam("sorting") String sorting) {
 
 		List<City> data = cityService.search(country, sorting);
