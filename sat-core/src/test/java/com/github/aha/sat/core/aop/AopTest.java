@@ -11,7 +11,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import com.github.aha.sat.core.wiring.Drink;
 
-@SpringBootTest(classes = AopApplication.class)
+@SpringBootTest
 class AopTest {
 
 	@Autowired

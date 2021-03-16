@@ -5,19 +5,12 @@ import static org.springframework.context.annotation.ScopedProxyMode.INTERFACES;
 
 import java.util.UUID;
 
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Scope;
 
-@SpringBootApplication
-@ComponentScan("com.github.aha.sat.core.scope")
-public class ScopeApplication {
-
-    public static void main(String[] args) {
-        SpringApplication.run(ScopeApplication.class, args);
-    }
+@Configuration
+public class ScopeConfig {
 
     @Bean
 	@Scope(value = SCOPE_PROTOTYPE, proxyMode = INTERFACES)
