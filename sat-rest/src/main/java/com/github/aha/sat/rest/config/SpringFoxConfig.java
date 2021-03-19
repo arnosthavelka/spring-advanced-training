@@ -19,7 +19,7 @@ import springfox.documentation.spring.web.plugins.Docket;
  * Usage:
  * 
  * access UI 	- GET http://localhost:8080/swagger-ui/
- * Swagger API	- GET http://localhost:8080/v2/api-docs
+ * Swagger API	- GET http://localhost:8080/v3/api-docs
  * 
  * @see https://www.baeldung.com/swagger-2-documentation-for-spring-rest-api
  */
