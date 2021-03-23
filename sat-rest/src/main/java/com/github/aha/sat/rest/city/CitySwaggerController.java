@@ -30,11 +30,11 @@ import com.fasterxml.jackson.annotation.JsonView;
 import com.github.aha.sat.rest.city.resource.CityBaseResource;
 import com.github.aha.sat.rest.city.resource.CityProjections.Basic;
 
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.ApiParam;
-import io.swagger.annotations.ApiResponse;
-import io.swagger.annotations.ApiResponses;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.tags.Tag;
 
 /**
  * Usage:
@@ -47,50 +47,58 @@ import io.swagger.annotations.ApiResponses;
  */
 @RestController
 @RequestMapping("/city/swagger")
-@Api("City management")
+@Tag(name = "City management")
 public class CitySwaggerController {
 
     @Autowired
     private CityService cityService;
 
-	@GetMapping(produces = { APPLICATION_JSON_VALUE, APPLICATION_XML_VALUE })
-	@JsonView(Basic.class)
-	@ApiOperation(value = "Search cities", notes = "Return all found cities with basic details.", response = City.class, responseContainer = "List")
-    @ApiResponses(value = { @ApiResponse(code = 200, message = "Successful retrieval of the list of cities (with simple detail)") })
-	public List<City> search(@ApiParam(name = "country", required = false) @PathParam("country") String country,
-            @ApiParam(name = "sorting", required = false) @PathParam("sorting") String sorting) {
-        return cityService.search(country, sorting);
-    }
-
 	@GetMapping(value = "/{id}", produces = { APPLICATION_JSON_VALUE, APPLICATION_XML_VALUE })
-	@ApiOperation(value = "Get city by ID", notes = "Return the city or throw CityNotFoundException.", response = City.class)
-    @ApiResponses(value = { 
-    		@ApiResponse(code = 200, message = "Successful retrieval of city detail (full detail)"),
-            @ApiResponse(code = 404, message = "City with given ID does not exist") }
-    )
+	@Operation(summary = "Get city by ID", description = "Return the city or throw CityNotFoundException.")
+	@ApiResponses(value = {
+			@ApiResponse(responseCode = "200", description = "Successful retrieval of city detail (full detail)"),
+			@ApiResponse(responseCode = "404", description = "City with given ID does not exist") })
 	public City getOne(@PathVariable("id") long id) {
 		return cityService.getOne(id);
+	}
+
+	@GetMapping(produces = { APPLICATION_JSON_VALUE, APPLICATION_XML_VALUE })
+	@JsonView(Basic.class)
+	@Operation(summary = "Search cities", description = "Return all found cities with basic details.")
+	@ApiResponses(value = { @ApiResponse(responseCode = "200", description = "Successful retrieval of the list of cities (with simple detail)") })
+	public List<City> search(
+			@Parameter(name = "country", required = false) @PathParam("country") String country,
+			@Parameter(name = "sorting", required = false) @PathParam("sorting") String sorting) {
+        return cityService.search(country, sorting);
     }
 
 	@PostMapping(consumes = { APPLICATION_JSON_VALUE, APPLICATION_XML_VALUE })
 	@ResponseStatus(CREATED)
-	@ApiOperation(value = "Create a city", notes = "Create a city based on data from CityBaseResource", response = Void.class)
-	@ApiResponses(value = { @ApiResponse(code = 201, message = "Successful creation of the city") })
+	@Operation(summary = "Create a city", description = "Create a city based on data from CityBaseResource")
+	@ApiResponses(value = { @ApiResponse(responseCode = "201", description = "Successful creation of the city") })
 	public void create(@Valid @RequestBody CityBaseResource resource, HttpServletRequest request, HttpServletResponse response) {
 		Long id = cityService.save(null, resource).getId();
 		response.addHeader("Location", getNewLocation(request, id));
 	}
 
 	@PutMapping(value = "/{id}")
-	@ApiOperation(value = "Update the city", notes = "Update the city with the data from CityBaseResource", response = Void.class)
+	@Operation(summary = "Update the city", description = "Update the city with the data from CityBaseResource")
 	@ApiResponses(value = {
-			@ApiResponse(code = 200, message = "Successful update of the city"),
-			@ApiResponse(code = 404, message = "City with given ID does not exist") }
+			@ApiResponse(responseCode = "200", description = "Successful update of the city"),
+			@ApiResponse(responseCode = "404", description = "City with given ID does not exist") }
 	)
 	public City update(@PathVariable long id, @Valid CityBaseResource resource, BindingResult bindingResult) {
 		validateInputs(bindingResult);
 		return cityService.save(id, resource);
     }
+
+	@DeleteMapping(value = "/{id}")
+	@ResponseStatus(NO_CONTENT)
+	@Operation(summary = "Delete the city", description = "Delete the city defined by ID)")
+	@ApiResponses(value = { @ApiResponse(responseCode = "204", description = "Successful deletion of the city") })
+	public void delete(@PathVariable long id) {
+		cityService.delete(id);
+	}
 
 	private void validateInputs(BindingResult bindingResult) {
 		if (bindingResult.hasErrors()) {
@@ -109,14 +117,6 @@ public class CitySwaggerController {
 		}
 
 		return sb.toString();
-	}
-
-	@DeleteMapping(value = "/{id}")
-	@ResponseStatus(NO_CONTENT)
-	@ApiOperation(value = "Delete the city", notes = "Delete the city defined by ID)", response = Void.class)
-	@ApiResponses(value = { @ApiResponse(code = 204, message = "Successful deletion of the city") })
-	public void delete(@PathVariable long id) {
-		cityService.delete(id);
 	}
 
 	private String getNewLocation(HttpServletRequest request, Long id) {
