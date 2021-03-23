@@ -5,7 +5,7 @@
 
 	<artifactId>sat-jpa</artifactId>
 	<packaging>jar</packaging>
-	<description>Demonstration JDBC in Spring framework</description>
+	<description>Demonstration of Spring Data JPA usage</description>
 
 	<parent>
 		<groupId>com.github.aha.sat</groupId>

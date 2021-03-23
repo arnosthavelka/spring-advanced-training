@@ -37,6 +37,9 @@ Accessing JPA data via REST sevice, including:
 * [Jolokia](https://jolokia.org/) (JMX over HTTP)
 * [Swagger](http://swagger.io/) (REST documentation)
 
+## sat-elk
+Accessing ELK data via Spring Data Elasticsearch
+
 ## sat-spring-boot-admin
 Usage of Spring Boot Admin to monitor SB applications.
 
