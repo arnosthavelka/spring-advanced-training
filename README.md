@@ -35,7 +35,7 @@ Accessing JPA data via REST sevice, including:
 * Spring Boot Admin Client
 * Advanced metrics (Micrometer via JMX)
 * [Jolokia](https://jolokia.org/) (JMX over HTTP)
-* [Swagger](http://swagger.io/) (REST documentation)
+* [Springdoc Openapi](https://springdoc.org/) (REST documentation)
 
 ## sat-spring-boot-admin
 Usage of Spring Boot Admin to monitor SB applications.
