@@ -20,6 +20,11 @@ spring:
     properties:
       hibernate:
       generate_statistics: true
+
+
+springdoc:
+  packagesToScan: com.github.aha.sat.rest
+  pathsToMatch: /v1, /city/**
       
 management:
   endpoints:

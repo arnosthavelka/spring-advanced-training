@@ -67,11 +67,11 @@
 		  <artifactId>micrometer-registry-jmx</artifactId>
 		</dependency>
 		
-		<!-- Enable Swagger -->
+		<!-- Enable Springdoc Openapi -->
 		<dependency>
-			<groupId>io.springfox</groupId>
-			<artifactId>springfox-boot-starter</artifactId>
-			<version>${springfox.version}</version>
+			<groupId>org.springdoc</groupId>
+			<artifactId>springdoc-openapi-ui</artifactId>
+			<version>${springdoc-openapi.version}</version>
 		</dependency>
 	
 		<!-- Enable JMX -->

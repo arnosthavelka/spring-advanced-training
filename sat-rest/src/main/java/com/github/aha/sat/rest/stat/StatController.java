@@ -8,48 +8,44 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.ApiResponse;
-import io.swagger.annotations.ApiResponses;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.tags.Tag;
 
+/**
+ * Usage:
+ * list entities 					- GET http://localhost:8080/stat/entity
+ * list queries		 				- GET http://localhost:8080/stat/query
+ * get statistics for one entity 	- GET http://localhost:8080/stat/entity/City
+ */
 @RestController
 @RequestMapping("/stat")
-@Api(value = "Hibernate statistics")
+@Tag(name = "Hibernate statistics")
 public class StatController {
 
     @Autowired
     private StatService statService;
 
-    /*
-     * http://localhost:8080/stat/entity
-     */
 	@GetMapping(value = "/entity", produces = { MediaType.APPLICATION_JSON_VALUE })
-    @ApiOperation(value = "Returns hibernate entities", notes = "Returns list of available entities in Hibernate", response = String[].class)
-    @ApiResponses(value = { @ApiResponse(code = 200, message = "Successful retrieval of Hibernate entities") })
-    public String[] listEntities() {
+	@Operation(summary = "Returns hibernate entities", description = "Returns list of available entities in Hibernate")
+	@ApiResponses(value = { @ApiResponse(responseCode = "200", description = "Successful retrieval of Hibernate entities") })
+    public String[] getALl() {
         return statService.getEntityNames();
     }
 
-    /*
-     * http://localhost:8080/stat/entity/City
-     */
 	@GetMapping(value = "/entity/{entity}", produces = { MediaType.APPLICATION_JSON_VALUE })
-    @ApiOperation(value = "Returns statistics of the entity", response = EntityStatistics.class)
-    @ApiResponses(value = { @ApiResponse(code = 200, message = "Successful retrieval of entity statistics") })
-    public EntityStatistics entityStat(@PathVariable String entity) {
+	@Operation(summary = "Returns statistics of the entity")
+	@ApiResponses(value = { @ApiResponse(responseCode = "200", description = "Successful retrieval of entity statistics") })
+    public EntityStatistics getOne(@PathVariable String entity) {
         return statService.getEntityStatistics(entity);
     }
 
-    /*
-     * http://localhost:8080/stat/query
-     * 
-     * Currently empty (criteria queries are not considered): http://stackoverflow.com/questions/2629754/hibernate-criteria-and-statistics
-     */
 	@GetMapping(value = "/query", produces = { MediaType.APPLICATION_JSON_VALUE })
-    @ApiOperation(value = "Returns queries", notes = "Returns list of used queries", response = String[].class)
-    @ApiResponses(value = { @ApiResponse(code = 200, message = "Successful retrieval of queries") })
+	@Operation(summary = "Returns queries", description = "Returns list of used queries")
+	@ApiResponses(value = { @ApiResponse(responseCode = "200", description = "Successful retrieval of queries") })
     public String[] listQueries() {
+		// Currently empty (criteria queries are not considered): http://stackoverflow.com/questions/2629754/hibernate-criteria-and-statistics
         return statService.getQueries();
     }
 
