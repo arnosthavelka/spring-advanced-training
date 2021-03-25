@@ -16,6 +16,9 @@ All these projects are based on Spring Boot 2.4.x & Java 15.
 ## sat-core
 Set of examples of Spring. It covers basics (e.g. BFPP & BPP, JSR and SpEL), hints (e.g. @Conditional, notifications, Spring profiles and proxying), testing, etc.
 
+## sat-elk
+Usage of Elasticsearch 7 via Spring Data & Docker image.
+
 ## sat-jdbc
 Usage of JDBC via Spring Boot and HSQL in memory DB.
 

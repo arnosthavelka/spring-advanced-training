@@ -82,24 +82,24 @@ public class CityService {
 		return repository.findById(cityId);
 	}
 
-	public Page<City> search(City inst, Pageable pageable) {
+	public Page<City> search(String name, String country, String subcountry, Pageable pageable) {
 		IndexCoordinates index = IndexCoordinates.of(City.INDEX);
 
-		CriteriaQuery query = buildSearchQuery(inst);
+		CriteriaQuery query = buildSearchQuery(name, country, subcountry);
 		query.setPageable(pageable);
 		return esTemplate.queryForPage(query, City.class, index);
 	}
 
-	private CriteriaQuery buildSearchQuery(City city) {
+	private CriteriaQuery buildSearchQuery(String name, String country, String subcountry) {
 		Criteria criteria = new Criteria();
-		if (nonNull(city.getName())) {
-			criteria.and(new Criteria("name").is(city.getName()));
+		if (nonNull(name)) {
+			criteria.and(new Criteria("name").is(name));
 		}
-		if (nonNull(city.getCountry())) {
-			criteria.and(new Criteria("country").contains(city.getCountry()));
+		if (nonNull(country)) {
+			criteria.and(new Criteria("country").contains(country));
 		}
-		if (nonNull(city.getSubcountry())) {
-			criteria.and(new Criteria("subcountry").is(city.getSubcountry()));
+		if (nonNull(subcountry)) {
+			criteria.and(new Criteria("subcountry").contains(subcountry));
 		}
 		return new CriteriaQuery(criteria);
 	}

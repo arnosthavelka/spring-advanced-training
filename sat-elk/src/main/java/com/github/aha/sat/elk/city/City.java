@@ -18,15 +18,19 @@ public class City implements Serializable {
 	public final static String INDEX = "city";
 
     @Id
-    private Long id;
+	private String id;
 
 	@JsonProperty("name")
     private String name;
 
+//	@Field(type = Text, index = false)
 	@JsonProperty("country")
 	private String country;
 
 	@JsonProperty("subcountry")
 	private String subcountry;
+
+	@JsonProperty("geonameid")
+	private Long geonameid;
 
 }

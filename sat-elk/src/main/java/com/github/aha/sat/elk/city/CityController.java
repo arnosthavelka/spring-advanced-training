@@ -2,7 +2,7 @@ package com.github.aha.sat.elk.city;
 
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
-import java.util.Collection;
+import javax.websocket.server.PathParam;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -16,6 +16,11 @@ import org.springframework.web.bind.annotation.RestController;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 
+/**
+ * Usage:
+ * get city detail		- GET http://localhost:8080/api/cities/HwB5aHgBiVYee_AkNeA6 
+ * search cities		- GET http://localhost:8080/api/cities/?country=Czech&subcountry=král
+ */
 @RestController
 @RequestMapping(value = CityController.ROOT_CONTEXT, produces = APPLICATION_JSON_VALUE)
 @RequiredArgsConstructor
@@ -32,21 +37,15 @@ public class CityController {
 	}
 
 	@GetMapping
-	public Collection<City> search(City searchDto, Pageable pageable) {
-		return service.search(searchDto, pageable);
+	public Page<City> search(@PathParam("name") String name, @PathParam("country") String country, @PathParam("subcountry") String subcountry,
+			Pageable pageable) {
+		return service.search(name, country, subcountry, pageable);
 	}
 
 	@PostMapping("/upload")
 	public ResponseEntity<?> uploadFile(String filename) {
 		service.uploadFile(filename);
 		return ResponseEntity.noContent().build();
-	}
-
-	public static <T> PageMetadata createResource(Page<T> page) {
-		if (page == null) {
-			return null;
-		}
-		return new PageMetadata(page.getSize(), page.getNumber(), page.getTotalElements(), page.getTotalPages());
 	}
 
 }
