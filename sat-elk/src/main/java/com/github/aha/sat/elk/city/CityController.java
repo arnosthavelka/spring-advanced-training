@@ -2,8 +2,6 @@ package com.github.aha.sat.elk.city;
 
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
-import java.util.Collection;
-
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
@@ -32,7 +30,7 @@ public class CityController {
 	}
 
 	@GetMapping
-	public Collection<City> search(City searchDto, Pageable pageable) {
+	public Page<City> search(City searchDto, Pageable pageable) {
 		return service.search(searchDto, pageable);
 	}
 
@@ -40,13 +38,6 @@ public class CityController {
 	public ResponseEntity<?> uploadFile(String filename) {
 		service.uploadFile(filename);
 		return ResponseEntity.noContent().build();
-	}
-
-	public static <T> PageMetadata createResource(Page<T> page) {
-		if (page == null) {
-			return null;
-		}
-		return new PageMetadata(page.getSize(), page.getNumber(), page.getTotalElements(), page.getTotalPages());
 	}
 
 }

@@ -82,10 +82,10 @@ public class CityService {
 		return repository.findById(cityId);
 	}
 
-	public Page<City> search(City inst, Pageable pageable) {
+	public Page<City> search(City city, Pageable pageable) {
 		IndexCoordinates index = IndexCoordinates.of(City.INDEX);
 
-		CriteriaQuery query = buildSearchQuery(inst);
+		CriteriaQuery query = buildSearchQuery(city);
 		query.setPageable(pageable);
 		return esTemplate.queryForPage(query, City.class, index);
 	}
