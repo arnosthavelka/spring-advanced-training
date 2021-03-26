@@ -4,6 +4,8 @@ import java.io.Serializable;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.elasticsearch.annotations.Document;
+import org.springframework.data.elasticsearch.annotations.Field;
+import org.springframework.data.elasticsearch.annotations.FieldType;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -21,9 +23,9 @@ public class City implements Serializable {
 	private String id;
 
 	@JsonProperty("name")
+	@Field(type = FieldType.Text, fielddata = true)
     private String name;
 
-//	@Field(type = Text, index = false)
 	@JsonProperty("country")
 	private String country;
 

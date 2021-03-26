@@ -5,6 +5,9 @@ See also https://www.baeldung.com/spring-data-elasticsearch-tutorial and https:/
 
 TODO
 
+### Index mapping
+http://oxygen-arnost.ifs.dev.dbgcloud.io:9200/city/_mapping
+
 ---
 http://localhost:8080/api/cities/upload?filename=Z:/world-cities.csv
 
@@ -26,6 +29,8 @@ http://localhost:8080/api/cities/HwB5aHgBiVYee_AkNeA6
   "geonameid": 3067696
 }
 
+---
+http://localhost:8080/api/cities/?sort=name,desc&page=0
 ---
 http://localhost:8080/api/cities/?country=Republic&subcountry=praha
 

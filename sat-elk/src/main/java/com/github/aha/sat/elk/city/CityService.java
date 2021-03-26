@@ -94,10 +94,10 @@ public class CityService {
 	private CriteriaQuery buildSearchQuery(String name, String country, String subcountry) {
 		Criteria criteria = new Criteria();
 		if (nonNull(name)) {
-			criteria.and(new Criteria("name").is(name));
+			criteria.and(new Criteria("name").contains(name));
 		}
 		if (nonNull(country)) {
-			criteria.and(new Criteria("country").contains(country));
+			criteria.and(new Criteria("country").is(country));
 		}
 		if (nonNull(subcountry)) {
 			criteria.and(new Criteria("subcountry").contains(subcountry));

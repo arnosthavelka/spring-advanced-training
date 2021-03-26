@@ -19,7 +19,7 @@ import lombok.RequiredArgsConstructor;
 /**
  * Usage:
  * get city detail					- GET http://localhost:8080/api/cities/HwB5aHgBiVYee_AkNeA6 
- * search cities (with pagination)	- GET http://localhost:8080/api/cities/?country=Czech&subcountry=král&size=2&page2
+ * search cities (with pagination)	- GET http://localhost:8080/api/cities/?name=be&country=Czech&subcountry=bohemia&size=5&sort=name
  */
 @RestController
 @RequestMapping(value = CityController.ROOT_CONTEXT, produces = APPLICATION_JSON_VALUE)
@@ -37,7 +37,8 @@ public class CityController {
 	}
 
 	@GetMapping
-	public SearchHits<City> search(@PathParam("name") String name, @PathParam("country") String country, @PathParam("subcountry") String subcountry,
+	public SearchHits<City> search(@PathParam("name") String name, @PathParam("country") String country,
+			@PathParam("subcountry") String subcountry,
 			Pageable pageable) {
 		return service.search(name, country, subcountry, pageable);
 	}
