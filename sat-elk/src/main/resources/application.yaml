@@ -2,4 +2,5 @@ spring:
   application:
     name: @pom.artifactId@
   elasticsearch:
-    rest:      uris: http://oxygen-arnost.ifs.dev.dbgcloud.io:9200
+    rest:
+      uris: http://oxygen-arnost.ifs.dev.dbgcloud.io:9200

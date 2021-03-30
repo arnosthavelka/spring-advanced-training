@@ -15,16 +15,16 @@ import lombok.Data;
 @Data
 public class City implements Serializable {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
 	public final static String INDEX = "city";
 
-    @Id
+	@Id
 	private String id;
 
 	@JsonProperty("name")
 	@Field(type = FieldType.Text, fielddata = true)
-    private String name;
+	private String name;
 
 	@JsonProperty("country")
 	private String country;

@@ -10,6 +10,7 @@ import java.util.Optional;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
 
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.elasticsearch.core.ElasticsearchOperations;
 import org.springframework.data.elasticsearch.core.SearchHits;
@@ -80,6 +81,10 @@ public class CityService {
 
 	public Optional<City> getOne(String cityId) {
 		return repository.findById(cityId);
+	}
+
+	public Page<City> searchByCountry(String country, Pageable pageable) {
+		return repository.findByCountry(country, pageable);
 	}
 
 	public SearchHits<City> search(String name, String country, String subcountry, Pageable pageable) {
