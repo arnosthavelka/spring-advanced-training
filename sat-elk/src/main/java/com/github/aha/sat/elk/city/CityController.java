@@ -4,6 +4,7 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
 import javax.websocket.server.PathParam;
 
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.elasticsearch.core.SearchHits;
 import org.springframework.http.ResponseEntity;
@@ -18,8 +19,9 @@ import lombok.RequiredArgsConstructor;
 
 /**
  * Usage:
- * get city detail					- GET http://localhost:8080/api/cities/HwB5aHgBiVYee_AkNeA6 
- * search cities (with pagination)	- GET http://localhost:8080/api/cities/?name=be&country=Czech&subcountry=bohemia&size=5&sort=name
+ * get city detail							- GET http://localhost:8080/api/cities/HwB5aHgBiVYee_AkNeA6 
+ * static search cities (with pagination)	- GET http://localhost:8080/api/cities/country/czech republic?sort=name,desc
+ * dynamic search cities (with pagination)	- GET http://localhost:8080/api/cities/?name=be&country=Czech&subcountry=bohemia&size=5&sort=name
  */
 @RestController
 @RequestMapping(value = CityController.ROOT_CONTEXT, produces = APPLICATION_JSON_VALUE)
@@ -36,10 +38,14 @@ public class CityController {
 		return service.getOne(id).orElse(null);
 	}
 
+	@GetMapping("/country/{country}")
+	public Page<City> searchByCountry(@PathVariable("country") String country, Pageable pageable) {
+		return service.searchByCountry(country, pageable);
+	}
+
 	@GetMapping
 	public SearchHits<City> search(@PathParam("name") String name, @PathParam("country") String country,
-			@PathParam("subcountry") String subcountry,
-			Pageable pageable) {
+			@PathParam("subcountry") String subcountry, Pageable pageable) {
 		return service.search(name, country, subcountry, pageable);
 	}
 

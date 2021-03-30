@@ -1,26 +1,23 @@
 # sat-elk
-POC for working with Elasticsearch
+POC for accessing Elasticsearch via Spring Data.
 
 See also https://www.baeldung.com/spring-data-elasticsearch-tutorial and https://www.baeldung.com/spring-data-elasticsearch-queries
 
-TODO
+## City domain
+Simple feature to demonstrate CRUD operations with ElasticSearch. The root API can be accessed here http://localhost:8080/api/cities/.
 
-### Index mapping
-http://oxygen-arnost.ifs.dev.dbgcloud.io:9200/city/_mapping
+### REST API
 
----
-http://localhost:8080/api/cities/upload?filename=Z:/world-cities.csv
+| Action                                    | HTTP Method | Context path
+| ----------------------------------------- | ----------- | -------------
+| Get item by ID                            | GET         | http://localhost:8080/api/cities/{id}
+| Static search (just by country)           | GET         | http://localhost:8080/api/cities/country/united kingdom?sort=name,desc
+| Dynamic search (by defined attributes)    | GET         | http://localhost:8080/api/cities/?name=be&country=Czech&subcountry=bohemia&size=5&sort=name,asc
+| Upload CSV					        	| POST        | http://localhost:8080/api/cities/upload?filename=Z:/world-cities.csv
 
-2021-03-25 09:21:14.374  INFO 6936 --- [nio-8080-exec-1] com.github.aha.sat.elk.city.CityService  : loading file Z:/world-cities.csv ...
-2021-03-25 09:21:14.439  INFO 6936 --- [nio-8080-exec-1] com.github.aha.sat.elk.city.CityService  : 23018 entries loaded from CSV file
-2021-03-25 09:21:15.593  INFO 6936 --- [nio-8080-exec-1] com.github.aha.sat.elk.city.CityService  : inst bulk stored [0/47] ...
-...
-2021-03-25 09:21:21.564  INFO 6936 --- [nio-8080-exec-1] com.github.aha.sat.elk.city.CityService  : inst bulk stored [46/47] ...
-2021-03-25 09:21:21.564  INFO 6936 --- [nio-8080-exec-1] com.github.aha.sat.elk.city.CityService  : data loading finish
+### Item output
 
----
-http://localhost:8080/api/cities/HwB5aHgBiVYee_AkNeA6
-
+```
 {
   "id": "HwB5aHgBiVYee_AkNeA6",
   "name": "Prague",
@@ -28,53 +25,102 @@ http://localhost:8080/api/cities/HwB5aHgBiVYee_AkNeA6
   "subcountry": "Praha",
   "geonameid": 3067696
 }
+```
 
----
-http://localhost:8080/api/cities/?sort=name,desc&page=0
----
-http://localhost:8080/api/cities/?country=Republic&subcountry=praha
+### Static Search Output
 
+```
 {
   "content": [
-    ...
     {
-      "id": "HwB5aHgBiVYee_AkNeA6",
-      "name": "Prague",
-      "country": "Czech Republic",
-      "subcountry": "Praha",
-      "geonameid": 3067696
+      "id": "7wXjgXgBeV-uft03tpY1",
+      "name": "York",
+      "country": "United Kingdom",
+      "subcountry": "England",
+      "geonameid": 2633352
     },
     ...
   ],
   "pageable": {
     "sort": {
-      "sorted": false,
-      "unsorted": true,
-      "empty": true
+      "sorted": true,
+      "unsorted": false,
+      "empty": false
     },
     "offset": 0,
-    "pageNumber": 0,
     "pageSize": 20,
+    "pageNumber": 0,
     "unpaged": false,
     "paged": true
   },
   "aggregations": null,
   "scrollId": null,
-  "maxScore": 10.203253,
-  "totalPages": 1,
-  "totalElements": 7,
+  "maxScore": "NaN",
+  "totalPages": 26,
+  "totalElements": 513,
   "size": 20,
   "number": 0,
   "sort": {
-    "sorted": false,
-    "unsorted": true,
-    "empty": true
+    "sorted": true,
+    "unsorted": false,
+    "empty": false
   },
   "first": true,
-  "last": true,
-  "numberOfElements": 7,
+  "last": false,
+  "numberOfElements": 20,
   "empty": false
 }
+```
+
+### Dynamic Search Output
+
+```
+{
+  "totalHits": 3,
+  "totalHitsRelation": "EQUAL_TO",
+  "maxScore": "NaN",
+  "scrollId": null,
+  "searchHits": [
+    ...,
+    {
+      "index": "city",
+      "id": "UAXjgXgBeV-uft03sovl",
+      "score": "NaN",
+      "sortValues": [
+        "beroun"
+      ],
+      "content": {
+        "id": "UAXjgXgBeV-uft03sovl",
+        "name": "Beroun",
+        "country": "Czech Republic",
+        "subcountry": "Central Bohemia",
+        "geonameid": 3079467
+      },
+      "highlightFields": {},
+      "innerHits": {},
+      "nestedMetaData": null
+    },
+    ...
+  ],
+  "aggregations": null,
+  "empty": false
+}
+```
+
+### Upload Output
+
+```
+2021-03-25 09:21:14.374  INFO 6936 --- [nio-8080-exec-1] com.github.aha.sat.elk.city.CityService  : loading file Z:/world-cities.csv ...
+2021-03-25 09:21:14.439  INFO 6936 --- [nio-8080-exec-1] com.github.aha.sat.elk.city.CityService  : 23018 entries loaded from CSV file
+2021-03-25 09:21:15.593  INFO 6936 --- [nio-8080-exec-1] com.github.aha.sat.elk.city.CityService  : inst bulk stored [0/47] ...
+...
+2021-03-25 09:21:21.564  INFO 6936 --- [nio-8080-exec-1] com.github.aha.sat.elk.city.CityService  : inst bulk stored [46/47] ...
+2021-03-25 09:21:21.564  INFO 6936 --- [nio-8080-exec-1] com.github.aha.sat.elk.city.CityService  : data loading finish
+```
+
+### Index mapping
+http://oxygen-arnost.ifs.dev.dbgcloud.io:9200/city/_mapping
+
 
 ## Running Elasticsearch by Docker in Linux AWS
 See https://hub.docker.com/_/elasticsearch.
