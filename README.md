@@ -16,6 +16,9 @@ All these projects are based on Spring Boot 2.4.x & Java 15.
 ## sat-core
 Set of examples of Spring. It covers basics (e.g. BFPP & BPP, JSR and SpEL), hints (e.g. @Conditional, notifications, Spring profiles and proxying), testing, etc.
 
+## sat-elk
+Usage of Elasticsearch 7 via Spring Data & Docker image.
+
 ## sat-jdbc
 Usage of JDBC via Spring Boot and HSQL in memory DB.
 
@@ -36,6 +39,9 @@ Accessing JPA data via REST sevice, including:
 * Advanced metrics (Micrometer via JMX)
 * [Jolokia](https://jolokia.org/) (JMX over HTTP)
 * [Springdoc Openapi](https://springdoc.org/) (REST documentation)
+
+## sat-elk
+Accessing ELK data via Spring Data Elasticsearch
 
 ## sat-spring-boot-admin
 Usage of Spring Boot Admin to monitor SB applications.

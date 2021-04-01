@@ -5,7 +5,7 @@
 
 	<artifactId>sat-jdbc</artifactId>
 	<packaging>jar</packaging>
-	<description>Demonstration JDBC in Spring framework</description>
+	<description>Demonstration of JDBC usage in Spring framework</description>
 
 	<parent>
 		<groupId>com.github.aha.sat</groupId>

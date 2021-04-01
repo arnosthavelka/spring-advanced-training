@@ -16,6 +16,7 @@ spring:
     default-domain: com.github.aha.sat.rest
   jpa:
     show-sql: true
+    open-in-view: false
     properties:
       hibernate:
       generate_statistics: true
