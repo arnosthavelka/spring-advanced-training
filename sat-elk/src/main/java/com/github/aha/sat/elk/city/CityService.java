@@ -21,6 +21,7 @@ import org.springframework.stereotype.Service;
 
 import com.fasterxml.jackson.dataformat.csv.CsvMapper;
 import com.fasterxml.jackson.dataformat.csv.CsvSchema;
+import com.github.aha.sat.elk.ElkException;
 
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
@@ -62,7 +63,7 @@ public class CityService {
 					.<City>readValues(new File(csvFileName))
 					.readAll();
 		} catch (IOException e) {
-			throw new RuntimeException(e);
+			throw new ElkException(e);
 		}
 	}
 
