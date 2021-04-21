@@ -97,6 +97,13 @@ public class CityService {
 		return esTemplate.search(query, City.class, index);
 	}
 
+	public Page<City> searchDeprecated(String name, String country, String subcountry, Pageable pageable) {
+		CriteriaQuery query = buildSearchQuery(name, country, subcountry);
+		query.setPageable(pageable);
+
+		return repository.search(query);
+	}
+
 	private CriteriaQuery buildSearchQuery(String name, String country, String subcountry) {
 		Criteria criteria = new Criteria();
 		if (nonNull(name)) {
