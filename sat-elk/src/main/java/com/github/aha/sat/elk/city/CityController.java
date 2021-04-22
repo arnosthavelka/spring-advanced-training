@@ -38,7 +38,7 @@ public class CityController {
 
 	@GetMapping("/{id}")
 	public City getOne(@PathVariable String id) {
-		return service.getOne(id).orElse(null);
+		return service.getOne(id);
 	}
 
 	@GetMapping("/country/{country}")

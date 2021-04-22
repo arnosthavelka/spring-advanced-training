@@ -6,7 +6,6 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Collection;
 import java.util.List;
-import java.util.Optional;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
 
@@ -80,8 +79,8 @@ public class CityService {
 		});
 	}
 
-	public Optional<City> getOne(String cityId) {
-		return repository.findById(cityId);
+	public City getOne(String cityId) {
+		return repository.findById(cityId).orElseThrow(() -> new ElkException("City with ID=" + cityId + " was not found!"));
 	}
 
 	public Page<City> searchByCountry(String country, Pageable pageable) {
