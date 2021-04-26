@@ -109,10 +109,10 @@ public class CityService {
 			criteria.and(new Criteria("name").contains(name));
 		}
 		if (nonNull(country)) {
-			criteria.and(new Criteria("country").is(country));
+			criteria.and(new Criteria("country").expression(country));
 		}
 		if (nonNull(subcountry)) {
-			criteria.and(new Criteria("subcountry").contains(subcountry));
+			criteria.and(new Criteria("subcountry").is(subcountry));
 		}
 		return new CriteriaQuery(criteria);
 	}
