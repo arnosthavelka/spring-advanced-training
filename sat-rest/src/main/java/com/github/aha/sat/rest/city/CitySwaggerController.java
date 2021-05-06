@@ -108,7 +108,7 @@ public class CitySwaggerController {
 	}
 
 	private String buildValidationErrorMessage(BindingResult bindingResult) {
-		StringBuilder sb = new StringBuilder();
+		var sb = new StringBuilder();
 		sb.append("Validation errors found! [count=").append(bindingResult.getErrorCount()).append("]\n");
 		sb.append("--------------------------------\n");
 		for (FieldError fieldError : bindingResult.getFieldErrors()) {
@@ -121,7 +121,7 @@ public class CitySwaggerController {
 
 	private String getNewLocation(HttpServletRequest request, Long id) {
 		StringBuffer url = request.getRequestURL();
-		UriTemplate template = new UriTemplate(url.append("/{childId}").toString());
+		var template = new UriTemplate(url.append("/{childId}").toString());
 		return template.expand(id).toASCIIString();
 
 	}
