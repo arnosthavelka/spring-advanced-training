@@ -9,7 +9,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class RestApplication {
 
     public static void main(String[] args) {
-        SpringApplication app = new SpringApplication(RestApplication.class);
+		var app = new SpringApplication(RestApplication.class);
 		app.setBannerMode(OFF);
         app.run(args);
     }

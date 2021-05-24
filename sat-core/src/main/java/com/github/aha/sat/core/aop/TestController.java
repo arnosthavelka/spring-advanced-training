@@ -22,7 +22,7 @@ public class TestController {
 
 	@GetMapping("/drink")
 	public String test() {
-		int val = new SecureRandom().nextInt(2);
+		var val = new SecureRandom().nextInt(2);
 		return val == 1 ? getName(tea) : getName(beer);
 	}
 

@@ -56,7 +56,7 @@ public class CityHateoasController {
 
 	@GetMapping(value = "/{id}", produces = HAL_JSON_VALUE)
 	public EntityModel<CityResource> getOne(@PathVariable("id") long id) {
-        City city = cityService.getOne(id);
+		var city = cityService.getOne(id);
 		return new CityResource(city).toResource();
     }
 

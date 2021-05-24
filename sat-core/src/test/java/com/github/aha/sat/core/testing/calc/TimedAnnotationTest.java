@@ -1,5 +1,6 @@
 package com.github.aha.sat.core.testing.calc;
 
+import static java.lang.Boolean.TRUE;
 import static java.time.Duration.ofMillis;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
@@ -15,21 +16,21 @@ class TimedAnnotationTest {
     @Test
     @Timed(millis = 100)
 	void testOkTime() {
-        assertThat(true, equalTo(Boolean.TRUE));
+		assertThat(true, equalTo(TRUE));
     }
 
     @Test()
     @Timed(millis = 100)
 	void testSpringTimeout() throws InterruptedException {
 		Thread.sleep(50); // NOSONAR
-        assertThat(true, equalTo(Boolean.TRUE));
+		assertThat(true, equalTo(TRUE));
     }
 
 	@Test
 	void testJUnitTimeout() throws InterruptedException {
 		assertTimeout(ofMillis(100), () -> {
 			Thread.sleep(50); // NOSONAR
-			assertThat(true, equalTo(Boolean.TRUE));
+			assertThat(true, equalTo(TRUE));
 		});
     }
 
