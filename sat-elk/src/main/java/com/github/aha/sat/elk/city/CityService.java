@@ -67,7 +67,7 @@ public class CityService {
 	}
 
 	private void storeData(List<City> instData) {
-		final AtomicInteger counter = new AtomicInteger();
+		final var counter = new AtomicInteger();
 
 		final Collection<List<City>> chunks = instData.stream()
 				.collect(Collectors.groupingBy(it -> counter.getAndIncrement() / BULK_SIZE))
@@ -88,7 +88,7 @@ public class CityService {
 	}
 
 	public SearchHits<City> search(String name, String country, String subcountry, Pageable pageable) {
-		IndexCoordinates index = IndexCoordinates.of(City.INDEX);
+		var index = IndexCoordinates.of(City.INDEX);
 
 		CriteriaQuery query = buildSearchQuery(name, country, subcountry);
 		query.setPageable(pageable);
@@ -100,11 +100,11 @@ public class CityService {
 		CriteriaQuery query = buildSearchQuery(name, country, subcountry);
 		query.setPageable(pageable);
 
-		return repository.search(query);
+		return repository.search(query); // NOSONAR
 	}
 
 	private CriteriaQuery buildSearchQuery(String name, String country, String subcountry) {
-		Criteria criteria = new Criteria();
+		var criteria = new Criteria();
 		if (nonNull(name)) {
 			criteria.and(new Criteria("name").contains(name));
 		}
