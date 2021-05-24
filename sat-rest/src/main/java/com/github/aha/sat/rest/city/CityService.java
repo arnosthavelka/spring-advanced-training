@@ -20,7 +20,7 @@ public class CityService {
 	private CityRepository cityRepository;
 
 	public List<City> search(String country, String sorting) {
-		Sort sort = Sort.by(sorting == null ? "id" : sorting);
+		var sort = Sort.by(sorting == null ? "id" : sorting);
 		sort.descending();
 		if (country == null) {
 			return cityRepository.findAll(sort);
