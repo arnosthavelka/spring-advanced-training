@@ -41,7 +41,7 @@ public class CityService {
 
 	private City getOrCreateCity(Long cityId) {
 		if (isNull(cityId)) {
-			return new City();
+			return City.builder().build();
 		}
 		return cityRepository.getOne(cityId);
 	}

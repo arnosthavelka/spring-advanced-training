@@ -10,12 +10,23 @@ import javax.persistence.Id;
 import com.fasterxml.jackson.annotation.JsonView;
 import com.github.aha.sat.rest.city.resource.CityProjections.Basic;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
+
 @Entity
+@Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
+@EqualsAndHashCode
 public class City implements Serializable {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    @Id
+	@Id
     @GeneratedValue
 	@JsonView(Basic.class)
     private Long id;
@@ -30,46 +41,4 @@ public class City implements Serializable {
     @Column(nullable = false)
     private String country;
 
-    protected City() {
-    }
-
-    public City(String name, String country, String state) {
-        super();
-        this.name = name;
-        this.country = country;
-        this.state = state;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getState() {
-        return state;
-    }
-
-    public void setState(String state) {
-        this.state = state;
-    }
-
-    public String getCountry() {
-        return country;
-    }
-
-    public void setCountry(String country) {
-        this.country = country;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    @Override
-    public String toString() {
-        return String.format("%s/%s [id=%d]", getCountry(), getName(), getId());
-    }
 }

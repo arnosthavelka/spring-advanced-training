@@ -63,7 +63,7 @@ class CitySwaggerControllerTests {
 	void createCity() {
 		long originalCount = repository.count();
 
-		City city = new City("Berlin", "Germany", null);
+		var city = City.builder().name("Berlin").country("Germany").build();
 		HttpHeaders headers = new HttpHeaders();
 		headers.setContentType(APPLICATION_JSON);
 		var request = new HttpEntity<City>(city, headers);

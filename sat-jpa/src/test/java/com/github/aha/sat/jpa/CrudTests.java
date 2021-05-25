@@ -16,7 +16,7 @@ class CrudTests extends AbstractCityTests {
 	void createEntity() {
 		long originalCount = cityRepository.count();
 
-        City city = new City("Frankfurt", "Germany", "");
+		var city = City.builder().name("Frankfurt").country("Germany").build();
         cityRepository.save(city);
 
 		assertThat(cityRepository.count()).isEqualTo(originalCount + 1);
@@ -26,7 +26,7 @@ class CrudTests extends AbstractCityTests {
 	void deleteEntity() {
 		long originalCount = cityRepository.count();
 
-        City city = cityRepository.findByName("Prague");
+		var city = cityRepository.findByName("Prague");
         cityRepository.delete(city);
 
 		assertThat(cityRepository.count()).isEqualTo(originalCount - 1);
