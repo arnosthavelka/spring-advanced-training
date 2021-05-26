@@ -4,6 +4,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.is;
 
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -12,6 +13,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import com.github.aha.sat.core.wiring.Drink;
 
 @SpringBootTest
+@Disabled
 class AopTest {
 
 	@Autowired
