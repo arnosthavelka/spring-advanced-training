@@ -96,24 +96,12 @@ public class CityService {
 		return esTemplate.search(query, City.class, index);
 	}
 
-	public Page<City> searchDeprecated(String name, String country, String subcountry, Pageable pageable) {
-		return repository.searchSimilar(buildCityExample(name, country, subcountry), null, pageable);
-	}
-
-	private City buildCityExample(String name, String country, String subcountry) {
-		var city = new City();
-		if (nonNull(name)) {
-			city.setName(name);
-		}
-		if (nonNull(country)) {
-			city.setCountry(country);
-		}
-		if (nonNull(subcountry)) {
-			city.setSubcountry(subcountry);
-		}
-		return city;
-	}
-
+//	public Page<City> searchDeprecated(String name, String country, String subcountry, Pageable pageable) {
+//		CriteriaQuery query = buildSearchQuery(name, country, subcountry);
+//		query.setPageable(pageable);
+//
+//		return repository.search(query); // NOSONAR
+//	}
 
 	private CriteriaQuery buildSearchQuery(String name, String country, String subcountry) {
 		var criteria = new Criteria();

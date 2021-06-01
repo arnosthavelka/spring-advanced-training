@@ -46,11 +46,11 @@ public class CityController {
 		return service.searchByCountry(country, pageable);
 	}
 
-	@GetMapping("/deprecated")
-	public Page<City> deprecatedSearch(@PathParam("name") String name, @PathParam("country") String country,
-			@PathParam("subcountry") String subcountry, Pageable pageable) {
-		return service.searchDeprecated(name, country, subcountry, pageable);
-	}
+//	@GetMapping("/deprecated")
+//	public Page<City> deprecatedSearch(@PathParam("name") String name, @PathParam("country") String country,
+//			@PathParam("subcountry") String subcountry, Pageable pageable) {
+//		return service.searchDeprecated(name, country, subcountry, pageable);
+//	}
 
 	@GetMapping
 	public SearchHits<City> search(@PathParam("name") String name, @PathParam("country") String country,
