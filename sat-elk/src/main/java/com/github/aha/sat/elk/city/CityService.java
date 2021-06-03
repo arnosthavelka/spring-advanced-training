@@ -66,16 +66,16 @@ public class CityService {
 		}
 	}
 
-	private void storeData(List<City> instData) {
+	private void storeData(List<City> cities) {
 		final var counter = new AtomicInteger();
 
-		final Collection<List<City>> chunks = instData.stream()
+		final Collection<List<City>> chunks = cities.stream()
 				.collect(Collectors.groupingBy(it -> counter.getAndIncrement() / BULK_SIZE))
 				.values();
 		counter.set(0);
 		chunks.forEach(ch -> {
 			repository.saveAll(ch);
-			log.info("inst bulk stored [{}/{}] ...", counter.getAndIncrement(), chunks.size());
+			log.info("bulk of cities stored [{}/{}] ...", counter.getAndIncrement(), chunks.size());
 		});
 	}
 
@@ -95,13 +95,6 @@ public class CityService {
 
 		return esTemplate.search(query, City.class, index);
 	}
-
-//	public Page<City> searchDeprecated(String name, String country, String subcountry, Pageable pageable) {
-//		CriteriaQuery query = buildSearchQuery(name, country, subcountry);
-//		query.setPageable(pageable);
-//
-//		return repository.search(query); // NOSONAR
-//	}
 
 	private CriteriaQuery buildSearchQuery(String name, String country, String subcountry) {
 		var criteria = new Criteria();
