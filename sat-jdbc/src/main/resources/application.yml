@@ -5,3 +5,7 @@ spring:
         username: sa
         password:
         driverClassName: org.hsqldb.jdbcDriver
+    sql:
+        init:
+            username: sa
+            password: 
