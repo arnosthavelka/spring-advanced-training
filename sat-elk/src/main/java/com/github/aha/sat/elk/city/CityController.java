@@ -23,7 +23,6 @@ import lombok.RequiredArgsConstructor;
  * get city detail							- GET http://localhost:8080/api/cities/HwB5aHgBiVYee_AkNeA6 
  * static search cities (with pagination)	- GET http://localhost:8080/api/cities/country/czech republic?sort=name,desc
  * dynamic search cities (with pagination)	- GET http://localhost:8080/api/cities/?name=be&country=Czech&subcountry=bohemia&size=5&sort=name
- * deprecated search (with pagination)		- GET http://localhost:8080/api/cities/deprecated/?name=be&country=Czech&subcountry=bohemia&size=5&sort=name
  * upload data								- POST http://localhost:8080/api/cities/upload?filename=Z:/world-cities.csv
  */
 @RestController
@@ -45,12 +44,6 @@ public class CityController {
 	public Page<City> searchByCountry(@PathVariable("country") String country, Pageable pageable) {
 		return service.searchByCountry(country, pageable);
 	}
-
-//	@GetMapping("/deprecated")
-//	public Page<City> deprecatedSearch(@PathParam("name") String name, @PathParam("country") String country,
-//			@PathParam("subcountry") String subcountry, Pageable pageable) {
-//		return service.searchDeprecated(name, country, subcountry, pageable);
-//	}
 
 	@GetMapping
 	public SearchHits<City> search(@PathParam("name") String name, @PathParam("country") String country,
