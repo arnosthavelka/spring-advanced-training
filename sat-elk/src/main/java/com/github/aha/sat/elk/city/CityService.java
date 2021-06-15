@@ -79,7 +79,7 @@ public class CityService {
 		});
 	}
 
-	public City getOne(String cityId) {
+	public City findById(String cityId) {
 		return repository.findById(cityId).orElseThrow(() -> new ElkException("City with ID=" + cityId + " was not found!"));
 	}
 

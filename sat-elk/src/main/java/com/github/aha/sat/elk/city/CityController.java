@@ -26,18 +26,18 @@ import lombok.RequiredArgsConstructor;
  * upload data								- POST http://localhost:8080/api/cities/upload?filename=Z:/world-cities.csv
  */
 @RestController
-@RequestMapping(value = CityController.ROOT_CONTEXT, produces = APPLICATION_JSON_VALUE)
+@RequestMapping(value = CityController.ROOT_PATH, produces = APPLICATION_JSON_VALUE)
 @RequiredArgsConstructor
 public class CityController {
 
-	public static final String ROOT_CONTEXT = "/api/cities";
+	static final String ROOT_PATH = "/api/cities";
 
 	@NonNull
 	final CityService service;
 
 	@GetMapping("/{id}")
-	public City getOne(@PathVariable String id) {
-		return service.getOne(id);
+	public City findById(@PathVariable String id) {
+		return service.findById(id);
 	}
 
 	@GetMapping("/country/{country}")
