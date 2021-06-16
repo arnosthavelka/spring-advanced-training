@@ -30,7 +30,7 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class CityController {
 
-	static final String ROOT_PATH = "/api/cities";
+	static final String ROOT_PATH = "/api/cities"; // NOSONAR
 
 	@NonNull
 	final CityService service;

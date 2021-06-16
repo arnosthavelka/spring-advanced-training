@@ -2,7 +2,7 @@ package com.github.aha.sat.elk.city;
 
 import static com.github.aha.sat.elk.city.CityController.ROOT_PATH;
 import static org.hamcrest.CoreMatchers.is;
-import static org.mockito.Mockito.when;
+import static org.mockito.BDDMockito.given;
 import static org.springframework.http.MediaType.APPLICATION_JSON;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
@@ -18,7 +18,7 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.web.servlet.MockMvc;
 
 @WebMvcTest(CityController.class)
-public class CityControllerTest {
+class CityControllerTest {
 
 	private static final String CITY_ID = UUID.randomUUID().toString();
 	private static final String CITY_NAME = "Barcelona";
@@ -33,7 +33,9 @@ public class CityControllerTest {
 
 	@Test
 	void listCities() throws Exception {
-		when(this.service.findById(CITY_ID)).thenReturn(prepareCity(CITY_ID, CITY_NAME, CITY_COUNTRY, CITY_SUBCOUNTRY));
+//		when(this.service.findById(CITY_ID)).thenReturn(prepareCity(CITY_ID, CITY_NAME, CITY_COUNTRY, CITY_SUBCOUNTRY));
+		given(service.findById(CITY_ID)).willReturn(prepareCity(CITY_ID, CITY_NAME, CITY_COUNTRY, CITY_SUBCOUNTRY));
+
 		mvc.perform(get(ROOT_PATH + "/" + CITY_ID))
 				.andExpect(status().isOk())
 				.andExpect(content().contentTypeCompatibleWith(APPLICATION_JSON))
