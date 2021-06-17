@@ -36,7 +36,7 @@ public class CityController {
 	final CityService service;
 
 	@GetMapping("/{id}")
-	public City findById(@PathVariable String id) {
+	public City getById(@PathVariable String id) {
 		return service.findById(id);
 	}
 

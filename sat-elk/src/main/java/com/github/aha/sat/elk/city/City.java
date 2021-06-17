@@ -9,10 +9,14 @@ import org.springframework.data.elasticsearch.annotations.FieldType;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Document(indexName = City.INDEX)
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class City implements Serializable {
 
 	private static final long serialVersionUID = 1L;
