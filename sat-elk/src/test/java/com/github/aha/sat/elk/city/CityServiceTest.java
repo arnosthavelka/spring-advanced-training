@@ -36,7 +36,7 @@ class CityServiceTest {
 	class FindById {
 
 		@Test
-		public void shouldReturnCity() {
+		void shouldReturnCity() {
 			City city = new City();
 			given(repository.findById(CITY_ID)).willReturn(of(city));
 
@@ -47,7 +47,7 @@ class CityServiceTest {
 		}
 
 		@Test
-		public void failWhenCityIsNotFound() {
+		void failWhenCityIsNotFound() {
 			assertThrows(ElkException.class, () -> service.findById(CITY_ID));
 
 			verify(repository).findById(CITY_ID);
