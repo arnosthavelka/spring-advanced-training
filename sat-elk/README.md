@@ -84,13 +84,13 @@ Simple feature to demonstrate CRUD operations with ElasticSearch. The root API c
     ...,
     {
       "index": "city",
-      "id": "UAXjgXgBeV-uft03sovl",
+      "id": "ckmz1XkB8HBQc_fknzUo",
       "score": "NaN",
       "sortValues": [
         "beroun"
       ],
       "content": {
-        "id": "UAXjgXgBeV-uft03sovl",
+        "id": "ckmz1XkB8HBQc_fknzUo",
         "name": "Beroun",
         "country": "Czech Republic",
         "subcountry": "Central Bohemia",
@@ -98,7 +98,10 @@ Simple feature to demonstrate CRUD operations with ElasticSearch. The root API c
       },
       "highlightFields": {},
       "innerHits": {},
-      "nestedMetaData": null
+      "nestedMetaData": null,
+      "routing": null,
+      "explanation": null,
+      "matchedQueries": []
     },
     ...
   ],
