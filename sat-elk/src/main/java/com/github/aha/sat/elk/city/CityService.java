@@ -54,7 +54,7 @@ public class CityService {
 		log.info("data loading finish");
 	}
 
-	private List<City> parseFile(String csvFileName) {
+	List<City> parseFile(String csvFileName) {
 		try {
 			return csvMapper
 					.readerFor(City.class)
