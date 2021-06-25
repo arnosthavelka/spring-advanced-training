@@ -1,12 +1,14 @@
 package com.github.aha.sat.core.aop;
 
-import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.EnableAspectJAutoProxy;
 
 import com.github.aha.sat.core.wiring.Drink;
 
-@SpringBootApplication
-public class AopApplication {
+@Configuration
+@EnableAspectJAutoProxy
+public class AopConfig {
 
     @Bean
 	public Drink tea() {
