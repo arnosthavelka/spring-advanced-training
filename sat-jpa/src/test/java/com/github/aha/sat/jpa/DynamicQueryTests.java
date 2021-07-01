@@ -8,13 +8,12 @@ import org.junit.jupiter.api.Test;
 import org.springframework.data.domain.Sort;
 
 import com.github.aha.sat.jpa.city.City;
-import com.github.aha.sat.jpa.city.CitySpecifications;
 
-class DynamicQueryTests extends AbstractCityTests implements CitySpecifications {
+class DynamicQueryTests extends AbstractCityTests {
 
     @Test
 	void testCitiesWithState() {
-		List<City> result = cityRepository.findAll(cityHasState(), Sort.by("country", "name"));
+		List<City> result = cityRepository.findAll(cityRepository.cityHasState(), Sort.by("country", "name"));
 
 		assertThat(result.size()).isEqualTo(7);
 		City city = result.get(0);
@@ -24,7 +23,8 @@ class DynamicQueryTests extends AbstractCityTests implements CitySpecifications 
 
     @Test
 	void testCitiesWithoutStateInUsa() {
-		List<City> result = cityRepository.findAll(cityHasNoState().and(cityFromCountry("USA")), Sort.by("country", "name"));
+		List<City> result = cityRepository.findAll(cityRepository.cityHasNoState().and(cityRepository.cityFromCountry("USA")),
+				Sort.by("country", "name"));
 
 		assertThat(result.size()).isEqualTo(1);
 		City city = result.get(0);
