@@ -11,7 +11,7 @@ import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.web.servlet.view.InternalResourceView;
 
-@SpringBootTest(classes = { ControllerApplication.class })
+@SpringBootTest(classes = { ControllerConfig.class })
 @WebAppConfiguration
 class HelloControllerTest {
 
