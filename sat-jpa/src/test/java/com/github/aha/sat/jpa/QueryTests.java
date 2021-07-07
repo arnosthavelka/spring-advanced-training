@@ -11,6 +11,7 @@ import org.springframework.data.domain.Sort;
 
 import com.github.aha.sat.jpa.city.City;
 import com.github.aha.sat.jpa.city.CityRepository;
+import com.github.aha.sat.jpa.city.City_;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -43,7 +44,7 @@ class QueryTests {
 
     @Test
 	void sortCities() {
-		Page<City> page = cityRepository.findAll(PageRequest.of(0, 5, Sort.Direction.DESC, "country", "name"));
+		Page<City> page = cityRepository.findAll(PageRequest.of(0, 5, Sort.Direction.DESC, City_.COUNTRY, City_.NAME));
 
 		assertThat(page.getSize()).isEqualTo(5);
 		log.debug("\n### testSorting output");
