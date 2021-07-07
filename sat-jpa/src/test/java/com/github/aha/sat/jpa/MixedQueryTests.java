@@ -6,10 +6,17 @@ import static org.hamcrest.Matchers.equalTo;
 import java.util.List;
 
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 
 import com.github.aha.sat.jpa.city.City;
+import com.github.aha.sat.jpa.city.CityRepository;
 
-class MixedQueryTests extends AbstractCityTests {
+@DataJpaTest
+class MixedQueryTests {
+
+	@Autowired
+	protected CityRepository cityRepository;
 
     @Test
 	void loadCitiesWithState() {
