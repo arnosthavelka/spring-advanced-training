@@ -33,15 +33,15 @@ public interface CityRepository extends JpaRepository<City, Long>, JpaSpecificat
 	 */
 
 	default Specification<City> cityHasState() {
-		return (r, q, cb) -> cb.notEqual(r.get("state"), "");
+		return (r, q, cb) -> cb.notEqual(r.get(City_.state), "");
 	}
 
 	default Specification<City> cityHasNoState() {
-		return (r, q, cb) -> cb.isNull(r.get("state"));
+		return (r, q, cb) -> cb.isNull(r.get(City_.state));
 	}
 
 	default Specification<City> cityFromCountry(final String country) {
-		return (r, q, cb) -> cb.equal(r.get("country"), country);
+		return (r, q, cb) -> cb.equal(r.get(City_.country), country);
 	}
 
 	/*

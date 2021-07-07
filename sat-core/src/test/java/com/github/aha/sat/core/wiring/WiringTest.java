@@ -1,7 +1,7 @@
 package com.github.aha.sat.core.wiring;
 
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.equalTo;
+
+import static org.assertj.core.api.Assertions.assertThat;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,17 +28,17 @@ class WiringTest {
 
 	@Test
 	void testPrimaryBean() {
-		assertThat(tea.getName(), equalTo("Tea"));
+		assertThat(tea.getName()).isEqualTo("Tea");
 	}
 
 	@Test
 	void testBeverage() {
-		assertThat(beverage.getName(), equalTo("Cola"));
+		assertThat(beverage.getName()).isEqualTo("Cola");
     }
 
 	@Test
 	void testBeer() {
-		assertThat(beer.getName(), equalTo("Beer"));
+		assertThat(beer.getName()).isEqualTo("Beer");
 	}
 
 }

@@ -11,6 +11,7 @@ import org.springframework.data.domain.Sort;
 
 import com.github.aha.sat.jpa.city.City;
 import com.github.aha.sat.jpa.city.CityRepository;
+import com.github.aha.sat.jpa.city.City_;
 
 @DataJpaTest
 class DynamicQueryTests {
@@ -20,7 +21,9 @@ class DynamicQueryTests {
 
     @Test
 	void shouldFindCitiesWithState() {
-		List<City> result = cityRepository.findAll(cityRepository.cityHasState(), Sort.by("country", "name"));
+		List<City> result = cityRepository.findAll(
+				cityRepository.cityHasState(),
+				Sort.by(City_.COUNTRY, City_.NAME));
 
 		assertThat(result.size()).isEqualTo(7);
 		verifyCity(result.get(0), "Brisbane", "Australia");
@@ -30,7 +33,7 @@ class DynamicQueryTests {
 	void shouldFindUsaCitiesWithoutState() {
 		List<City> result = cityRepository.findAll(
 				cityRepository.cityHasNoState().and(cityRepository.cityFromCountry("USA")),
-				Sort.by("country", "name"));
+				Sort.by(City_.COUNTRY, City_.NAME));
 
 		assertThat(result.size()).isEqualTo(1);
 		verifyCity(result.get(0), "New York", "USA");
