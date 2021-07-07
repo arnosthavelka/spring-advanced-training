@@ -1,35 +1,41 @@
 package com.github.aha.sat.jpa;
 
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.equalTo;
+import static org.assertj.core.api.Assertions.assertThat;
 
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 
 import com.github.aha.sat.jpa.city.City;
+import com.github.aha.sat.jpa.city.CityRepository;
 
 import lombok.extern.slf4j.Slf4j;
 
+@DataJpaTest
 @Slf4j
-class QueryTests extends AbstractCityTests {
+class QueryTests {
+
+	@Autowired
+	protected CityRepository cityRepository;
 
     @Test
 	void countCities() {
         long count = cityRepository.count();
 
-		assertThat(count, equalTo(13L));
+		assertThat(count).isEqualTo(13);
     }
 
     @Test
 	void paginateCities() {
 		Page<City> page = cityRepository.findAll(PageRequest.of(0, 5));
 
-        assertThat(page.getSize(), equalTo(5));
-		assertThat(page.getTotalElements(), equalTo(13L));
-        assertThat(page.getTotalPages(), equalTo(3));
-		log.debug("\n### testPagingt output");
+		assertThat(page.getSize()).isEqualTo(5);
+		assertThat(page.getTotalElements()).isEqualTo(13);
+		assertThat(page.getTotalPages()).isEqualTo(3);
+		log.debug("\n### testPaging output");
         for (City city : page.getContent()) {
 			log.debug(city.toString());
         }
@@ -39,7 +45,7 @@ class QueryTests extends AbstractCityTests {
 	void sortCities() {
 		Page<City> page = cityRepository.findAll(PageRequest.of(0, 5, Sort.Direction.DESC, "country", "name"));
 
-        assertThat(page.getSize(), equalTo(5));
+		assertThat(page.getSize()).isEqualTo(5);
 		log.debug("\n### testSorting output");
         for (City city : page.getContent()) {
 			log.debug(city.toString());
@@ -50,8 +56,8 @@ class QueryTests extends AbstractCityTests {
 	void getCityByName() {
         City city = cityRepository.findByNameAndCountryAllIgnoringCase("Tokyo", "Japan");
 
-        assertThat(city.getName(), equalTo("Tokyo"));
-        assertThat(city.getCountry(), equalTo("Japan"));
+		assertThat(city.getName()).isEqualTo("Tokyo");
+		assertThat(city.getCountry()).isEqualTo("Japan");
     }
 
 }
