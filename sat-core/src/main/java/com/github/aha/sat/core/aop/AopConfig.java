@@ -14,8 +14,8 @@ public class AopConfig {
     }
 
     @Bean
-	public EnjoyableDrink beer() {
-		return () -> "Beer";
+	public EnjoyableDrink coffee() {
+		return () -> "Coffee";
     }
 
 }

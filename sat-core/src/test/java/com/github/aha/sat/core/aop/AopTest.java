@@ -19,8 +19,8 @@ class AopTest {
 	private Drink tea;
 
 	@Autowired
-	@Qualifier("beer")
-	private Drink beer;
+	@Qualifier("coffee")
+	private Drink coffee;
 
 	@Test
 	void testTea() {
@@ -29,10 +29,10 @@ class AopTest {
 
 	@Test
 	void testEnhancedBear() {
-		assertThat(beer.getName(), equalTo("Beer"));
-		if (beer instanceof Enjoyable) {
-			Enjoyable en = (Enjoyable) beer;
-			assertThat(en.enjoy(beer), equalTo("Wow Beer!"));
+		assertThat(coffee.getName(), equalTo("Coffee"));
+		if (coffee instanceof Enjoyable) {
+			Enjoyable en = (Enjoyable) coffee;
+			assertThat(en.enjoy(coffee), equalTo("Wow Coffee!"));
 		}
     }
 
