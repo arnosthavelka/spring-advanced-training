@@ -14,7 +14,7 @@ import lombok.extern.slf4j.Slf4j;
 @Aspect
 @Component
 @Slf4j
-public class DrinkLogger {
+public class BeverageLogger {
 
 	@Pointcut("execution(* com.github.aha.sat..Tea.*())")
 	private void teaUsage() {

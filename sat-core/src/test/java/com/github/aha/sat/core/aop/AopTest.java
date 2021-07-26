@@ -9,18 +9,18 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import com.github.aha.sat.core.wiring.Drink;
+import com.github.aha.sat.core.wiring.Beverage;
 
 @SpringBootTest(classes = AopConfig.class)
 class AopTest {
 
 	@Autowired
 	@Qualifier("tea")
-	private Drink tea;
+	private Beverage tea;
 
 	@Autowired
 	@Qualifier("coffee")
-	private Drink coffee;
+	private Beverage coffee;
 
 	@Test
 	void testTea() {

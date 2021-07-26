@@ -7,7 +7,7 @@ import org.springframework.context.annotation.Configuration;
 
 import com.github.aha.sat.core.conditional.condition.AlcoholCondition;
 import com.github.aha.sat.core.conditional.condition.SodaCondition;
-import com.github.aha.sat.core.wiring.Drink;
+import com.github.aha.sat.core.wiring.Beverage;
 
 @Configuration
 @ComponentScan
@@ -15,25 +15,25 @@ public class ConditionalConfig {
 
 	@Bean
 	@Conditional(AlcoholCondition.class)
-	public Drink beer()	{
+	public Beverage beer()	{
 		return () -> "Beer";
 	}
 
 	@Bean
 	@Conditional(AlcoholCondition.class)
-	public Drink wine() {
+	public Beverage wine() {
 		return () -> "Wine";
 	}
 
 	@Bean
 	@Conditional(SodaCondition.class)
-	public Drink cola() {
+	public Beverage cola() {
 		return () -> "cola";
 	}
 
 	@Bean
 	@Conditional(SodaCondition.class)
-	public Drink fanta() {
+	public Beverage fanta() {
 		return () -> "fanta";
 	}
 
