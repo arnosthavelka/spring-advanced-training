@@ -50,4 +50,5 @@ class CollectionWiringTest {
 		assertThat(alcoholicBeverages).hasSize(1);
 		assertThat(alcoholicBeverages).map(Beverage::getName).contains("Beer");
 	}
+
 }
