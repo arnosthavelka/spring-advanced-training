@@ -27,19 +27,19 @@ class MapWiringTest {
 	@Test
 	void shouldWireAllBeverages() {
 		assertThat(beverages).hasSize(6);
-		assertThat(beverages.keySet()).contains("beer", "cola", "soda", "coffee", "tea", "iceTea");
+		assertThat(beverages).containsKeys("beer", "cola", "soda", "coffee", "tea", "iceTea");
 	}
 
 	@Test
 	void shouldWireCarbonatedBeverages() {
 		assertThat(carbonatedBeverages).hasSize(3);
-		assertThat(carbonatedBeverages.keySet()).contains("beer", "cola", "soda");
+		assertThat(carbonatedBeverages).containsKeys("beer", "cola", "soda");
 	}
 
 	@Test
 	void shouldWireAlcoholicBeverages() {
 		assertThat(alcoholicBeverages).hasSize(1);
-		assertThat(alcoholicBeverages.keySet()).contains("beer");
+		assertThat(alcoholicBeverages).containsKey("beer");
 		assertThat(alcoholicBeverages.get("beer").getName()).contains("Beer");
 	}
 
