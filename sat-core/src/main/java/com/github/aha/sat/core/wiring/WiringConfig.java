@@ -1,10 +1,14 @@
 package com.github.aha.sat.core.wiring;
 
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.Configuration;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.Bean;
 
-@Configuration
-@ComponentScan
+@SpringBootApplication
 public class WiringConfig {
+
+	@Bean
+	public Beverage iceTea() {
+		return () -> "Ice Tea";
+	}
 
 }
