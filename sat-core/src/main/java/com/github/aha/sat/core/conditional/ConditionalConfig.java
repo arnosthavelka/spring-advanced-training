@@ -7,7 +7,7 @@ import org.springframework.context.annotation.Configuration;
 
 import com.github.aha.sat.core.conditional.condition.AlcoholCondition;
 import com.github.aha.sat.core.conditional.condition.SodaCondition;
-import com.github.aha.sat.core.wiring.Beverage;
+import com.github.aha.sat.core.wiring.beverage.Beverage;
 
 @Configuration
 @ComponentScan

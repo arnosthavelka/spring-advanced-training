@@ -9,7 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import com.github.aha.sat.core.wiring.Beverage;
+import com.github.aha.sat.core.wiring.beverage.Beverage;
 
 @SpringBootTest(classes = AopConfig.class)
 class AopTest {
