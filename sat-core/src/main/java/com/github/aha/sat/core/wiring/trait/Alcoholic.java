@@ -7,8 +7,7 @@ import java.lang.annotation.Target;
 
 import org.springframework.beans.factory.annotation.Qualifier;
 
-@Target({ElementType.CONSTRUCTOR, ElementType.FIELD,
-ElementType.METHOD, ElementType.TYPE})
+@Target({ ElementType.CONSTRUCTOR, ElementType.FIELD, ElementType.METHOD, ElementType.TYPE, ElementType.TYPE_USE })
 @Retention(RetentionPolicy.RUNTIME)
 @Qualifier
 public @interface Alcoholic {
