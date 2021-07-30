@@ -10,9 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import com.github.aha.sat.core.wiring.WiringConfig;
-import com.github.aha.sat.core.wiring.beverage.AbstractCarbonatedBeverage;
-import com.github.aha.sat.core.wiring.beverage.AbstractHotBeverage;
-import com.github.aha.sat.core.wiring.beverage.Beverage;
 import com.github.aha.sat.core.wiring.trait.Alcoholic;
 
 @SpringBootTest(classes = WiringConfig.class)
