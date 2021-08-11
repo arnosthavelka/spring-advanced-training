@@ -16,7 +16,7 @@ import com.github.aha.sat.core.wiring.beverage.AbstractCarbonatedBeverage;
 class OrderCollectionWiringTest {
 	
 	/**
-	 * The exact name cannot be predicted as it's driven by lambda.
+	 * The exact name cannot be predicted as it's derived from lambda.
 	 */
 	private static final String SODA_ORDER = "WiringConfig$$Lambda$";
 
