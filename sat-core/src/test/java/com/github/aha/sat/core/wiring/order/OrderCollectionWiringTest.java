@@ -11,6 +11,9 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import com.github.aha.sat.core.wiring.WiringConfig;
 import com.github.aha.sat.core.wiring.beverage.AbstractCarbonatedBeverage;
+import com.github.aha.sat.core.wiring.beverage.Beer;
+import com.github.aha.sat.core.wiring.beverage.Cola;
+import com.github.aha.sat.core.wiring.beverage.Soda;
 
 @SpringBootTest(classes = WiringConfig.class)
 class OrderCollectionWiringTest {
@@ -21,25 +24,34 @@ class OrderCollectionWiringTest {
 	private static final String SODA_ORDER = "WiringConfig$$Lambda$";
 
 	@Autowired
-	private Collection<BeverageOrder<?>> orders;
+	private Collection<BeverageOrder<?>> allOrders;
 
 	@Autowired
-	private Collection<BeverageOrder<? extends AbstractCarbonatedBeverage>> carnonatedOrders;
+	private BeverageOrder<? extends AbstractCarbonatedBeverage>[] carbonatedOrders;
+
+	@Autowired
+	private BeverageOrder<Beer> beerOrder;
+
+	@Autowired
+	private BeverageOrder<Cola> colaOrder;
+
+	@Autowired
+	private BeverageOrder<Soda> sodaOrder;
 
 	@Test
 	void shouldWireAllOrders() {
-		assertThat(orders).hasSize(4);
-		assertThat(orders).map(BeverageOrder::getClass).map(Class::getSimpleName)
+		assertThat(allOrders).hasSize(4);
+		assertThat(allOrders).map(BeverageOrder::getClass).map(Class::getSimpleName)
 				.contains("BeerOrder", "ColaOrder", "TeaOrder")
 				.anyMatch(c -> c.startsWith(SODA_ORDER));
 	}
 
 	@Test
 	void shouldWireAllCarnonatedOrders() {
-		assertThat(carnonatedOrders).hasSize(3);
-		assertThat(carnonatedOrders).map(BeverageOrder::getClass).map(Class::getSimpleName)
-				.contains("BeerOrder", "ColaOrder")
-				.anyMatch(c -> c.startsWith(SODA_ORDER));
+		assertThat(carbonatedOrders).hasSize(3);
+		assertThat(carbonatedOrders)
+				.contains(beerOrder, colaOrder, sodaOrder)
+				.doesNotContain(beverage -> "Just dummy order");
 	}
 
 }

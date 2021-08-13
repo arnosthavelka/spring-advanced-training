@@ -13,7 +13,6 @@ import com.github.aha.sat.core.wiring.beverage.Beer;
 import com.github.aha.sat.core.wiring.beverage.Cola;
 import com.github.aha.sat.core.wiring.beverage.Soda;
 import com.github.aha.sat.core.wiring.beverage.Tea;
-import com.github.aha.sat.core.wiring.trait.Alcoholic;
 
 @SpringBootTest(classes = WiringConfig.class)
 public class OrderSingleWiringTest {
@@ -29,7 +28,7 @@ public class OrderSingleWiringTest {
 	private BeverageOrder<? extends AbstractCarbonatedBeverage> beverageOrder;
 
 	@Autowired
-	private BeverageOrder<@Alcoholic ? extends AbstractCarbonatedBeverage> beerOrder;
+	private BeverageOrder<? extends AbstractCarbonatedBeverage> beerOrder;
 
 	@Test
 	void shouldWireBeanByType() {
