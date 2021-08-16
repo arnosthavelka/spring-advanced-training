@@ -15,7 +15,7 @@ import com.github.aha.sat.core.wiring.trait.Alcoholic;
 class BeverageSingleWiringTest {
 	
 	@Autowired
-	private Beverage primaryBeverage;
+	private Beverage soda; // it's tea due to @Primary annotation
 
 	@Autowired
 	@Qualifier("iceTea")
@@ -30,7 +30,7 @@ class BeverageSingleWiringTest {
 
 	@Test
 	void shouldWirePrimaryBean() {
-		assertThat(primaryBeverage.getName()).isEqualTo("Tea");
+		assertThat(soda.getName()).isEqualTo("Tea");
 	}
 
 	@Test
