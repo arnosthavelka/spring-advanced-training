@@ -5,7 +5,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 @Primary
-public class Tea extends AbstractHotBeverage {
+public class Tea implements HotBeverage {
 
 	@Override
 	public String getName() {

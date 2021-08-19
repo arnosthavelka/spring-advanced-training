@@ -26,7 +26,7 @@ class BeverageSingleWiringTest {
 
 	@Autowired
 	@Alcoholic
-	private Beverage beer;
+	private Beverage coldBeer;
 
 	@Test
 	void shouldWirePrimaryBean() {
@@ -45,7 +45,7 @@ class BeverageSingleWiringTest {
 
 	@Test
 	void shouldWireBeanByAnnotation() {
-		assertThat(beer.getName()).isEqualTo("Beer");
+		assertThat(coldBeer.getName()).isEqualTo("Beer");
 	}
 
 }

@@ -22,7 +22,7 @@ class BeverageCollectionWiringTest {
 	private Collection<? extends AbstractCarbonatedBeverage> carbonatedBeverages;
 
 	@Autowired
-	private Collection<AbstractHotBeverage> hotBeverages;
+	private Collection<HotBeverage> hotBeverages;
 
 	@Autowired
 	@Alcoholic
