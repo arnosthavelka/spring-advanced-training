@@ -48,8 +48,8 @@ class OrderCollectionWiringTest {
 
 	@Test
 	void shouldWireAllCarnonatedOrders() {
-		assertThat(carbonatedOrders).hasSize(3);
 		assertThat(carbonatedOrders)
+				.hasSize(3)
 				.contains(beerOrder, colaOrder, sodaOrder)
 				.doesNotContain(beverage -> "Just dummy order");
 	}

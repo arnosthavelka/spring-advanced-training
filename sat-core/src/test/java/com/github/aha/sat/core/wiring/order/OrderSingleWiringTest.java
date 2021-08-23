@@ -15,7 +15,7 @@ import com.github.aha.sat.core.wiring.beverage.Soda;
 import com.github.aha.sat.core.wiring.beverage.Tea;
 
 @SpringBootTest(classes = WiringConfig.class)
-public class OrderSingleWiringTest {
+class OrderSingleWiringTest {
 
 	@Autowired
 	private BeverageOrder<Tea> teaOrder;
