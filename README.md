@@ -47,7 +47,7 @@ Accessing ELK data via Spring Data Elasticsearch
 Usage of Spring Boot Admin to monitor SB applications.
 
 [travis-url-main]: https://github.com/arnosthavelka/spring-advanced-training
-[travis-image]: https://travis-ci.org/arnosthavelka/spring-advanced-training.svg?branch=master
+[travis-image]: https://travis-ci.com/arnosthavelka/spring-advanced-training.svg?branch=master
 
 [sonar-url]: https://sonarcloud.io/dashboard?id=arnosthavelka_spring-advanced-training
 [sonar-quality-gate]: https://sonarcloud.io/api/project_badges/measure?project=arnosthavelka_spring-advanced-training&metric=alert_status
