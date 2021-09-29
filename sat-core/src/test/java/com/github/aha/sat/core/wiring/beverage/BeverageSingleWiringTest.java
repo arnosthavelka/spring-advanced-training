@@ -19,7 +19,7 @@ class BeverageSingleWiringTest {
 
 	@Autowired
 	@Qualifier("iceTea")
-	private Beverage quilifiedBeverage;
+	private Beverage qualifiedBeverage;
 
 	@Autowired
 	private AbstractCarbonatedBeverage cola;
@@ -35,7 +35,7 @@ class BeverageSingleWiringTest {
 
 	@Test
 	void shouldWireBeanByQualifier() {
-		assertThat(quilifiedBeverage.getName()).isEqualTo("Ice Tea");
+		assertThat(qualifiedBeverage.getName()).isEqualTo("Ice Tea");
 	}
 
 	@Test
