@@ -18,7 +18,7 @@ class BeverageSingleWiringTest {
 	private Beverage soda; // it's tea due to @Primary annotation
 
 	@Autowired
-	@Qualifier("iceTea")
+	@Qualifier("soda")
 	private Beverage qualifiedBeverage;
 
 	@Autowired
@@ -35,7 +35,7 @@ class BeverageSingleWiringTest {
 
 	@Test
 	void shouldWireBeanByQualifier() {
-		assertThat(qualifiedBeverage.getName()).isEqualTo("Ice Tea");
+		assertThat(qualifiedBeverage.getName()).isEqualTo("Soda");
 	}
 
 	@Test
