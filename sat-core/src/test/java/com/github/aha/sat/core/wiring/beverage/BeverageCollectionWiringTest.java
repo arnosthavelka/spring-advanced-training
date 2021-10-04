@@ -17,7 +17,7 @@ import com.github.aha.sat.core.wiring.trait.Alcoholic;
 class BeverageCollectionWiringTest {
 	
 	@Autowired
-	private Collection<? extends Beverage> beverages;
+	private Collection<Beverage> beverages;
 
 	@Autowired
 	private Collection<? extends AbstractCarbonatedBeverage> carbonatedBeverages;
