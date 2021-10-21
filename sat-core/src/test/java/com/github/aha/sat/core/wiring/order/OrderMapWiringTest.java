@@ -19,7 +19,6 @@ class OrderMapWiringTest {
 
 	@Test
 	void shouldWireAllOrders() {
-		allOrders.forEach((k, v) -> System.out.println(k));
 		assertThat(allOrders)
 				.hasSize(4)
 				.containsKeys("beerOrder", "colaOrder", "teaOrder", "sodaOrder");
