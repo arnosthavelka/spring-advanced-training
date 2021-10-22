@@ -10,18 +10,19 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import com.github.aha.sat.core.wiring.WiringConfig;
+import com.github.aha.sat.core.wiring.beverage.AbstractCarbonatedBeverage;
 
 @SpringBootTest(classes = WiringConfig.class)
 class OrderMapWiringTest {
 	
 	@Autowired
-	private Map<String, BeverageOrder<?>> allOrders;
+	private Map<String, BeverageOrder<? extends AbstractCarbonatedBeverage>> allOrders;
 
 	@Test
 	void shouldWireAllOrders() {
 		assertThat(allOrders)
-				.hasSize(4)
-				.containsKeys("beerOrder", "colaOrder", "teaOrder", "sodaOrder");
+				.hasSize(3)
+				.containsKeys("beerOrder", "colaOrder", "sodaOrder");
 	}
 
 }
