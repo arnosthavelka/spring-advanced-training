@@ -12,8 +12,8 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<java.version>16</java.version>
 		<jacoco.version>0.8.7</jacoco.version>
-		<spring-boot-admin.version>2.5.1</spring-boot-admin.version>
-		<springdoc-openapi.version>1.5.10</springdoc-openapi.version>
+		<spring-boot-admin.version>2.5.2</spring-boot-admin.version>
+		<springdoc-openapi.version>1.5.12</springdoc-openapi.version>
 	</properties>
 	
 	<parent>

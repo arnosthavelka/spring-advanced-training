@@ -14,7 +14,13 @@ All these projects are based on Spring Boot 2.5.x & Java 16.
 
 #Projects
 ## sat-core
-Set of examples of Spring. It covers basics (e.g. BFPP & BPP, JSR and SpEL), hints (e.g. @Conditional, notifications, Spring profiles and proxying), testing, etc.
+Set of examples of Spring. It contains examples e.g. for: 
+* Smart dependency injection
+* @Conditional & notifications
+* Spring profiles and proxying
+* BFPP & BPP
+* Testing
+* JSR and SpEL
 
 ## sat-elk
 Usage of Elasticsearch 7 via Spring Data & Docker image.
@@ -38,13 +44,15 @@ Accessing JPA data via REST sevice, including:
 * Spring Boot Admin Client
 * Advanced metrics (Micrometer via JMX)
 * [Jolokia](https://jolokia.org/) (JMX over HTTP)
-* [Springdoc Openapi](https://springdoc.org/) (REST documentation)
+* [Springdoc Openapi](http://localhost:8080/swagger-ui.html) (REST documentation)
 
 ## sat-elk
 Accessing ELK data via Spring Data Elasticsearch
 
 ## sat-spring-boot-admin
 Usage of Spring Boot Admin to monitor SB applications.
+
+http://localhost:8085/
 
 [travis-url-main]: https://github.com/arnosthavelka/spring-advanced-training
 [travis-image]: https://travis-ci.com/arnosthavelka/spring-advanced-training.svg?branch=master
