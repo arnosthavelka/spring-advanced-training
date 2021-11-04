@@ -54,7 +54,7 @@ Usage of Spring Boot Admin to monitor SB applications.
 
 http://localhost:8085/
 
-[travis-url-main]: https://github.com/arnosthavelka/spring-advanced-training
+[travis-url-main]: https://app.travis-ci.com/github/arnosthavelka/spring-advanced-training
 [travis-image]: https://travis-ci.com/arnosthavelka/spring-advanced-training.svg?branch=master
 
 [sonar-url]: https://sonarcloud.io/dashboard?id=arnosthavelka_spring-advanced-training
