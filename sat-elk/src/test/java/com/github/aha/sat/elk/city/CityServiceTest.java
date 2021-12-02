@@ -136,7 +136,7 @@ class CityServiceTest {
 		List<? extends SearchHit<City>> cities = List.of(cityHit);
 
 		given(esTemplate.search(any(Query.class), eq(City.class), eq(IndexCoordinates.of(INDEX))))
-				.willReturn(new SearchHitsImpl<City>(1, EQUAL_TO, NaN, null, cities, null));
+				.willReturn(new SearchHitsImpl<City>(1, EQUAL_TO, NaN, "scrollId", cities, null, null));
 
 		SearchHits<City> result = service.search(name, country, subcountry, pageable);
 

@@ -86,7 +86,7 @@ class CityControllerTest {
 				new City(CITY_ID, CITY_NAME, CITY_COUNTRY, CITY_SUBCOUNTRY, CITY_GEONAMEID.longValue()));
 		List<? extends SearchHit<City>> cities = List.of(cityHit);
 		given(service.search(eq(cityNameParamValue), eq(CITY_COUNTRY), any(), any()))
-				.willReturn(new SearchHitsImpl<City>(1, EQUAL_TO, NaN, null, cities, null));
+				.willReturn(new SearchHitsImpl<City>(1, EQUAL_TO, NaN, "scrollId", cities, null, null));
 
 		mvc.perform(get(ROOT_PATH + "?name=" + cityNameParamValue + "&country=" + CITY_COUNTRY + "&size=5&sort=name"))
 				.andExpect(status().isOk())
