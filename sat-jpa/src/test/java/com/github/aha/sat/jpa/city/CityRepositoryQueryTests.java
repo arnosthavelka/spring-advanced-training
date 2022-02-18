@@ -1,4 +1,4 @@
-package com.github.aha.sat.jpa;
+package com.github.aha.sat.jpa.city;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -17,7 +17,7 @@ import lombok.extern.slf4j.Slf4j;
 
 @DataJpaTest
 @Slf4j
-class QueryTests {
+class CityRepositoryQueryTests {
 
 	@Autowired
 	protected CityRepository cityRepository;

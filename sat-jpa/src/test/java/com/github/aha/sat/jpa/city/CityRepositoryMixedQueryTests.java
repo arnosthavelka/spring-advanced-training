@@ -1,4 +1,4 @@
-package com.github.aha.sat.jpa;
+package com.github.aha.sat.jpa.city;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
@@ -13,7 +13,7 @@ import com.github.aha.sat.jpa.city.City;
 import com.github.aha.sat.jpa.city.CityRepository;
 
 @DataJpaTest
-class MixedQueryTests {
+class CityRepositoryMixedQueryTests {
 
 	@Autowired
 	protected CityRepository cityRepository;

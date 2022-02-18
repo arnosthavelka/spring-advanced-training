@@ -1,4 +1,4 @@
-package com.github.aha.sat.jpa;
+package com.github.aha.sat.jpa.city;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -14,7 +14,7 @@ import com.github.aha.sat.jpa.city.CityRepository;
 import com.github.aha.sat.jpa.city.City_;
 
 @DataJpaTest
-class DynamicQueryTests {
+class CityRepositoryDynamicQueryTests {
 
 	@Autowired
 	protected CityRepository cityRepository;
