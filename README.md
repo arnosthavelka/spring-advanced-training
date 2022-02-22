@@ -30,7 +30,6 @@ Usage of JDBC via Spring Boot and HSQL in memory DB.
 
 ## sat-jpa
 Usage of JPA via Spring Boot and H2 in memory DB (including web console).
-* Spring Data REST
 * Liquibase
 * H2 database (console is accessible as: http://localhost:8080/console/ -> JDBC URL=jdbc:h2:mem:testdb)
 
