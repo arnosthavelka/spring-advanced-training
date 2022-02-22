@@ -9,10 +9,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 
-import com.github.aha.sat.jpa.city.City;
-import com.github.aha.sat.jpa.city.CityRepository;
-import com.github.aha.sat.jpa.city.City_;
-
 import lombok.extern.slf4j.Slf4j;
 
 @DataJpaTest
