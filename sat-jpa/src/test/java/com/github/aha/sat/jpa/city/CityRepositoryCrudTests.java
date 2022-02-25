@@ -8,16 +8,13 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 
-import com.github.aha.sat.jpa.city.City;
-import com.github.aha.sat.jpa.city.CityRepository;
-
 @DataJpaTest
 class CityRepositoryCrudTests {
 
 	@Autowired
 	protected CityRepository cityRepository;
 
-	long totalCount = -1;
+	static long totalCount = -1;
 
 	@PostConstruct
 	void init() {

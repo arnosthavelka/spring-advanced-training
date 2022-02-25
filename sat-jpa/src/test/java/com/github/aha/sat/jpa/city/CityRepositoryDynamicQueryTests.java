@@ -9,10 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.data.domain.Sort;
 
-import com.github.aha.sat.jpa.city.City;
-import com.github.aha.sat.jpa.city.CityRepository;
-import com.github.aha.sat.jpa.city.City_;
-
 @DataJpaTest
 class CityRepositoryDynamicQueryTests {
 
