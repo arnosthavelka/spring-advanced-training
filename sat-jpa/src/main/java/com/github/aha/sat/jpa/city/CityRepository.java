@@ -1,5 +1,8 @@
 package com.github.aha.sat.jpa.city;
 
+import static com.github.aha.sat.jpa.city.City_.country;
+import static com.github.aha.sat.jpa.city.City_.state;
+
 import java.util.List;
 
 import org.springframework.data.domain.Page;
@@ -23,15 +26,15 @@ public interface CityRepository extends CityCustomRepository, JpaRepository<City
 	List<City> findByState(String state);
 
 	default Specification<City> cityHasState() {
-		return (r, q, cb) -> cb.notEqual(r.get(City_.state), "");
+		return (cityRoot, q, cb) -> cb.notEqual(cityRoot.get(state), "");
 	}
 
 	default Specification<City> cityHasNoState() {
-		return (r, q, cb) -> cb.isNull(r.get(City_.state));
+		return (cityRoot, q, cb) -> cb.isNull(cityRoot.get(state));
 	}
 
-	default Specification<City> cityFromCountry(final String country) {
-		return (r, q, cb) -> cb.equal(r.get(City_.country), country);
+	default Specification<City> cityFromCountry(final String countryName) {
+		return (cityRoot, q, cb) -> cb.equal(cityRoot.get(country), countryName);
 	}
 
 	@Query("SELECT c FROM City c WHERE LOWER(c.name) = LOWER(:name)")
