@@ -1,11 +1,16 @@
 package com.github.aha.sat.jpa.city;
 
+import static org.springframework.data.domain.ExampleMatcher.GenericPropertyMatchers.contains;
+import static org.springframework.data.domain.ExampleMatcher.GenericPropertyMatchers.exact;
+
 import java.util.List;
+import java.util.Optional;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.data.domain.Example;
+import org.springframework.data.domain.ExampleMatcher;
 
 /**
  * See https://www.baeldung.com/spring-data-query-by-example
@@ -18,21 +23,38 @@ class CityRepositoryExampleTests extends AbstractCityRepositoryTests {
 
 	@Test
 	void findByState() {
-		var exampleCity = new City();
-		exampleCity.setState("Queensland");
+		var exampleCity = City.builder().state("Queensland").build();
 
 		List<City> result = cityRepository.findAll(Example.of(exampleCity));
 
 		verifyFirstCityInCollection(result, "Brisbane", "Australia");
 	}
 
-//	private Example<City> buildFilterByExample(City city) {
-//		ExampleMatcher matcher = ExampleMatcher.matching()
-//				.withIgnorePaths("id");
-//		// .withMatcher( "code", exact() )
-//		// .withMatcher( "name",
-//		// ExampleMatcher.GenericPropertyMatchers.contains().ignoreCase() );
-//		return Example.of(city, matcher);
-//	}
+	@Test
+	void findByNameAndCountry() {
+		var exampleCity = City.builder()
+				.name("Montreal")
+				.country("Canada")
+				.build();
+
+		Optional<City> optionalResult = cityRepository.findOne(Example.of(exampleCity));
+
+		verifyOptionalCity(optionalResult, "Montreal", "Canada");
+	}
+
+	@Test
+	void findByWildcard() {
+		var exampleCity = City.builder()
+				.name("an")
+				.country("usa")
+				.build();
+		ExampleMatcher matcher = ExampleMatcher.matching()
+				.withMatcher("country", exact()).withIgnoreCase()
+				.withMatcher("name", contains());
+
+		List<City> optionalResult = cityRepository.findAll(Example.of(exampleCity, matcher));
+
+		verifyFirstCityInCollection(optionalResult, "Atlanta", "USA");
+	}
 
 }
