@@ -12,7 +12,7 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.data.domain.Sort;
 
 @DataJpaTest
-class CityRepositorySpecificationTests {
+class CityRepositorySpecificationTests extends AbstractCityRepositoryTests {
 
 	@Autowired
 	protected CityRepository cityRepository;
@@ -35,11 +35,6 @@ class CityRepositorySpecificationTests {
 
 		assertThat(result.size()).isEqualTo(1);
 		verifyCity(result.get(0), "New York", "USA");
-	}
-
-	private void verifyCity(City city, String name, String country) {
-		assertThat(city.getName()).isEqualTo(name);
-		assertThat(city.getCountry()).isEqualTo(country);
 	}
 
 }

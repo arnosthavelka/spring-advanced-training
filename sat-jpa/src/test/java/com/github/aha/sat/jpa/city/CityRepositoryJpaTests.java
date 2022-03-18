@@ -1,8 +1,6 @@
 package com.github.aha.sat.jpa.city;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.equalTo;
 
 import java.util.List;
 
@@ -10,7 +8,6 @@ import javax.annotation.PostConstruct;
 
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -20,10 +17,7 @@ import lombok.extern.slf4j.Slf4j;
 
 @DataJpaTest
 @Slf4j
-class CityRepositoryJpaTests {
-
-	@Autowired
-	protected CityRepository cityRepository;
+class CityRepositoryJpaTests extends AbstractCityRepositoryTests {
 
 	static long totalCount = -1;
 
@@ -98,7 +92,7 @@ class CityRepositoryJpaTests {
 		List<City> result = cityRepository.findByNameAndCountry("% %", country);
 
 		assertThat(result).hasSize(2);
-		verifyFirstCityInColletion(result, "New York", country);
+		verifyFirstCityInCollection(result, "New York", country);
 	}
 
 	@Test
@@ -114,7 +108,7 @@ class CityRepositoryJpaTests {
 		List<City> result = cityRepository.findByState("California");
 
 		assertThat(result).hasSize(1);
-		verifyFirstCityInColletion(result, "San Francisco", "USA");
+		verifyFirstCityInCollection(result, "San Francisco", "USA");
 	}
 
 	@Test
@@ -147,19 +141,6 @@ class CityRepositoryJpaTests {
 			assertThat(cityRepository.count()).isEqualTo(totalCount - 1);
 		}
 
-	}
-
-	private void verifyCity(City city, String name, String country) {
-		assertThat(city.getName()).isEqualTo(name);
-		assertThat(city.getCountry()).isEqualTo(country);
-	}
-
-	private void verifyFirstCityInColletion(List<City> result, String name, String country) {
-		assertThat(result)
-				.first().satisfies(city -> {
-					assertThat(city.getName(), equalTo(name));
-					assertThat(city.getCountry(), equalTo(country));
-				});
 	}
 
 }

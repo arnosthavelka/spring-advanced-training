@@ -2,7 +2,6 @@ package com.github.aha.sat.jpa.city;
 
 import static java.util.stream.Collectors.toList;
 import static java.util.stream.StreamSupport.stream;
-import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.List;
 
@@ -15,7 +14,7 @@ import org.springframework.data.domain.Example;
  * See https://www.baeldung.com/spring-data-query-by-example
  */
 @DataJpaTest
-class CityRepositoryExampleTests {
+class CityRepositoryExampleTests extends AbstractCityRepositoryTests {
 
 	@Autowired
 	protected CityRepository cityRepository;
@@ -28,7 +27,7 @@ class CityRepositoryExampleTests {
 		Iterable<City> iterableResult = cityRepository.findAll(Example.of(exampleCity));
 		List<City> result = convertToList(iterableResult);
 
-		verifyCity(result.get(0), "Brisbane", "Australia");
+		verifyFirstCityInCollection(result, "Brisbane", "Australia");
 	}
 
 	private <T> List<T> convertToList(Iterable<T> result) {
@@ -43,10 +42,5 @@ class CityRepositoryExampleTests {
 //		// ExampleMatcher.GenericPropertyMatchers.contains().ignoreCase() );
 //		return Example.of(city, matcher);
 //	}
-
-	private void verifyCity(City city, String name, String country) {
-		assertThat(city.getName()).isEqualTo(name);
-		assertThat(city.getCountry()).isEqualTo(country);
-	}
 
 }
