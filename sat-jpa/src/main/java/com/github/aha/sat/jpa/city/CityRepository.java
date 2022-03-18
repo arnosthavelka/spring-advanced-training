@@ -12,8 +12,10 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
+import org.springframework.data.repository.query.QueryByExampleExecutor;
 
-public interface CityRepository extends CityCustomRepository, JpaRepository<City, Long>, JpaSpecificationExecutor<City> {
+public interface CityRepository
+		extends CityCustomRepository, JpaRepository<City, Long>, JpaSpecificationExecutor<City>, QueryByExampleExecutor<City> {
 
 	City findByName(String name);
 	
