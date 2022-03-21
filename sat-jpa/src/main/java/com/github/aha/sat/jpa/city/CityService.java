@@ -12,7 +12,7 @@ public class CityService {
 
 	private final CityRepository repository;
 
-	public Optional<City> findInAustralieBy(String name, String state) {
+	public Optional<City> findInAustraliaBy(String name, String state) {
 		return repository.findAustraliaCitiesBy(name, state).stream().findFirst();
 	}
 

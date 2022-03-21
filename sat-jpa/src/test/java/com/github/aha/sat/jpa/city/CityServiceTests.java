@@ -14,7 +14,7 @@ class CityServiceTests {
 
     @Test
 	void getCityByName() {
-		var cityOptional = service.findInAustralieBy("Melbourne", "Victoria");
+		var cityOptional = service.findInAustraliaBy("Melbourne", "Victoria");
 
 		assertThat(cityOptional.get()).satisfies(c -> {
 			assertThat(c.getName()).isEqualTo("Melbourne");
