@@ -17,4 +17,9 @@ public class CityService {
 		return result.stream().findFirst();
 	}
 
+	public Optional<City> findInUsaBy(String name, String state) {
+		var result = repository.findUsaCitiesBy(name, state);
+		return result.stream().findFirst();
+	}
+
 }

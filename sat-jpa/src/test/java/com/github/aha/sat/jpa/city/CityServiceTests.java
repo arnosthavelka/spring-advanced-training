@@ -13,7 +13,7 @@ class CityServiceTests {
 	protected CityService service;
 
     @Test
-	void getCityByName() {
+	void findInAustraliaBy() {
 		var cityOptional = service.findInAustraliaBy("Melbourne", "Victoria");
 
 		assertThat(cityOptional.get()).satisfies(c -> {
@@ -22,5 +22,16 @@ class CityServiceTests {
 			assertThat(c.getCountry()).isEqualTo("Australia");
 		});
     }
+
+	@Test
+	void findInUsaBy() {
+		var cityOptional = service.findInUsaBy("Atlanta", "Georgia");
+
+		assertThat(cityOptional.get()).satisfies(c -> {
+			assertThat(c.getName()).isEqualTo("Atlanta");
+			assertThat(c.getState()).isEqualTo("Georgia");
+			assertThat(c.getCountry()).isEqualTo("USA");
+		});
+	}
 
 }

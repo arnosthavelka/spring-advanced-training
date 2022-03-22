@@ -5,5 +5,6 @@ import java.util.List;
 public interface CityCustomRepository {
 
 	List<City> findAustraliaCitiesBy(String name, String state);
+	List<City> findUsaCitiesBy(String name, String state);
 
 }
