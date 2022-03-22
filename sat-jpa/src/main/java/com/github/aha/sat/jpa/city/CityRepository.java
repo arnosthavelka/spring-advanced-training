@@ -28,7 +28,7 @@ public interface CityRepository
 	List<City> findByState(String state);
 
 	default Specification<City> cityHasState() {
-		return (cityRoot, q, cb) -> cb.notEqual(cityRoot.get(state), "");
+		return (cityRoot, q, cb) -> cb.not(cb.isNull(cityRoot.get(state)));
 	}
 
 	default Specification<City> cityHasNoState() {
