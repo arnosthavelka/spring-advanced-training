@@ -2,6 +2,8 @@ package com.github.aha.sat.jpa.city;
 
 import static com.github.aha.sat.jpa.city.City_.country;
 import static com.github.aha.sat.jpa.city.City_.state;
+import static com.github.aha.sat.jpa.city.QCity.city;
+import static java.util.Objects.nonNull;
 
 import java.util.List;
 
@@ -11,11 +13,17 @@ import org.springframework.data.jpa.domain.Specification;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.querydsl.QuerydslPredicateExecutor;
 import org.springframework.data.repository.query.Param;
 import org.springframework.data.repository.query.QueryByExampleExecutor;
 
-public interface CityRepository
-		extends CityCustomRepository, JpaRepository<City, Long>, JpaSpecificationExecutor<City>, QueryByExampleExecutor<City> {
+import com.querydsl.core.BooleanBuilder;
+import com.querydsl.core.types.Predicate;
+
+import lombok.NonNull;
+
+public interface CityRepository extends CityCustomRepository,
+		JpaRepository<City, Long>, JpaSpecificationExecutor<City>, QueryByExampleExecutor<City>, QuerydslPredicateExecutor<City> {
 
 	City findByName(String name);
 	
@@ -37,6 +45,16 @@ public interface CityRepository
 
 	default Specification<City> cityFromCountry(final String countryName) {
 		return (cityRoot, q, cb) -> cb.equal(cityRoot.get(country), countryName);
+	}
+
+	default Predicate searchBy(@NonNull String country, String name) {
+		BooleanBuilder predicate = new BooleanBuilder()
+				.and(city.country.eq(country))
+				.and(city.state.isNull());
+		if (nonNull(name)) {
+			predicate.and(city.name.likeIgnoreCase("%" + name + "%")); // the value is lowered by default
+		}
+		return predicate;
 	}
 
 	@Query("SELECT c FROM City c WHERE LOWER(c.name) = LOWER(:name)")
