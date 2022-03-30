@@ -47,12 +47,12 @@ public interface CityRepository extends CityCustomRepository,
 		return (cityRoot, q, cb) -> cb.equal(cityRoot.get(country), countryName);
 	}
 
-	default Predicate searchBy(@NonNull String country, String name) {
+	default Predicate searchPredicateWithoutState(@NonNull String country, String name) {
 		BooleanBuilder predicate = new BooleanBuilder()
-				.and(city.country.eq(country))
+				.and(city.country.like("%" + country + "%"))
 				.and(city.state.isNull());
 		if (nonNull(name)) {
-			predicate.and(city.name.likeIgnoreCase("%" + name + "%")); // the value is lowered by default
+			predicate.and(city.name.eq(name));
 		}
 		return predicate;
 	}
