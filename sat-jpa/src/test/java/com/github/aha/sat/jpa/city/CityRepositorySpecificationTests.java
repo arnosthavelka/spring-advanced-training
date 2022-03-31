@@ -23,7 +23,7 @@ class CityRepositorySpecificationTests extends AbstractCityRepositoryTests {
 				cityRepository.cityHasState(),
 				Sort.by(COUNTRY, NAME));
 
-		assertThat(result.size()).isEqualTo(7);
+		assertThat(result.size()).isEqualTo(9);
 		verifyCity(result.get(0), "Brisbane", "Australia");
 	}
 

@@ -8,13 +8,18 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQuery;
+
+import com.github.aha.sat.jpa.country.Country;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import lombok.NonNull;
 
 @Entity
 @NamedQuery(name = "City.findByName", query = "select c from City c where c.name = ?1")
@@ -38,7 +43,9 @@ public class City implements Serializable {
 	@Column(nullable = true)
     private String state;
 
-    @Column(nullable = false)
-    private String country;
+	@ManyToOne
+	@JoinColumn(name = "COUNTRY_ID")
+	@NonNull
+	private Country country;
 
 }

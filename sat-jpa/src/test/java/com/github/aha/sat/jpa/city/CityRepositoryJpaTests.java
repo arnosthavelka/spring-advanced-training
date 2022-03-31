@@ -8,6 +8,7 @@ import javax.annotation.PostConstruct;
 
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -19,6 +20,7 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 class CityRepositoryJpaTests extends AbstractCityRepositoryTests {
 
+	static final int TOTAL_SIZE = 15;
 	static long totalCount = -1;
 
 	@PostConstruct
@@ -30,18 +32,21 @@ class CityRepositoryJpaTests extends AbstractCityRepositoryTests {
 	
     @Test
 	void countCities() {
-		assertThat(totalCount).isEqualTo(13);
+		assertThat(totalCount).isEqualTo(TOTAL_SIZE);
     }
 
 	@Nested
 	class FindAllTest {
 
+
 		@Test
 		void pagination() {
-			Page<City> page = cityRepository.findAll(PageRequest.of(0, 5));
+			var pageSize = 5;
 
-			assertThat(page.getSize()).isEqualTo(5);
-			assertThat(page.getTotalElements()).isEqualTo(13);
+			Page<City> page = cityRepository.findAll(PageRequest.of(0, pageSize));
+
+			assertThat(page.getSize()).isEqualTo(pageSize);
+			assertThat(page.getTotalElements()).isEqualTo(TOTAL_SIZE);
 			assertThat(page.getTotalPages()).isEqualTo(3);
 			log.debug("\n### testPaging output");
 			for (City city : page.getContent()) {
@@ -89,7 +94,7 @@ class CityRepositoryJpaTests extends AbstractCityRepositoryTests {
 	void findByNameAndCountry() {
 		var country = "USA";
 
-		List<City> result = cityRepository.findByNameAndCountry("% %", country);
+		List<City> result = cityRepository.findByNameLikeAndCountryName("% %", country);
 
 		assertThat(result).hasSize(2);
 		verifyFirstCityInCollection(result, "New York", country);
@@ -97,10 +102,10 @@ class CityRepositoryJpaTests extends AbstractCityRepositoryTests {
 
 	@Test
 	void findByNameAndCountryAllIgnoringCase() {
-		City city = cityRepository.findByNameAndCountryAllIgnoringCase("Tokyo", "Japan");
+		City city = cityRepository.findByNameAndCountryNameAllIgnoringCase("Tokyo", "Japan");
 
 		assertThat(city.getName()).isEqualTo("Tokyo");
-		assertThat(city.getCountry()).isEqualTo("Japan");
+		assertThat(city.getCountry().getName()).isEqualTo("Japan");
 	}
 
 	@Test
@@ -120,14 +125,23 @@ class CityRepositoryJpaTests extends AbstractCityRepositoryTests {
 		verifyCity(city, "Prague", "Czech Republic");
 	}
 
+	@Autowired
+	CountryRepository countryRepository;
+
 	@Nested
 	class ModificationTest {
 
 		@Test
 		void createEntity() {
-			var city = City.builder().name("Frankfurt").country("Germany").build();
+			var country = countryRepository.findByName("Australia");
+			var city = City.builder()
+					.name("Darwin")
+					.state("North territory")
+					.country(country)
+					.build();
+			country.getCities().add(city);
 
-			cityRepository.save(city);
+			countryRepository.save(country);
 
 			assertThat(cityRepository.count()).isEqualTo(totalCount + 1);
 		}

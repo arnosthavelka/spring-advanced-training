@@ -1,37 +1,35 @@
 package com.github.aha.sat.jpa.city;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.equalTo;
 
 import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
+import com.github.aha.sat.jpa.country.Country;
+
 abstract class AbstractCityRepositoryTests {
 
 	@Autowired
 	CityRepository cityRepository;
 
-	void verifyCity(City city, String name, String country) {
-		assertThat(city.getName()).isEqualTo(name);
-		assertThat(city.getCountry()).isEqualTo(country);
+	Country buildCountry(String countryName) {
+		return Country.builder().name(countryName).build();
 	}
 
-	void verifyOptionalCity(Optional<City> optionalResult, String name, String country) {
-		assertThat(optionalResult).get().satisfies(city -> {
-			assertThat(city.getName(), equalTo(name));
-			assertThat(city.getCountry(), equalTo(country));
-		});
+	void verifyOptionalCity(Optional<City> optionalResult, String name, String countryName) {
+		assertThat(optionalResult).get().satisfies(city -> verifyCity(city, name, countryName));
 	}
 
-	void verifyFirstCityInCollection(List<City> result, String name, String country) {
+	void verifyFirstCityInCollection(List<City> result, String name, String countryName) {
 		assertThat(result)
-				.first().satisfies(city -> {
-					assertThat(city.getName(), equalTo(name));
-					assertThat(city.getCountry(), equalTo(country));
-				});
+				.first().satisfies(city -> verifyCity(city, name, countryName));
+	}
+
+	void verifyCity(City city, String name, String countryName) {
+		assertThat(city.getName()).isEqualTo(name);
+		assertThat(city.getCountry().getName()).isEqualTo(countryName);
 	}
 
 }

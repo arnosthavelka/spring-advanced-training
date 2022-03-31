@@ -1,8 +1,23 @@
 databaseChangeLog:
   - changeSet:
-      id: DDL for city table
+      id: DDL
       author: arnost.havelka
       changes:
+        - createTable:
+            tableName: country
+            columns:
+              - column:
+                  name: id
+                  type: int
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: name
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
         - createTable:
             tableName: city
             columns:
@@ -24,15 +39,32 @@ databaseChangeLog:
                   constraints:
                     nullable: true
               - column:
-                  name: country
+                  name: country_id
                   type: varchar(255)
                   constraints:
                     nullable: false
+            addForeignKeyConstraint:
+              - baseColumnNames: country_id
+              - baseTableName: country
+              - constraintName: city_fk1
+              - deferrable: false
+              - initiallyDeferred: false
+              - onDelete: RESTRICT
+              - onUpdate: RESTRICT
+              - referencedColumnNames: id
+              - referencedTableName: country
+              - validate: true
   - changeSet:
-      id: Init data for city table
+      id: Init data
       author: arnost.havelka
       changes:
         # Australia
+        - insert:
+            tableName: country
+            columns:
+              - column:
+                  name: name
+                  value: Australia
         - insert:
             tableName: city
             columns:
@@ -43,8 +75,8 @@ databaseChangeLog:
                   name: state
                   value: Queensland
               - column:
-                  name: country
-                  value: Australia
+                  name: country_id
+                  value: 1
         - insert:
             tableName: city
             columns:
@@ -55,8 +87,8 @@ databaseChangeLog:
                   name: state
                   value: Victoria
               - column:
-                  name: country
-                  value: Australia
+                  name: country_id
+                  value: 1
         - insert:
             tableName: city
             columns:
@@ -67,9 +99,15 @@ databaseChangeLog:
                   name: state
                   value: New South Wales
               - column:
-                  name: country
-                  value: Australia
+                  name: country_id
+                  value: 1
         # America
+        - insert:
+            tableName: country
+            columns:
+              - column:
+                  name: name
+                  value: Canada
         - insert:
             tableName: city
             columns:
@@ -80,8 +118,14 @@ databaseChangeLog:
                   name: state
                   value: Quebec
               - column:
-                  name: country
-                  value: Canada
+                  name: country_id
+                  value: 2
+        - insert:
+            tableName: country
+            columns:
+              - column:
+                  name: name
+                  value: USA
         - insert:
             tableName: city
             columns:
@@ -92,8 +136,8 @@ databaseChangeLog:
                   name: state
                   value: Georgia
               - column:
-                  name: country
-                  value: USA
+                  name: country_id
+                  value: 3
         - insert:
             tableName: city
             columns:
@@ -104,8 +148,9 @@ databaseChangeLog:
                   name: state
                   value: Illionis
               - column:
-                  name: country
-                  value: USA
+                  name: country_id
+                  value: 3
+        - insert:
             tableName: city
             columns:
               - column:
@@ -115,8 +160,8 @@ databaseChangeLog:
                   name: state
                   value: Florida
               - column:
-                  name: country
-                  value: USA
+                  name: country_id
+                  value: 3
         - insert:
             tableName: city
             columns:
@@ -124,8 +169,8 @@ databaseChangeLog:
                   name: name
                   value: New York
               - column:
-                  name: country
-                  value: USA
+                  name: country_id
+                  value: 3
         - insert:
             tableName: city
             columns:
@@ -136,9 +181,15 @@ databaseChangeLog:
                   name: state
                   value: California
               - column:
-                  name: country
-                  value: USA
+                  name: country_id
+                  value: 3
         # Asia
+        - insert:
+            tableName: country
+            columns:
+              - column:
+                  name: name
+                  value: Japan
         - insert:
             tableName: city
             columns:
@@ -146,9 +197,15 @@ databaseChangeLog:
                   name: name
                   value: Tokyo
               - column:
-                  name: country
-                  value: Japan
+                  name: country_id
+                  value: 4
         # Europe
+        - insert:
+            tableName: country
+            columns:
+              - column:
+                  name: name
+                  value: Czech Republic
         - insert:
             tableName: city
             columns:
@@ -156,8 +213,14 @@ databaseChangeLog:
                   name: name
                   value: Prague
               - column:
-                  name: country
-                  value: Czech Republic
+                  name: country_id
+                  value: 5
+        - insert:
+            tableName: country
+            columns:
+              - column:
+                  name: name
+                  value: France
         - insert:
             tableName: city
             columns:
@@ -165,8 +228,14 @@ databaseChangeLog:
                   name: name
                   value: Paris
               - column:
-                  name: country
-                  value: France
+                  name: country_id
+                  value: 6
+        - insert:
+            tableName: country
+            columns:
+              - column:
+                  name: name
+                  value: Spain
         - insert:
             tableName: city
             columns:
@@ -177,16 +246,29 @@ databaseChangeLog:
                   name: state
                   value: Catalunya
               - column:
-                  name: country
-                  value: Spain
+                  name: country_id
+                  value: 7
+        - insert:
+            tableName: country
+            columns:
+              - column:
+                  name: name
+                  value: Switzerland
+        - insert:
             tableName: city
             columns:
               - column:
                   name: name
                   value: Bern
               - column:
-                  name: country
-                  value: Switzerland
+                  name: country_id
+                  value: 8
+        - insert:
+            tableName: country
+            columns:
+              - column:
+                  name: name
+                  value: United Kingdom
         - insert:
             tableName: city
             columns:
@@ -194,5 +276,5 @@ databaseChangeLog:
                   name: name
                   value: London
               - column:
-                  name: country
-                  value: United Kingdom
+                  name: country_id
+                  value: 9

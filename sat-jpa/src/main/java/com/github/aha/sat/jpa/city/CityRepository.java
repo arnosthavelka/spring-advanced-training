@@ -3,6 +3,7 @@ package com.github.aha.sat.jpa.city;
 import static com.github.aha.sat.jpa.city.City_.country;
 import static com.github.aha.sat.jpa.city.City_.state;
 import static com.github.aha.sat.jpa.city.QCity.city;
+import static com.github.aha.sat.jpa.country.Country_.name;
 import static java.util.Objects.nonNull;
 
 import java.util.List;
@@ -27,11 +28,11 @@ public interface CityRepository extends CityCustomRepository,
 
 	City findByName(String name);
 	
-	List<City> findByNameAndCountry(String name, String country);
+	List<City> findByNameLikeAndCountryName(String name, String country);
 
-	City findByNameAndCountryAllIgnoringCase(String name, String country);
+	City findByNameAndCountryNameAllIgnoringCase(String name, String country);
 
-    Page<City> findByNameContainingAndCountryContainingAllIgnoringCase(String name, String country, Pageable pageable);
+	Page<City> findByNameContainingAndCountryNameContainingAllIgnoringCase(String name, String country, Pageable pageable);
 
 	List<City> findByState(String state);
 
@@ -44,12 +45,12 @@ public interface CityRepository extends CityCustomRepository,
 	}
 
 	default Specification<City> cityFromCountry(final String countryName) {
-		return (cityRoot, q, cb) -> cb.equal(cityRoot.get(country), countryName);
+		return (cityRoot, q, cb) -> cb.equal(cityRoot.get(country).get(name), countryName);
 	}
 
 	default Predicate searchPredicateWithoutState(@NonNull String country, String name) {
 		BooleanBuilder predicate = new BooleanBuilder()
-				.and(city.country.like("%" + country + "%"))
+				.and(city.country.name.like("%" + country + "%"))
 				.and(city.state.isNull());
 		if (nonNull(name)) {
 			predicate.and(city.name.eq(name));

@@ -46,7 +46,7 @@ public class CityCustomRepositoryImpl implements CityCustomRepository {
 				.from(city)
 				.where(city.name.eq(nameArgument)
 						.and(city.state.eq(stateArgument))
-						.and(city.country.eq("USA")))
+						.and(city.country.name.eq("USA")))
 				.fetch();
 	}
 
