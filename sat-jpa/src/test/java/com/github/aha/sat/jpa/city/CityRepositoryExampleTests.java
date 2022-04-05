@@ -7,7 +7,6 @@ import java.util.List;
 import java.util.Optional;
 
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.ExampleMatcher;
@@ -18,16 +17,15 @@ import org.springframework.data.domain.ExampleMatcher;
 @DataJpaTest
 class CityRepositoryExampleTests extends AbstractCityRepositoryTests {
 
-	@Autowired
-	protected CityRepository cityRepository;
-
 	@Test
 	void findByState() {
-		var exampleCity = City.builder().state("Queensland").build();
+		var countryName = "Australia";
+		var country = countryRepository.findByName(countryName);
+		var exampleCity = City.builder().state("Queensland").country(country).build();
 
 		List<City> result = cityRepository.findAll(Example.of(exampleCity));
 
-		verifyFirstCityInCollection(result, "Brisbane", "Australia");
+		verifyFirstCityInCollection(result, "Brisbane", countryName);
 	}
 
 	@Test

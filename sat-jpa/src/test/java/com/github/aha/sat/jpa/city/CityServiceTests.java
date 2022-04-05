@@ -19,7 +19,7 @@ class CityServiceTests {
 		assertThat(cityOptional.get()).satisfies(c -> {
 			assertThat(c.getName()).isEqualTo("Melbourne");
 			assertThat(c.getState()).isEqualTo("Victoria");
-			assertThat(c.getCountry()).isEqualTo("Australia");
+			assertThat(c.getCountry().getName()).isEqualTo("Australia");
 		});
     }
 
@@ -30,7 +30,7 @@ class CityServiceTests {
 		assertThat(cityOptional).get().satisfies(c -> {
 			assertThat(c.getName()).isEqualTo("Atlanta");
 			assertThat(c.getState()).isEqualTo("Georgia");
-			assertThat(c.getCountry()).isEqualTo("USA");
+			assertThat(c.getCountry().getName()).isEqualTo("USA");
 		});
 	}
 

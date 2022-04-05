@@ -15,6 +15,7 @@ import javax.persistence.criteria.Root;
 
 import org.springframework.stereotype.Repository;
 
+import com.github.aha.sat.jpa.country.Country_;
 import com.querydsl.jpa.impl.JPAQuery;
 
 import lombok.RequiredArgsConstructor;
@@ -34,7 +35,7 @@ public class CityCustomRepositoryImpl implements CityCustomRepository {
 
 		predicates.add(cb.equal(cityRoot.get(name), nameArgument));
 		predicates.add(cb.equal(cityRoot.get(state), stateArgument));
-		predicates.add(cb.equal(cityRoot.get(country), cb.literal("Australia")));
+		predicates.add(cb.equal(cityRoot.get(country).get(Country_.name), cb.literal("Australia")));
 
 		query.where(predicates.toArray(new Predicate[0]));
 		return em.createQuery(query).getResultList();

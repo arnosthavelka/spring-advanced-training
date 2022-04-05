@@ -14,6 +14,9 @@ abstract class AbstractCityRepositoryTests {
 	@Autowired
 	CityRepository cityRepository;
 
+	@Autowired
+	CountryRepository countryRepository;
+
 	Country buildCountry(String countryName) {
 		return Country.builder().name(countryName).build();
 	}
