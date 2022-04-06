@@ -12,7 +12,7 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.data.domain.Sort;
 
 @DataJpaTest
-class CityRepositorySpecificationTests extends AbstractCityRepositoryTests {
+class CityRepositorySpecificationTests extends AbstractRepositoryTests {
 
 	@Autowired
 	protected CityRepository cityRepository;

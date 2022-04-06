@@ -15,7 +15,7 @@ import org.springframework.data.domain.ExampleMatcher;
  * See https://www.baeldung.com/spring-data-query-by-example
  */
 @DataJpaTest
-class CityRepositoryExampleTests extends AbstractCityRepositoryTests {
+class CityRepositoryExampleTests extends AbstractRepositoryTests {
 
 	@Test
 	void findByState() {

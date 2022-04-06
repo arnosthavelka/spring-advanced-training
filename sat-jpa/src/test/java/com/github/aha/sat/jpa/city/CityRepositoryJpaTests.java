@@ -17,7 +17,7 @@ import lombok.extern.slf4j.Slf4j;
 
 @DataJpaTest
 @Slf4j
-class CityRepositoryJpaTests extends AbstractCityRepositoryTests {
+class CityRepositoryJpaTests extends AbstractRepositoryTests {
 
 	static final int TOTAL_SIZE = 15;
 	static long totalCount = -1;

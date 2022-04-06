@@ -9,7 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.github.aha.sat.jpa.country.Country;
 
-abstract class AbstractCityRepositoryTests {
+abstract class AbstractRepositoryTests {
 
 	@Autowired
 	CityRepository cityRepository;
