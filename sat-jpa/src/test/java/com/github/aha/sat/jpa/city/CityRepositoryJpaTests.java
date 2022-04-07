@@ -108,6 +108,20 @@ class CityRepositoryJpaTests extends AbstractRepositoryTests {
 	}
 
 	@Test
+	void findByNameContainingAndCountryNameContainingAllIgnoringCase() {
+		var pageSize = 2;
+
+		Page<City> page = cityRepository.findByNameContainingAndCountryNameContainingAllIgnoringCase("an", "usa", PageRequest.of(0, pageSize));
+
+		assertThat(page.getSize()).isEqualTo(pageSize);
+		assertThat(page.getTotalElements()).isEqualTo(2);
+		assertThat(page.getTotalPages()).isEqualTo(1);
+		assertThat(page.getContent())
+				.satisfies(c -> log.debug("The page content:"))
+				.allSatisfy(city -> log.debug(city.toString()));
+	}
+
+	@Test
 	void findByState() {
 		List<City> result = cityRepository.findByState("California");
 

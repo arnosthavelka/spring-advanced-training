@@ -28,9 +28,9 @@ public interface CityRepository extends CityCustomRepository,
 
 	City findByName(String name);
 	
-	List<City> findByNameLikeAndCountryName(String name, String country);
+	List<City> findByNameLikeAndCountryName(@NonNull String name, @NonNull String country);
 
-	City findByNameAndCountryNameAllIgnoringCase(String name, String country);
+	City findByNameAndCountryNameAllIgnoringCase(@NonNull String name, @NonNull String country);
 
 	Page<City> findByNameContainingAndCountryNameContainingAllIgnoringCase(String name, String country, Pageable pageable);
 
@@ -44,7 +44,7 @@ public interface CityRepository extends CityCustomRepository,
 		return (cityRoot, q, cb) -> cb.isNull(cityRoot.get(state));
 	}
 
-	default Specification<City> cityFromCountry(final String countryName) {
+	default Specification<City> cityFromCountry(@NonNull String countryName) {
 		return (cityRoot, q, cb) -> cb.equal(cityRoot.get(country).get(name), countryName);
 	}
 
