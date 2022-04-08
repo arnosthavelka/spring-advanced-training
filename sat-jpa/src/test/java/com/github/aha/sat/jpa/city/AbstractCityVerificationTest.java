@@ -5,17 +5,9 @@ import static org.assertj.core.api.Assertions.assertThat;
 import java.util.List;
 import java.util.Optional;
 
-import org.springframework.beans.factory.annotation.Autowired;
-
 import com.github.aha.sat.jpa.country.Country;
 
-abstract class AbstractRepositoryTests {
-
-	@Autowired
-	CityRepository cityRepository;
-
-	@Autowired
-	CountryRepository countryRepository;
+abstract class AbstractCityVerificationTest {
 
 	Country buildCountry(String countryName) {
 		return Country.builder().name(countryName).build();

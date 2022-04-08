@@ -13,6 +13,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.github.aha.sat.jpa.city.City;
 
 import lombok.AllArgsConstructor;
@@ -39,8 +40,9 @@ public class Country implements Serializable {
     @Column(nullable = false)
     private String name;
 
-	@ToString.Exclude
 	@OneToMany(mappedBy = "country", cascade = { PERSIST, MERGE })
+	@JsonBackReference // https://stackoverflow.com/questions/43587133/jackson-serialize-circular-references-stack-overflow-error
+	@ToString.Exclude
 	private List<City> cities;
 
 }

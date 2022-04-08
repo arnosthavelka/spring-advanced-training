@@ -14,9 +14,9 @@ class CityServiceTests {
 
     @Test
 	void findInAustraliaBy() {
-		var cityOptional = service.findInAustraliaBy("Melbourne", "Victoria");
+		var cities = service.findInAustraliaBy("Melbourne", "Victoria");
 
-		assertThat(cityOptional.get()).satisfies(c -> {
+		assertThat(cities).first().satisfies(c -> {
 			assertThat(c.getName()).isEqualTo("Melbourne");
 			assertThat(c.getState()).isEqualTo("Victoria");
 			assertThat(c.getCountry().getName()).isEqualTo("Australia");
@@ -25,9 +25,9 @@ class CityServiceTests {
 
 	@Test
 	void findInUsaBy() {
-		var cityOptional = service.findInUsaBy("Atlanta", "Georgia");
+		var cities = service.findInUsaBy("Atlanta", "Georgia");
 
-		assertThat(cityOptional).get().satisfies(c -> {
+		assertThat(cities).first().satisfies(c -> {
 			assertThat(c.getName()).isEqualTo("Atlanta");
 			assertThat(c.getState()).isEqualTo("Georgia");
 			assertThat(c.getCountry().getName()).isEqualTo("USA");

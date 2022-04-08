@@ -8,6 +8,7 @@ import javax.annotation.PostConstruct;
 
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -17,10 +18,16 @@ import lombok.extern.slf4j.Slf4j;
 
 @DataJpaTest
 @Slf4j
-class CityRepositoryJpaTests extends AbstractRepositoryTests {
+class CityRepositoryJpaTests extends AbstractCityVerificationTest {
 
 	static final int TOTAL_SIZE = 15;
 	static long totalCount = -1;
+
+	@Autowired
+	CityRepository cityRepository;
+
+	@Autowired
+	CountryRepository countryRepository;
 
 	@PostConstruct
 	void init() {

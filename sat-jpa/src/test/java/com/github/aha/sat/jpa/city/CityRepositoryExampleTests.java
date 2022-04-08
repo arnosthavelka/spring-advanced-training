@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.ExampleMatcher;
@@ -15,7 +16,13 @@ import org.springframework.data.domain.ExampleMatcher;
  * See https://www.baeldung.com/spring-data-query-by-example
  */
 @DataJpaTest
-class CityRepositoryExampleTests extends AbstractRepositoryTests {
+class CityRepositoryExampleTests extends AbstractCityVerificationTest {
+
+	@Autowired
+	CityRepository cityRepository;
+
+	@Autowired
+	CountryRepository countryRepository;
 
 	@Test
 	void findByState() {

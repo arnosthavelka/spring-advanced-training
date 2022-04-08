@@ -12,7 +12,7 @@ import org.springframework.data.util.Streamable;
  * See https://www.baeldung.com/rest-api-search-language-spring-data-querydsl
  */
 @DataJpaTest
-class CityRepositoryQueryDslTests extends AbstractRepositoryTests {
+class CityRepositoryQueryDslTests extends AbstractCityVerificationTest {
 
 	@Autowired
 	protected CityRepository cityRepository;
