@@ -48,4 +48,16 @@ class CityRepositoryQueryDslTests extends AbstractCityVerificationTest {
 
 	}
 
+	@Nested
+	class CountCitiesByTest {
+
+		@Test
+		void countByCountry() {
+			var count = cityRepository.countCitiesBy(null, null, "Spain");
+
+			assertThat(count).isEqualTo(1);
+		}
+
+	}
+
 }
