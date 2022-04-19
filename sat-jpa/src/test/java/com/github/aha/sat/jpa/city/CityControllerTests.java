@@ -21,7 +21,7 @@ class CityControllerTests extends AbstractCityVerificationTest {
 	private CityService service;
 
 	@Test
-	public void searchForCityInAustralia() {
+	void searchForCityInAustralia() {
 		var name = "Melbourne";
 		var state = "Victoria";
 		var country = "Australia";
@@ -34,7 +34,7 @@ class CityControllerTests extends AbstractCityVerificationTest {
 	}
 
 	@Test
-	public void searchForCityInUsa() {
+	void searchForCityInUsa() {
 		var name = "Atlanta";
 		var state = "Georgia";
 		var country = "USA";
@@ -47,7 +47,7 @@ class CityControllerTests extends AbstractCityVerificationTest {
 	}
 
 	@Test
-	public void failForAnyOtherCountry() {
+	void failForAnyOtherCountry() {
 		assertThrows(IllegalArgumentException.class, () -> this.controller.search("name", "state", "France"));
 	}
 

@@ -26,7 +26,7 @@ public class CityController {
 
 	@GetMapping
 	public List<City> search(String name, String state, String country) {
-		List<City> result = switch (country) {
+		return switch (country) {
 		case "Australia": {
 			yield service.findInAustraliaBy(name, state);
 		}
@@ -36,7 +36,6 @@ public class CityController {
 		default:
 			throw new IllegalArgumentException("Unexpected value: " + country);
 		};
-		return result;
 	}
 
 }
