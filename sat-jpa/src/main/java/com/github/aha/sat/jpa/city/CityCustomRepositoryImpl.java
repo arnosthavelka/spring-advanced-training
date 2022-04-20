@@ -16,6 +16,7 @@ import javax.persistence.criteria.Root;
 import org.springframework.stereotype.Repository;
 
 import com.github.aha.sat.jpa.country.Country_;
+import com.querydsl.core.types.Projections;
 import com.querydsl.jpa.impl.JPAQuery;
 
 import lombok.RequiredArgsConstructor;
@@ -47,6 +48,14 @@ public class CityCustomRepositoryImpl implements CityCustomRepository {
 				.where(city.name.eq(cityName)
 						.and(city.state.eq(cityState))
 						.and(city.country.name.eq("USA")))
+				.fetch();
+	}
+
+	public List<CityProjection> searchByCountry(String countryName) {
+		return new JPAQuery<CityProjection>(em)
+				.select(Projections.constructor(CityProjection.class, city.id, city.name, city.state, city.country.name))
+				.from(city)
+				.where(city.country.name.eq(countryName))
 				.fetch();
 	}
 
