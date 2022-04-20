@@ -18,6 +18,7 @@ import org.springframework.stereotype.Repository;
 import com.github.aha.sat.jpa.country.Country_;
 import com.querydsl.core.types.Projections;
 import com.querydsl.jpa.impl.JPAQuery;
+import com.querydsl.jpa.impl.JPAQueryFactory;
 
 import lombok.RequiredArgsConstructor;
 
@@ -43,8 +44,7 @@ public class CityCustomRepositoryImpl implements CityCustomRepository {
 	}
 
 	public List<City> findUsaCitiesBy(String cityName, String cityState) {
-		return new JPAQuery<City>(em)
-				.from(city)
+		return new JPAQueryFactory(em).selectFrom(city)
 				.where(city.name.eq(cityName)
 						.and(city.state.eq(cityState))
 						.and(city.country.name.eq("USA")))
