@@ -2,8 +2,6 @@ package com.github.aha.sat.jpa.city;
 
 import java.util.List;
 
-import com.querydsl.core.Tuple;
-
 import lombok.NonNull;
 
 public interface CityCustomRepository {
@@ -12,6 +10,7 @@ public interface CityCustomRepository {
 	List<City> findUsaCitiesBy(@NonNull String name, @NonNull String state);
 	List<CityProjection> searchByCountry(@NonNull String countryName);
 	long countCitiesBy(String cityName, String cityState, @NonNull String countryName);
-	List<Tuple> countCitiesByCountry(@NonNull String countryName);
+	List<javax.persistence.Tuple> countCitiesWithSpecificationByCountry(@NonNull String countryName);
+	List<com.querydsl.core.Tuple> countCitiesWithQuerydslByCountry(@NonNull String countryName);
 
 }

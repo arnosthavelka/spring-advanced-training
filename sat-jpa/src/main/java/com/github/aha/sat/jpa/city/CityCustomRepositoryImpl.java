@@ -76,7 +76,19 @@ public class CityCustomRepositoryImpl implements CityCustomRepository {
 		return query.fetchOne();
 	}
 
-	public List<Tuple> countCitiesByCountry(@NonNull String countryName) {
+	public List<javax.persistence.Tuple> countCitiesWithSpecificationByCountry(@NonNull String countryName) {
+		var cb = em.getCriteriaBuilder();
+		var query = cb.createTupleQuery();
+		var cityRoot = query.from(City.class);
+		var countryJoin = cityRoot.join(City_.country);
+		query.select(cb.tuple(countryJoin.get(Country_.id), countryJoin.get(Country_.name), cb.count(countryJoin)))
+		// or query.multiselect(countryJoin.get(Country_.id), countryJoin.get(Country_.name), cb.count(countryJoin));
+				.where(cb.equal(countryJoin.get(Country_.name), countryName))
+				.groupBy(countryJoin);
+		return em.createQuery(query).getResultList();
+	}
+
+	public List<Tuple> countCitiesWithQuerydslByCountry(@NonNull String countryName) {
 		return new JPAQuery<>(em)
 				.select(city.country.id, city.country.name, city.country.count())
 				.from(city)

@@ -88,10 +88,27 @@ class CityRepositoryQueryDslTests extends AbstractCityVerificationTest {
 	}
 
 	@Test
-	void countCitiesByCountry() {
+	void countCitiesWithSpecificationByCountry() {
+		var countryName = "USA";
+
+		var result = cityRepository.countCitiesWithSpecificationByCountry(countryName);
+
+		assertThat(result)
+				.hasSize(1)
+				.first()
+				.satisfies(t -> {
+					assertThat(t.getElements()).hasSize(3);
+					assertThat(t.get(0, Long.class)).isPositive();
+					assertThat(t.get(1, String.class)).isEqualTo(countryName);
+					assertThat(t.get(2, Long.class)).isEqualTo(5);
+				});
+	}
+
+	@Test
+	void countCitiesWithQuerydslByCountry() {
 		var countryName = "Australia";
 
-		var result = cityRepository.countCitiesByCountry(countryName);
+		var result = cityRepository.countCitiesWithQuerydslByCountry(countryName);
 
 		assertThat(result)
 				.hasSize(1)
