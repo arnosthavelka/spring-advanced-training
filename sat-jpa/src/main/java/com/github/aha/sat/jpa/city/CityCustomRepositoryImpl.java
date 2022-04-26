@@ -81,8 +81,7 @@ public class CityCustomRepositoryImpl implements CityCustomRepository {
 		var query = cb.createTupleQuery();
 		var cityRoot = query.from(City.class);
 		var countryJoin = cityRoot.join(City_.country);
-		query.select(cb.tuple(countryJoin.get(Country_.id), countryJoin.get(Country_.name), cb.count(countryJoin)))
-		// or query.multiselect(countryJoin.get(Country_.id), countryJoin.get(Country_.name), cb.count(countryJoin));
+		query.select(cb.tuple(countryJoin.get(Country_.id), countryJoin.get(Country_.name), cb.count(countryJoin))) // or use query.multiselect without the cb.tuple
 				.where(cb.equal(countryJoin.get(Country_.name), countryName))
 				.groupBy(countryJoin);
 		return em.createQuery(query).getResultList();
