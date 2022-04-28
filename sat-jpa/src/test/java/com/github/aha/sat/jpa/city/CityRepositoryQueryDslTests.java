@@ -97,8 +97,9 @@ class CityRepositoryQueryDslTests extends AbstractCityVerificationTest {
 				.hasSize(1)
 				.first()
 				.satisfies(t -> {
-					assertThat(t.getElements()).hasSize(3);
-					assertThat(t.get(0, Long.class)).isPositive();
+					var tupleElements = t.getElements();
+					assertThat(tupleElements).hasSize(3);
+					assertThat((Long) t.get("countryId")).isPositive();
 					assertThat(t.get(1, String.class)).isEqualTo(countryName);
 					assertThat(t.get(2, Long.class)).isEqualTo(5);
 				});
@@ -115,9 +116,9 @@ class CityRepositoryQueryDslTests extends AbstractCityVerificationTest {
 				.first()
 				.satisfies(t -> {
 					assertThat(t.size()).isEqualTo(3);
-					assertThat(t.get(city.country.id)).isPositive();			// or t.get(0, Long.class)
-					assertThat(t.get(city.country.name)).isEqualTo(countryName);// or t.get(1, String.class)
-					assertThat(t.get(city.country.count())).isEqualTo(3);		// or t.get(2, Long.class)
+					assertThat(t.get(city.country.id.as("countryId"))).isPositive(); // or t.get(0, Long.class)
+					assertThat(t.get(city.country.name)).isEqualTo(countryName);	// or t.get(1, String.class)
+					assertThat(t.get(city.country.count())).isEqualTo(3);			// or t.get(2, Long.class)
 				});
 	}
 
