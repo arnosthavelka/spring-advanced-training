@@ -20,7 +20,6 @@ import com.github.aha.sat.jpa.country.Country_;
 import com.querydsl.core.Tuple;
 import com.querydsl.core.types.Projections;
 import com.querydsl.jpa.impl.JPAQuery;
-import com.querydsl.jpa.impl.JPAQueryFactory;
 
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
@@ -46,14 +45,6 @@ public class CityCustomRepositoryImpl implements CityCustomRepository {
 		return em.createQuery(query).getResultList();
 	}
 
-	public List<City> findUsaCitiesBy(@NonNull String cityName, @NonNull String cityState) {
-		return new JPAQueryFactory(em).selectFrom(city)
-				.where(city.name.eq(cityName)
-						.and(city.state.eq(cityState))
-						.and(city.country.name.eq("USA")))
-				.fetch();
-	}
-	
 	public List<CityProjection> searchByCountry(@NonNull String countryName) {
 		return new JPAQuery<CityProjection>(em)
 				.select(Projections.constructor(CityProjection.class, city.id, city.name, city.state, city.country.name))

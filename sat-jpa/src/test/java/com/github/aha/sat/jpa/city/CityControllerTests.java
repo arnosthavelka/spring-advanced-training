@@ -1,7 +1,6 @@
 package com.github.aha.sat.jpa.city;
 
 import static java.util.List.of;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.when;
 
 import java.util.List;
@@ -31,24 +30,6 @@ class CityControllerTests extends AbstractCityVerificationTest {
 		List<City> foundCities = this.controller.search(name, state, country);
 
 		verifyFirstCityInCollection(foundCities, name, country);
-	}
-
-	@Test
-	void searchForCityInUsa() {
-		var name = "Atlanta";
-		var state = "Georgia";
-		var country = "USA";
-		var cityInstance = City.builder().name(name).state(state).country(buildCountry(country)).build();
-		when(this.service.findInUsaBy(name, state)).thenReturn(of(cityInstance));
-
-		List<City> foundCities = this.controller.search(name, state, country);
-
-		verifyFirstCityInCollection(foundCities, name, country);
-	}
-
-	@Test
-	void failForAnyOtherCountry() {
-		assertThrows(IllegalArgumentException.class, () -> this.controller.search("name", "state", "France"));
 	}
 
 }

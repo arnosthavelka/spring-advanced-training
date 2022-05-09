@@ -27,14 +27,4 @@ class CityServiceTests {
 		verify(repository).findAustraliaCitiesBy(name, state);
     }
 
-	@Test
-	void findInUsaBy() {
-		var name = "Atlanta";
-		var state = "Georgia";
-
-		service.findInUsaBy(name, state);
-
-		verify(repository).findUsaCitiesBy(name, state);
-	}
-
 }

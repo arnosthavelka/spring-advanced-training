@@ -18,9 +18,4 @@ public class CityService {
 		return repository.findAustraliaCitiesBy(name, state);
 	}
 
-	@Transactional(readOnly = true)
-	public List<City> findInUsaBy(String name, String state) {
-		return repository.findUsaCitiesBy(name, state);
-	}
-
 }
