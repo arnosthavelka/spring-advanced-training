@@ -1,37 +1,40 @@
 package com.github.aha.sat.jpa.city;
 
-import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.Mockito.verify;
 
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
 
-@SpringBootTest
+@ExtendWith(MockitoExtension.class)
 class CityServiceTests {
 
-	@Autowired
+	@Mock
+	CityRepository repository;
+
+	@InjectMocks
 	protected CityService service;
 
     @Test
 	void findInAustraliaBy() {
-		var cities = service.findInAustraliaBy("Melbourne", "Victoria");
+		var name = "Melbourne";
+		var state = "Victoria";
 
-		assertThat(cities).first().satisfies(c -> {
-			assertThat(c.getName()).isEqualTo("Melbourne");
-			assertThat(c.getState()).isEqualTo("Victoria");
-			assertThat(c.getCountry().getName()).isEqualTo("Australia");
-		});
+		service.findInAustraliaBy(name, state);
+
+		verify(repository).findAustraliaCitiesBy(name, state);
     }
 
 	@Test
 	void findInUsaBy() {
-		var cities = service.findInUsaBy("Atlanta", "Georgia");
+		var name = "Atlanta";
+		var state = "Georgia";
 
-		assertThat(cities).first().satisfies(c -> {
-			assertThat(c.getName()).isEqualTo("Atlanta");
-			assertThat(c.getState()).isEqualTo("Georgia");
-			assertThat(c.getCountry().getName()).isEqualTo("USA");
-		});
+		service.findInUsaBy(name, state);
+
+		verify(repository).findUsaCitiesBy(name, state);
 	}
 
 }
