@@ -11,11 +11,8 @@ import org.springframework.web.bind.annotation.RestController;
 import lombok.RequiredArgsConstructor;
 
 /**
- * Usage:
- * <ul>
- * <li>search by JPA Criteria: 	http://localhost:8080/cities/?name=Melbourne&state=Victoria&country=Australia</li>
- * <li>search by QueryDSL: 		http://localhost:8080/cities/?name=Atlanta&state=Georgia&country=USA</li>
- * </ul>
+ * Usage: search:
+ * http://localhost:8080/cities/?name=Melbourne&state=Victoria&countryName=Australia</li>
  */
 @RestController
 @RequestMapping(value = "/cities", produces = APPLICATION_JSON_VALUE)
@@ -25,17 +22,8 @@ public class CityController {
 	private final CityService service;
 
 	@GetMapping
-	public List<City> search(String name, String state, String country) {
-		return switch (country) {
-		case "Australia": {
-			yield service.findInAustraliaBy(name, state);
-		}
-		case "USA": {
-			yield service.findInUsaBy(name, state);
-		}
-		default:
-			throw new IllegalArgumentException("Unexpected value: " + country);
-		};
+	public List<City> search(String name, String state, String countryName) {
+		return service.findAllBy(name, state, countryName);
 	}
 
 }

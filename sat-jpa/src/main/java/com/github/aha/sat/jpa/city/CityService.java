@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 
 @Service
@@ -14,13 +15,8 @@ public class CityService {
 	private final CityRepository repository;
 
 	@Transactional(readOnly = true)
-	public List<City> findInAustraliaBy(String name, String state) {
-		return repository.findAustraliaCitiesBy(name, state);
-	}
-
-	@Transactional(readOnly = true)
-	public List<City> findInUsaBy(String name, String state) {
-		return repository.findUsaCitiesBy(name, state);
+	public List<City> findAllBy(@NonNull String cityName, @NonNull String cityState, @NonNull String countryName) {
+		return repository.findAllCitiesBy(cityName, cityState, countryName);
 	}
 
 }

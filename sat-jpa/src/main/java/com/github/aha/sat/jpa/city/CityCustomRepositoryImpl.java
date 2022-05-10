@@ -18,9 +18,7 @@ import org.springframework.stereotype.Repository;
 
 import com.github.aha.sat.jpa.country.Country_;
 import com.querydsl.core.Tuple;
-import com.querydsl.core.types.Projections;
 import com.querydsl.jpa.impl.JPAQuery;
-import com.querydsl.jpa.impl.JPAQueryFactory;
 
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
@@ -32,34 +30,18 @@ public class CityCustomRepositoryImpl implements CityCustomRepository {
 	@PersistenceContext
 	private final EntityManager em;
 
-	public List<City> findAustraliaCitiesBy(@NonNull String cityName, @NonNull String cityState) {
+	public List<City> findAllCitiesBy(@NonNull String cityName, @NonNull String cityState, @NonNull String countryName) {
 		var cb = em.getCriteriaBuilder();
 		var query = cb.createQuery(City.class);
 		Root<City> cityRoot = query.from(City.class);
 		List<Predicate> predicates = new ArrayList<>();
 
-		predicates.add(cb.equal(cityRoot.get(name), cityName));
-		predicates.add(cb.equal(cityRoot.get(state), cityState));
-		predicates.add(cb.equal(cityRoot.get(country).get(Country_.name), cb.literal("Australia")));
+		predicates.add(cb.like(cityRoot.get(name), cityName));
+		predicates.add(cb.like(cityRoot.get(state), cityState));
+		predicates.add(cb.equal(cityRoot.get(country).get(Country_.name), cb.literal(countryName)));
 
 		query.where(predicates.toArray(new Predicate[0]));
 		return em.createQuery(query).getResultList();
-	}
-
-	public List<City> findUsaCitiesBy(@NonNull String cityName, @NonNull String cityState) {
-		return new JPAQueryFactory(em).selectFrom(city)
-				.where(city.name.eq(cityName)
-						.and(city.state.eq(cityState))
-						.and(city.country.name.eq("USA")))
-				.fetch();
-	}
-	
-	public List<CityProjection> searchByCountry(@NonNull String countryName) {
-		return new JPAQuery<CityProjection>(em)
-				.select(Projections.constructor(CityProjection.class, city.id, city.name, city.state, city.country.name))
-				.from(city)
-				.where(city.country.name.eq(countryName))
-				.fetch();
 	}
 
 	public long countCitiesBy(String cityName, String cityState, @NonNull String countryName) {

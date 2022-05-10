@@ -1,4 +1,4 @@
-package com.github.aha.sat.jpa.city;
+package com.github.aha.sat.jpa.country;
 
 import static org.mockito.Mockito.verify;
 
@@ -9,23 +9,21 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 @ExtendWith(MockitoExtension.class)
-class CityServiceTests {
+class CountryServiceTests {
 
 	@Mock
-	CityRepository repository;
+	CountryRepository repository;
 
 	@InjectMocks
-	protected CityService service;
+	CountryService service;
 
     @Test
 	void findAllBy() {
-		var name = "Melbourne";
-		var state = "Victoria";
-		var countryName = "Australia";
+		var namePattern = "Melbourne";
 
-		service.findAllBy(name, state, countryName);
+		service.findAllBy(namePattern);
 
-		verify(repository).findAllCitiesBy(name, state, countryName);
+		verify(repository).findAllByNameLike("%" + namePattern + "%");
     }
 
 }
