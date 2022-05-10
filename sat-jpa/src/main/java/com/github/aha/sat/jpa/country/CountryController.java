@@ -11,10 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 import lombok.RequiredArgsConstructor;
 
 /**
- * Usage:
- * <ul>
- * <li>search: http://localhost:8080/countries?name=an</li>
- * </ul>
+ * Usage: search: http://localhost:8080/countries?name=an</li>
  */
 @RestController
 @RequestMapping(value = "/countries", produces = APPLICATION_JSON_VALUE)

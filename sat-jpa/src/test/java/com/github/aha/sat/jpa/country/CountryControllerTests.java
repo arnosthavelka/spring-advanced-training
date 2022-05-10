@@ -19,7 +19,7 @@ class CountryControllerTests {
 	CountryController controller;
 
 	@Test
-	void searchForCityInAustralia() {
+	void search() {
 		var name = "Japan";
 
 		controller.search(name);

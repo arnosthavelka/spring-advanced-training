@@ -18,13 +18,14 @@ class CityServiceTests {
 	protected CityService service;
 
     @Test
-	void findInAustraliaBy() {
+	void findAllBy() {
 		var name = "Melbourne";
 		var state = "Victoria";
+		var countryName = "Australia";
 
-		service.findInAustraliaBy(name, state);
+		service.findAllBy(name, state, countryName);
 
-		verify(repository).findAustraliaCitiesBy(name, state);
+		verify(repository).findAllCitiesBy(name, state, countryName);
     }
 
 }

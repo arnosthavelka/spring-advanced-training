@@ -1,35 +1,31 @@
 package com.github.aha.sat.jpa.city;
 
-import static java.util.List.of;
-import static org.mockito.Mockito.when;
-
-import java.util.List;
+import static org.mockito.Mockito.verify;
 
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.client.RestClientTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
 
-@RestClientTest(CityController.class)
-class CityControllerTests extends AbstractCityVerificationTest {
+@ExtendWith(MockitoExtension.class)
+class CityControllerTests {
 
-	@Autowired
-	protected CityController controller;
-
-	@MockBean
+	@Mock
 	private CityService service;
 
+	@InjectMocks
+	protected CityController controller;
+
 	@Test
-	void searchForCityInAustralia() {
+	void search() {
 		var name = "Melbourne";
 		var state = "Victoria";
 		var country = "Australia";
-		var cityInstance = City.builder().name(name).state(state).country(buildCountry(country)).build();
-		when(this.service.findInAustraliaBy(name, state)).thenReturn(of(cityInstance));
 
-		List<City> foundCities = this.controller.search(name, state, country);
+		controller.search(name, state, country);
 
-		verifyFirstCityInCollection(foundCities, name, country);
+		verify(service).findAllBy(name, state, country);
 	}
 
 }

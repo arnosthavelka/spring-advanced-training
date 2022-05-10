@@ -31,7 +31,7 @@ public class CityCustomRepositoryImpl implements CityCustomRepository {
 	@PersistenceContext
 	private final EntityManager em;
 
-	public List<City> findAustraliaCitiesBy(@NonNull String cityName, @NonNull String cityState) {
+	public List<City> findAllCitiesBy(@NonNull String cityName, @NonNull String cityState, @NonNull String countryName) {
 		var cb = em.getCriteriaBuilder();
 		var query = cb.createQuery(City.class);
 		Root<City> cityRoot = query.from(City.class);
@@ -39,7 +39,7 @@ public class CityCustomRepositoryImpl implements CityCustomRepository {
 
 		predicates.add(cb.equal(cityRoot.get(name), cityName));
 		predicates.add(cb.equal(cityRoot.get(state), cityState));
-		predicates.add(cb.equal(cityRoot.get(country).get(Country_.name), cb.literal("Australia")));
+		predicates.add(cb.equal(cityRoot.get(country).get(Country_.name), cb.literal(countryName)));
 
 		query.where(predicates.toArray(new Predicate[0]));
 		return em.createQuery(query).getResultList();
