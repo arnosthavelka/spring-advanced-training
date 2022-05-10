@@ -14,6 +14,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 
+import com.github.aha.sat.jpa.country.CountryRepository;
+
 import lombok.extern.slf4j.Slf4j;
 
 @DataJpaTest

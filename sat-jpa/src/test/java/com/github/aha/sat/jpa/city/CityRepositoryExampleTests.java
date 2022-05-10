@@ -12,6 +12,8 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.ExampleMatcher;
 
+import com.github.aha.sat.jpa.country.CountryRepository;
+
 /**
  * See https://www.baeldung.com/spring-data-query-by-example
  */
