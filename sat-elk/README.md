@@ -1,5 +1,5 @@
 # sat-elk
-POC for accessing Elasticsearch via Spring Data.
+The examples of Elasticsearch usage via Spring Data.
 
 See also https://www.baeldung.com/spring-data-elasticsearch-tutorial and https://www.baeldung.com/spring-data-elasticsearch-queries
 

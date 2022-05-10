@@ -14,6 +14,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 
+import com.github.aha.sat.jpa.country.CountryRepository;
+
 import lombok.extern.slf4j.Slf4j;
 
 @DataJpaTest
@@ -170,6 +172,43 @@ class CityRepositoryJpaTests extends AbstractCityVerificationTest {
 			cityRepository.delete(city);
 
 			assertThat(cityRepository.count()).isEqualTo(totalCount - 1);
+		}
+
+	}
+
+	@Nested
+	class FindAllCitiesByTest {
+
+		private static final String USA = "USA";
+
+		@Test
+		void exactValues() {
+			var cityName = "San Francisco";
+			var state = "California";
+
+			var result = cityRepository.findAllCitiesBy(cityName, state, USA);
+
+			assertThat(result)
+					.hasSize(1)
+					.first()
+					.satisfies(c -> {
+						assertThat(c.getId()).isPositive();
+						assertThat(c.getName()).isEqualTo(cityName);
+						assertThat(c.getState()).isEqualTo(state);
+						assertThat(c.getCountry().getName()).isEqualTo(USA);
+					});
+		}
+
+		@Test
+		void wildcard() {
+			var result = cityRepository.findAllCitiesBy("%an%", "%i%", USA);
+
+			assertThat(result)
+					.hasSize(2)
+					.allSatisfy(c -> {
+						assertThat(c.getCountry().getName()).isEqualTo(USA);
+						assertThat(c.getName()).containsAnyOf("Atlanta", "San Francisco");
+					});
 		}
 
 	}
