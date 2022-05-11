@@ -12,6 +12,4 @@ public interface CityCustomRepository {
 
 	List<javax.persistence.Tuple> countCitiesWithSpecificationByCountry(@NonNull String countryName);
 
-	List<com.querydsl.core.Tuple> countCitiesWithQuerydslByCountry(@NonNull String countryName);
-
 }

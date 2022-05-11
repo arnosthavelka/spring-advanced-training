@@ -17,7 +17,6 @@ import javax.persistence.criteria.Root;
 import org.springframework.stereotype.Repository;
 
 import com.github.aha.sat.jpa.country.Country_;
-import com.querydsl.core.Tuple;
 import com.querydsl.jpa.impl.JPAQuery;
 
 import lombok.NonNull;
@@ -67,15 +66,6 @@ public class CityCustomRepositoryImpl implements CityCustomRepository {
 				.where(cb.equal(countryJoin.get(Country_.name), countryName))
 				.groupBy(countryJoin);
 		return em.createQuery(query).getResultList();
-	}
-
-	public List<Tuple> countCitiesWithQuerydslByCountry(@NonNull String countryName) {
-		return new JPAQuery<>(em)
-				.select(city.country.id.as("countryId"), city.country.name, city.country.count())
-				.from(city)
-				.where(city.country.name.eq(countryName))
-				.groupBy(city.country)
-				.fetch();
 	}
 
 }

@@ -1,6 +1,5 @@
 package com.github.aha.sat.jpa.city;
 
-import static com.github.aha.sat.jpa.city.QCity.city;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import org.junit.jupiter.api.Nested;
@@ -90,23 +89,6 @@ class CityRepositoryQueryDslTests extends AbstractCityVerificationTest {
 					assertThat((Long) t.get("countryId")).isPositive();
 					assertThat(t.get(1, String.class)).isEqualTo(countryName);
 					assertThat(t.get(2, Long.class)).isEqualTo(5);
-				});
-	}
-
-	@Test
-	void countCitiesWithQuerydslByCountry() {
-		var countryName = "Australia";
-
-		var result = cityRepository.countCitiesWithQuerydslByCountry(countryName);
-
-		assertThat(result)
-				.hasSize(1)
-				.first()
-				.satisfies(t -> {
-					assertThat(t.size()).isEqualTo(3);
-					assertThat(t.get(city.country.id.as("countryId"))).isPositive(); // or t.get(0, Long.class)
-					assertThat(t.get(city.country.name)).isEqualTo(countryName);	// or t.get(1, String.class)
-					assertThat(t.get(city.country.count())).isEqualTo(3);			// or t.get(2, Long.class)
 				});
 	}
 
