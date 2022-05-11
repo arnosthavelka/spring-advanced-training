@@ -50,7 +50,7 @@ class CountryRepositoryTests {
 					.hasSize(1)
 					.first()
 					.satisfies(c -> {
-						assertThat(c.getId()).isEqualTo(3);
+						assertThat(c.getId()).isPositive();
 						assertThat(c.getName()).isEqualTo(USA);
 						assertThat(c.getCities()).map(City::getName).contains(cityName);
 					});
@@ -67,6 +67,23 @@ class CountryRepositoryTests {
 						assertThat(c.getCities()).map(City::getName).contains("Atlanta", "San Francisco");
 					});
 		}
+
+	}
+
+	@Test
+	void searchByCountry() {
+		var countryName = "Australia";
+
+		var result = cityRepository.searchByCountry(countryName);
+
+		assertThat(result)
+				.hasSize(3)
+				.allSatisfy(p -> {
+					assertThat(p.getId()).isPositive();
+					assertThat(p.getName()).containsAnyOf("Brisbane", "Melbourne", "Sydney");
+					assertThat(p.getState()).containsAnyOf("Queensland", "Victoria", "New South Wales");
+					assertThat(p.getCountryName()).isEqualTo(countryName);
+				});
 
 	}
 

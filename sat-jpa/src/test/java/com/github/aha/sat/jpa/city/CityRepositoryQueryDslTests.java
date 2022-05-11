@@ -50,18 +50,6 @@ class CityRepositoryQueryDslTests extends AbstractCityVerificationTest {
 	}
 
 	@Nested
-	class SearchByCountryTest {
-
-		@Test
-		void simple() {
-			var result = cityRepository.searchByCountry("Australia");
-
-			assertThat(result).hasSize(3);
-		}
-
-	}
-
-	@Nested
 	class CountCitiesByTest {
 
 		@Test

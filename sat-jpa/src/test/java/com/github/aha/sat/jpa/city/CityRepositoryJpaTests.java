@@ -176,4 +176,41 @@ class CityRepositoryJpaTests extends AbstractCityVerificationTest {
 
 	}
 
+	@Nested
+	class FindAllCitiesByTest {
+
+		private static final String USA = "USA";
+
+		@Test
+		void exactValues() {
+			var cityName = "San Francisco";
+			var state = "California";
+
+			var result = cityRepository.findAllCitiesBy(cityName, state, USA);
+
+			assertThat(result)
+					.hasSize(1)
+					.first()
+					.satisfies(c -> {
+						assertThat(c.getId()).isPositive();
+						assertThat(c.getName()).isEqualTo(cityName);
+						assertThat(c.getState()).isEqualTo(state);
+						assertThat(c.getCountry().getName()).isEqualTo(USA);
+					});
+		}
+
+		@Test
+		void wildcard() {
+			var result = cityRepository.findAllCitiesBy("%an%", "%i%", USA);
+
+			assertThat(result)
+					.hasSize(2)
+					.allSatisfy(c -> {
+						assertThat(c.getCountry().getName()).isEqualTo(USA);
+						assertThat(c.getName()).containsAnyOf("Atlanta", "San Francisco");
+					});
+		}
+
+	}
+
 }

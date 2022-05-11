@@ -18,7 +18,6 @@ import org.springframework.stereotype.Repository;
 
 import com.github.aha.sat.jpa.country.Country_;
 import com.querydsl.core.Tuple;
-import com.querydsl.core.types.Projections;
 import com.querydsl.jpa.impl.JPAQuery;
 
 import lombok.NonNull;
@@ -37,20 +36,12 @@ public class CityCustomRepositoryImpl implements CityCustomRepository {
 		Root<City> cityRoot = query.from(City.class);
 		List<Predicate> predicates = new ArrayList<>();
 
-		predicates.add(cb.equal(cityRoot.get(name), cityName));
-		predicates.add(cb.equal(cityRoot.get(state), cityState));
+		predicates.add(cb.like(cityRoot.get(name), cityName));
+		predicates.add(cb.like(cityRoot.get(state), cityState));
 		predicates.add(cb.equal(cityRoot.get(country).get(Country_.name), cb.literal(countryName)));
 
 		query.where(predicates.toArray(new Predicate[0]));
 		return em.createQuery(query).getResultList();
-	}
-
-	public List<CityProjection> searchByCountry(@NonNull String countryName) {
-		return new JPAQuery<CityProjection>(em)
-				.select(Projections.constructor(CityProjection.class, city.id, city.name, city.state, city.country.name))
-				.from(city)
-				.where(city.country.name.eq(countryName))
-				.fetch();
 	}
 
 	public long countCitiesBy(String cityName, String cityState, @NonNull String countryName) {
