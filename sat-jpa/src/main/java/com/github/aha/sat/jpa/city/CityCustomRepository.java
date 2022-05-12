@@ -2,6 +2,8 @@ package com.github.aha.sat.jpa.city;
 
 import java.util.List;
 
+import javax.persistence.Tuple;
+
 import lombok.NonNull;
 
 public interface CityCustomRepository {
@@ -10,6 +12,6 @@ public interface CityCustomRepository {
 
 	long countCitiesBy(String cityName, String cityState, @NonNull String countryName);
 
-	List<javax.persistence.Tuple> countCitiesWithSpecificationByCountry(@NonNull String countryName);
+	List<Tuple> countCitiesInCountriesLike(@NonNull String countryName);
 
 }

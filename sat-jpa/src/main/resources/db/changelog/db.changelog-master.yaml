@@ -76,7 +76,7 @@ databaseChangeLog:
                   value: Queensland
               - column:
                   name: country_id
-                  value: 1
+                  value: "1"
         - insert:
             tableName: city
             columns:

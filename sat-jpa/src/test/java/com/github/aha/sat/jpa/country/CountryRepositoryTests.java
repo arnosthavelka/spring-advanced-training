@@ -13,7 +13,7 @@ import com.github.aha.sat.jpa.city.City;
 @DataJpaTest
 class CountryRepositoryTests {
 
-	private static final String USA = "USA";
+	static final String USA = "USA";
 
 	@Autowired
 	protected CountryRepository countryRepository;
