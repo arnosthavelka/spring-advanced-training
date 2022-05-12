@@ -11,13 +11,13 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Tuple;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 
 import org.springframework.stereotype.Repository;
 
 import com.github.aha.sat.jpa.country.Country_;
-import com.querydsl.core.Tuple;
 import com.querydsl.jpa.impl.JPAQuery;
 
 import lombok.NonNull;
@@ -58,24 +58,15 @@ public class CityCustomRepositoryImpl implements CityCustomRepository {
 		return query.fetchOne();
 	}
 
-	public List<javax.persistence.Tuple> countCitiesWithSpecificationByCountry(@NonNull String countryName) {
+	public List<Tuple> countCitiesInCountriesLike(@NonNull String countryName) {
 		var cb = em.getCriteriaBuilder();
 		var query = cb.createTupleQuery();
 		var cityRoot = query.from(City.class);
 		var countryJoin = cityRoot.join(City_.country);
 		query.select(cb.tuple(countryJoin.get(Country_.id).alias("countryId"), countryJoin.get(Country_.name), cb.count(countryJoin))) // or use query.multiselect without the cb.tuple
-				.where(cb.equal(countryJoin.get(Country_.name), countryName))
+				.where(cb.like(countryJoin.get(Country_.name), countryName))
 				.groupBy(countryJoin);
 		return em.createQuery(query).getResultList();
-	}
-
-	public List<Tuple> countCitiesWithQuerydslByCountry(@NonNull String countryName) {
-		return new JPAQuery<>(em)
-				.select(city.country.id.as("countryId"), city.country.name, city.country.count())
-				.from(city)
-				.where(city.country.name.eq(countryName))
-				.groupBy(city.country)
-				.fetch();
 	}
 
 }

@@ -24,6 +24,8 @@ class CityRepositoryJpaTests extends AbstractCityVerificationTest {
 
 	static final int TOTAL_SIZE = 15;
 	static long totalCount = -1;
+	static final String AUSTRALIA = "Australia";
+	static final String USA = "USA";
 
 	@Autowired
 	CityRepository cityRepository;
@@ -84,7 +86,7 @@ class CityRepositoryJpaTests extends AbstractCityVerificationTest {
 
 			var city = cityRepository.findByName(name);
 
-			verifyCity(city, name, "USA");
+			verifyCity(city, name, USA);
 		}
 
 		@Test
@@ -100,12 +102,10 @@ class CityRepositoryJpaTests extends AbstractCityVerificationTest {
 
 	@Test
 	void findByNameAndCountry() {
-		var country = "USA";
-
-		List<City> result = cityRepository.findByNameLikeAndCountryName("% %", country);
+		List<City> result = cityRepository.findByNameLikeAndCountryName("% %", USA);
 
 		assertThat(result).hasSize(2);
-		verifyFirstCityInCollection(result, "New York", country);
+		verifyFirstCityInCollection(result, "New York", USA);
 	}
 
 	@Test
@@ -135,7 +135,7 @@ class CityRepositoryJpaTests extends AbstractCityVerificationTest {
 		List<City> result = cityRepository.findByState("California");
 
 		assertThat(result).hasSize(1);
-		verifyFirstCityInCollection(result, "San Francisco", "USA");
+		verifyFirstCityInCollection(result, "San Francisco", USA);
 	}
 
 	@Test
@@ -152,7 +152,7 @@ class CityRepositoryJpaTests extends AbstractCityVerificationTest {
 
 		@Test
 		void createEntity() {
-			var country = countryRepository.findByName("Australia");
+			var country = countryRepository.findByName(AUSTRALIA);
 			var city = City.builder()
 					.name("Darwin")
 					.state("North territory")
@@ -178,8 +178,6 @@ class CityRepositoryJpaTests extends AbstractCityVerificationTest {
 
 	@Nested
 	class FindAllCitiesByTest {
-
-		private static final String USA = "USA";
 
 		@Test
 		void exactValues() {
