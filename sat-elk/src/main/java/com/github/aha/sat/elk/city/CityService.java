@@ -4,6 +4,7 @@ import static java.util.Objects.nonNull;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Path;
 import java.util.Collection;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -56,10 +57,11 @@ public class CityService {
 
 	List<City> parseFile(String csvFileName) {
 		try {
+			var csvFile = Path.of(csvFileName);
 			return csvMapper
 					.readerFor(City.class)
 					.with(schema)
-					.<City>readValues(new File(csvFileName))
+					.<City>readValues(csvFile.toFile())
 					.readAll();
 		} catch (IOException e) {
 			throw new ElkException(e);
