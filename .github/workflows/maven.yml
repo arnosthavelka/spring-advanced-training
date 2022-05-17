@@ -23,4 +23,4 @@ jobs:
         distribution: 'temurin'
         cache: maven
     - name: Build with Maven
-      run: mvn org.jacoco:jacoco-maven-plugin:prepare-agent install sonar:sonar -Pcoverage -Dsonar.projectKey=arnosthavelka_spring-advanced-training -Dsonar.host.url=https://sonarcloud.io
+      run: mvn org.jacoco:jacoco-maven-plugin:prepare-agent install sonar:sonar -Pcoverage -Dsonar.organization=arnosthavelka-github -Dsonar.projectKey=arnosthavelka_spring-advanced-training -Dsonar.host.url=https://sonarcloud.io -Dsonar.login=$SONAR_TOKEN
