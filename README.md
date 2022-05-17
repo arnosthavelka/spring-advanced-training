@@ -1,6 +1,6 @@
 # spring-advanced-training
 
-[![Travis Build Status][travis-image]][travis-url-main] [![Sonar quality gate][sonar-quality-gate]][sonar-url] [![Sonar coverage][sonar-coverage]][sonar-url] [![Sonar bugs][sonar-bugs]][sonar-url] [![Sonar vulnerabilities][sonar-vulnerabilities]][sonar-url] [![MIT licensed][mit-badge]](./LICENSE)
+[![Java CI with Maven][github-image]][github-url-main] [![Sonar quality gate][sonar-quality-gate]][sonar-url] [![Sonar coverage][sonar-coverage]][sonar-url] [![Sonar bugs][sonar-bugs]][sonar-url] [![Sonar vulnerabilities][sonar-vulnerabilities]][sonar-url] [![MIT licensed][mit-badge]](./LICENSE)
 
 Sample projects (source codes) for my training [Spring - Advanced](http://arnosthavelka.github.io/presentation/spring-advanced/index.html) and [Spring Boot](http://arnosthavelka.github.io/presentation/spring-boot/index.html). 
 All these projects are based on Spring Boot 2.6.x & Java 17.
@@ -56,8 +56,8 @@ Usage of Spring Boot Admin to monitor SB applications.
 
 http://localhost:8085/
 
-[travis-url-main]: https://app.travis-ci.com/github/arnosthavelka/spring-advanced-training
-[travis-image]: https://travis-ci.com/arnosthavelka/spring-advanced-training.svg?branch=master
+[github-url-main]: https://github.com/arnosthavelka/spring-advanced-training/actions/workflows/maven.yml
+[github-image]: https://github.com/arnosthavelka/spring-advanced-training/actions/workflows/maven.yml/badge.svg
 
 [sonar-url]: https://sonarcloud.io/dashboard?id=arnosthavelka_spring-advanced-training
 [sonar-quality-gate]: https://sonarcloud.io/api/project_badges/measure?project=arnosthavelka_spring-advanced-training&metric=alert_status
