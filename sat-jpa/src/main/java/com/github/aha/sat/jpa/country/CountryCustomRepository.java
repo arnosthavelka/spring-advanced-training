@@ -13,6 +13,8 @@ public interface CountryCustomRepository {
 
 	List<CityProjection> searchByCountry(@NonNull String countryName);
 
+	long countBy(String cityName, String cityState, String countryName);
+
 	List<Tuple> countCitiesInCountriesLike(@NonNull String countryName);
 
 }
