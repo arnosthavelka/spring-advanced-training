@@ -89,6 +89,51 @@ class CountryRepositoryTests {
 	}
 
 	@Nested
+	class CountByTest {
+
+		@Test
+		void countAll() {
+			var count = countryRepository.countBy(null, null, null);
+
+			assertThat(count).isEqualTo(9);
+		}
+
+		@Test
+		void countByCityName() {
+			var count = countryRepository.countBy("an", null, null);
+
+			assertThat(count).isEqualTo(2);
+		}
+
+		@Test
+		void countByState() {
+			var count = countryRepository.countBy(null, "%ni%", null);
+
+			assertThat(count).isEqualTo(1);
+		}
+
+		@Test
+		void countByCountry() {
+			var count = countryRepository.countBy(null, null, USA);
+
+			assertThat(count).isEqualTo(1);
+		}
+
+		@Test
+		void countByCityNameAndState() {
+			// TODO not expected SQL
+			// Hibernate: select count(country0_.id) as col_0_0_ from country country0_
+			// where ( exists (select 1 from city cities1_ where country0_.id=cities1_.country_id and (cities1_.name like ? escape '!'))) 
+			//   and (exists (select 1 from city cities2_ where country0_.id=cities2_.country_id and (cities2_.state like ? escape '!')))
+
+			var count = countryRepository.countBy("a", "%n%", null);
+
+			assertThat(count).isEqualTo(3);
+		}
+
+	}
+
+	@Nested
 	class CountCitiesWithQuerydslByCountryTest {
 
 		@Test
