@@ -46,15 +46,16 @@ public class CountryCustomRepositoryImpl implements CountryCustomRepository {
 	public long countBy(String cityName, String cityState, String countryName) {
 		JPAQuery<Long> query = new JPAQuery<>(em)
 				.select(country.count())
-				.from(country);
+				.from(country)
+				.innerJoin(country.cities, city);
 		if (nonNull(countryName)) {
 			query.where(country.name.eq(countryName));
 		}
 		if (nonNull(cityName)) {
-			query.where(country.cities.any().name.contains(cityName));
+			query.where(city.name.contains(cityName));
 		}
 		if (nonNull(cityState)) {
-			query.where(country.cities.any().state.like(cityState));
+			query.where(city.state.like(cityState));
 		}
 		return query.fetchOne();
 	}
