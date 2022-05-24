@@ -12,6 +12,7 @@ import javax.persistence.PersistenceContext;
 import org.springframework.stereotype.Repository;
 
 import com.github.aha.sat.jpa.city.CityProjection;
+import com.querydsl.core.BooleanBuilder;
 import com.querydsl.core.Tuple;
 import com.querydsl.core.types.Projections;
 import com.querydsl.jpa.impl.JPAQuery;
@@ -47,15 +48,13 @@ public class CountryCustomRepositoryImpl implements CountryCustomRepository {
 		JPAQuery<Long> query = new JPAQuery<>(em)
 				.select(country.count())
 				.from(country)
-				.innerJoin(country.cities, city);
+				.innerJoin(country.cities, city)
+				.where(new BooleanBuilder()
+						.and(getIfNotEmpty(cityName, v -> city.name.contains(v)))
+						.and(getIfNotEmpty(cityState, v -> city.state.like(v)))
+                        .getValue());
 		if (nonNull(countryName)) {
 			query.where(country.name.eq(countryName));
-		}
-		if (nonNull(cityName)) {
-			query.where(city.name.contains(cityName));
-		}
-		if (nonNull(cityState)) {
-			query.where(city.state.like(cityState));
 		}
 		return query.fetchOne();
 	}

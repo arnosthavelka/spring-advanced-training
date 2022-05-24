@@ -3,9 +3,6 @@ package com.github.aha.sat.jpa.city;
 import static org.springframework.data.domain.ExampleMatcher.GenericPropertyMatchers.contains;
 import static org.springframework.data.domain.ExampleMatcher.GenericPropertyMatchers.exact;
 
-import java.util.List;
-import java.util.Optional;
-
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
@@ -32,9 +29,9 @@ class CityRepositoryExampleTests extends AbstractCityVerificationTest {
 		var country = countryRepository.findByName(countryName);
 		var exampleCity = City.builder().state("Queensland").country(country).build();
 
-		List<City> result = cityRepository.findAll(Example.of(exampleCity));
+		var cities = cityRepository.findAll(Example.of(exampleCity));
 
-		verifyFirstCityInCollection(result, "Brisbane", countryName);
+		verifyFirstCityInCollection(cities, "Brisbane", countryName);
 	}
 
 	@Test
@@ -44,9 +41,9 @@ class CityRepositoryExampleTests extends AbstractCityVerificationTest {
 				.country(buildCountry("Canada"))
 				.build();
 
-		Optional<City> optionalResult = cityRepository.findOne(Example.of(exampleCity));
+		var cityOptional = cityRepository.findOne(Example.of(exampleCity));
 
-		verifyOptionalCity(optionalResult, "Montreal", "Canada");
+		verifyOptionalCity(cityOptional, "Montreal", "Canada");
 	}
 
 	@Test
@@ -59,9 +56,9 @@ class CityRepositoryExampleTests extends AbstractCityVerificationTest {
 				.withMatcher("country", exact()).withIgnoreCase()
 				.withMatcher("name", contains());
 
-		List<City> optionalResult = cityRepository.findAll(Example.of(exampleCity, matcher));
+		var cities = cityRepository.findAll(Example.of(exampleCity, matcher));
 
-		verifyFirstCityInCollection(optionalResult, "Atlanta", "USA");
+		verifyFirstCityInCollection(cities, "Atlanta", "USA");
 	}
 
 }
