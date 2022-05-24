@@ -5,7 +5,6 @@ import static com.github.aha.sat.jpa.country.QCountry.country;
 import static java.util.Objects.nonNull;
 
 import java.util.List;
-import java.util.function.Function;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -58,10 +57,6 @@ public class CountryCustomRepositoryImpl implements CountryCustomRepository {
 			query.where(country.name.eq(countryName));
 		}
 		return query.fetchOne();
-	}
-
-	public static <O> O getIfNotEmpty(String value, Function<String, O> converter) {
-		return nonNull(value) ? converter.apply(value) : null;
 	}
 
 	public List<Tuple> countCitiesInCountriesLike(@NonNull String countryName) {

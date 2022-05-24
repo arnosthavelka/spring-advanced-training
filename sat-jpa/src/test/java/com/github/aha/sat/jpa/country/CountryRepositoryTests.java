@@ -7,6 +7,7 @@ import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.data.util.Streamable;
 
 import com.github.aha.sat.jpa.city.City;
 
@@ -161,4 +162,41 @@ class CountryRepositoryTests {
 		}
 
 	}
+
+	@Test
+	void countStates() {
+		long result = countryRepository.count(countryRepository.predicateWithoutCities("Japan"));
+
+		assertThat(result).isEqualTo(1);
+	}
+
+	@Nested
+	class FindAllWithoutCitiesTest {
+
+		@Test
+		void allCountries() {
+			var iterableResult = countryRepository.findAllWithoutCities(null);
+			var result = Streamable.of(iterableResult).toList();
+
+			assertThat(result).hasSize(9);
+		}
+
+		@Test
+		void specificCountry() {
+			var countryName = "Switzerland";
+
+			var iterableResult = countryRepository.findAllWithoutCities(countryName);
+			var result = Streamable.of(iterableResult).toList();
+
+			assertThat(result)
+					.hasSize(1)
+					.first()
+					.satisfies(c -> {
+						assertThat(c.getName()).isEqualTo(countryName);
+						assertThat(c.getCities()).isNotEmpty();
+					});
+		}
+
+	}
+
 }

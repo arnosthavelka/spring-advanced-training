@@ -1,15 +1,10 @@
 package com.github.aha.sat.jpa.city;
 
-import static com.github.aha.sat.jpa.city.City_.COUNTRY;
-import static com.github.aha.sat.jpa.city.City_.NAME;
 import static org.assertj.core.api.Assertions.assertThat;
-
-import java.util.List;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
-import org.springframework.data.domain.Sort;
 
 @DataJpaTest
 class CityRepositorySpecificationTests extends AbstractCityVerificationTest {
@@ -18,23 +13,19 @@ class CityRepositorySpecificationTests extends AbstractCityVerificationTest {
 	protected CityRepository cityRepository;
 
 	@Test
-	void cityHasState() {
-		List<City> result = cityRepository.findAll(
-				cityRepository.cityHasState(),
-				Sort.by(COUNTRY, NAME));
+	void findAllWithState() {
+		var cities = cityRepository.findAllWithState();
 
-		assertThat(result).hasSize(9);
-		verifyCity(result.get(0), "Brisbane", "Australia");
+		assertThat(cities).hasSize(9);
+		verifyFirstCityInCollection(cities, "Brisbane", "Australia");
 	}
 
 	@Test
-	void cityHasNoState() {
-		List<City> result = cityRepository.findAll(
-				cityRepository.cityHasNoState().and(cityRepository.cityFromCountry("USA")),
-				Sort.by(COUNTRY, NAME));
+	void noState() {
+		var cities = cityRepository.findAllWithoutStateInUsa();
 
-		assertThat(result).hasSize(1);
-		verifyCity(result.get(0), "New York", "USA");
+		assertThat(cities).hasSize(1);
+		verifyFirstCityInCollection(cities, "New York", "USA");
 	}
 
 }
