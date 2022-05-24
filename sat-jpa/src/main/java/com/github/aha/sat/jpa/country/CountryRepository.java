@@ -10,7 +10,8 @@ import org.springframework.data.querydsl.QuerydslPredicateExecutor;
 import com.querydsl.core.BooleanBuilder;
 import com.querydsl.core.types.Predicate;
 
-public interface CountryRepository extends JpaRepository<Country, Long>, CountryCustomRepository, QuerydslPredicateExecutor<Country> {
+public interface CountryRepository extends CountryCustomRepository,
+		JpaRepository<Country, Long>, QuerydslPredicateExecutor<Country> {
 
 	Country findByName(String name);
 
