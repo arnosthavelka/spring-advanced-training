@@ -9,6 +9,9 @@ import com.github.aha.sat.jpa.country.Country;
 
 abstract class AbstractCityVerificationTest {
 
+	static final String AUSTRALIA = "Australia";
+	static final String USA = "USA";
+
 	Country buildCountry(String countryName) {
 		return Country.builder().name(countryName).build();
 	}

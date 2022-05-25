@@ -17,7 +17,7 @@ class CityRepositorySpecificationTests extends AbstractCityVerificationTest {
 		var cities = cityRepository.findAllWithState();
 
 		assertThat(cities).hasSize(9);
-		verifyFirstCityInCollection(cities, "Brisbane", "Australia");
+		verifyFirstCityInCollection(cities, "Brisbane", AUSTRALIA);
 	}
 
 	@Test
@@ -25,7 +25,7 @@ class CityRepositorySpecificationTests extends AbstractCityVerificationTest {
 		var cities = cityRepository.findAllWithoutStateInUsa();
 
 		assertThat(cities).hasSize(1);
-		verifyFirstCityInCollection(cities, "New York", "USA");
+		verifyFirstCityInCollection(cities, "New York", USA);
 	}
 
 }
