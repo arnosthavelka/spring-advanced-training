@@ -25,13 +25,12 @@ class CityRepositoryExampleTests extends AbstractCityVerificationTest {
 
 	@Test
 	void findByState() {
-		var countryName = "Australia";
-		var country = countryRepository.findByName(countryName);
+		var country = countryRepository.findByName(AUSTRALIA);
 		var exampleCity = City.builder().state("Queensland").country(country).build();
 
 		var cities = cityRepository.findAll(Example.of(exampleCity));
 
-		verifyFirstCityInCollection(cities, "Brisbane", countryName);
+		verifyFirstCityInCollection(cities, "Brisbane", AUSTRALIA);
 	}
 
 	@Test
@@ -52,13 +51,13 @@ class CityRepositoryExampleTests extends AbstractCityVerificationTest {
 				.name("an")
 				.country(buildCountry("usa"))
 				.build();
-		ExampleMatcher matcher = ExampleMatcher.matching()
+		var matcher = ExampleMatcher.matching()
 				.withMatcher("country", exact()).withIgnoreCase()
 				.withMatcher("name", contains());
 
 		var cities = cityRepository.findAll(Example.of(exampleCity, matcher));
 
-		verifyFirstCityInCollection(cities, "Atlanta", "USA");
+		verifyFirstCityInCollection(cities, "Atlanta", USA);
 	}
 
 }

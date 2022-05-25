@@ -2,6 +2,7 @@ package com.github.aha.sat.jpa.city;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
@@ -12,17 +13,47 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 @DataJpaTest
 class CityRepositoryCustomTests extends AbstractCityVerificationTest {
 
-	static final String AUSTRALIA = "Australia";
-	static final String USA = "USA";
-
 	@Autowired
 	protected CityRepository cityRepository;
 
+	@Nested
+	class FindAllCitiesByTest {
+
+		@Test
+		void exactValues() {
+			var cityName = "San Francisco";
+			var state = "California";
+
+			var result = cityRepository.findAllCitiesBy(cityName, state, USA);
+
+			assertThat(result)
+					.hasSize(1)
+					.first()
+					.satisfies(c -> {
+						assertThat(c.getId()).isPositive();
+						assertThat(c.getName()).isEqualTo(cityName);
+						assertThat(c.getState()).isEqualTo(state);
+						assertThat(c.getCountry().getName()).isEqualTo(USA);
+					});
+		}
+
+		@Test
+		void wildcard() {
+			var result = cityRepository.findAllCitiesBy("%an%", "%i%", USA);
+
+			assertThat(result)
+					.hasSize(2)
+					.allSatisfy(c -> {
+						assertThat(c.getCountry().getName()).isEqualTo(USA);
+						assertThat(c.getName()).containsAnyOf("Atlanta", "San Francisco");
+					});
+		}
+
+	}
+
 	@Test
 	void countCitiesWithSpecificationByCountry() {
-		var countryName = "Australia";
-
-		var result = cityRepository.countCitiesInCountriesLike(countryName);
+		var result = cityRepository.countCitiesInCountriesLike(AUSTRALIA);
 
 		assertThat(result)
 				.hasSize(1)
@@ -31,7 +62,7 @@ class CityRepositoryCustomTests extends AbstractCityVerificationTest {
 					var tupleElements = t.getElements();
 					assertThat(tupleElements).hasSize(3);
 					assertThat((Long) t.get("countryId")).isPositive();
-					assertThat(t.get(1, String.class)).isEqualTo(countryName);
+					assertThat(t.get(1, String.class)).isEqualTo(AUSTRALIA);
 					assertThat(t.get(2, Long.class)).isEqualTo(3);
 				});
 	}
