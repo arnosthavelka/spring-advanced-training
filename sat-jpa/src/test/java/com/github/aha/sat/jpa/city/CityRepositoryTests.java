@@ -20,12 +20,10 @@ import lombok.extern.slf4j.Slf4j;
 
 @DataJpaTest
 @Slf4j
-class CityRepositoryJpaTests extends AbstractCityVerificationTest {
+class CityRepositoryTests extends AbstractCityVerificationTest {
 
 	static final int TOTAL_SIZE = 15;
 	static long totalCount = -1;
-	static final String AUSTRALIA = "Australia";
-	static final String USA = "USA";
 
 	@Autowired
 	CityRepository cityRepository;
@@ -101,7 +99,7 @@ class CityRepositoryJpaTests extends AbstractCityVerificationTest {
 	}
 
 	@Test
-	void findByNameAndCountry() {
+	void findByNameLikeAndCountryName() {
 		List<City> result = cityRepository.findByNameLikeAndCountryName("% %", USA);
 
 		assertThat(result).hasSize(2);
@@ -109,7 +107,7 @@ class CityRepositoryJpaTests extends AbstractCityVerificationTest {
 	}
 
 	@Test
-	void findByNameAndCountryAllIgnoringCase() {
+	void findByNameAndCountryNameAllIgnoringCase() {
 		City city = cityRepository.findByNameAndCountryNameAllIgnoringCase("Tokyo", "Japan");
 
 		assertThat(city.getName()).isEqualTo("Tokyo");
@@ -128,14 +126,6 @@ class CityRepositoryJpaTests extends AbstractCityVerificationTest {
 		assertThat(page.getContent())
 				.satisfies(c -> log.debug("The page content:"))
 				.allSatisfy(city -> log.debug(city.toString()));
-	}
-
-	@Test
-	void findByState() {
-		List<City> result = cityRepository.findByState("California");
-
-		assertThat(result).hasSize(1);
-		verifyFirstCityInCollection(result, "San Francisco", USA);
 	}
 
 	@Test
@@ -172,41 +162,6 @@ class CityRepositoryJpaTests extends AbstractCityVerificationTest {
 			cityRepository.delete(city);
 
 			assertThat(cityRepository.count()).isEqualTo(totalCount - 1);
-		}
-
-	}
-
-	@Nested
-	class FindAllCitiesByTest {
-
-		@Test
-		void exactValues() {
-			var cityName = "San Francisco";
-			var state = "California";
-
-			var result = cityRepository.findAllCitiesBy(cityName, state, USA);
-
-			assertThat(result)
-					.hasSize(1)
-					.first()
-					.satisfies(c -> {
-						assertThat(c.getId()).isPositive();
-						assertThat(c.getName()).isEqualTo(cityName);
-						assertThat(c.getState()).isEqualTo(state);
-						assertThat(c.getCountry().getName()).isEqualTo(USA);
-					});
-		}
-
-		@Test
-		void wildcard() {
-			var result = cityRepository.findAllCitiesBy("%an%", "%i%", USA);
-
-			assertThat(result)
-					.hasSize(2)
-					.allSatisfy(c -> {
-						assertThat(c.getCountry().getName()).isEqualTo(USA);
-						assertThat(c.getName()).containsAnyOf("Atlanta", "San Francisco");
-					});
 		}
 
 	}

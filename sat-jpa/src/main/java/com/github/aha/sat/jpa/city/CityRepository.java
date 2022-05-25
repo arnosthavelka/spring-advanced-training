@@ -5,12 +5,12 @@ import static com.github.aha.sat.jpa.city.City_.NAME;
 import static com.github.aha.sat.jpa.city.City_.country;
 import static com.github.aha.sat.jpa.city.City_.state;
 import static com.github.aha.sat.jpa.country.Country_.name;
+import static org.springframework.data.domain.Sort.by;
 
 import java.util.List;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
@@ -25,33 +25,29 @@ public interface CityRepository extends CityCustomRepository,
 
 	City findByName(String name);
 	
-	List<City> findByNameLikeAndCountryName(@NonNull String name, @NonNull String country);
-
 	City findByNameAndCountryNameAllIgnoringCase(@NonNull String name, @NonNull String country);
+
+	List<City> findByNameLikeAndCountryName(@NonNull String name, @NonNull String country);
 
 	Page<City> findByNameContainingAndCountryNameContainingAllIgnoringCase(String name, String country, Pageable pageable);
 
-	List<City> findByState(String state);
-
 	default List<City> findAllWithState() {
-		return findAll(cityHasState(), Sort.by(COUNTRY, NAME));
+		return findAll(specWithState(), by(COUNTRY, NAME));
 	}
 
-	default Specification<City> cityHasState() {
+	default Specification<City> specWithState() {
 		return (cityRoot, q, cb) -> cb.not(cb.isNull(cityRoot.get(state)));
 	}
 
 	default List<City> findAllWithoutStateInUsa() {
-		return findAll(
-				cityHasNoState().and(cityFromCountry("USA")),
-				Sort.by(COUNTRY, NAME));
+		return findAll(specWithoutState().and(specByCountry("USA")), by(COUNTRY, NAME));
 	}
 
-	default Specification<City> cityHasNoState() {
+	default Specification<City> specWithoutState() {
 		return (cityRoot, q, cb) -> cb.isNull(cityRoot.get(state));
 	}
 
-	default Specification<City> cityFromCountry(@NonNull String countryName) {
+	default Specification<City> specByCountry(@NonNull String countryName) {
 		return (cityRoot, q, cb) -> cb.equal(cityRoot.get(country).get(name), countryName);
 	}
 
