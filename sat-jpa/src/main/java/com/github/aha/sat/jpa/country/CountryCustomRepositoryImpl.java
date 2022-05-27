@@ -13,7 +13,6 @@ import org.springframework.stereotype.Repository;
 
 import com.github.aha.sat.jpa.city.CityProjection;
 import com.querydsl.core.BooleanBuilder;
-import com.querydsl.core.Tuple;
 import com.querydsl.core.types.Projections;
 import com.querydsl.jpa.impl.JPAQuery;
 
@@ -57,15 +56,6 @@ public class CountryCustomRepositoryImpl implements CountryCustomRepository {
 			query.where(country.name.eq(countryName));
 		}
 		return query.fetchOne();
-	}
-
-	public List<Tuple> countCitiesInCountriesLike(@NonNull String countryName) {
-		return new JPAQuery<>(em)
-				.select(city.country.id.as("countryId"), city.country.name, city.country.count())
-				.from(city)
-				.where(city.country.name.like(countryName))
-				.groupBy(city.country)
-				.fetch();
 	}
 
 }
