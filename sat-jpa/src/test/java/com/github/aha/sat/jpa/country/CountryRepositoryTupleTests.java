@@ -19,6 +19,7 @@ import org.springframework.data.jpa.repository.support.Querydsl;
 import org.springframework.data.support.PageableExecutionUtils;
 
 import com.querydsl.core.Tuple;
+import com.querydsl.core.types.OrderSpecifier;
 import com.querydsl.core.types.dsl.PathBuilder;
 import com.querydsl.jpa.JPQLQuery;
 import com.querydsl.jpa.impl.JPAQuery;
@@ -29,6 +30,7 @@ import lombok.NonNull;
 class CountryRepositoryTupleTests {
 
 	static final String USA = "USA";
+	static final String AUSTRALIA = "Australia";
 
 	@PersistenceContext
 	private EntityManager em;
@@ -79,11 +81,11 @@ class CountryRepositoryTupleTests {
 	@Nested
 	class PagingTest {
 
-		Page<Tuple> findAllTuplesSortedBy(Pageable pageable) {
+		Page<Tuple> findAllTuplesSortedBy(Pageable pageable, OrderSpecifier<?>... o) {
 			var query = new JPAQuery<>(em)
 					.select(city.country.id, city.country.name, city.id, city.name)
 					.from(city)
-					.orderBy(country.name.asc(), city.name.asc());
+					.orderBy(o);
 			return fetchPage(query, pageable, Tuple.class);
 		}
 
@@ -96,7 +98,7 @@ class CountryRepositoryTupleTests {
 
 		@Test
 		void unpagedResult() {
-			var result = findAllTuplesSortedBy(Pageable.unpaged());
+			var result = findAllTuplesSortedBy(Pageable.unpaged(), country.name.asc(), city.name.asc());
 
 			assertThat(result)
 					.hasSize(15)
@@ -104,16 +106,16 @@ class CountryRepositoryTupleTests {
 					.satisfies(t -> {
 						assertThat(t.size()).isPositive();
 						assertThat(t.get(city.country.id)).isPositive();
-						assertThat(t.get(city.country.name)).isEqualTo("Australia");
+						assertThat(t.get(city.country.name)).isEqualTo(AUSTRALIA);
 						assertThat(t.get(city.id)).isPositive();
 						assertThat(t.get(city.name)).isEqualTo("Brisbane");
 					});
 		}
 
 		@Test
-		void pagedResult() {
+		void pagedResultSortedByCountry() {
 			var pageSize = 3;
-			var result = findAllTuplesSortedBy(PageRequest.of(0, pageSize));
+			var result = findAllTuplesSortedBy(PageRequest.of(0, pageSize), country.name.asc());
 
 			assertThat(result)
 					.hasSize(pageSize)
@@ -121,9 +123,26 @@ class CountryRepositoryTupleTests {
 					.satisfies(t -> {
 						assertThat(t.size()).isPositive();
 						assertThat(t.get(city.country.id)).isPositive();
-						assertThat(t.get(city.country.name)).isEqualTo("Australia");
+						assertThat(t.get(city.country.name)).isEqualTo(AUSTRALIA);
 						assertThat(t.get(city.id)).isPositive();
-						assertThat(t.get(city.name)).isEqualTo("Brisbane");
+						assertThat(t.get(city.name)).isNotEmpty();
+					});
+		}
+
+		@Test
+		void pagedResultSortedByCity() {
+			var pageSize = 3;
+			var result = findAllTuplesSortedBy(PageRequest.of(0, pageSize), city.name.asc());
+
+			assertThat(result)
+					.hasSize(pageSize)
+					.first()
+					.satisfies(t -> {
+						assertThat(t.size()).isPositive();
+						assertThat(t.get(city.country.id)).isPositive();
+						assertThat(t.get(city.country.name)).isEqualTo(USA);
+						assertThat(t.get(city.id)).isPositive();
+						assertThat(t.get(city.name)).isEqualTo("Atlanta");
 					});
 		}
 
