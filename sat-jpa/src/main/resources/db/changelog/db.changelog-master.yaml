@@ -278,3 +278,10 @@ databaseChangeLog:
               - column:
                   name: country_id
                   value: "9"
+        # enmpty country
+        - insert:
+            tableName: country
+            columns:
+              - column:
+                  name: name
+                  value: Belgium
