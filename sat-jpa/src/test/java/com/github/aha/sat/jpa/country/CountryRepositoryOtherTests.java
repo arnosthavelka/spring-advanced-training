@@ -123,7 +123,7 @@ class CountryRepositoryOtherTests {
 		void containsWithExpression() {
 			var result = new JPAQuery<>(em)
 					.select(country)
-					.from(country, city)
+					.from(country)
 					.where(country.cities.contains(JPAExpressions.select(city).from(city).where(city.name.eq("Barcelona"))))
 					.fetchOne();
 			
