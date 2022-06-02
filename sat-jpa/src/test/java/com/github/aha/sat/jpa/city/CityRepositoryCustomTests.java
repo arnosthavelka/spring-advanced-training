@@ -52,6 +52,23 @@ class CityRepositoryCustomTests extends AbstractCityVerificationTest {
 	}
 
 	@Test
+	void searchByCity() {
+		var cityName = "London";
+
+		var result = cityRepository.searchByCity(cityName);
+
+		assertThat(result)
+				.hasSize(1)
+				.first()
+				.satisfies(c -> {
+					assertThat(c.getId()).isPositive();
+					assertThat(c.getName()).isEqualTo(cityName);
+					assertThat(c.getState()).isNull();
+					assertThat(c.getCountryName()).isEqualTo("United Kingdom");
+				});
+	}
+
+	@Test
 	void countCitiesWithSpecificationByCountry() {
 		var result = cityRepository.countCitiesInCountriesLike(AUSTRALIA);
 

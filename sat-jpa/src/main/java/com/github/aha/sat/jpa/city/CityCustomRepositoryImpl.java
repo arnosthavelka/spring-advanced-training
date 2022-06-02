@@ -1,6 +1,7 @@
 package com.github.aha.sat.jpa.city;
 
 import static com.github.aha.sat.jpa.city.City_.country;
+import static com.github.aha.sat.jpa.city.City_.id;
 import static com.github.aha.sat.jpa.city.City_.name;
 import static com.github.aha.sat.jpa.city.City_.state;
 
@@ -38,6 +39,24 @@ public class CityCustomRepositoryImpl implements CityCustomRepository {
 		predicates.add(cb.equal(cityRoot.get(country).get(Country_.name), cb.literal(countryName)));
 
 		query.where(predicates.toArray(new Predicate[0]));
+		return em.createQuery(query).getResultList();
+	}
+
+	public List<CityProjection> searchByCity(@NonNull String cityName) {
+		var cb = em.getCriteriaBuilder();
+		var query = cb.createQuery(CityProjection.class);
+		var cityRoot = query.from(City.class);
+
+		List<Predicate> predicates = new ArrayList<>();
+		predicates.add(cb.like(cityRoot.get(name), cityName));
+
+		query.select(
+				cb.construct(CityProjection.class,
+						cityRoot.get(id),
+						cityRoot.get(name),
+						cityRoot.get(state),
+						cityRoot.get(country).get(Country_.name)))
+				.where(predicates.toArray(new Predicate[0]));
 		return em.createQuery(query).getResultList();
 	}
 
