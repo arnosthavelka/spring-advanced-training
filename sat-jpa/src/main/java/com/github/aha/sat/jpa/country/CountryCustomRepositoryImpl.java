@@ -2,7 +2,6 @@ package com.github.aha.sat.jpa.country;
 
 import static com.github.aha.sat.jpa.city.QCity.city;
 import static com.github.aha.sat.jpa.country.QCountry.country;
-import static java.util.Objects.nonNull;
 
 import java.util.List;
 
@@ -44,17 +43,15 @@ public class CountryCustomRepositoryImpl implements CountryCustomRepository {
 	}
 
 	public long countBy(String cityName, String cityState, String countryName) {
-		JPAQuery<Long> query = new JPAQuery<>(em)
+		var query = new JPAQuery<>(em)
 				.select(country.count())
 				.from(country)
 				.innerJoin(country.cities, city)
 				.where(new BooleanBuilder()
 						.and(getIfNotEmpty(cityName, v -> city.name.contains(v)))
 						.and(getIfNotEmpty(cityState, v -> city.state.like(v)))
+						.and(getIfNotEmpty(countryName, v -> country.name.eq(v)))
                         .getValue());
-		if (nonNull(countryName)) {
-			query.where(country.name.eq(countryName));
-		}
 		return query.fetchOne();
 	}
 
