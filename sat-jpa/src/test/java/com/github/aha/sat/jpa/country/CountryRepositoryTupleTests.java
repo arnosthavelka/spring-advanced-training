@@ -122,7 +122,7 @@ class CountryRepositoryTupleTests {
 		@Test
 		void pagedResultSortedByCity() {
 			var pageSize = 3;
-			var result = findAllTuplesSortedBy(PageRequest.of(0, pageSize), city.name.asc());
+			var result = findAllTuplesSortedBy(PageRequest.of(0, pageSize), city.name.desc());
 
 			assertThat(result)
 					.hasSize(pageSize)
@@ -130,9 +130,9 @@ class CountryRepositoryTupleTests {
 					.satisfies(t -> {
 						assertThat(t.size()).isPositive();
 						assertThat(t.get(city.country.id)).isPositive();
-						assertThat(t.get(city.country.name)).isEqualTo(USA);
+						assertThat(t.get(city.country.name)).isEqualTo("Japan");
 						assertThat(t.get(city.id)).isPositive();
-						assertThat(t.get(city.name)).isEqualTo("Atlanta");
+						assertThat(t.get(city.name)).isEqualTo("Tokyo");
 					});
 		}
 

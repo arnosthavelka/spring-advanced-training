@@ -20,11 +20,11 @@ import lombok.experimental.UtilityClass;
 @UtilityClass
 public class QuerydslUtils {
 
-	<O> O getIfNotEmpty(String value, Function<String, O> converter) {
+	public static <O> O getIfNotEmpty(String value, Function<String, O> converter) {
 		return nonNull(value) ? converter.apply(value) : null;
 	}
 
-	<T, R> Page<T> fetchPage(EntityManager em, JPAQuery<T> query, Pageable pageable) {
+	public static <T, R> Page<T> fetchPage(EntityManager em, JPAQuery<T> query, Pageable pageable) {
 		// var querydsl = new Querydsl(em, (new PathBuilderFactory()).create(pathType));
 		var querydsl = new Querydsl(em, new PathBuilder<>(query.getType(), "abc"));
 		JPQLQuery<T> paginatedQuery = querydsl.applyPagination(pageable, query);
