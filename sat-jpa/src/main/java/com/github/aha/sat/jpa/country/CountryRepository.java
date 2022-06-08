@@ -1,6 +1,7 @@
 package com.github.aha.sat.jpa.country;
 
 import static com.github.aha.sat.jpa.country.QCountry.country;
+import static com.github.aha.sat.jpa.country.QuerydslUtils.getIfNotEmpty;
 
 import java.util.List;
 
@@ -18,7 +19,7 @@ public interface CountryRepository extends CountryCustomRepository,
 	List<Country> findAllByNameLike(String name);
 
 	default Iterable<Country> findAllWithoutCities(String countryName) {
-		return findAll(predicateWithoutCities(countryName));
+		return findAll(predicateWithoutCities(countryName), country.name.asc());
 	}
 
 	default Predicate predicateWithoutCities(String countryName) {

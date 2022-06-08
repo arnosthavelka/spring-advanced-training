@@ -2,6 +2,7 @@ package com.github.aha.sat.jpa.country;
 
 import static com.github.aha.sat.jpa.city.QCity.city;
 import static com.github.aha.sat.jpa.country.QCountry.country;
+import static com.github.aha.sat.jpa.country.QuerydslUtils.fetchPage;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.List;
@@ -15,13 +16,9 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.jpa.repository.support.Querydsl;
-import org.springframework.data.support.PageableExecutionUtils;
 
 import com.querydsl.core.Tuple;
 import com.querydsl.core.types.OrderSpecifier;
-import com.querydsl.core.types.dsl.PathBuilder;
-import com.querydsl.jpa.JPQLQuery;
 import com.querydsl.jpa.impl.JPAQuery;
 
 import lombok.NonNull;
@@ -86,14 +83,7 @@ class CountryRepositoryTupleTests {
 					.select(city.country.id, city.country.name, city.id, city.name)
 					.from(city)
 					.orderBy(o);
-			return fetchPage(query, pageable, Tuple.class);
-		}
-
-		<T, R> Page<T> fetchPage(JPAQuery<T> query, Pageable pageable, Class<R> pathType) {
-			// var querydsl = new Querydsl(em, (new PathBuilderFactory()).create(pathType));
-			var querydsl = new Querydsl(em, new PathBuilder<>(pathType, "abc"));
-			JPQLQuery<T> paginatedQuery = querydsl.applyPagination(pageable, query);
-			return PageableExecutionUtils.getPage(paginatedQuery.fetch(), pageable, paginatedQuery::fetchCount);
+			return fetchPage(em, query, pageable);
 		}
 
 		@Test
@@ -132,7 +122,7 @@ class CountryRepositoryTupleTests {
 		@Test
 		void pagedResultSortedByCity() {
 			var pageSize = 3;
-			var result = findAllTuplesSortedBy(PageRequest.of(0, pageSize), city.name.asc());
+			var result = findAllTuplesSortedBy(PageRequest.of(0, pageSize), city.name.desc());
 
 			assertThat(result)
 					.hasSize(pageSize)
@@ -140,9 +130,9 @@ class CountryRepositoryTupleTests {
 					.satisfies(t -> {
 						assertThat(t.size()).isPositive();
 						assertThat(t.get(city.country.id)).isPositive();
-						assertThat(t.get(city.country.name)).isEqualTo(USA);
+						assertThat(t.get(city.country.name)).isEqualTo("Japan");
 						assertThat(t.get(city.id)).isPositive();
-						assertThat(t.get(city.name)).isEqualTo("Atlanta");
+						assertThat(t.get(city.name)).isEqualTo("Tokyo");
 					});
 		}
 
