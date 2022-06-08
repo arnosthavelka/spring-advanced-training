@@ -1,6 +1,7 @@
 package com.github.aha.sat.jpa.country;
 
 import static com.github.aha.sat.jpa.country.QCountry.country;
+import static com.github.aha.sat.jpa.country.QuerydslUtils.getIfNotEmpty;
 
 import java.util.List;
 

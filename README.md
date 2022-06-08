@@ -34,7 +34,7 @@ Usage of JPA via Spring Boot and H2 in memory DB (including web console).
 * Generated JPA static metamodel
 * QueryDsl
 * Liquibase
-* H2 database (console is accessible as: http://localhost:8080/console/ -> JDBC URL=jdbc:h2:mem:testdb)
+* H2 database (console is accessible as: http://localhost:8080/console/ -> JDBC_URL=`jdbc:h2:mem:testdb`)
 
 ## sat-liquibase
 Usage of JDBC & [Liquibase](http://www.liquibase.org/) via Spring Boot and HSQL in memory DB.
