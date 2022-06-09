@@ -49,9 +49,9 @@ public class CountryCustomRepositoryImpl implements CountryCustomRepository {
 				.from(country)
 				.innerJoin(country.cities, city)
 				.where(new BooleanBuilder()
-						.and(getIfNotEmpty(cityName, v -> city.name.contains(v)))
-						.and(getIfNotEmpty(cityState, v -> city.state.like(v)))
-						.and(getIfNotEmpty(countryName, v -> country.name.eq(v)))
+						.and(getIfNotEmpty(cityName, city.name::contains))
+						.and(getIfNotEmpty(cityState, city.state::like))
+						.and(getIfNotEmpty(countryName, country.name::eq))
                         .getValue());
 		return query.fetchOne();
 	}

@@ -24,7 +24,7 @@ public class QuerydslUtils {
 		return nonNull(value) ? converter.apply(value) : null;
 	}
 
-	public static <T, R> Page<T> fetchPage(EntityManager em, JPAQuery<T> query, Pageable pageable) {
+	public static <T> Page<T> fetchPage(EntityManager em, JPAQuery<T> query, Pageable pageable) {
 		// var querydsl = new Querydsl(em, (new PathBuilderFactory()).create(pathType));
 		var querydsl = new Querydsl(em, new PathBuilder<>(query.getType(), "abc"));
 		JPQLQuery<T> paginatedQuery = querydsl.applyPagination(pageable, query);

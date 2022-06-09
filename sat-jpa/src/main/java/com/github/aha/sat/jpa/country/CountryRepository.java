@@ -22,9 +22,8 @@ public interface CountryRepository extends CountryCustomRepository,
 	}
 
 	default Predicate predicateWithoutCities() {
-		BooleanBuilder predicate = new BooleanBuilder()
+		return new BooleanBuilder()
 				.and(country.cities.isEmpty());
-		return predicate;
 	}
 
 }
