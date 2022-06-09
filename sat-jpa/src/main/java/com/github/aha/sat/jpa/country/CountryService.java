@@ -15,7 +15,7 @@ public class CountryService {
 
 	@Transactional(readOnly = true)
 	public List<Country> findAllBy(String name) {
-		return repository.findAllByNameLike("%" + name + "%");
+		return repository.findByNameLikeIgnoreCase("%" + name + "%");
 	}
 
 }

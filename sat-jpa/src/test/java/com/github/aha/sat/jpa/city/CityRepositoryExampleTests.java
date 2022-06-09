@@ -25,7 +25,7 @@ class CityRepositoryExampleTests extends AbstractCityVerificationTest {
 
 	@Test
 	void findByState() {
-		var country = countryRepository.findByName(AUSTRALIA);
+		var country = countryRepository.getByName(AUSTRALIA);
 		var exampleCity = City.builder().state("Queensland").country(country).build();
 
 		var cities = cityRepository.findAll(Example.of(exampleCity));

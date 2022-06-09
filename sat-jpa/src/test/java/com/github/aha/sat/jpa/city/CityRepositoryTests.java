@@ -142,7 +142,7 @@ class CityRepositoryTests extends AbstractCityVerificationTest {
 
 		@Test
 		void createEntity() {
-			var country = countryRepository.findByName(AUSTRALIA);
+			var country = countryRepository.getByName(AUSTRALIA);
 			var city = City.builder()
 					.name("Darwin")
 					.state("North territory")

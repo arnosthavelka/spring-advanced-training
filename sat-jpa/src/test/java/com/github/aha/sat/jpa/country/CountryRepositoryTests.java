@@ -2,7 +2,6 @@ package com.github.aha.sat.jpa.country;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
@@ -17,10 +16,10 @@ class CountryRepositoryTests {
 	protected CountryRepository countryRepository;
 
 	@Test
-	void findByName() {
+	void getByName() {
 		var countryName = "Japan";
 
-		var result = countryRepository.findByName(countryName);
+		var result = countryRepository.getByName(countryName);
 
 		assertThat(result.getId()).isEqualTo(4);
 		assertThat(result.getName()).isEqualTo(countryName);
@@ -28,48 +27,27 @@ class CountryRepositoryTests {
 	}
 
 	@Test
-	void findAllByNameLike() {
+	void findByNameLikeIgnoreCase() {
 		var namePattern = "%an%";
 
-		var result = countryRepository.findAllByNameLike(namePattern);
+		var result = countryRepository.findByNameLikeIgnoreCase(namePattern);
 
 		assertThat(result).map(Country::getName).containsExactly("Canada", "Japan", "France", "Switzerland");
 	}
 
 	@Test
 	void countByStateName() {
-		long result = countryRepository.count(countryRepository.predicateWithoutCities("Japan"));
+		long result = countryRepository.count(countryRepository.predicateWithoutCities());
 
 		assertThat(result).isEqualTo(1);
 	}
 
-	@Nested
-	class FindAllWithoutCitiesTest {
+	@Test
+	void findAllWithoutCities() {
+		var iterableResult = countryRepository.findAllWithoutCities();
+		var result = Streamable.of(iterableResult).toList();
 
-		@Test
-		void allCountries() {
-			var iterableResult = countryRepository.findAllWithoutCities(null);
-			var result = Streamable.of(iterableResult).toList();
-
-			assertThat(result).hasSize(9);
-		}
-
-		@Test
-		void specificCountry() {
-			var countryName = "Switzerland";
-
-			var iterableResult = countryRepository.findAllWithoutCities(countryName);
-			var result = Streamable.of(iterableResult).toList();
-
-			assertThat(result)
-					.hasSize(1)
-					.first()
-					.satisfies(c -> {
-						assertThat(c.getName()).isEqualTo(countryName);
-						assertThat(c.getCities()).isNotEmpty();
-					});
-		}
-
+		assertThat(result).hasSize(1);
 	}
 
 }

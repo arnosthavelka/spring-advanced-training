@@ -1,7 +1,6 @@
 package com.github.aha.sat.jpa.country;
 
 import static com.github.aha.sat.jpa.country.QCountry.country;
-import static com.github.aha.sat.jpa.country.QuerydslUtils.getIfNotEmpty;
 
 import java.util.List;
 
@@ -14,18 +13,17 @@ import com.querydsl.core.types.Predicate;
 public interface CountryRepository extends CountryCustomRepository,
 		JpaRepository<Country, Long>, QuerydslPredicateExecutor<Country> {
 
-	Country findByName(String name);
+	Country getByName(String name);
 
-	List<Country> findAllByNameLike(String name);
+	List<Country> findByNameLikeIgnoreCase(String name);
 
-	default Iterable<Country> findAllWithoutCities(String countryName) {
-		return findAll(predicateWithoutCities(countryName), country.name.asc());
+	default Iterable<Country> findAllWithoutCities() {
+		return findAll(predicateWithoutCities(), country.name.asc());
 	}
 
-	default Predicate predicateWithoutCities(String countryName) {
+	default Predicate predicateWithoutCities() {
 		BooleanBuilder predicate = new BooleanBuilder()
-				.and(getIfNotEmpty(countryName, v -> country.name.like("%" + v + "%")))
-				.and(country.cities.isNotEmpty());
+				.and(country.cities.isEmpty());
 		return predicate;
 	}
 

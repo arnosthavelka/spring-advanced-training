@@ -23,7 +23,7 @@ class CountryServiceTests {
 
 		service.findAllBy(namePattern);
 
-		verify(repository).findAllByNameLike("%" + namePattern + "%");
+		verify(repository).findByNameLikeIgnoreCase("%" + namePattern + "%");
     }
 
 }
