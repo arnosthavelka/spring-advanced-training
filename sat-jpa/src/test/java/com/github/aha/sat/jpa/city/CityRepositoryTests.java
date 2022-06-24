@@ -76,13 +76,13 @@ class CityRepositoryTests extends AbstractCityVerificationTest {
 	}
 
 	@Nested
-	class FindByNameTest {
+	class GetByNameTest {
 
 		@Test
 		void shouldFindEntity() {
 			var name = "Miami";
 
-			var city = cityRepository.findByName(name);
+			var city = cityRepository.getByName(name);
 
 			verifyCity(city, name, USA);
 		}
@@ -91,7 +91,7 @@ class CityRepositoryTests extends AbstractCityVerificationTest {
 		void shouldNotFindEntity() {
 			var misspelledName = "prague";
 
-			var city = cityRepository.findByName(misspelledName);
+			var city = cityRepository.getByName(misspelledName);
 
 			assertThat(city).isNull();
 		}
@@ -157,7 +157,7 @@ class CityRepositoryTests extends AbstractCityVerificationTest {
 
 		@Test
 		void deleteEntity() {
-			var city = cityRepository.findByName("Prague");
+			var city = cityRepository.getByName("Prague");
 
 			cityRepository.delete(city);
 

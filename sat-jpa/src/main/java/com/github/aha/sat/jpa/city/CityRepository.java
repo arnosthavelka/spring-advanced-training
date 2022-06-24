@@ -23,7 +23,7 @@ import lombok.NonNull;
 public interface CityRepository extends CityCustomRepository,
 		JpaRepository<City, Long>, JpaSpecificationExecutor<City>, QueryByExampleExecutor<City> {
 
-	City findByName(String name);
+	City getByName(String name);
 	
 	City findByNameAndCountryNameAllIgnoringCase(@NonNull String name, @NonNull String country);
 
