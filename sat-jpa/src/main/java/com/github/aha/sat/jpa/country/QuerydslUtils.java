@@ -12,6 +12,7 @@ import org.springframework.data.jpa.repository.support.Querydsl;
 import org.springframework.data.support.PageableExecutionUtils;
 
 import com.querydsl.core.types.dsl.PathBuilder;
+import com.querydsl.core.types.dsl.PathBuilderFactory;
 import com.querydsl.jpa.JPQLQuery;
 import com.querydsl.jpa.impl.JPAQuery;
 
@@ -25,8 +26,13 @@ public class QuerydslUtils {
 	}
 
 	public static <T> Page<T> fetchPage(EntityManager em, JPAQuery<T> query, Pageable pageable) {
-		// var querydsl = new Querydsl(em, (new PathBuilderFactory()).create(pathType));
-		var querydsl = new Querydsl(em, new PathBuilder<>(query.getType(), "abc"));
+		var querydsl = new Querydsl(em, new PathBuilder<>(query.getType(), "alias"));
+		JPQLQuery<T> paginatedQuery = querydsl.applyPagination(pageable, query);
+		return PageableExecutionUtils.getPage(paginatedQuery.fetch(), pageable, paginatedQuery::fetchCount);
+	}
+
+	public static <T> Page<T> fetchProjectedPage(EntityManager em, JPQLQuery<T> query, Pageable pageable, Class<?> rootType) {
+		var querydsl = new Querydsl(em, (new PathBuilderFactory()).create(rootType));
 		JPQLQuery<T> paginatedQuery = querydsl.applyPagination(pageable, query);
 		return PageableExecutionUtils.getPage(paginatedQuery.fetch(), pageable, paginatedQuery::fetchCount);
 	}

@@ -2,8 +2,11 @@ package com.github.aha.sat.jpa.country;
 
 import static com.github.aha.sat.jpa.city.QCity.city;
 import static com.github.aha.sat.jpa.country.QCountry.country;
-import static com.github.aha.sat.jpa.country.QuerydslUtils.fetchPage;
+import static com.github.aha.sat.jpa.country.QuerydslUtils.fetchProjectedPage;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.springframework.data.domain.PageRequest.of;
+import static org.springframework.data.domain.Sort.Direction.ASC;
+import static org.springframework.data.domain.Sort.Direction.DESC;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -12,12 +15,10 @@ import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 
 import com.github.aha.sat.jpa.city.City;
 import com.github.aha.sat.jpa.city.CityProjection;
-import com.querydsl.core.types.OrderSpecifier;
 import com.querydsl.core.types.Projections;
 import com.querydsl.jpa.JPAExpressions;
 import com.querydsl.jpa.impl.JPAQuery;
@@ -145,32 +146,20 @@ class CountryRepositoryOtherTests {
 	@Nested
 	class PagingAndSortingTest {
 
-		private Page<CityProjection> findAllProjectionsSortedBy(Pageable pageable, OrderSpecifier<?>... o) {
+		private Page<CityProjection> findAllProjectionSortedBy(Pageable pageable, Class<?> pathType) {
 			var query = new JPAQuery<CityProjection>(em)
 					.select(Projections.constructor(CityProjection.class, city.id, city.name, city.state, country.name))
-					.from(country)
-					.innerJoin(country.cities, city)
-					.where(country.name.eq(USA))
-					.orderBy(o);
-			var result = fetchPage(em, query, pageable);
-			return result;
+					.from(city)
+//					.innerJoin(country.cities, city)
+					.innerJoin(country)
+					.on(country.id.eq(city.country.id))
+					.where(country.name.eq(USA));
+			return fetchProjectedPage(em, query, pageable, pathType);
 		}
 
 		@Test
-		void unpagedResult() {
-			var result = findAllProjectionsSortedBy(Pageable.unpaged(), country.name.asc(), city.name.asc());
-
-			assertThat(result)
-					.first()
-					.satisfies(c -> {
-						assertThat(c.getName()).isEqualTo("Atlanta");
-						assertThat(c.getCountryName()).isEqualTo(USA);
-					});
-		}
-
-		@Test
-		void pagedResultSortedByCountry() {
-			var result = findAllProjectionsSortedBy(PageRequest.ofSize(3), country.name.asc());
+		void pagedResultSortedByCountryName() {
+			var result = findAllProjectionSortedBy(of(0, 3, ASC, "countryName"), City.class);
 
 			assertThat(result)
 					.first()
@@ -181,8 +170,20 @@ class CountryRepositoryOtherTests {
 		}
 
 		@Test
-		void pagedResultSortedByCityDescended() {
-			var result = findAllProjectionsSortedBy(PageRequest.ofSize(3), city.name.desc());
+		void pagedResultSortedByMultipleAtrributes() {
+			var result = findAllProjectionSortedBy(of(0, 3, ASC, "state", "name"), City.class);
+
+			assertThat(result)
+					.first()
+					.satisfies(c -> {
+						assertThat(c.getName()).isEqualTo("New York");
+						assertThat(c.getCountryName()).isEqualTo(USA);
+					});
+		}
+
+		@Test
+		void pagedResultSortedByCityNameDescended() {
+			var result = findAllProjectionSortedBy(of(0, 3, DESC, "name"), City.class);
 
 			assertThat(result)
 					.first()
