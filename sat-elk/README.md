@@ -140,7 +140,7 @@ _Note: the available networks can be listed by.
 #### Add Elasticsearch cluster
 Run Elasticsearch:
 
-`docker run -d --name sat-elasticsearch --net sat-elk-net -p 9200:9200 -p 9300:9300 -e "discovery.type=single-node" elasticsearch:7.10.1` (as supported by Spring Data - docker has already newer version)
+`docker run -d --name sat-elasticsearch --net sat-elk-net -p 9200:9200 -p 9300:9300 -e "discovery.type=single-node" elasticsearch:7.17.4` (as supported by Spring Data - docker has already newer version)
 
 The Elasticsearch instance can be verified by REST call
 `GET http://<ELK_HOST>:9200`

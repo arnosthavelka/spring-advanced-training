@@ -158,8 +158,20 @@ class CountryRepositoryOtherTests {
 		}
 
 		@Test
-		void pagedResultSortedByCountryName() {
-			var result = findAllProjectionSortedBy(of(0, 3, ASC, "countryName"), City.class);
+		void pagedResultSortedByCityId() {
+			var result = findAllProjectionSortedBy(of(0, 3, ASC, "id"), City.class);
+
+			assertThat(result)
+					.first()
+					.satisfies(c -> {
+						assertThat(c.getName()).isEqualTo("Atlanta");
+						assertThat(c.getCountryName()).isEqualTo(USA);
+					});
+		}
+
+		@Test
+		void pagedResultSortedByCityNameDescended() {
+			var result = findAllProjectionSortedBy(of(0, 3, DESC, "name"), City.class);
 
 			assertThat(result)
 					.first()
@@ -182,8 +194,8 @@ class CountryRepositoryOtherTests {
 		}
 
 		@Test
-		void pagedResultSortedByCityNameDescended() {
-			var result = findAllProjectionSortedBy(of(0, 3, DESC, "name"), City.class);
+		void pagedResultSortedByCountryName() {
+			var result = findAllProjectionSortedBy(of(0, 3, ASC, "countryName"), City.class);
 
 			assertThat(result)
 					.first()
