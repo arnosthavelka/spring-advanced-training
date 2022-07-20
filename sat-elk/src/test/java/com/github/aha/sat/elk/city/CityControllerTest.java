@@ -1,15 +1,13 @@
 package com.github.aha.sat.elk.city;
 
-import static com.github.aha.sat.elk.city.City.INDEX;
 import static com.github.aha.sat.elk.city.CityController.ROOT_PATH;
-import static java.lang.Float.NaN;
 import static java.lang.Long.valueOf;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.notNullValue;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.BDDMockito.given;
-import static org.springframework.data.elasticsearch.core.TotalHitsRelation.EQUAL_TO;
+import static org.springframework.data.domain.Pageable.ofSize;
 import static org.springframework.http.MediaType.APPLICATION_JSON;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
@@ -25,8 +23,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.data.domain.PageImpl;
-import org.springframework.data.elasticsearch.core.SearchHit;
-import org.springframework.data.elasticsearch.core.SearchHitsImpl;
 import org.springframework.test.web.servlet.MockMvc;
 
 @WebMvcTest(CityController.class)
@@ -79,28 +75,23 @@ class CityControllerTest {
 
 	@Test
 	void search() throws Exception {
-		String cityNameParamValue = CITY_NAME.toLowerCase().substring(0, 5);
-		Object[] sortedValues = List.of(cityNameParamValue).toArray();
-		var cityHit = new SearchHit<City>(
-				INDEX, UUID.randomUUID().toString(), null, NaN, sortedValues, null, null, null, null, null,
-				new City(CITY_ID, CITY_NAME, CITY_COUNTRY, CITY_SUBCOUNTRY, CITY_GEONAMEID.longValue()));
-		List<? extends SearchHit<City>> cities = List.of(cityHit);
+		var pageSize = 5;
+		var cityNameParamValue = CITY_NAME.toLowerCase().substring(0, pageSize);
+		List<City> cities = List.of(new City(CITY_ID, CITY_NAME, CITY_COUNTRY, CITY_SUBCOUNTRY, CITY_GEONAMEID.longValue()));
 		given(service.search(eq(cityNameParamValue), eq(CITY_COUNTRY), any(), any()))
-				.willReturn(new SearchHitsImpl<City>(1, EQUAL_TO, NaN, "scrollId", cities, null, null));
+				.willReturn(new PageImpl<City>(cities, ofSize(pageSize), cities.size()));
 
 		mvc.perform(get(ROOT_PATH + "?name=" + cityNameParamValue + "&country=" + CITY_COUNTRY + "&size=5&sort=name"))
 				.andExpect(status().isOk())
 				.andExpect(content().contentTypeCompatibleWith(APPLICATION_JSON))
-				.andExpect(jsonPath("$.searchHits[0].index", is(INDEX)))
-				.andExpect(jsonPath("$.searchHits[0].id", notNullValue()))
-				.andExpect(jsonPath("$.searchHits[0].score", is("NaN")))
-				.andExpect(jsonPath("$.searchHits[0].sortValues.[0]", is(cityNameParamValue)))
-				.andExpect(jsonPath("$.searchHits[0].content.id", notNullValue()))
-				.andExpect(jsonPath("$.searchHits[0].content.name", is(CITY_NAME)))
-				.andExpect(jsonPath("$.searchHits[0].content.country", is(CITY_COUNTRY)))
-				.andExpect(jsonPath("$.searchHits[0].content.subcountry", is(CITY_SUBCOUNTRY)))
-				.andExpect(jsonPath("$.searchHits[0].content.geonameid", is(CITY_GEONAMEID)))
-				.andExpect(jsonPath("$.totalHits", is(1)));
+				.andExpect(jsonPath("$.numberOfElements", is(1)))
+				.andExpect(jsonPath("$.pageable.pageSize", is(pageSize)))
+				.andExpect(jsonPath("$.pageable.paged", is(true)))
+				.andExpect(jsonPath("$.content[0].id", notNullValue()))
+				.andExpect(jsonPath("$.content[0].name", is(CITY_NAME)))
+				.andExpect(jsonPath("$.content[0].country", is(CITY_COUNTRY)))
+				.andExpect(jsonPath("$.content[0].subcountry", is(CITY_SUBCOUNTRY)))
+				.andExpect(jsonPath("$.content[0].geonameid", is(CITY_GEONAMEID)));
 	}
 
 	@Test

@@ -7,7 +7,6 @@ import javax.websocket.server.PathParam;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.elasticsearch.core.SearchHits;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -46,7 +45,7 @@ public class CityController {
 	}
 
 	@GetMapping
-	public SearchHits<City> search(@PathParam("name") String name, @PathParam("country") String country,
+	public Page<City> search(@PathParam("name") String name, @PathParam("country") String country,
 			@PathParam("subcountry") String subcountry, Pageable pageable) {
 		return service.search(name, country, subcountry, pageable);
 	}

@@ -33,7 +33,6 @@ import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.elasticsearch.core.ElasticsearchOperations;
 import org.springframework.data.elasticsearch.core.SearchHit;
-import org.springframework.data.elasticsearch.core.SearchHits;
 import org.springframework.data.elasticsearch.core.SearchHitsImpl;
 import org.springframework.data.elasticsearch.core.mapping.IndexCoordinates;
 import org.springframework.data.elasticsearch.core.query.Query;
@@ -138,9 +137,9 @@ class CityServiceTest {
 		given(esTemplate.search(any(Query.class), eq(City.class), eq(IndexCoordinates.of(INDEX))))
 				.willReturn(new SearchHitsImpl<City>(1, EQUAL_TO, NaN, "scrollId", cities, null, null));
 
-		SearchHits<City> result = service.search(name, country, subcountry, pageable);
+		var result = service.search(name, country, subcountry, pageable);
 
-		assertThat(result.getTotalHits()).isEqualTo(1);
+		assertThat(result.getTotalElements()).isEqualTo(1);
 		verify(esTemplate).search(any(Query.class), eq(City.class), eq(IndexCoordinates.of(INDEX)));
 	}
 
