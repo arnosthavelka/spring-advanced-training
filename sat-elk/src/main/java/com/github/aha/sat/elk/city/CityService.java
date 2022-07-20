@@ -1,8 +1,9 @@
 package com.github.aha.sat.elk.city;
 
 import static java.util.Objects.nonNull;
+import static org.springframework.data.elasticsearch.core.SearchHitSupport.searchPageFor;
+import static org.springframework.data.elasticsearch.core.SearchHitSupport.unwrapSearchHits;
 
-import java.io.File;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.util.Collection;
@@ -13,7 +14,6 @@ import java.util.stream.Collectors;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.elasticsearch.core.ElasticsearchOperations;
-import org.springframework.data.elasticsearch.core.SearchHits;
 import org.springframework.data.elasticsearch.core.mapping.IndexCoordinates;
 import org.springframework.data.elasticsearch.core.query.Criteria;
 import org.springframework.data.elasticsearch.core.query.CriteriaQuery;
@@ -89,13 +89,14 @@ public class CityService {
 		return repository.findByCountry(country, pageable);
 	}
 
-	public SearchHits<City> search(String name, String country, String subcountry, Pageable pageable) {
+	public Page<City> search(String name, String country, String subcountry, Pageable pageable) {
 		var index = IndexCoordinates.of(City.INDEX);
 
 		CriteriaQuery query = buildSearchQuery(name, country, subcountry);
 		query.setPageable(pageable);
 
-		return esTemplate.search(query, City.class, index);
+		var result = esTemplate.search(query, City.class, index);
+		return (Page<City>) unwrapSearchHits(searchPageFor(result, pageable));
 	}
 
 	private CriteriaQuery buildSearchQuery(String name, String country, String subcountry) {
