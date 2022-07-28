@@ -14,6 +14,8 @@ import java.util.stream.Collectors;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.elasticsearch.core.ElasticsearchOperations;
+import org.springframework.data.elasticsearch.core.SearchHits;
+import org.springframework.data.elasticsearch.core.SearchPage;
 import org.springframework.data.elasticsearch.core.mapping.IndexCoordinates;
 import org.springframework.data.elasticsearch.core.query.Criteria;
 import org.springframework.data.elasticsearch.core.query.CriteriaQuery;
@@ -89,14 +91,22 @@ public class CityService {
 		return repository.findByCountry(country, pageable);
 	}
 
+	@SuppressWarnings("unchecked")
 	public Page<City> search(String name, String country, String subcountry, Pageable pageable) {
+		return (Page<City>) unwrapSearchHits(searchPage(name, country, subcountry, pageable));
+	}
+
+	public SearchPage<City> searchPage(String name, String country, String subcountry, Pageable pageable) {
+		return searchPageFor(searchHits(name, country, subcountry, pageable), pageable);
+	}
+
+	public SearchHits<City> searchHits(String name, String country, String subcountry, Pageable pageable) {
 		var index = IndexCoordinates.of(City.INDEX);
 
 		CriteriaQuery query = buildSearchQuery(name, country, subcountry);
 		query.setPageable(pageable);
 
-		var result = esTemplate.search(query, City.class, index);
-		return (Page<City>) unwrapSearchHits(searchPageFor(result, pageable));
+		return esTemplate.search(query, City.class, index);
 	}
 
 	private CriteriaQuery buildSearchQuery(String name, String country, String subcountry) {
