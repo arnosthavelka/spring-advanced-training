@@ -12,7 +12,9 @@ Simple feature to demonstrate CRUD operations with ElasticSearch. The root API c
 | ----------------------------------------- | ----------- | -------------
 | Get item by ID                            | GET         | http://localhost:8080/api/cities/{id}
 | Static search (just by country)           | GET         | http://localhost:8080/api/cities/country/united kingdom?sort=name,desc
-| Dynamic search (by defined attributes)    | GET         | http://localhost:8080/api/cities/?name=be&country=Czech&subcountry=bohemia&size=5&sort=name,asc
+| Dynamic search (with Page response)		| GET         | http://localhost:8080/api/cities/?name=be&country=Czech&subcountry=bohemia&size=5&sort=name,asc
+| Dynamic search (with SearchPage response)	| GET         | http://localhost:8080/api/cities/search_page?name=be&country=Czech&subcountry=bohemia&size=5&sort=name,asc
+| Dynamic search (with SearchHits response)	| GET         | http://localhost:8080/api/cities/search_hints?name=be&country=Czech&subcountry=bohemia&size=5&sort=name,asc
 | Upload CSV					        	| POST        | http://localhost:8080/api/cities/upload?filename=Z:/world-cities.csv
 
 ### Item output
@@ -74,6 +76,139 @@ Simple feature to demonstrate CRUD operations with ElasticSearch. The root API c
 
 ### Dynamic Search Output
 
+#### Page response
+
+```
+{
+  "content": [
+    {
+      "id": "yqoYEIIB55LQo2aMkOKS",
+      "name": "Benešov",
+      "country": "Czech Republic",
+      "subcountry": "Central Bohemia",
+      "geonameid": 3079508
+    },
+    ...
+  ],
+  "pageable": {
+    "sort": {
+      "empty": false,
+      "sorted": true,
+      "unsorted": false
+    },
+    "offset": 0,
+    "pageNumber": 0,
+    "pageSize": 5,
+    "unpaged": false,
+    "paged": true
+  },
+  "last": true,
+  "totalPages": 1,
+  "totalElements": 3,
+  "size": 5,
+  "number": 0,
+  "sort": {
+    "empty": false,
+    "sorted": true,
+    "unsorted": false
+  },
+  "first": true,
+  "numberOfElements": 3,
+  "empty": false
+}
+```
+
+#### SearchPage response
+
+```
+{
+  "content": [
+    {
+      "index": "city",
+      "id": "yqoYEIIB55LQo2aMkOKS",
+      "score": "NaN",
+      "sortValues": [
+        "benešov"
+      ],
+      "content": {
+        "id": "yqoYEIIB55LQo2aMkOKS",
+        "name": "Benešov",
+        "country": "Czech Republic",
+        "subcountry": "Central Bohemia",
+        "geonameid": 3079508
+      },
+      "highlightFields": {},
+      "innerHits": {},
+      "nestedMetaData": null,
+      "routing": null,
+      "explanation": null,
+      "matchedQueries": []
+    },
+    ...
+  ],
+  "pageable": {
+    "sort": {
+      "empty": false,
+      "sorted": true,
+      "unsorted": false
+    },
+    "offset": 0,
+    "pageNumber": 0,
+    "pageSize": 5,
+    "unpaged": false,
+    "paged": true
+  },
+  "searchHits": {
+    "totalHits": 3,
+    "totalHitsRelation": "EQUAL_TO",
+    "maxScore": "NaN",
+    "scrollId": null,
+    "searchHits": [
+      {
+        "index": "city",
+        "id": "yqoYEIIB55LQo2aMkOKS",
+        "score": "NaN",
+        "sortValues": [
+          "benešov"
+        ],
+        "content": {
+          "id": "yqoYEIIB55LQo2aMkOKS",
+          "name": "Benešov",
+          "country": "Czech Republic",
+          "subcountry": "Central Bohemia",
+          "geonameid": 3079508
+        },
+        "highlightFields": {},
+        "innerHits": {},
+        "nestedMetaData": null,
+        "routing": null,
+        "explanation": null,
+        "matchedQueries": []
+      },
+      ...
+    ],
+    "aggregations": null,
+    "suggest": null,
+    "empty": false
+  },
+  "totalPages": 1,
+  "totalElements": 3,
+  "size": 5,
+  "number": 0,
+  "sort": {
+    "empty": false,
+    "sorted": true,
+    "unsorted": false
+  },
+  "first": true,
+  "last": true,
+  "numberOfElements": 3,
+  "empty": false
+}
+```
+
+#### SearchHits response
+
 ```
 {
   "totalHits": 3,
@@ -81,20 +216,19 @@ Simple feature to demonstrate CRUD operations with ElasticSearch. The root API c
   "maxScore": "NaN",
   "scrollId": null,
   "searchHits": [
-    ...,
     {
       "index": "city",
-      "id": "ckmz1XkB8HBQc_fknzUo",
+      "id": "yqoYEIIB55LQo2aMkOKS",
       "score": "NaN",
       "sortValues": [
-        "beroun"
+        "benešov"
       ],
       "content": {
-        "id": "ckmz1XkB8HBQc_fknzUo",
-        "name": "Beroun",
+        "id": "yqoYEIIB55LQo2aMkOKS",
+        "name": "Benešov",
         "country": "Czech Republic",
         "subcountry": "Central Bohemia",
-        "geonameid": 3079467
+        "geonameid": 3079508
       },
       "highlightFields": {},
       "innerHits": {},
@@ -106,6 +240,7 @@ Simple feature to demonstrate CRUD operations with ElasticSearch. The root API c
     ...
   ],
   "aggregations": null,
+  "suggest": null,
   "empty": false
 }
 ```
