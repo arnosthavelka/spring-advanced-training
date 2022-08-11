@@ -83,7 +83,7 @@ class CityControllerTest {
 
 	@Test
 	void search() throws Exception {
-		var cityNameParamValue = CITY_NAME.toLowerCase().substring(0, PAGE_SIZE);
+		var cityNameParamValue = CITY_NAME.toLowerCase().substring(0, 5);
 		List<City> cities = List.of(new City(CITY_ID, CITY_NAME, CITY_COUNTRY, CITY_SUBCOUNTRY, CITY_GEONAMEID.longValue()));
 		given(service.search(eq(cityNameParamValue), eq(CITY_COUNTRY), any(), any()))
 				.willReturn(new PageImpl<City>(cities, ofSize(PAGE_SIZE), cities.size()));
@@ -103,19 +103,18 @@ class CityControllerTest {
 
 	@Test
 	void searchPage() throws Exception {
+		var totalHits = 1;
 		String cityNameParamValue = CITY_NAME.toLowerCase().substring(0, 5);
 		Object[] sortedValues = List.of(cityNameParamValue).toArray();
-		var cityHit = new SearchHit<City>(
-				INDEX, UUID.randomUUID().toString(), null, NaN, sortedValues, null, null, null, null, null,
-				new City(CITY_ID, CITY_NAME, CITY_COUNTRY, CITY_SUBCOUNTRY, CITY_GEONAMEID.longValue()));
-		List<? extends SearchHit<City>> cities = List.of(cityHit);
+		var city = new City(CITY_ID, CITY_NAME, CITY_COUNTRY, CITY_SUBCOUNTRY, CITY_GEONAMEID.longValue());
+		List<? extends SearchHit<City>> cities = List.of(createSearchHit(city, sortedValues));
 		given(service.searchPage(eq(cityNameParamValue), eq(CITY_COUNTRY), any(), any()))
-				.willReturn(searchPageFor(new SearchHitsImpl<City>(1, EQUAL_TO, NaN, "scrollId", cities, null, null), ofSize(PAGE_SIZE)));
+				.willReturn(searchPageFor(createSearchHitsImpl(cities, totalHits), ofSize(PAGE_SIZE)));
 
 		mvc.perform(get(ROOT_PATH + "/search_page?name=" + cityNameParamValue + "&country=" + CITY_COUNTRY + "&size=" + PAGE_SIZE + "&sort=name"))
 				.andExpect(status().isOk())
 				.andExpect(content().contentTypeCompatibleWith(APPLICATION_JSON))
-				.andExpect(jsonPath("$.totalElements", is(1)))
+				.andExpect(jsonPath("$.totalElements", is(totalHits)))
 				.andExpect(jsonPath("$.pageable.pageSize", is(PAGE_SIZE)))
 				.andExpect(jsonPath("$.pageable.paged", is(true)))
 				.andExpect(jsonPath("$.content[0].index", is(INDEX)))
@@ -130,21 +129,23 @@ class CityControllerTest {
 				.andExpect(jsonPath("$.searchHits", notNullValue()));
 	}
 
+	private SearchHit<City> createSearchHit(City city, Object[] sortedValues) {
+		return new SearchHit<City>(INDEX, UUID.randomUUID().toString(), null, NaN, sortedValues, null, null, null, null, null, city);
+	}
+
 	@Test
 	void searchHits() throws Exception {
+		var totalHits = 1;
 		String cityNameParamValue = CITY_NAME.toLowerCase().substring(0, 5);
 		Object[] sortedValues = List.of(cityNameParamValue).toArray();
-		var cityHit = new SearchHit<City>(
-				INDEX, UUID.randomUUID().toString(), null, NaN, sortedValues, null, null, null, null, null,
-				new City(CITY_ID, CITY_NAME, CITY_COUNTRY, CITY_SUBCOUNTRY, CITY_GEONAMEID.longValue()));
-		List<? extends SearchHit<City>> cities = List.of(cityHit);
-		given(service.searchHits(eq(cityNameParamValue), eq(CITY_COUNTRY), any(), any()))
-				.willReturn(new SearchHitsImpl<City>(1, EQUAL_TO, NaN, "scrollId", cities, null, null));
+		var city = new City(CITY_ID, CITY_NAME, CITY_COUNTRY, CITY_SUBCOUNTRY, CITY_GEONAMEID.longValue());
+		List<? extends SearchHit<City>> cities = List.of(createSearchHit(city, sortedValues));
+		given(service.searchHits(eq(cityNameParamValue), eq(CITY_COUNTRY), any(), any())).willReturn(createSearchHitsImpl(cities, totalHits));
 
 		mvc.perform(get(ROOT_PATH + "/search_hints?name=" + cityNameParamValue + "&country=" + CITY_COUNTRY + "&size=" + PAGE_SIZE + "&sort=name"))
 				.andExpect(status().isOk())
 				.andExpect(content().contentTypeCompatibleWith(APPLICATION_JSON))
-				.andExpect(jsonPath("$.totalHits", is(1)))
+				.andExpect(jsonPath("$.totalHits", is(totalHits)))
 				.andExpect(jsonPath("$.searchHits[0].index", is(INDEX)))
 				.andExpect(jsonPath("$.searchHits[0].id", notNullValue()))
 				.andExpect(jsonPath("$.searchHits[0].score", is("NaN")))
@@ -160,6 +161,10 @@ class CityControllerTest {
 	void uploadFile() throws Exception {
 		mvc.perform(post(ROOT_PATH + "/upload"))
 				.andExpect(status().isNoContent());
+	}
+
+	private SearchHitsImpl<City> createSearchHitsImpl(List<? extends SearchHit<City>> cities, int totalHits) {
+		return new SearchHitsImpl<City>(totalHits, EQUAL_TO, NaN, "scrollId", cities, null, null);
 	}
 
 }
