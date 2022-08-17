@@ -142,7 +142,7 @@ class CityControllerTest {
 		List<? extends SearchHit<City>> cities = List.of(createSearchHit(city, sortedValues));
 		given(service.searchHits(eq(cityNameParamValue), eq(CITY_COUNTRY), any(), any())).willReturn(createSearchHitsImpl(cities, totalHits));
 
-		mvc.perform(get(ROOT_PATH + "/search_hints?name=" + cityNameParamValue + "&country=" + CITY_COUNTRY + "&size=" + PAGE_SIZE + "&sort=name"))
+		mvc.perform(get(ROOT_PATH + "/search_hits?name=" + cityNameParamValue + "&country=" + CITY_COUNTRY + "&size=" + PAGE_SIZE + "&sort=name"))
 				.andExpect(status().isOk())
 				.andExpect(content().contentTypeCompatibleWith(APPLICATION_JSON))
 				.andExpect(jsonPath("$.totalHits", is(totalHits)))

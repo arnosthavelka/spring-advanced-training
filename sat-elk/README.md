@@ -14,7 +14,7 @@ Simple feature to demonstrate CRUD operations with ElasticSearch. The root API c
 | Static search (just by country)           | GET         | http://localhost:8080/api/cities/country/united kingdom?sort=name,desc
 | Dynamic search (with Page response)		| GET         | http://localhost:8080/api/cities/?name=be&country=Czech&subcountry=bohemia&size=5&sort=name,asc
 | Dynamic search (with SearchPage response)	| GET         | http://localhost:8080/api/cities/search_page?name=be&country=Czech&subcountry=bohemia&size=5&sort=name,asc
-| Dynamic search (with SearchHits response)	| GET         | http://localhost:8080/api/cities/search_hints?name=be&country=Czech&subcountry=bohemia&size=5&sort=name,asc
+| Dynamic search (with SearchHits response)	| GET         | http://localhost:8080/api/cities/search_hits?name=be&country=Czech&subcountry=bohemia&size=5&sort=name,asc
 | Upload CSV					        	| POST        | http://localhost:8080/api/cities/upload?filename=Z:/world-cities.csv
 
 ### Item output

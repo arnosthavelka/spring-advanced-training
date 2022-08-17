@@ -25,7 +25,7 @@ import lombok.RequiredArgsConstructor;
  * static search cities (with Page response)		- GET http://localhost:8080/api/cities/country/czech republic?sort=name,desc
  * dynamic search cities (with Page response)		- GET http://localhost:8080/api/cities/?name=be&country=Czech&subcountry=bohemia&size=5&sort=name
  * dynamic search cities (with SearchPage response)	- GET http://localhost:8080/api/cities/search_page?name=be&country=Czech&subcountry=bohemia&size=5&sort=name
- * dynamic search cities (with SearchHits response)	- GET http://localhost:8080/api/cities/search_hints?name=be&country=Czech&subcountry=bohemia&size=5&sort=name
+ * dynamic search cities (with SearchHits response)	- GET http://localhost:8080/api/cities/search_hits?name=be&country=Czech&subcountry=bohemia&size=5&sort=name
  * upload data										- POST http://localhost:8080/api/cities/upload?filename=Z:/world-cities.csv
  */
 @RestController
@@ -60,7 +60,7 @@ public class CityController {
 		return service.searchPage(name, country, subcountry, pageable);
 	}
 
-	@GetMapping("/search_hints")
+	@GetMapping("/search_hits")
 	public SearchHits<City> searchHits(@PathParam("name") String name, @PathParam("country") String country,
 			@PathParam("subcountry") String subcountry, Pageable pageable) {
 		return service.searchHits(name, country, subcountry, pageable);
