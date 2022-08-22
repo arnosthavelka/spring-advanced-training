@@ -16,7 +16,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.elasticsearch.core.ElasticsearchOperations;
 import org.springframework.data.elasticsearch.core.SearchHits;
 import org.springframework.data.elasticsearch.core.SearchPage;
-import org.springframework.data.elasticsearch.core.mapping.IndexCoordinates;
 import org.springframework.data.elasticsearch.core.query.Criteria;
 import org.springframework.data.elasticsearch.core.query.CriteriaQuery;
 import org.springframework.stereotype.Service;
@@ -101,12 +100,10 @@ public class CityService {
 	}
 
 	public SearchHits<City> searchHits(String name, String country, String subcountry, Pageable pageable) {
-		var index = IndexCoordinates.of(City.INDEX);
-
 		CriteriaQuery query = buildSearchQuery(name, country, subcountry);
 		query.setPageable(pageable);
 
-		return esTemplate.search(query, City.class, index);
+		return esTemplate.search(query, City.class);
 	}
 
 	private CriteriaQuery buildSearchQuery(String name, String country, String subcountry) {

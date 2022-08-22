@@ -12,10 +12,10 @@ Simple feature to demonstrate CRUD operations with ElasticSearch. The root API c
 | ----------------------------------------- | ----------- | -------------
 | Get item by ID                            | GET         | http://localhost:8080/api/cities/{id}
 | Static search (just by country)           | GET         | http://localhost:8080/api/cities/country/united kingdom?sort=name,desc
-| Dynamic search (with Page response)		| GET         | http://localhost:8080/api/cities/?name=be&country=Czech&subcountry=bohemia&size=5&sort=name,asc
+| Dynamic search (with Page response)		    | GET         | http://localhost:8080/api/cities/?name=be&country=Czech&subcountry=bohemia&size=5&sort=name,asc
 | Dynamic search (with SearchPage response)	| GET         | http://localhost:8080/api/cities/search_page?name=be&country=Czech&subcountry=bohemia&size=5&sort=name,asc
-| Dynamic search (with SearchHits response)	| GET         | http://localhost:8080/api/cities/search_hints?name=be&country=Czech&subcountry=bohemia&size=5&sort=name,asc
-| Upload CSV					        	| POST        | http://localhost:8080/api/cities/upload?filename=Z:/world-cities.csv
+| Dynamic search (with SearchHits response)	| GET         | http://localhost:8080/api/cities/search_hits?name=be&country=Czech&subcountry=bohemia&size=5&sort=name,asc
+| Upload CSV					        	            | POST        | http://localhost:8080/api/cities/upload?filename=Z:/world-cities.csv
 
 ### Item output
 
@@ -288,6 +288,21 @@ The availability can be checked from PowerShell console as:_
 _The used ports can be listed in AWS by:_
 
 `netstat -tulpn`
+
+#### Disable XPack in Elasticsearch
+The docker image contains enabled XPath which produces warning like this:
+```
+2022-07-18 08:57:05.821  WARN 6196 --- [nio-8080-exec-1] org.elasticsearch.client.RestClient      : request [POST http://localhost:9200/_bulk?timeout=1m] returned 1 warnings: [299 Elasticsearch-7.17.4-79878662c54c886ae89206c685d9f1051a9d6411 "Elasticsearch built-in security features are not enabled. Without authentication, your cluster could be accessible to anyone. See https://www.elastic.co/guide/en/elasticsearch/reference/7.17/security-minimal-setup.html to enable security."]
+```
+
+Therefore, we need to disable security in DEV environment as:
+```
+docker exec -it <container_id> bash
+cd /usr/share/elasticsearch/config
+echo "xpack.security.enabled: false" >> elasticsearch.yml
+```
+
+See: https://stackoverflow.com/questions/67993633/how-to-fix-this-in-error-rails-warning-299-elasticsearch-built-in-security-fea
 
 #### Add ElasticHQ GUI
 `docker run -d --name sat-elastichq --net sat-elk-net -p 5000:5000 elastichq/elasticsearch-hq`
