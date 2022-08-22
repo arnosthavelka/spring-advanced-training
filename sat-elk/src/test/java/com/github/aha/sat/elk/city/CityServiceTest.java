@@ -34,7 +34,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.elasticsearch.core.ElasticsearchOperations;
 import org.springframework.data.elasticsearch.core.SearchHit;
 import org.springframework.data.elasticsearch.core.SearchHitsImpl;
-import org.springframework.data.elasticsearch.core.mapping.IndexCoordinates;
 import org.springframework.data.elasticsearch.core.query.Query;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
@@ -134,13 +133,13 @@ class CityServiceTest {
 				new City(CITY_ID, name, country, subcountry, 666L));
 		List<? extends SearchHit<City>> cities = List.of(cityHit);
 
-		given(esTemplate.search(any(Query.class), eq(City.class), eq(IndexCoordinates.of(INDEX))))
+		given(esTemplate.search(any(Query.class), eq(City.class)))
 				.willReturn(new SearchHitsImpl<City>(1, EQUAL_TO, NaN, "scrollId", cities, null, null));
 
 		var result = service.search(name, country, subcountry, pageable);
 
 		assertThat(result.getTotalElements()).isEqualTo(1);
-		verify(esTemplate).search(any(Query.class), eq(City.class), eq(IndexCoordinates.of(INDEX)));
+		verify(esTemplate).search(any(Query.class), eq(City.class));
 	}
 
 }
