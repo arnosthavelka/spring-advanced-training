@@ -1,5 +1,6 @@
 package com.github.aha.sat.elk.city;
 
+import static com.fasterxml.jackson.dataformat.csv.CsvParser.Feature.FAIL_ON_MISSING_HEADER_COLUMNS;
 import static java.util.Objects.nonNull;
 import static org.springframework.data.elasticsearch.core.SearchHitSupport.searchPageFor;
 import static org.springframework.data.elasticsearch.core.SearchHitSupport.unwrapSearchHits;
@@ -60,6 +61,7 @@ public class CityService {
 		try {
 			var csvFile = Path.of(csvFileName);
 			return csvMapper
+					.disable(FAIL_ON_MISSING_HEADER_COLUMNS)
 					.readerFor(City.class)
 					.with(schema)
 					.<City>readValues(csvFile.toFile())

@@ -2,7 +2,7 @@ package com.github.aha.sat.jpa.city;
 
 import java.util.List;
 
-import javax.persistence.Tuple;
+import jakarta.persistence.Tuple;
 
 import lombok.NonNull;
 

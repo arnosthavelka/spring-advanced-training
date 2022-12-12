@@ -164,7 +164,7 @@ class CityControllerTest {
 	}
 
 	private SearchHitsImpl<City> createSearchHitsImpl(List<? extends SearchHit<City>> cities, int totalHits) {
-		return new SearchHitsImpl<City>(totalHits, EQUAL_TO, NaN, "scrollId", cities, null, null);
+		return new SearchHitsImpl<City>(totalHits, EQUAL_TO, NaN, "scrollId", "pointInTimeId", cities, null, null);
 	}
 
 }
