@@ -8,8 +8,6 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
 import java.util.List;
 
-import javax.websocket.server.PathParam;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.hateoas.EntityModel;
@@ -22,6 +20,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.github.aha.sat.rest.city.resource.CityEntityResource;
 import com.github.aha.sat.rest.city.resource.CityResource;
+
+import jakarta.websocket.server.PathParam;
 
 /**
  * Usage:
