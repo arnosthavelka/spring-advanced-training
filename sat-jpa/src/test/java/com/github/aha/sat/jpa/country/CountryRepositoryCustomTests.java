@@ -43,10 +43,11 @@ class CountryRepositoryCustomTests {
 			var result = countryRepository.findAllCountriesBy("%an%", "%i%");
 
 			assertThat(result)
-					.hasSize(2)
-					.allSatisfy(c -> {
+					.singleElement()
+					.satisfies(c -> {
 						assertThat(c.getName()).isEqualTo(USA);
 						assertThat(c.getCities()).map(City::getName).contains("Atlanta", "San Francisco");
+
 					});
 		}
 
