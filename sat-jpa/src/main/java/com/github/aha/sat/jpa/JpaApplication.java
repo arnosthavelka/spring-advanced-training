@@ -10,15 +10,4 @@ public class JpaApplication {
         SpringApplication.run(JpaApplication.class, args);
     }
 
-	/**
-	 * Usage: http://localhost:8080/console/ (JDBC URL=jdbc:h2:mem:testdb)
-	 * 
-	 * @see https://dzone.com/articles/using-the-h2-database-console-in-spring-boot-with
-	 */
-//	@Bean
-//	ServletRegistrationBean<WebServlet> h2servletRegistration() {
-//		var registrationBean = new ServletRegistrationBean<WebServlet>(new WebServlet());
-//		registrationBean.addUrlMappings("/console/*");
-//		return registrationBean;
-//	}
 }
