@@ -29,8 +29,7 @@ class CountryRepositoryCustomTests {
 			var result = countryRepository.findAllCountriesHavingCity(cityName, "California");
 
 			assertThat(result)
-					.hasSize(1)
-					.first()
+					.singleElement()
 					.satisfies(c -> {
 						assertThat(c.getId()).isPositive();
 						assertThat(c.getName()).isEqualTo(USA);
