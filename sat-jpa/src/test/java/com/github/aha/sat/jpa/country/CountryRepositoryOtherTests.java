@@ -8,9 +8,6 @@ import static org.springframework.data.domain.PageRequest.of;
 import static org.springframework.data.domain.Sort.Direction.ASC;
 import static org.springframework.data.domain.Sort.Direction.DESC;
 
-import jakarta.persistence.EntityManager;
-import jakarta.persistence.PersistenceContext;
-
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
@@ -22,6 +19,9 @@ import com.github.aha.sat.jpa.city.CityProjection;
 import com.querydsl.core.types.Projections;
 import com.querydsl.jpa.JPAExpressions;
 import com.querydsl.jpa.impl.JPAQuery;
+
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.PersistenceContext;
 
 @DataJpaTest
 class CountryRepositoryOtherTests {
@@ -144,7 +144,7 @@ class CountryRepositoryOtherTests {
 	}
 	
 	@Nested
-	class PagingAndSortingTest {
+	class PagingAndSorting {
 
 		private Page<CityProjection> findAllProjectionSortedBy(Pageable pageable, Class<?> pathType) {
 			var query = new JPAQuery<CityProjection>(em)

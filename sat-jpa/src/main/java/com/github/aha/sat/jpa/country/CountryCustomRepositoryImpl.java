@@ -26,7 +26,7 @@ public class CountryCustomRepositoryImpl implements CountryCustomRepository {
 	@PersistenceContext
 	private final EntityManager em;
 
-	public List<Country> findAllCountriesBy(@NonNull String cityName, @NonNull String cityState) {
+	public List<Country> findAllCountriesHavingCity(@NonNull String cityName, @NonNull String cityState) {
 		return new JPAQuery<Country>(em)
 				.select(city.country)
 				.from(city)
