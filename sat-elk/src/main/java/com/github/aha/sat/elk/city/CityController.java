@@ -11,10 +11,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import jakarta.websocket.server.PathParam;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 
@@ -48,20 +48,20 @@ public class CityController {
 	}
 
 	@GetMapping
-	public Page<City> search(@PathParam("name") String name, @PathParam("country") String country,
-			@PathParam("subcountry") String subcountry, Pageable pageable) {
+	public Page<City> search(@RequestParam("name") String name, @RequestParam("country") String country,
+			@RequestParam("subcountry") String subcountry, Pageable pageable) {
 		return service.search(name, country, subcountry, pageable);
 	}
 
 	@GetMapping("/search_page")
-	public SearchPage<City> searchPage(@PathParam("name") String name, @PathParam("country") String country,
-			@PathParam("subcountry") String subcountry, Pageable pageable) {
+	public SearchPage<City> searchPage(@RequestParam("name") String name, @RequestParam("country") String country,
+			@RequestParam("subcountry") String subcountry, Pageable pageable) {
 		return service.searchPage(name, country, subcountry, pageable);
 	}
 
 	@GetMapping("/search_hits")
-	public SearchHits<City> searchHits(@PathParam("name") String name, @PathParam("country") String country,
-			@PathParam("subcountry") String subcountry, Pageable pageable) {
+	public SearchHits<City> searchHits(@RequestParam("name") String name, @RequestParam("country") String country,
+			@RequestParam("subcountry") String subcountry, Pageable pageable) {
 		return service.searchHits(name, country, subcountry, pageable);
 	}
 
