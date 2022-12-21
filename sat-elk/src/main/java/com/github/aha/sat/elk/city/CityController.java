@@ -48,20 +48,23 @@ public class CityController {
 	}
 
 	@GetMapping
-	public Page<City> search(@RequestParam("name") String name, @RequestParam("country") String country,
-			@RequestParam("subcountry") String subcountry, Pageable pageable) {
+	public Page<City> search(@RequestParam(name = "name", required = false) String name,
+			@RequestParam(name = "country", required = false) String country,
+			@RequestParam(name = "subcountry", required = false) String subcountry, Pageable pageable) {
 		return service.search(name, country, subcountry, pageable);
 	}
 
 	@GetMapping("/search_page")
-	public SearchPage<City> searchPage(@RequestParam("name") String name, @RequestParam("country") String country,
-			@RequestParam("subcountry") String subcountry, Pageable pageable) {
+	public SearchPage<City> searchPage(@RequestParam(name = "name", required = false) String name,
+			@RequestParam(name = "country", required = false) String country,
+			@RequestParam(name = "subcountry", required = false) String subcountry, Pageable pageable) {
 		return service.searchPage(name, country, subcountry, pageable);
 	}
 
 	@GetMapping("/search_hits")
-	public SearchHits<City> searchHits(@RequestParam("name") String name, @RequestParam("country") String country,
-			@RequestParam("subcountry") String subcountry, Pageable pageable) {
+	public SearchHits<City> searchHits(@RequestParam(name = "name", required = false) String name,
+			@RequestParam(name = "country", required = false) String country,
+			@RequestParam(name = "subcountry", required = false) String subcountry, Pageable pageable) {
 		return service.searchHits(name, country, subcountry, pageable);
 	}
 
