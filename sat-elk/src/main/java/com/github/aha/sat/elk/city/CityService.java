@@ -16,7 +16,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.elasticsearch.core.ElasticsearchOperations;
 import org.springframework.data.elasticsearch.core.SearchHits;
-import org.springframework.data.elasticsearch.core.SearchPage;
 import org.springframework.data.elasticsearch.core.query.Criteria;
 import org.springframework.data.elasticsearch.core.query.CriteriaQuery;
 import org.springframework.stereotype.Service;
@@ -94,18 +93,16 @@ public class CityService {
 
 	@SuppressWarnings("unchecked")
 	public Page<City> search(String name, String country, String subcountry, Pageable pageable) {
-		return (Page<City>) unwrapSearchHits(searchPage(name, country, subcountry, pageable));
+		return (Page<City>) unwrapSearchHits(searchPageFor(searchHits(name, country, subcountry, pageable), pageable));
 	}
 
-	public SearchPage<City> searchPage(String name, String country, String subcountry, Pageable pageable) {
-		return searchPageFor(searchHits(name, country, subcountry, pageable), pageable);
-	}
-
-	public SearchHits<City> searchHits(String name, String country, String subcountry, Pageable pageable) {
+	SearchHits<City> searchHits(String name, String country, String subcountry, Pageable pageable) {
 		CriteriaQuery query = buildSearchQuery(name, country, subcountry);
 		query.setPageable(pageable);
 
-		return esTemplate.search(query, City.class);
+		var result = esTemplate.search(query, City.class);
+		// TODO remove of correctly serialize result.getAggregations()
+		return result;
 	}
 
 	private CriteriaQuery buildSearchQuery(String name, String country, String subcountry) {
