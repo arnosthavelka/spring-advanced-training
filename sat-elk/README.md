@@ -12,7 +12,7 @@ Simple feature to demonstrate CRUD operations with ElasticSearch. The root API c
 | ----------------------------------------- | ----------- | -------------
 | Get item by ID                            | GET         | http://localhost:8080/api/cities/{id}
 | Static search (just by country)           | GET         | http://localhost:8080/api/cities/country/united kingdom?sort=name,desc
-| Dynamic search (with Page response)		| GET         | http://localhost:8080/api/cities/?name=be&country=Czech&subcountry=bohemia&size=5&sort=name,asc
+| Dynamic search (with Page response)		| GET         | http://localhost:8080/api/cities?name=be&country=Czech&subcountry=bohemia&size=5&sort=name,asc
 | Dynamic search (with SearchPage response)	| GET         | http://localhost:8080/api/cities/search_page?name=be&country=Czech&subcountry=bohemia&size=5&sort=name,asc
 | Dynamic search (with SearchHits response)	| GET         | http://localhost:8080/api/cities/search_hits?name=be&country=Czech&subcountry=bohemia&size=5&sort=name,asc
 | Upload CSV					        	| POST        | http://localhost:8080/api/cities/upload?filename=Z:/world-cities.csv
@@ -45,31 +45,28 @@ Simple feature to demonstrate CRUD operations with ElasticSearch. The root API c
   ],
   "pageable": {
     "sort": {
+      "empty": false,
       "sorted": true,
-      "unsorted": false,
-      "empty": false
+      "unsorted": false
     },
     "offset": 0,
-    "pageSize": 20,
     "pageNumber": 0,
+    "pageSize": 50,
     "unpaged": false,
     "paged": true
   },
-  "aggregations": null,
-  "scrollId": null,
-  "maxScore": "NaN",
-  "totalPages": 26,
-  "totalElements": 513,
-  "size": 20,
+  "totalElements": 3225,
+  "totalPages": 65,
+  "size": 50,
   "number": 0,
   "sort": {
+    "empty": false,
     "sorted": true,
-    "unsorted": false,
-    "empty": false
+    "unsorted": false
   },
   "first": true,
   "last": false,
-  "numberOfElements": 20,
+  "numberOfElements": 50,
   "empty": false
 }
 ```
