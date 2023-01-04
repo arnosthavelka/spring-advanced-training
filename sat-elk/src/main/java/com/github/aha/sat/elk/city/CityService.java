@@ -101,7 +101,6 @@ public class CityService {
 		query.setPageable(pageable);
 
 		var result = esTemplate.search(query, City.class);
-		// TODO remove of correctly serialize result.getAggregations()
 		return result;
 	}
 

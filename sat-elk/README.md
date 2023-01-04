@@ -48,7 +48,6 @@ Simple feature to demonstrate CRUD operations with ElasticSearch. The root API c
       "unsorted": false
     },
     "offset": 0,
-    "pageSize": 20,
     "pageNumber": 0,
     "paged": true,
     "unpaged": false
