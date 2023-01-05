@@ -100,8 +100,7 @@ public class CityService {
 		CriteriaQuery query = buildSearchQuery(name, country, subcountry);
 		query.setPageable(pageable);
 
-		var result = esTemplate.search(query, City.class);
-		return result;
+		return esTemplate.search(query, City.class);
 	}
 
 	private CriteriaQuery buildSearchQuery(String name, String country, String subcountry) {
