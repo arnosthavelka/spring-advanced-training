@@ -7,11 +7,6 @@ import static org.springframework.http.MediaType.APPLICATION_XML_VALUE;
 
 import java.util.List;
 
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
-import jakarta.validation.Valid;
-import jakarta.websocket.server.PathParam;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
@@ -34,6 +29,10 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import jakarta.validation.Valid;
+import jakarta.websocket.server.PathParam;
 
 /**
  * Usage:
@@ -120,8 +119,7 @@ public class CitySwaggerController {
 	}
 
 	private String getNewLocation(HttpServletRequest request, Long id) {
-		StringBuffer url = request.getRequestURL();
-		var template = new UriTemplate(url.append("/{childId}").toString());
+		var template = new UriTemplate(request.getRequestURL().append("/{childId}").toString());
 		return template.expand(id).toASCIIString();
 
 	}
