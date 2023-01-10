@@ -1,7 +1,6 @@
 package com.github.aha.sat.elk.city;
 
 import static com.github.aha.sat.elk.city.CityController.ROOT_PATH;
-import static java.lang.Float.NaN;
 import static java.lang.Long.valueOf;
 import static java.util.UUID.randomUUID;
 import static org.hamcrest.CoreMatchers.is;
@@ -10,7 +9,6 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.BDDMockito.given;
 import static org.springframework.data.domain.Pageable.ofSize;
-import static org.springframework.data.elasticsearch.core.TotalHitsRelation.EQUAL_TO;
 import static org.springframework.http.MediaType.APPLICATION_JSON;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
@@ -26,8 +24,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.data.domain.PageImpl;
-import org.springframework.data.elasticsearch.core.SearchHit;
-import org.springframework.data.elasticsearch.core.SearchHitsImpl;
 import org.springframework.test.web.servlet.MockMvc;
 
 @WebMvcTest(CityController.class)
@@ -103,10 +99,6 @@ class CityControllerTest {
 	void uploadFile() throws Exception {
 		mvc.perform(post(ROOT_PATH + "/upload"))
 				.andExpect(status().isNoContent());
-	}
-
-	private SearchHitsImpl<City> createSearchHitsImpl(List<? extends SearchHit<City>> cities, int totalHits) {
-		return new SearchHitsImpl<City>(totalHits, EQUAL_TO, NaN, "scrollId", "pointInTimeId", cities, null, null);
 	}
 
 }
