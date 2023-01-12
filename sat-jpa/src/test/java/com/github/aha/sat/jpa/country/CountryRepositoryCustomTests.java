@@ -20,17 +20,16 @@ class CountryRepositoryCustomTests {
 	protected CountryRepository countryRepository;
 
 	@Nested
-	class FindAllCountriesByTest {
+	class FindAllCountriesHavingCity {
 
 		@Test
 		void exactValues() {
 			var cityName = "San Francisco";
 
-			var result = countryRepository.findAllCountriesBy(cityName, "California");
+			var result = countryRepository.findAllCountriesHavingCity(cityName, "California");
 
 			assertThat(result)
-					.hasSize(1)
-					.first()
+					.singleElement()
 					.satisfies(c -> {
 						assertThat(c.getId()).isPositive();
 						assertThat(c.getName()).isEqualTo(USA);
@@ -40,13 +39,14 @@ class CountryRepositoryCustomTests {
 
 		@Test
 		void wildcard() {
-			var result = countryRepository.findAllCountriesBy("%an%", "%i%");
+			var result = countryRepository.findAllCountriesHavingCity("%an%", "%i%");
 
 			assertThat(result)
-					.hasSize(2)
-					.allSatisfy(c -> {
+					.singleElement()
+					.satisfies(c -> {
 						assertThat(c.getName()).isEqualTo(USA);
 						assertThat(c.getCities()).map(City::getName).contains("Atlanta", "San Francisco");
+
 					});
 		}
 
@@ -68,7 +68,7 @@ class CountryRepositoryCustomTests {
 	}
 
 	@Nested
-	class CountByTest {
+	class CountBy {
 
 		@Test
 		void countAll() {

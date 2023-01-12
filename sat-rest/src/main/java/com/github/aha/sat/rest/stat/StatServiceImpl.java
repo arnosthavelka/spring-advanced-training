@@ -1,6 +1,6 @@
 package com.github.aha.sat.rest.stat;
 
-import javax.persistence.EntityManager;
+import jakarta.persistence.EntityManager;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;

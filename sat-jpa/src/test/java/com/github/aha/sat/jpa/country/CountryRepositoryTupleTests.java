@@ -7,9 +7,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.List;
 
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
@@ -21,6 +18,8 @@ import com.querydsl.core.Tuple;
 import com.querydsl.core.types.OrderSpecifier;
 import com.querydsl.jpa.impl.JPAQuery;
 
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.PersistenceContext;
 import lombok.NonNull;
 
 @DataJpaTest
@@ -33,7 +32,7 @@ class CountryRepositoryTupleTests {
 	private EntityManager em;
 
 	@Nested
-	class SimpleTupleUsageTest {
+	class SimpleTupleUsage {
 
 		List<Tuple> countCitiesInCountriesLike(@NonNull String countryName) {
 			return new JPAQuery<>(em)
@@ -76,7 +75,7 @@ class CountryRepositoryTupleTests {
 	}
 
 	@Nested
-	class PagingTest {
+	class Paging {
 
 		Page<Tuple> findAllTuplesSortedBy(Pageable pageable, OrderSpecifier<?>... o) {
 			var query = new JPAQuery<>(em)

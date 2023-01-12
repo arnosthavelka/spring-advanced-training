@@ -6,9 +6,6 @@ import static com.github.aha.sat.jpa.country.QuerydslUtils.getIfNotEmpty;
 
 import java.util.List;
 
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-
 import org.springframework.stereotype.Repository;
 
 import com.github.aha.sat.jpa.city.CityProjection;
@@ -17,6 +14,8 @@ import com.querydsl.core.Tuple;
 import com.querydsl.core.types.Projections;
 import com.querydsl.jpa.impl.JPAQuery;
 
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.PersistenceContext;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 
@@ -27,7 +26,7 @@ public class CountryCustomRepositoryImpl implements CountryCustomRepository {
 	@PersistenceContext
 	private final EntityManager em;
 
-	public List<Country> findAllCountriesBy(@NonNull String cityName, @NonNull String cityState) {
+	public List<Country> findAllCountriesHavingCity(@NonNull String cityName, @NonNull String cityState) {
 		return new JPAQuery<Country>(em)
 				.select(city.country)
 				.from(city)
