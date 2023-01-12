@@ -4,8 +4,6 @@ import static java.util.Objects.nonNull;
 
 import java.util.function.Function;
 
-import javax.persistence.EntityManager;
-
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.support.Querydsl;
@@ -16,6 +14,7 @@ import com.querydsl.core.types.dsl.PathBuilderFactory;
 import com.querydsl.jpa.JPQLQuery;
 import com.querydsl.jpa.impl.JPAQuery;
 
+import jakarta.persistence.EntityManager;
 import lombok.experimental.UtilityClass;
 
 @UtilityClass

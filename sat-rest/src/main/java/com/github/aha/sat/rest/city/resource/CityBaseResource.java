@@ -1,9 +1,10 @@
 package com.github.aha.sat.rest.city.resource;
 
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
+import static io.swagger.v3.oas.annotations.media.Schema.RequiredMode.REQUIRED;
 
 import io.swagger.v3.oas.annotations.media.Schema;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 import lombok.Data;
 
 @Data
@@ -17,7 +18,7 @@ public class CityBaseResource {
 	private String state;
 
 	@NotNull(message = "Country cannot be null")
-	@Schema(required = true, description = "Country where the city belogs") // it duplicates @NotNull information -> otherwise it will be hidden
+	@Schema(requiredMode =  REQUIRED, description = "Country where the city belogs") // it duplicates @NotNull information -> otherwise it will be hidden
 	private String country;
 
 }

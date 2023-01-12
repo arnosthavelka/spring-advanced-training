@@ -1,5 +1,6 @@
 package com.github.aha.sat.elk.city;
 
+import static com.fasterxml.jackson.dataformat.csv.CsvParser.Feature.FAIL_ON_MISSING_HEADER_COLUMNS;
 import static java.util.Objects.nonNull;
 import static org.springframework.data.elasticsearch.core.SearchHitSupport.searchPageFor;
 import static org.springframework.data.elasticsearch.core.SearchHitSupport.unwrapSearchHits;
@@ -15,7 +16,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.elasticsearch.core.ElasticsearchOperations;
 import org.springframework.data.elasticsearch.core.SearchHits;
-import org.springframework.data.elasticsearch.core.SearchPage;
 import org.springframework.data.elasticsearch.core.query.Criteria;
 import org.springframework.data.elasticsearch.core.query.CriteriaQuery;
 import org.springframework.stereotype.Service;
@@ -60,6 +60,7 @@ public class CityService {
 		try {
 			var csvFile = Path.of(csvFileName);
 			return csvMapper
+					.disable(FAIL_ON_MISSING_HEADER_COLUMNS)
 					.readerFor(City.class)
 					.with(schema)
 					.<City>readValues(csvFile.toFile())
@@ -92,14 +93,10 @@ public class CityService {
 
 	@SuppressWarnings("unchecked")
 	public Page<City> search(String name, String country, String subcountry, Pageable pageable) {
-		return (Page<City>) unwrapSearchHits(searchPage(name, country, subcountry, pageable));
+		return (Page<City>) unwrapSearchHits(searchPageFor(searchHits(name, country, subcountry, pageable), pageable));
 	}
 
-	public SearchPage<City> searchPage(String name, String country, String subcountry, Pageable pageable) {
-		return searchPageFor(searchHits(name, country, subcountry, pageable), pageable);
-	}
-
-	public SearchHits<City> searchHits(String name, String country, String subcountry, Pageable pageable) {
+	SearchHits<City> searchHits(String name, String country, String subcountry, Pageable pageable) {
 		CriteriaQuery query = buildSearchQuery(name, country, subcountry);
 		query.setPageable(pageable);
 
