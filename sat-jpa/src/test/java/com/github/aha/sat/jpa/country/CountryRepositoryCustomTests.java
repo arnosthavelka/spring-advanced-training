@@ -10,7 +10,10 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 
 import com.github.aha.sat.jpa.city.City;
 
+import lombok.extern.slf4j.Slf4j;
+
 @DataJpaTest
+@Slf4j
 class CountryRepositoryCustomTests {
 
 	static final String USA = "USA";
@@ -40,7 +43,7 @@ class CountryRepositoryCustomTests {
 		@Test
 		void wildcard() {
 			var result = countryRepository.findAllCountriesHavingCity("%an%", "%i%");
-
+			
 			assertThat(result)
 					.singleElement()
 					.satisfies(c -> {
