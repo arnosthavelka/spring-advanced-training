@@ -13,7 +13,6 @@ import com.github.aha.sat.jpa.city.City;
 import lombok.extern.slf4j.Slf4j;
 
 @DataJpaTest
-@Slf4j
 class CountryRepositoryCustomTests {
 
 	static final String USA = "USA";
