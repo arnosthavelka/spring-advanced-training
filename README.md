@@ -3,7 +3,7 @@
 [![Java CI with Maven][github-image]][github-url-main] [![Sonar quality gate][sonar-quality-gate]][sonar-url] [![Sonar coverage][sonar-coverage]][sonar-url] [![Sonar bugs][sonar-bugs]][sonar-url] [![Sonar vulnerabilities][sonar-vulnerabilities]][sonar-url] [![MIT licensed][mit-badge]](./LICENSE)
 
 Sample projects (source codes) for my training [Spring - Advanced](http://arnosthavelka.github.io/presentation/spring-advanced/index.html) and [Spring Boot](http://arnosthavelka.github.io/presentation/spring-boot/index.html). 
-All these projects are based on Spring Boot 2.7.x & Java 17.
+All these projects are based on Spring Boot 3.0.x & Java 17.
 
 #Agenda
 * Spring Core - some necessary basics and hints
