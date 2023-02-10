@@ -12,14 +12,14 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<java.version>17</java.version>
 		<jacoco.version>0.8.8</jacoco.version>
-		<spring-boot-admin.version>3.0.0-M5</spring-boot-admin.version>
-		<springdoc-openapi.version>1.6.13</springdoc-openapi.version>
+		<spring-boot-admin.version>3.0.0</spring-boot-admin.version>
+		<springdoc-openapi.version>1.6.14</springdoc-openapi.version>
 	</properties>
 	
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>3.0.2</version>
+		<version>3.0.3</version>
 		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
 
