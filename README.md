@@ -45,7 +45,6 @@ Accessing JPA data via REST sevice, including:
 * Spring Data & HATEOAS
 * Spring Boot Admin Client
 * Advanced metrics (Micrometer via JMX)
-* [Jolokia](https://jolokia.org/) (JMX over HTTP)
 * [Springdoc Openapi](http://localhost:8080/swagger-ui.html) (REST documentation)
 
 ## sat-elk

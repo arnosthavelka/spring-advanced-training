@@ -74,17 +74,6 @@
 			<version>${springdoc-openapi.version}</version>
 		</dependency>
 	
-		<!-- Enable JMX -->
-		<dependency>
-			<groupId>org.springframework.integration</groupId>
-			<artifactId>spring-integration-jmx</artifactId>
-		</dependency>
-		<!-- Expose JMX over HTTP-->
-		<dependency>
-			<groupId>org.jolokia</groupId>
-			<artifactId>jolokia-core</artifactId>
-			<version>1.7.1</version>
-		</dependency>
 		<!-- Enable Actuator -->
 	    <dependency>
 	        <groupId>org.springframework.boot</groupId>
