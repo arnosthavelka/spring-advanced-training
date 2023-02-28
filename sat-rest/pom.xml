@@ -61,12 +61,6 @@
 		    <artifactId>hibernate-validator</artifactId>
 		</dependency>
 		
-		<!-- Runtime metrics -->
-		<dependency>
-		  <groupId>io.micrometer</groupId>
-		  <artifactId>micrometer-registry-jmx</artifactId>
-		</dependency>
-		
 		<!-- Enable Springdoc Openapi -->
 		<dependency>
 			<groupId>org.springdoc</groupId>
