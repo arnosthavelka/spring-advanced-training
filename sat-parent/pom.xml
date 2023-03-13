@@ -13,13 +13,13 @@
 		<java.version>17</java.version>
 		<jacoco.version>0.8.8</jacoco.version>
 		<spring-boot-admin.version>3.0.0</spring-boot-admin.version>
-		<springdoc-openapi.version>1.6.14</springdoc-openapi.version>
+		<springdoc-openapi.version>1.6.15</springdoc-openapi.version>
 	</properties>
 	
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>3.0.4</version>
+		<version>3.0.5</version>
 		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
 
