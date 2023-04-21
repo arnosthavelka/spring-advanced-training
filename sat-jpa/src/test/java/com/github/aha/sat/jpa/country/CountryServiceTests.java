@@ -1,6 +1,7 @@
 package com.github.aha.sat.jpa.country;
 
 import static org.mockito.Mockito.verify;
+import static org.springframework.data.domain.Pageable.unpaged;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -25,5 +26,15 @@ class CountryServiceTests {
 
 		verify(repository).findByNameLikeIgnoreCase("%" + namePattern + "%");
     }
+
+	@Test
+	void findAllCountriesHavingCity() {
+		var cityName = "aaa";
+		var cityState = "bbb";
+
+		service.findAllCountriesHavingCity(cityName, cityState, unpaged());
+
+		verify(repository).findAllCountriesHavingCity("%" + cityName + "%", "%" + cityState + "%", unpaged());
+	}
 
 }

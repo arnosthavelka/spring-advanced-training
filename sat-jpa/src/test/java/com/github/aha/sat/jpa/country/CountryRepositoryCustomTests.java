@@ -2,6 +2,7 @@ package com.github.aha.sat.jpa.country;
 
 import static com.github.aha.sat.jpa.country.QCountry.country;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.springframework.data.domain.Pageable.unpaged;
 
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
@@ -26,7 +27,7 @@ class CountryRepositoryCustomTests {
 		void exactValues() {
 			var cityName = "San Francisco";
 
-			var result = countryRepository.findAllCountriesHavingCity(cityName, "California");
+			var result = countryRepository.findAllCountriesHavingCity(cityName, "California", unpaged());
 
 			assertThat(result).singleElement().satisfies(c -> {
 				assertThat(c.getId()).isPositive();
@@ -37,7 +38,7 @@ class CountryRepositoryCustomTests {
 
 		@Test
 		void wildcard() {
-			var result = countryRepository.findAllCountriesHavingCity("%an%", "%i%");
+			var result = countryRepository.findAllCountriesHavingCity("%an%", "%i%", unpaged());
 
 			assertThat(result).singleElement().satisfies(c -> {
 				assertThat(c.getName()).isEqualTo(USA);

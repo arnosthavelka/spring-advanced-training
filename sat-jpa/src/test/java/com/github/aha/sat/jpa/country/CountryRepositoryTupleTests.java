@@ -4,6 +4,7 @@ import static com.github.aha.sat.jpa.city.QCity.city;
 import static com.github.aha.sat.jpa.country.QCountry.country;
 import static com.github.aha.sat.jpa.country.QuerydslUtils.fetchPage;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.springframework.data.domain.Pageable.unpaged;
 
 import java.util.List;
 
@@ -87,7 +88,7 @@ class CountryRepositoryTupleTests {
 
 		@Test
 		void unpagedResult() {
-			var result = findAllTuplesSortedBy(Pageable.unpaged(), country.name.asc(), city.name.asc());
+			var result = findAllTuplesSortedBy(unpaged(), country.name.asc(), city.name.asc());
 
 			assertThat(result)
 					.hasSize(15)
