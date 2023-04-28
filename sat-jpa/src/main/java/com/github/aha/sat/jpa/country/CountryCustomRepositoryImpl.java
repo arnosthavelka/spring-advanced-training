@@ -30,6 +30,7 @@ public class CountryCustomRepositoryImpl extends QuerydslRepositorySupport imple
 	public CountryCustomRepositoryImpl(EntityManager em) {
 		super(Country.class);
 		this.em = em;
+		setEntityManager(em);
 	}
 
 	public Page<Country> findAllCountriesHavingCity(@NonNull String cityName, @NonNull String cityState, Pageable pageable) {
