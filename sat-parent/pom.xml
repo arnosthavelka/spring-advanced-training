@@ -8,6 +8,13 @@
 
 	<description>Parent POM for SAT projects</description>
 
+	<parent>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-parent</artifactId>
+		<version>3.0.7</version>
+		<relativePath /> <!-- lookup parent from repository -->
+	</parent>
+
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<java.version>17</java.version>
@@ -16,13 +23,6 @@
 		<springdoc-openapi.version>1.6.15</springdoc-openapi.version>
 	</properties>
 	
-	<parent>
-		<groupId>org.springframework.boot</groupId>
-		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>3.0.6</version>
-		<relativePath /> <!-- lookup parent from repository -->
-	</parent>
-
 	<dependencies>
 		<!-- Testing -->
 		<dependency>

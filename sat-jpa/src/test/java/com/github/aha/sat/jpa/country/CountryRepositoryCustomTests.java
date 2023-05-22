@@ -24,7 +24,7 @@ class CountryRepositoryCustomTests {
 	class FindAllCountriesHavingCity {
 
 		@Test
-		void exactValues() {
+		void exactValue() {
 			var cityName = "San Francisco";
 
 			var result = countryRepository.findAllCountriesHavingCity(cityName, "California", unpaged());

@@ -37,7 +37,8 @@ public class CountryCustomRepositoryImpl extends QuerydslRepositorySupport imple
 		Long totalCount = findCountriesHavingCityQuery(city.country.count(), cityName, cityState).fetchOne();
 		JPAQuery<Country> query = findCountriesHavingCityQuery(city.country, cityName, cityState);
 		ofNullable(getQuerydsl()).ifPresent(querydsl -> querydsl.applyPagination(pageable, query));
-		return getPage(query.fetch(), pageable, () -> totalCount);
+		List<Country> pagedData = query.fetch();
+		return getPage(pagedData, pageable, () -> totalCount);
 	}
 	
 	private <T> JPAQuery<T> findCountriesHavingCityQuery(Expression<T> expression, String cityName, String cityState) {
