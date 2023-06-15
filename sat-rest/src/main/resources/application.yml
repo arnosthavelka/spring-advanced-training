@@ -23,6 +23,8 @@ spring:
 
 
 springdoc:
+  api-docs:
+    version: openapi-3-0
   packagesToScan: com.github.aha.sat.rest
   pathsToMatch: /v1, /city/**
       
