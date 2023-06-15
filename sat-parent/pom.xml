@@ -3,7 +3,7 @@
 
 	<groupId>com.github.aha.sat</groupId>
 	<artifactId>sat-parent</artifactId>
-	<version>0.6.0-SNAPSHOT</version>
+	<version>0.6.1-SNAPSHOT</version>
 	<packaging>pom</packaging>
 
 	<description>Parent POM for SAT projects</description>
@@ -19,7 +19,7 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<java.version>17</java.version>
 		<jacoco.version>0.8.8</jacoco.version>
-		<spring-boot-admin.version>3.0.0</spring-boot-admin.version>
+		<spring-boot-admin.version>3.0.4</spring-boot-admin.version>
 		<springdoc-openapi.version>1.6.15</springdoc-openapi.version>
 	</properties>
 	
