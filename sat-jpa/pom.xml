@@ -48,12 +48,6 @@
 		<dependency>
 			<groupId>org.liquibase</groupId>
 			<artifactId>liquibase-core</artifactId>
-			<exclusions>
-				<exclusion> <!-- due to SB 3.0 switch to Jakarta -->
-					<groupId>javax.xml.bind</groupId>
-					<artifactId>jaxb-api</artifactId>
-				</exclusion>
-			</exclusions>
 		</dependency>
 		<dependency>
 		    <groupId>jakarta.xml.bind</groupId>
