@@ -24,7 +24,7 @@ public class SpringdocOpenapiConfig {
 		return new OpenAPI()
 				.info(new Info().title("SAT-REST API")
 						.description("Usage of Springdoc Openapi in Spring Boot")
-						.version("2.1")
+						.version("0.6.1")
 						.license(new License().name("License MIT")
 								.url("https://github.com/arnosthavelka/spring-advanced-training/blob/master/LICENSE")));
 	}
