@@ -21,7 +21,7 @@ class OrderCollectionWiringTest {
 	/**
 	 * The exact name cannot be predicted as it's derived from lambda.
 	 */
-	private static final String SODA_ORDER = "WiringConfig$$Lambda$";
+	private static final String SODA_ORDER = "WiringConfig$$Lambda";
 
 	@Autowired
 	private Collection<BeverageOrder<?>> allOrders;

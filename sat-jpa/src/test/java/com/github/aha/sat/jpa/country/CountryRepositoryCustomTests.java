@@ -29,22 +29,26 @@ class CountryRepositoryCustomTests {
 
 			var result = countryRepository.findAllCountriesHavingCity(cityName, "California", unpaged());
 
-			assertThat(result).singleElement().satisfies(c -> {
-				assertThat(c.getId()).isPositive();
-				assertThat(c.getName()).isEqualTo(USA);
-				assertThat(c.getCities()).map(City::getName).contains(cityName);
-			});
+			assertThat(result)
+				.singleElement()
+				.satisfies(c -> {
+					assertThat(c.getId()).isPositive();
+					assertThat(c.getName()).isEqualTo(USA);
+					assertThat(c.getCities()).map(City::getName).contains(cityName);
+				});
 		}
 
 		@Test
 		void wildcard() {
 			var result = countryRepository.findAllCountriesHavingCity("%an%", "%i%", unpaged());
 
-			assertThat(result).singleElement().satisfies(c -> {
-				assertThat(c.getName()).isEqualTo(USA);
-				assertThat(c.getCities()).map(City::getName).contains("Atlanta", "San Francisco");
-
-			});
+			assertThat(result)
+				.singleElement()
+				.satisfies(c -> {
+					assertThat(c.getName()).isEqualTo(USA);
+					assertThat(c.getCities()).map(City::getName).contains("Atlanta", "San Francisco");
+	
+				});
 		}
 
 	}
@@ -53,12 +57,14 @@ class CountryRepositoryCustomTests {
 	void searchByCountry() {
 		var result = countryRepository.searchByCountry(AUSTRALIA);
 
-		assertThat(result).hasSize(3).allSatisfy(p -> {
-			assertThat(p.getId()).isPositive();
-			assertThat(p.getName()).containsAnyOf("Brisbane", "Melbourne", "Sydney");
-			assertThat(p.getState()).containsAnyOf("Queensland", "Victoria", "New South Wales");
-			assertThat(p.getCountryName()).isEqualTo(AUSTRALIA);
-		});
+		assertThat(result)
+			.hasSize(3)
+			.allSatisfy(p -> {
+				assertThat(p.getId()).isPositive();
+				assertThat(p.getName()).containsAnyOf("Brisbane", "Melbourne", "Sydney");
+				assertThat(p.getState()).containsAnyOf("Queensland", "Victoria", "New South Wales");
+				assertThat(p.getCountryName()).isEqualTo(AUSTRALIA);
+			});
 
 	}
 

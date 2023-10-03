@@ -27,8 +27,7 @@ class CityRepositoryCustomTests extends AbstractCityVerificationTest {
 			var result = cityRepository.findAllCitiesBy(cityName, state, USA);
 
 			assertThat(result)
-					.hasSize(1)
-					.first()
+					.singleElement()
 					.satisfies(c -> {
 						assertThat(c.getId()).isPositive();
 						assertThat(c.getName()).isEqualTo(cityName);
@@ -58,8 +57,7 @@ class CityRepositoryCustomTests extends AbstractCityVerificationTest {
 		var result = cityRepository.searchByCity(cityName);
 
 		assertThat(result)
-				.hasSize(1)
-				.first()
+				.singleElement()
 				.satisfies(c -> {
 					assertThat(c.getId()).isPositive();
 					assertThat(c.getName()).isEqualTo(cityName);
@@ -73,8 +71,7 @@ class CityRepositoryCustomTests extends AbstractCityVerificationTest {
 		var result = cityRepository.countCitiesInCountriesLike(AUSTRALIA);
 
 		assertThat(result)
-				.hasSize(1)
-				.first()
+				.singleElement()
 				.satisfies(t -> {
 					var tupleElements = t.getElements();
 					assertThat(tupleElements).hasSize(3);
