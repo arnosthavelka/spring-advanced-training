@@ -113,16 +113,19 @@ class CountryRepositoryCustomTests {
 		var countries = countryRepository.countCitiesInCountriesContaining("a");
 
 //		[[1, Australia, 3],
-//		   [2, Canada, 1],
-//		   [4, Japan, 1],
-//		   [6, France, 1],
-//		   [7, Spain, 1],
-//		   [8, Switzerland, 1]]
-		assertThat(countries).hasSize(6).first().satisfies(t -> {
-			assertThat(t.size()).isEqualTo(3);
-			assertThat(t.get(country.name)).isEqualTo(AUSTRALIA);
-			assertThat(t.get(2, Integer.class)).isEqualTo(3);
-		});
+//	     [2, Canada, 1],
+//		 [4, Japan, 1],
+//		 [6, France, 1],
+//		 [7, Spain, 1],
+//		 [8, Switzerland, 1]]
+		assertThat(countries)
+			.hasSize(6)
+			.first()
+			.satisfies(t -> {
+				assertThat(t.size()).isEqualTo(3);
+				assertThat(t.get(country.name)).isEqualTo(AUSTRALIA);
+				assertThat(t.get(2, Integer.class)).isEqualTo(3);
+			});
 	}
 
 }
