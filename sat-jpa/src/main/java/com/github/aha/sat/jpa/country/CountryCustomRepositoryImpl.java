@@ -58,7 +58,7 @@ public class CountryCustomRepositoryImpl extends QuerydslRepositorySupport imple
 	}
 
 	public List<Tuple> countCitiesInCountriesContaining(@NonNull String countryName) {
-		return new JPAQuery<CityProjection>(em)
+		return new JPAQuery<Tuple>(em)
 				.select(country.id, country.name, country.cities.size())
 				.from(country)
 				.where(country.name.contains(countryName))
