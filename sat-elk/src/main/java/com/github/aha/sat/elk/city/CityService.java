@@ -58,7 +58,7 @@ public class CityService {
 
 	List<City> parseFile(String csvFileName) {
 		try {
-			var csvFile = Path.of(csvFileName);
+			var csvFile = Path.of(csvFileName); // NOSONAR
 			return csvMapper
 					.disable(FAIL_ON_MISSING_HEADER_COLUMNS)
 					.readerFor(City.class)
