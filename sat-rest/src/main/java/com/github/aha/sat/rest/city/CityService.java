@@ -43,7 +43,7 @@ public class CityService {
 		if (isNull(cityId)) {
 			return City.builder().build();
 		}
-		return cityRepository.getById(cityId);
+		return cityRepository.getReferenceById(cityId);
 	}
 
 	private void updateCity(City city, CityBaseResource cityResource) {

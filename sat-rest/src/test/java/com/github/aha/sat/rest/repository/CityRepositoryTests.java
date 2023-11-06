@@ -31,7 +31,7 @@ class CityRepositoryTests {
 
     @Test
 	void testCityById() {
-        City city = cityRepository.getOne(102L);
+        City city = cityRepository.getReferenceById(102L);
 
 		assertAll(
 				() -> assertThat(city.getName(), equalTo("Barcelona")),
