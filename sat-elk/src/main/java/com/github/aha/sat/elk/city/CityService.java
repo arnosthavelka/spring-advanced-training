@@ -58,12 +58,12 @@ public class CityService {
 
 	List<City> parseFile(String csvFileName) {
 		try {
-			var csvFile = Path.of(csvFileName); // NOSONAR
+			var csvFile = Path.of(csvFileName);
 			return csvMapper
 					.disable(FAIL_ON_MISSING_HEADER_COLUMNS)
 					.readerFor(City.class)
 					.with(schema)
-					.<City>readValues(csvFile.toFile())
+					.<City>readValues(csvFile.toFile()) // NOSONAR
 					.readAll();
 		} catch (IOException e) {
 			throw new ElkException(e);
