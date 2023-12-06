@@ -56,9 +56,10 @@ public class CityService {
 		log.info("data loading finish");
 	}
 
+	@SuppressWarnings("javasecurity:S2083")
 	List<City> parseFile(String csvFileName) {
 		try {
-			var csvFile = Path.of(csvFileName); // NOSONAR
+			var csvFile = Path.of(csvFileName);
 			return csvMapper
 					.disable(FAIL_ON_MISSING_HEADER_COLUMNS)
 					.readerFor(City.class)
