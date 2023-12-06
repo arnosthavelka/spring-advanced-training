@@ -64,7 +64,7 @@ public class CityService {
 					.disable(FAIL_ON_MISSING_HEADER_COLUMNS)
 					.readerFor(City.class)
 					.with(schema)
-					.<City>readValues(csvFile.toFile()) // NOSONAR
+					.<City>readValues(csvFile.toFile())
 					.readAll();
 		} catch (IOException e) {
 			throw new ElkException(e);
