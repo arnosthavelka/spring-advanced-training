@@ -30,7 +30,7 @@ class Jsr250Test {
 	static class Context {
 
         @Bean
-		public TokenBean myBean() {
+        TokenBean myBean() {
             return new TokenBean() {
 
                 @PostConstruct

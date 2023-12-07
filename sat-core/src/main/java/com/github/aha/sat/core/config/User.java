@@ -1,14 +1,10 @@
 package com.github.aha.sat.core.config;
 
-import org.springframework.stereotype.Component;
-
-@Component
 public class User {
 
     private String name;
 
-    // @Autowired
-    public User(/* @Value("") */String name) {
+    public User(String name) {
         this.name = name;
     }
 

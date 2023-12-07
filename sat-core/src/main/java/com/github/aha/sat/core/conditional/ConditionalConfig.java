@@ -13,27 +13,27 @@ import com.github.aha.sat.core.wiring.beverage.Beverage;
 @ComponentScan
 public class ConditionalConfig {
 
-	@Bean
-	@Conditional(AlcoholCondition.class)
-	public Beverage beer()	{
+    @Bean
+    @Conditional(AlcoholCondition.class)
+    Beverage beer()	{
 		return () -> "Beer";
 	}
 
-	@Bean
-	@Conditional(AlcoholCondition.class)
-	public Beverage wine() {
+    @Bean
+    @Conditional(AlcoholCondition.class)
+    Beverage wine() {
 		return () -> "Wine";
 	}
 
-	@Bean
-	@Conditional(SodaCondition.class)
-	public Beverage cola() {
+    @Bean
+    @Conditional(SodaCondition.class)
+    Beverage cola() {
 		return () -> "cola";
 	}
 
-	@Bean
-	@Conditional(SodaCondition.class)
-	public Beverage fanta() {
+    @Bean
+    @Conditional(SodaCondition.class)
+    Beverage fanta() {
 		return () -> "fanta";
 	}
 
