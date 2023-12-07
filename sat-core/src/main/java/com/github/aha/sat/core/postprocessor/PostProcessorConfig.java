@@ -9,17 +9,17 @@ import org.springframework.context.annotation.Configuration;
 public class PostProcessorConfig {
 
     @Bean
-    public BeanFactoryPostProcessor bfppLogger() {
+    BeanFactoryPostProcessor bfppLogger() {
         return new LoggerBfpp();
     }
 
     @Bean
-    public BeanPostProcessor upperCaseBpp() {
+    BeanPostProcessor upperCaseBpp() {
         return new UpperCaseBpp();
     }
 
     @Bean
-    public String hello() {
-        return "Hi all!";
+    String crown() {
+        return "One who wears the crown, bears the crown.";
     }
 }

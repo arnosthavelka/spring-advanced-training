@@ -9,13 +9,13 @@ import com.github.aha.sat.core.wiring.beverage.Beverage;
 public class AopConfig {
 
     @Bean
-	public Beverage tea() {
-		return () -> "Tea";
+    Beverage milk() {
+		return () -> "Milk";
     }
 
     @Bean
-	public EnjoyableBeverage coffee() {
-		return () -> "Coffee";
+    EnjoyableBeverage hotChocolade() {
+		return () -> "Hot Chocolade";
     }
 
 }

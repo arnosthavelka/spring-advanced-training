@@ -11,11 +11,11 @@ import org.springframework.boot.test.context.SpringBootTest;
 class BppTest {
 
     @Autowired
-    @Qualifier("hello")
+    @Qualifier("crown")
     private String bean;
 
     @Test
 	void contextLoads() {
-		assertThat(bean).hasToString("HI ALL!");
+		assertThat(bean).hasToString("ONE WHO WEARS THE CROWN, BEARS THE CROWN.");
     }
 }
