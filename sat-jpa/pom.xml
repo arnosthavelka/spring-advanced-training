@@ -29,19 +29,13 @@
 			<artifactId>spring-boot-starter-data-jpa</artifactId>
 		</dependency>
 		<dependency>
-			<groupId>org.hibernate.orm</groupId>
-			<artifactId>hibernate-jpamodelgen</artifactId>
+	        <groupId>org.hibernate.orm</groupId>
+	        <artifactId>hibernate-jpamodelgen</artifactId>
+			<optional>true</optional>
 		</dependency>
 		<dependency>
 			<groupId>com.querydsl</groupId>
 			<artifactId>querydsl-jpa</artifactId>
-			<version>${querydsl.version}</version>
-			<classifier>jakarta</classifier>
-		</dependency>
-		<dependency>
-			<groupId>com.querydsl</groupId>
-			<artifactId>querydsl-apt</artifactId>
-			<scope>provided</scope>
 			<version>${querydsl.version}</version>
 			<classifier>jakarta</classifier>
 		</dependency>
@@ -63,9 +57,35 @@
 			<artifactId>h2</artifactId>
 		</dependency>
 	</dependencies>
-	
+
 	<build>
 		<finalName>${project.name}</finalName>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<configuration>
+					<annotationProcessorPaths>
+						<path>
+							<groupId>org.hibernate.orm</groupId>
+							<artifactId>hibernate-jpamodelgen</artifactId>
+							<version>${hibernate.version}</version>
+						</path>
+						<path>
+							<groupId>com.querydsl</groupId>
+							<artifactId>querydsl-apt</artifactId>
+							<version>${querydsl.version}</version>
+							<classifier>jakarta</classifier>
+						</path>
+						<path>
+							<groupId>org.projectlombok</groupId>
+							<artifactId>lombok</artifactId>
+							<version>${lombok.version}</version>
+						</path>
+					</annotationProcessorPaths>
+				</configuration>
+			</plugin>
+		</plugins>
 	</build>
 
 </project>
