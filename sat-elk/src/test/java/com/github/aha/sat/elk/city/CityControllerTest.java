@@ -63,7 +63,7 @@ class CityControllerTest {
 				new City(CITY_ID, CITY_NAME, CITY_COUNTRY, CITY_SUBCOUNTRY, CITY_GEONAMEID.longValue()),
 				new City(randomUUID().toString(), secondCity, CITY_COUNTRY, secondCity, 3117735L)
 				);
-		// TODO check why new PageImpl<City>(cities) is not working
+		// FIXME new PageImpl<City>(cities) -> https://github.com/spring-projects/spring-data-commons/issues/2987#issuecomment-1827613130
 		given(service.searchByCountry(eq(CITY_COUNTRY), any())).willReturn(new PageImpl<City>(cities, ofSize(PAGE_SIZE), cities.size()));
 
 		mvc.perform(get(ROOT_PATH + "/country/" + CITY_COUNTRY))
