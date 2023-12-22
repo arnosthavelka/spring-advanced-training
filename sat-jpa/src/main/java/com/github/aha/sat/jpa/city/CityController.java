@@ -11,8 +11,8 @@ import org.springframework.web.bind.annotation.RestController;
 import lombok.RequiredArgsConstructor;
 
 /**
- * Usage: search:
- * http://localhost:8080/cities/?name=Melbourne&state=Victoria&countryName=Australia</li>
+ * Usage: 
+ * - search	GET	http://localhost:8080/cities?name=Melbourne&state=Victoria&countryName=Australia
  */
 @RestController
 @RequestMapping(value = "/cities", produces = APPLICATION_JSON_VALUE)

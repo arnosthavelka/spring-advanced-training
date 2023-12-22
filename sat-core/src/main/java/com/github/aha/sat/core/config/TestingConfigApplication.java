@@ -20,33 +20,33 @@ public class TestingConfigApplication {
     }
 
     @Bean
-    public String hi() {
+    String hi() {
         return "Hi all!";
     }
 
     @Bean
-    public String hello() {
+    String hello() {
         return "Hello all!";
     }
 
     @Bean
-    public String randomGreeting() {
+    String randomGreeting() {
 		int val = new SecureRandom().nextInt(10) % 2;
         return val == 0 ? hi() : hello();
     }
 
     @Bean
-    public String hiGreeting(String hi) {
+    String hiGreeting(String hi) {
         return hi;
     }
 
     @Bean
-    public String helloGreeting(@Qualifier("hello") String bean) {
+    String helloGreeting(@Qualifier("hello") String bean) {
         return bean;
     }
 
     @Bean
-    public User userArny() {
+    User userArny() {
         return new User("Arny");
     }
 

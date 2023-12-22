@@ -9,20 +9,20 @@ import org.springframework.stereotype.Component;
 import jakarta.annotation.PostConstruct;
 
 @Component
-@Order(2)
-public class Hello implements CommandLineRunner {
+@Order(1)
+public class Apple implements CommandLineRunner {
 
 	/** Logger. */
-	private static final Logger LOG = LoggerFactory.getLogger(Hello.class);
+	private static final Logger LOG = LoggerFactory.getLogger(Apple.class);
 
 	@PostConstruct
 	void init() {
-		LOG.info("Initializing Hello bean ...");
+		LOG.info("Initializing Apple bean ...");
 	}
 
 	@Override
 	public void run(String... args) throws Exception {
-		LOG.info("Hello!");
+		LOG.info("Here's Apple runner");
 	}
 
 }

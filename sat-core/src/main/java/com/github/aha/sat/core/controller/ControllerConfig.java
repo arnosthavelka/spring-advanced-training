@@ -8,8 +8,8 @@ import org.springframework.web.servlet.view.InternalResourceViewResolver;
 @Configuration
 public class ControllerConfig {
 
-	@Bean
-	public ViewResolver getViewResolver() {
+    @Bean
+    ViewResolver getViewResolver() {
 		var resolver = new InternalResourceViewResolver();
 		resolver.setPrefix("/WEB-INF/jsp/");
 		resolver.setSuffix(".jsp");

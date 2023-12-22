@@ -1,8 +1,6 @@
 package com.github.aha.sat.core.aop;
 
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.equalTo;
-import static org.hamcrest.Matchers.is;
+import static org.assertj.core.api.Assertions.assertThat;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,24 +13,24 @@ import com.github.aha.sat.core.wiring.beverage.Beverage;
 class AopTest {
 
 	@Autowired
-	@Qualifier("tea")
-	private Beverage tea;
+	@Qualifier("milk")
+	private Beverage milk;
 
 	@Autowired
-	@Qualifier("coffee")
-	private Beverage coffee;
-
+	@Qualifier("hotChocolade")
+	private Beverage hotChocolade;
+	
 	@Test
 	void testTea() {
-		assertThat(tea.getName(), is(equalTo("Tea")));
+		assertThat(milk.getName()).isEqualTo("Milk");
 	}
 
 	@Test
 	void testEnhancedBear() {
-		assertThat(coffee.getName(), equalTo("Coffee"));
-		if (coffee instanceof Enjoyable) {
-			Enjoyable en = (Enjoyable) coffee;
-			assertThat(en.enjoy(coffee), equalTo("Wow Coffee!"));
+		assertThat(hotChocolade.getName()).isEqualTo("Hot Chocolade");
+		if (hotChocolade instanceof Enjoyable) {
+			Enjoyable en = (Enjoyable) hotChocolade;
+			assertThat(en.enjoy(hotChocolade)).isEqualTo("Wow Hot Chocolade");
 		}
     }
 

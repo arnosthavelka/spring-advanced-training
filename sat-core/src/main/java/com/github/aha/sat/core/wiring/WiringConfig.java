@@ -10,13 +10,13 @@ import com.github.aha.sat.core.wiring.order.BeverageOrder;
 @SpringBootApplication
 public class WiringConfig {
 
-	@Bean
-	public Beverage iceTea() {
+    @Bean
+    Beverage iceTea() {
 		return () -> "Ice Tea";
 	}
 
-	@Bean
-	public BeverageOrder<Soda> sodaOrder() {
+    @Bean
+    BeverageOrder<Soda> sodaOrder() {
 		return beverage -> beverage.getName() + " is ready to be served.";
 	}
 

@@ -61,8 +61,10 @@ class CityControllerTest {
 		var secondCity = "Madrid";
 		List<City> cities = List.of(
 				new City(CITY_ID, CITY_NAME, CITY_COUNTRY, CITY_SUBCOUNTRY, CITY_GEONAMEID.longValue()),
-				new City(randomUUID().toString(), secondCity, CITY_COUNTRY, secondCity, 3117735L));
-		given(service.searchByCountry(eq(CITY_COUNTRY), any())).willReturn(new PageImpl<City>(cities));
+				new City(randomUUID().toString(), secondCity, CITY_COUNTRY, secondCity, 3117735L)
+				);
+		// FIXME new PageImpl<City>(cities) -> https://github.com/spring-projects/spring-data-commons/issues/2987#issuecomment-1827613130
+		given(service.searchByCountry(eq(CITY_COUNTRY), any())).willReturn(new PageImpl<City>(cities, ofSize(PAGE_SIZE), cities.size()));
 
 		mvc.perform(get(ROOT_PATH + "/country/" + CITY_COUNTRY))
 				.andExpect(status().isOk())

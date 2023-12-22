@@ -13,8 +13,8 @@ import org.springframework.context.annotation.Scope;
 public class ScopeConfig {
 
     @Bean
-	@Scope(value = SCOPE_PROTOTYPE, proxyMode = INTERFACES)
-    public TokenBean beanPrototype() {
+    @Scope(value = SCOPE_PROTOTYPE, proxyMode = INTERFACES)
+    TokenBean beanPrototype() {
 		return new TokenBean() {
 			@Override
 			public String getToken() {
@@ -24,7 +24,7 @@ public class ScopeConfig {
     }
 
     @Bean
-    public TokenBean beanSingleton(final TokenBean beanPrototype) {
+    TokenBean beanSingleton(final TokenBean beanPrototype) {
 		return beanPrototype::toString;
     }
 
