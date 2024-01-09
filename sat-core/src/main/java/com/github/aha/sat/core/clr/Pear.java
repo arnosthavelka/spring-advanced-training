@@ -1,28 +1,25 @@
 package com.github.aha.sat.core.clr;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
 import jakarta.annotation.PostConstruct;
+import lombok.extern.slf4j.Slf4j;
 
 @Component
 @Order(2)
+@Slf4j
 public class Pear implements CommandLineRunner {
-
-	/** Logger. */
-	private static final Logger LOG = LoggerFactory.getLogger(Pear.class);
 
 	@PostConstruct
 	void init() {
-		LOG.info("Initializing Pear bean ...");
+		log.info("Initializing Pear bean ...");
 	}
 
 	@Override
 	public void run(String... args) throws Exception {
-		LOG.info("Here's Pear runner");
+		log.info("Here's Pear runner");
 	}
 
 }
