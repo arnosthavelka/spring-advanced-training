@@ -11,26 +11,28 @@ import com.github.aha.sat.core.LogUtils;
 import ch.qos.logback.classic.spi.ILoggingEvent;
 import ch.qos.logback.core.read.ListAppender;
 
-public class AppleTest {
+public class PearTest {
 	
-	Apple apple = new Apple();
+	Pear pear = new Pear();
 	
 	@Test
 	void run() throws Exception {
-		ListAppender<ILoggingEvent> logAppender = LogUtils.getAppenderForLoggerOfClass( Apple.class );
+		ListAppender<ILoggingEvent> logAppender = LogUtils.getAppenderForLoggerOfClass( Pear.class );
 		
-		apple.init();
-		apple.run();
-		
+		pear.init();
 		assertThat( logAppender.list )
-			.hasSize(2)
-			.anySatisfy(logEntry -> {
+			.singleElement()
+			.satisfies(logEntry -> {
 				assertThat( logEntry.getLevel() ).isEqualTo(DEBUG);
-				assertThat( logEntry.getFormattedMessage() ).startsWith("Initializing Apple");
-			})
-			.anySatisfy(logEntry -> {
+				assertThat( logEntry.getFormattedMessage() ).isEqualTo("Initializing Pear bean ..." );
+			});
+
+		pear.run();
+		assertThat( logAppender.list )
+			.last()
+			.satisfies(logEntry -> {
 				assertThat( logEntry.getLevel() ).isEqualTo(INFO);
-				assertThat( logEntry.getFormattedMessage() ).isEqualTo("Here's Apple runner" );
+				assertThat( logEntry.getFormattedMessage() ).isEqualTo("Here's Pear runner" );
 			});
 	}
 
