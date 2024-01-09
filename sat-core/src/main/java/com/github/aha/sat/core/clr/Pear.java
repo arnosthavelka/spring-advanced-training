@@ -14,7 +14,7 @@ public class Pear implements CommandLineRunner {
 
 	@PostConstruct
 	void init() {
-		log.info("Initializing Pear bean ...");
+		log.debug("Initializing Pear bean ...");
 	}
 
 	@Override
