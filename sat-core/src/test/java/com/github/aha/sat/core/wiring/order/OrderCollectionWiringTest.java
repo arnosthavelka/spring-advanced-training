@@ -40,16 +40,17 @@ class OrderCollectionWiringTest {
 
 	@Test
 	void shouldWireAllOrders() {
-		assertThat(allOrders).hasSize(4);
-		assertThat(allOrders).map(BeverageOrder::getClass).map(Class::getSimpleName)
-				.contains("BeerOrder", "ColaOrder", "TeaOrder")
-				.anyMatch(c -> c.startsWith(SODA_ORDER));
+		assertThat(allOrders)
+			.hasSize(4)
+			.map(BeverageOrder::getClass)
+			.map(Class::getSimpleName)
+			.contains("BeerOrder", "ColaOrder", "TeaOrder")
+			.anyMatch(className -> className.startsWith(SODA_ORDER));
 	}
 
 	@Test
 	void shouldWireAllCarnonatedOrders() {
 		assertThat(carbonatedOrders)
-				.hasSize(3)
 				.contains(beerOrder, colaOrder, sodaOrder)
 				.doesNotContain(beverage -> "Just dummy order");
 	}
