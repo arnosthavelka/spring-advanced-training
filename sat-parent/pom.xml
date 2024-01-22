@@ -21,6 +21,7 @@
 		<jacoco.version>0.8.11</jacoco.version>
 		<spring-boot-admin.version>3.2.1</spring-boot-admin.version>
 		<springdoc-openapi.version>2.3.0</springdoc-openapi.version>
+		<spring-javaformat-maven-plugin.version>0.0.41</spring-javaformat-maven-plugin.version>
 	</properties>
 	
 	<dependencies>
@@ -58,6 +59,11 @@
 	                <target>${java.version}</target>
 	                <forceJavacCompilerUse>true</forceJavacCompilerUse>
 	            </configuration>
+			</plugin>
+			<plugin>
+				<groupId>io.spring.javaformat</groupId>
+				<artifactId>spring-javaformat-maven-plugin</artifactId>
+				<version>${spring-javaformat-maven-plugin.version}</version>
 			</plugin>
 		</plugins>
 	</build>
