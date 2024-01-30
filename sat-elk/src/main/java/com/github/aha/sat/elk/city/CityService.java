@@ -43,10 +43,7 @@ public class CityService {
 
 	final CsvMapper csvMapper = new CsvMapper();
 
-	final CsvSchema schema = csvMapper
-			.typedSchemaFor(City.class)
-			.withHeader()
-			.withColumnReordering(true);
+	final CsvSchema schema = csvMapper.typedSchemaFor(City.class).withHeader().withColumnReordering(true);
 
 	public void uploadFile(String csvFileName) {
 		log.info("loading file {} ...", csvFileName);
@@ -60,13 +57,13 @@ public class CityService {
 	List<City> parseFile(String csvFileName) {
 		try {
 			var csvFile = Path.of(csvFileName);
-			return csvMapper
-					.disable(FAIL_ON_MISSING_HEADER_COLUMNS)
-					.readerFor(City.class)
-					.with(schema)
-					.<City>readValues(csvFile.toFile())
-					.readAll();
-		} catch (IOException e) {
+			return csvMapper.disable(FAIL_ON_MISSING_HEADER_COLUMNS)
+				.readerFor(City.class)
+				.with(schema)
+				.<City>readValues(csvFile.toFile())
+				.readAll();
+		}
+		catch (IOException e) {
 			throw new ElkException(e);
 		}
 	}
@@ -75,8 +72,8 @@ public class CityService {
 		final var counter = new AtomicInteger();
 
 		final Collection<List<City>> chunks = cities.stream()
-				.collect(Collectors.groupingBy(it -> counter.getAndIncrement() / BULK_SIZE))
-				.values();
+			.collect(Collectors.groupingBy(it -> counter.getAndIncrement() / BULK_SIZE))
+			.values();
 		counter.set(0);
 		chunks.forEach(ch -> {
 			repository.saveAll(ch);
@@ -85,7 +82,8 @@ public class CityService {
 	}
 
 	public City findById(String cityId) {
-		return repository.findById(cityId).orElseThrow(() -> new ElkException("City with ID=" + cityId + " was not found!"));
+		return repository.findById(cityId)
+			.orElseThrow(() -> new ElkException("City with ID=" + cityId + " was not found!"));
 	}
 
 	public Page<City> searchByCountry(String country, Pageable pageable) {

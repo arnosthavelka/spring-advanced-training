@@ -1,6 +1,5 @@
 package com.github.aha.sat.core.wiring.order;
 
-
 import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.Collection;
@@ -17,7 +16,7 @@ import com.github.aha.sat.core.wiring.beverage.Soda;
 
 @SpringBootTest(classes = WiringConfig.class)
 class OrderCollectionWiringTest {
-	
+
 	/**
 	 * The exact name cannot be predicted as it's derived from lambda.
 	 */
@@ -40,8 +39,7 @@ class OrderCollectionWiringTest {
 
 	@Test
 	void shouldWireAllOrders() {
-		assertThat(allOrders)
-			.hasSize(4)
+		assertThat(allOrders).hasSize(4)
 			.map(BeverageOrder::getClass)
 			.map(Class::getSimpleName)
 			.contains("BeerOrder", "ColaOrder", "TeaOrder")
@@ -50,9 +48,8 @@ class OrderCollectionWiringTest {
 
 	@Test
 	void shouldWireAllCarnonatedOrders() {
-		assertThat(carbonatedOrders)
-				.contains(beerOrder, colaOrder, sodaOrder)
-				.doesNotContain(beverage -> "Just dummy order");
+		assertThat(carbonatedOrders).contains(beerOrder, colaOrder, sodaOrder)
+			.doesNotContain(beverage -> "Just dummy order");
 	}
 
 }

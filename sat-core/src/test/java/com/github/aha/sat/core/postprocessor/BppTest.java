@@ -10,12 +10,13 @@ import org.springframework.boot.test.context.SpringBootTest;
 @SpringBootTest(classes = PostProcessorConfig.class)
 class BppTest {
 
-    @Autowired
-    @Qualifier("crown")
-    private String bean;
+	@Autowired
+	@Qualifier("crown")
+	private String bean;
 
-    @Test
+	@Test
 	void contextLoads() {
 		assertThat(bean).hasToString("ONE WHO WEARS THE CROWN, BEARS THE CROWN.");
-    }
+	}
+
 }

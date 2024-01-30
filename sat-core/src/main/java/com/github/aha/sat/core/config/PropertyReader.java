@@ -11,9 +11,13 @@ import lombok.Setter;
 public class PropertyReader {
 
 	private String text;
+
 	private Long longNumber;
+
 	private Integer smallNumber;
+
 	private Integer numberLessThanTen;
+
 	private Integer numberInRange;
 
 }

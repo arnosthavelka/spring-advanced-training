@@ -17,7 +17,7 @@ class CityServiceTests {
 	@InjectMocks
 	protected CityService service;
 
-    @Test
+	@Test
 	void findAllBy() {
 		var name = "Melbourne";
 		var state = "Victoria";
@@ -26,6 +26,6 @@ class CityServiceTests {
 		service.findAllBy(name, state, countryName);
 
 		verify(repository).findAllCitiesBy(name, state, countryName);
-    }
+	}
 
 }

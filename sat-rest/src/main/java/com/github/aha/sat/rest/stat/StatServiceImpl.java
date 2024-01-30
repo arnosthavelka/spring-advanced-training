@@ -14,31 +14,32 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional
 public class StatServiceImpl implements StatService {
 
-    @Autowired
-    private EntityManager em;
+	@Autowired
+	private EntityManager em;
 
-    public Statistics getStatistics() {
+	public Statistics getStatistics() {
 		var session = (Session) this.em.getDelegate();
-        return session.getSessionFactory().getStatistics();
-    }
+		return session.getSessionFactory().getStatistics();
+	}
 
-    public SessionFactory getSessionFactory() {
+	public SessionFactory getSessionFactory() {
 		var session = (Session) this.em.getDelegate();
-        return session.getSessionFactory();
-    }
+		return session.getSessionFactory();
+	}
 
-    @Override
-    public String[] getEntityNames() {
-        return getStatistics().getEntityNames();
-    }
+	@Override
+	public String[] getEntityNames() {
+		return getStatistics().getEntityNames();
+	}
 
-    @Override
-    public String[] getQueries() {
-        return getStatistics().getQueries();
-    }
+	@Override
+	public String[] getQueries() {
+		return getStatistics().getQueries();
+	}
 
-    @Override
-    public EntityStatistics getEntityStatistics(String entityName) {
-        return getStatistics().getEntityStatistics("com.github.aha.sat.rest.domain." + entityName);
-    }
+	@Override
+	public EntityStatistics getEntityStatistics(String entityName) {
+		return getStatistics().getEntityStatistics("com.github.aha.sat.rest.domain." + entityName);
+	}
+
 }

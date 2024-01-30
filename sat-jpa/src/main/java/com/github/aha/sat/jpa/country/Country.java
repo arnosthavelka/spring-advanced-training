@@ -30,14 +30,14 @@ import lombok.ToString;
 @EqualsAndHashCode
 public class Country implements Serializable {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    @Id
+	@Id
 	@GeneratedValue(strategy = IDENTITY)
-    private Long id;
+	private Long id;
 
-    @Column(nullable = false)
-    private String name;
+	@Column(nullable = false)
+	private String name;
 
 	@OneToMany(mappedBy = "country", cascade = { PERSIST, MERGE })
 	@JsonBackReference // https://stackoverflow.com/questions/43587133/jackson-serialize-circular-references-stack-overflow-error

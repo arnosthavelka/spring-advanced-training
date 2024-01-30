@@ -1,6 +1,5 @@
 package com.github.aha.sat.core.wiring.order;
 
-
 import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.Map;
@@ -14,15 +13,13 @@ import com.github.aha.sat.core.wiring.beverage.AbstractCarbonatedBeverage;
 
 @SpringBootTest(classes = WiringConfig.class)
 class OrderMapWiringTest {
-	
+
 	@Autowired
 	private Map<String, BeverageOrder<? extends AbstractCarbonatedBeverage>> carbonatedOrders;
 
 	@Test
 	void shouldWireAllOrders() {
-		assertThat(carbonatedOrders)
-				.hasSize(3)
-				.containsKeys("beerOrder", "colaOrder", "sodaOrder");
+		assertThat(carbonatedOrders).hasSize(3).containsKeys("beerOrder", "colaOrder", "sodaOrder");
 	}
 
 }

@@ -14,22 +14,22 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class CommandLineRunnerApplication implements CommandLineRunner {
 
-    public static void main(String[] args) {
-        SpringApplication.run(CommandLineRunnerApplication.class, args);
-    }
+	public static void main(String[] args) {
+		SpringApplication.run(CommandLineRunnerApplication.class, args);
+	}
 
-    @Bean
+	@Bean
 	CommandLineRunner bye() {
-        return new CommandLineRunner () {
+		return new CommandLineRunner() {
 
 			@Override
 			public void run(String... args) throws Exception {
 				log.info("Bye!");
-				
+
 			}
-        	
+
 		};
-    }
+	}
 
 	@Override
 	public void run(String... args) throws Exception {

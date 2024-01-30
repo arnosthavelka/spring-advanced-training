@@ -41,7 +41,7 @@ class CityDzoneTests {
 		var city = getCityByName(cityName);
 
 		assertThat(city.getName()).isEqualTo(cityName);
-    }
+	}
 
 	private City getCityByName(String cityName) {
 		var cb = em.getCriteriaBuilder();
@@ -61,10 +61,7 @@ class CityDzoneTests {
 
 		assertThat(pagedResult.getTotalElements()).isEqualTo(5);
 		assertThat(pagedResult.getTotalPages()).isEqualTo(3);
-        assertThat( pagedResult.getContent() )
-	        .hasSize( 2 )
-	        .map( City::getName )
-				.containsExactly("Atlanta", "Chicago");
+		assertThat(pagedResult.getContent()).hasSize(2).map(City::getName).containsExactly("Atlanta", "Chicago");
 	}
 
 	private Page<City> findCitiesByCountry(String countryName, Pageable pageable) {
@@ -77,7 +74,8 @@ class CityDzoneTests {
 
 		CriteriaQuery<Long> countQuery = cb.createQuery(Long.class);
 		Root<City> cityCountRoot = countQuery.from(City.class);
-		countQuery.select(cb.count(cityCountRoot)).where(cb.equal(cityCountRoot.get(country).get(Country_.name), countryName));
+		countQuery.select(cb.count(cityCountRoot))
+			.where(cb.equal(cityCountRoot.get(country).get(Country_.name), countryName));
 		var totalCount = em.createQuery(countQuery).getSingleResult();
 
 		return new PageImpl<>(pagedData, pageable, totalCount);
@@ -94,11 +92,12 @@ class CityDzoneTests {
 	public static <T> Page<T> toPage(List<T> fromCollection, @NonNull Pageable pageable) {
 		try {
 			List<T> resources = emptyIfNull(fromCollection).stream()
-					.skip(pageable.getOffset())
-					.limit(pageable.getPageSize())
-					.collect(toList());
+				.skip(pageable.getOffset())
+				.limit(pageable.getPageSize())
+				.collect(toList());
 			return new PageImpl<>(resources, pageable, fromCollection.size());
-		} catch (UnsupportedOperationException uoe) {
+		}
+		catch (UnsupportedOperationException uoe) {
 			return new PageImpl<>(fromCollection, pageable, fromCollection.size());
 		}
 	}

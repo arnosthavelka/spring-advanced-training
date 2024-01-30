@@ -10,5 +10,5 @@ public class TeaOrder implements BeverageOrder<Tea> {
 	public String takeOrder(Tea beverage) {
 		return beverage.getName() + " order is taken.";
 	}
-	
+
 }

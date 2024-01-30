@@ -1,6 +1,5 @@
 package com.github.aha.sat.core.wiring.beverage;
 
-
 import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.Map;
@@ -14,7 +13,7 @@ import com.github.aha.sat.core.wiring.trait.Alcoholic;
 
 @SpringBootTest(classes = WiringConfig.class)
 class BeverageMapWiringTest {
-	
+
 	@Autowired
 	private Map<String, Beverage> beverages;
 
@@ -27,23 +26,17 @@ class BeverageMapWiringTest {
 
 	@Test
 	void shouldWireAllBeverages() {
-		assertThat(beverages)
-				.hasSize(6)
-				.containsKeys("beer", "cola", "soda", "coffee", "tea", "iceTea");
+		assertThat(beverages).hasSize(6).containsKeys("beer", "cola", "soda", "coffee", "tea", "iceTea");
 	}
 
 	@Test
 	void shouldWireCarbonatedBeverages() {
-		assertThat(carbonatedBeverages)
-				.hasSize(3)
-				.containsKeys("beer", "cola", "soda");
+		assertThat(carbonatedBeverages).hasSize(3).containsKeys("beer", "cola", "soda");
 	}
 
 	@Test
 	void shouldWireAlcoholicBeverages() {
-		assertThat(alcoholicBeverages)
-				.hasSize(1)
-				.containsKey("beer");
+		assertThat(alcoholicBeverages).hasSize(1).containsKey("beer");
 		assertThat(alcoholicBeverages.get("beer").getName()).contains("Beer");
 	}
 

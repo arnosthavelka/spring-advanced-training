@@ -19,7 +19,7 @@ class AopTest {
 	@Autowired
 	@Qualifier("hotChocolade")
 	private Beverage hotChocolade;
-	
+
 	@Test
 	void testTea() {
 		assertThat(milk.getName()).isEqualTo("Milk");
@@ -32,6 +32,6 @@ class AopTest {
 			Enjoyable en = (Enjoyable) hotChocolade;
 			assertThat(en.enjoy(hotChocolade)).isEqualTo("Wow Hot Chocolade");
 		}
-    }
+	}
 
 }

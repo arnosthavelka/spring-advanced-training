@@ -10,5 +10,5 @@ public class ColaOrder implements BeverageOrder<Cola> {
 	public String takeOrder(Cola beverage) {
 		return beverage.getName() + " is temporarily not available.";
 	}
-	
+
 }

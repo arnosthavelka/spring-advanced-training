@@ -27,8 +27,8 @@ public class CityResource extends CityBaseResource {
 	}
 
 	public EntityModel<CityResource> toResource() {
-		return EntityModel.of(this,
-				linkTo(methodOn(CityHateoasController.class).getOne(id)).withSelfRel(),
+		return EntityModel.of(this, linkTo(methodOn(CityHateoasController.class).getOne(id)).withSelfRel(),
 				linkTo(CityHateoasController.class).slash(id).withRel("delete"));
 	}
+
 }

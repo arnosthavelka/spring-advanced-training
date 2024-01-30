@@ -22,7 +22,8 @@ public class CountryService {
 	}
 
 	@Transactional(readOnly = true)
-	public Page<Country> findAllCountriesHavingCity(@NonNull String cityName, @NonNull String cityState, Pageable pageable) {
+	public Page<Country> findAllCountriesHavingCity(@NonNull String cityName, @NonNull String cityState,
+			Pageable pageable) {
 		return repository.findAllCountriesHavingCity("%" + cityName + "%", "%" + cityState + "%", pageable);
 	}
 

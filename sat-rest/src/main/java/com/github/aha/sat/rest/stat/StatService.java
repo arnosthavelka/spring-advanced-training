@@ -6,14 +6,14 @@ import org.hibernate.stat.Statistics;
 
 public interface StatService {
 
-    Statistics getStatistics();
+	Statistics getStatistics();
 
-    SessionFactory getSessionFactory();
+	SessionFactory getSessionFactory();
 
-    String[] getEntityNames();
+	String[] getEntityNames();
 
-    String[] getQueries();
+	String[] getQueries();
 
-    EntityStatistics getEntityStatistics(String entityName);
+	EntityStatistics getEntityStatistics(String entityName);
 
 }

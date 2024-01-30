@@ -5,11 +5,12 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ComponentScan;
 
 @SpringBootApplication
-@ComponentScan(basePackages = "com.github.aha.sat.dummy") // intentionally wrong package to avoid loading beans
+@ComponentScan(basePackages = "com.github.aha.sat.dummy") // intentionally wrong package
+															// to avoid loading beans
 public class CoreApplication {
 
-    public static void main(String[] args) {
-        SpringApplication.run(CoreApplication.class, args);
-    }
+	public static void main(String[] args) {
+		SpringApplication.run(CoreApplication.class, args);
+	}
 
 }

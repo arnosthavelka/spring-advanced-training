@@ -36,15 +36,14 @@ class CityRepositoryTests extends AbstractCityVerificationTest {
 			totalCount = cityRepository.count();
 		}
 	}
-	
-    @Test
+
+	@Test
 	void countCities() {
 		assertThat(totalCount).isEqualTo(TOTAL_SIZE);
-    }
+	}
 
 	@Nested
 	class FindAllTest {
-
 
 		@Test
 		void pagination() {
@@ -63,7 +62,8 @@ class CityRepositoryTests extends AbstractCityVerificationTest {
 
 		@Test
 		void sorting() {
-			Page<City> page = cityRepository.findAll(PageRequest.of(0, 5, Sort.Direction.DESC, City_.COUNTRY, City_.NAME));
+			Page<City> page = cityRepository
+				.findAll(PageRequest.of(0, 5, Sort.Direction.DESC, City_.COUNTRY, City_.NAME));
 
 			assertThat(page.getSize()).isEqualTo(5);
 			log.debug("\n### testSorting output");
@@ -117,14 +117,14 @@ class CityRepositoryTests extends AbstractCityVerificationTest {
 	void findByNameContainingAndCountryNameContainingAllIgnoringCase() {
 		var pageSize = 2;
 
-		Page<City> page = cityRepository.findByNameContainingAndCountryNameContainingAllIgnoringCase("an", "usa", PageRequest.of(0, pageSize));
+		Page<City> page = cityRepository.findByNameContainingAndCountryNameContainingAllIgnoringCase("an", "usa",
+				PageRequest.of(0, pageSize));
 
 		assertThat(page.getSize()).isEqualTo(pageSize);
 		assertThat(page.getTotalElements()).isEqualTo(2);
 		assertThat(page.getTotalPages()).isEqualTo(1);
-		assertThat(page.getContent())
-				.satisfies(c -> log.debug("The page content:"))
-				.allSatisfy(city -> log.debug(city.toString()));
+		assertThat(page.getContent()).satisfies(c -> log.debug("The page content:"))
+			.allSatisfy(city -> log.debug(city.toString()));
 	}
 
 	@Test
@@ -142,11 +142,7 @@ class CityRepositoryTests extends AbstractCityVerificationTest {
 		@Test
 		void createEntity() {
 			var country = countryRepository.getByName(AUSTRALIA);
-			var city = City.builder()
-					.name("Darwin")
-					.state("North territory")
-					.country(country)
-					.build();
+			var city = City.builder().name("Darwin").state("North territory").country(country).build();
 			country.getCities().add(city);
 
 			countryRepository.save(country);

@@ -26,18 +26,18 @@ public class City implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-    @GeneratedValue
+	@GeneratedValue
 	@JsonView(Basic.class)
-    private Long id;
+	private Long id;
 
-    @Column(nullable = false)
+	@Column(nullable = false)
 	@JsonView(Basic.class)
-    private String name;
+	private String name;
 
-    @Column(nullable = true)
-    private String state;
+	@Column(nullable = true)
+	private String state;
 
-    @Column(nullable = false)
-    private String country;
+	@Column(nullable = false)
+	private String country;
 
 }

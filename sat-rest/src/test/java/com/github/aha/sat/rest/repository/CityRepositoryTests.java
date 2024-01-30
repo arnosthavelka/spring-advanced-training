@@ -23,44 +23,39 @@ class CityRepositoryTests {
 	@Autowired
 	protected CityRepository cityRepository;
 
-    @Test
+	@Test
 	void testCount() {
-        long count = cityRepository.count();
-        assertThat(count, equalTo(6L));
-    }
+		long count = cityRepository.count();
+		assertThat(count, equalTo(6L));
+	}
 
-    @Test
+	@Test
 	void testCityById() {
-        City city = cityRepository.getReferenceById(102L);
+		City city = cityRepository.getReferenceById(102L);
 
-		assertAll(
-				() -> assertThat(city.getName(), equalTo("Barcelona")),
+		assertAll(() -> assertThat(city.getName(), equalTo("Barcelona")),
 				() -> assertThat(city.getCountry(), equalTo("Spain")),
 				() -> assertThat(city.getState(), equalTo("Catalunya")));
-    }
+	}
 
-    @Test
+	@Test
 	void testCityByName() {
-        City city = cityRepository.findByName("Bern");
+		City city = cityRepository.findByName("Bern");
 
-		assertAll(
-				() -> assertThat(city.getId(), equalTo(103L)),
-				() -> assertThat(city.getName(), equalTo("Bern")),
+		assertAll(() -> assertThat(city.getId(), equalTo(103L)), () -> assertThat(city.getName(), equalTo("Bern")),
 				() -> assertThat(city.getCountry(), equalTo("Switzerland")),
 				() -> assertThat(city.getState(), equalTo("")));
-    }
+	}
 
-    @Test
+	@Test
 	void testCitiesByCountry() {
 		List<City> data = cityRepository.findByCountry("Czech Republic", Sort.by(Sort.Direction.ASC, "name"));
 
 		assertThat(data.size(), equalTo(1));
-        City city = data.get(0);
-		assertAll(
-				() -> assertThat(city.getId(), equalTo(100L)),
-				() -> assertThat(city.getName(), equalTo("Prague")),
+		City city = data.get(0);
+		assertAll(() -> assertThat(city.getId(), equalTo(100L)), () -> assertThat(city.getName(), equalTo("Prague")),
 				() -> assertThat(city.getCountry(), equalTo("Czech Republic")),
 				() -> assertThat(city.getState(), equalTo("")));
-    }
+	}
 
 }

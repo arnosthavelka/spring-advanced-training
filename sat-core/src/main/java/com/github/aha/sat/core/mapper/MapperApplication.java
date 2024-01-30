@@ -15,14 +15,15 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 @SpringBootApplication
 public class MapperApplication {
 
-    @Value("classpath:/users.json")
-    private Resource usersJsonResource;
+	@Value("classpath:/users.json")
+	private Resource usersJsonResource;
 
-    @Bean
-    List<UserDTO> jsonUsers(ObjectMapper objectMapper) throws IOException {
+	@Bean
+	List<UserDTO> jsonUsers(ObjectMapper objectMapper) throws IOException {
 		try (var inputStream = usersJsonResource.getInputStream()) {
-        	UserDTO[] payloadUsers = objectMapper.readValue(inputStream,UserDTO[].class);
-        	return Collections.unmodifiableList(Arrays.asList(payloadUsers));
-        }    	
-    }
+			UserDTO[] payloadUsers = objectMapper.readValue(inputStream, UserDTO[].class);
+			return Collections.unmodifiableList(Arrays.asList(payloadUsers));
+		}
+	}
+
 }

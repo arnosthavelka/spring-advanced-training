@@ -33,48 +33,44 @@ public class CountryCustomRepositoryImpl extends QuerydslRepositorySupport imple
 		this.em = em;
 	}
 
-	public Page<Country> findAllCountriesHavingCity(@NonNull String cityName, @NonNull String cityState, Pageable pageable) {
+	public Page<Country> findAllCountriesHavingCity(@NonNull String cityName, @NonNull String cityState,
+			Pageable pageable) {
 		Long totalCount = findCountriesHavingCityQuery(city.country.count(), cityName, cityState).fetchOne();
 		JPAQuery<Country> query = findCountriesHavingCityQuery(city.country, cityName, cityState);
 		ofNullable(getQuerydsl()).ifPresent(querydsl -> querydsl.applyPagination(pageable, query));
 		List<Country> pagedData = query.fetch();
 		return getPage(pagedData, pageable, () -> totalCount);
 	}
-	
+
 	private <T> JPAQuery<T> findCountriesHavingCityQuery(Expression<T> expression, String cityName, String cityState) {
-		return new JPAQuery<Country>(em)
-				.select(expression)				
-				.from(city)
-				.where(city.name.like(cityName)
-						.and(city.state.like(cityState)));
+		return new JPAQuery<Country>(em).select(expression)
+			.from(city)
+			.where(city.name.like(cityName).and(city.state.like(cityState)));
 	}
 
 	public List<CityProjection> searchByCountry(@NonNull String countryName) {
 		return new JPAQuery<CityProjection>(em)
-				.select(Projections.constructor(CityProjection.class, city.id, city.name, city.state, city.country.name))
-				.from(city)
-				.where(city.country.name.eq(countryName))
-				.fetch();
+			.select(Projections.constructor(CityProjection.class, city.id, city.name, city.state, city.country.name))
+			.from(city)
+			.where(city.country.name.eq(countryName))
+			.fetch();
 	}
 
 	public List<Tuple> countCitiesInCountriesContaining(@NonNull String countryName) {
-		return new JPAQuery<Tuple>(em)
-				.select(country.id, country.name, country.cities.size())
-				.from(country)
-				.where(country.name.contains(countryName))
-				.fetch();
+		return new JPAQuery<Tuple>(em).select(country.id, country.name, country.cities.size())
+			.from(country)
+			.where(country.name.contains(countryName))
+			.fetch();
 	}
 
 	public long countBy(String cityName, String cityState, String countryName) {
-		var query = new JPAQuery<>(em)
-				.select(country.count())
-				.from(country)
-				.innerJoin(country.cities, city)
-				.where(new BooleanBuilder()
-						.and(getIfNotEmpty(cityName, city.name::contains))
-						.and(getIfNotEmpty(cityState, city.state::like))
-						.and(getIfNotEmpty(countryName, country.name::eq))
-                        .getValue());
+		var query = new JPAQuery<>(em).select(country.count())
+			.from(country)
+			.innerJoin(country.cities, city)
+			.where(new BooleanBuilder().and(getIfNotEmpty(cityName, city.name::contains))
+				.and(getIfNotEmpty(cityState, city.state::like))
+				.and(getIfNotEmpty(countryName, country.name::eq))
+				.getValue());
 		return query.fetchOne();
 	}
 

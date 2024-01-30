@@ -17,11 +17,12 @@ import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 
 /**
- * Usage:
- * get city detail									- GET http://localhost:8080/api/cities/HwB5aHgBiVYee_AkNeA6 
- * static search cities (with Page response)		- GET http://localhost:8080/api/cities/country/czech republic?sort=name,desc
- * dynamic search cities (with Page response)		- GET http://localhost:8080/api/cities?name=be&country=Czech&subcountry=bohemia&size=5&sort=name
- * upload data										- POST http://localhost:8080/api/cities/upload?filename=Z:/world-cities.csv
+ * Usage: get city detail - GET http://localhost:8080/api/cities/HwB5aHgBiVYee_AkNeA6
+ * static search cities (with Page response) - GET
+ * http://localhost:8080/api/cities/country/czech republic?sort=name,desc dynamic search
+ * cities (with Page response) - GET
+ * http://localhost:8080/api/cities?name=be&country=Czech&subcountry=bohemia&size=5&sort=name
+ * upload data - POST http://localhost:8080/api/cities/upload?filename=Z:/world-cities.csv
  */
 @RestController
 @RequestMapping(value = CityController.ROOT_PATH, produces = APPLICATION_JSON_VALUE)

@@ -27,7 +27,8 @@ public class CityCustomRepositoryImpl implements CityCustomRepository {
 	@PersistenceContext
 	private final EntityManager em;
 
-	public List<City> findAllCitiesBy(@NonNull String cityName, @NonNull String cityState, @NonNull String countryName) {
+	public List<City> findAllCitiesBy(@NonNull String cityName, @NonNull String cityState,
+			@NonNull String countryName) {
 		var cb = em.getCriteriaBuilder();
 		var query = cb.createQuery(City.class);
 		Root<City> cityRoot = query.from(City.class);
@@ -49,13 +50,9 @@ public class CityCustomRepositoryImpl implements CityCustomRepository {
 		List<Predicate> predicates = new ArrayList<>();
 		predicates.add(cb.like(cityRoot.get(name), cityName));
 
-		query.select(
-				cb.construct(CityProjection.class,
-						cityRoot.get(id),
-						cityRoot.get(name),
-						cityRoot.get(state),
-						cityRoot.get(country).get(Country_.name)))
-				.where(predicates.toArray(new Predicate[0]));
+		query.select(cb.construct(CityProjection.class, cityRoot.get(id), cityRoot.get(name), cityRoot.get(state),
+				cityRoot.get(country).get(Country_.name)))
+			.where(predicates.toArray(new Predicate[0]));
 		return em.createQuery(query).getResultList();
 	}
 
@@ -64,9 +61,12 @@ public class CityCustomRepositoryImpl implements CityCustomRepository {
 		var query = cb.createTupleQuery();
 		var cityRoot = query.from(City.class);
 		var countryJoin = cityRoot.join(City_.country);
-		query.select(cb.tuple(countryJoin.get(Country_.id).alias("countryId"), countryJoin.get(Country_.name), cb.count(countryJoin))) // or use query.multiselect without the cb.tuple
-				.where(cb.like(countryJoin.get(Country_.name), countryName))
-				.groupBy(countryJoin);
+		query
+			.select(cb.tuple(countryJoin.get(Country_.id).alias("countryId"), countryJoin.get(Country_.name),
+					cb.count(countryJoin))) // or use query.multiselect without the
+											// cb.tuple
+			.where(cb.like(countryJoin.get(Country_.name), countryName))
+			.groupBy(countryJoin);
 		return em.createQuery(query).getResultList();
 	}
 

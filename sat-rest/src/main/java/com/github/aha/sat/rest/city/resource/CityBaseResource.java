@@ -18,7 +18,16 @@ public class CityBaseResource {
 	private String state;
 
 	@NotNull(message = "Country cannot be null")
-	@Schema(requiredMode =  REQUIRED, description = "Country where the city belogs") // it duplicates @NotNull information -> otherwise it will be hidden
+	@Schema(requiredMode = REQUIRED, description = "Country where the city belogs") // it
+																					// duplicates
+																					// @NotNull
+																					// information
+																					// ->
+																					// otherwise
+																					// it
+																					// will
+																					// be
+																					// hidden
 	private String country;
 
 }

@@ -9,6 +9,6 @@ public class TestController {
 	@GetMapping("/test")
 	public String hello() {
 		return "Hello from Spring Boot Admin";
-    }
+	}
 
 }

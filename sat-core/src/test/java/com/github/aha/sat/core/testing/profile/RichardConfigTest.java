@@ -8,8 +8,9 @@ import org.springframework.test.context.ActiveProfiles;
 @ActiveProfiles("richard")
 class RichardConfigTest extends AbstractConfigTest {
 
-    @Test
+	@Test
 	void testUser() {
 		assertThat(user.getName()).isEqualTo("Richard");
-    }
+	}
+
 }

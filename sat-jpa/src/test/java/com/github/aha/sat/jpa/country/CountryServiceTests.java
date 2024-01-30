@@ -18,14 +18,14 @@ class CountryServiceTests {
 	@InjectMocks
 	CountryService service;
 
-    @Test
+	@Test
 	void findAllBy() {
 		var namePattern = "Melbourne";
 
 		service.findAllBy(namePattern);
 
 		verify(repository).findByNameLikeIgnoreCase("%" + namePattern + "%");
-    }
+	}
 
 	@Test
 	void findAllCountriesHavingCity() {

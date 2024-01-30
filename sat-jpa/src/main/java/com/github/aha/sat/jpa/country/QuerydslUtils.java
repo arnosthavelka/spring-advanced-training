@@ -30,7 +30,8 @@ public class QuerydslUtils {
 		return PageableExecutionUtils.getPage(paginatedQuery.fetch(), pageable, paginatedQuery::fetchCount);
 	}
 
-	public static <T> Page<T> fetchProjectedPage(EntityManager em, JPQLQuery<T> query, Pageable pageable, Class<?> rootType) {
+	public static <T> Page<T> fetchProjectedPage(EntityManager em, JPQLQuery<T> query, Pageable pageable,
+			Class<?> rootType) {
 		var querydsl = new Querydsl(em, (new PathBuilderFactory()).create(rootType));
 		JPQLQuery<T> paginatedQuery = querydsl.applyPagination(pageable, query);
 		return PageableExecutionUtils.getPage(paginatedQuery.fetch(), pageable, paginatedQuery::fetchCount);

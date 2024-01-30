@@ -11,9 +11,9 @@ import org.springframework.boot.test.context.SpringBootTest;
 @SpringBootTest(classes = { MapperApplication.class })
 class JsonUserRepositoryTest {
 
-    @Autowired
-    private UserRepository repo;
-    
+	@Autowired
+	private UserRepository repo;
+
 	@Test
 	void testUsersCount() {
 		assertThat(repo.fetchAllUsers().size(), is(equalTo(3)));

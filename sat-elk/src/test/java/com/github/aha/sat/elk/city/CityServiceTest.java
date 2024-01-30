@@ -46,6 +46,7 @@ import lombok.extern.slf4j.Slf4j;
 class CityServiceTest {
 
 	private static final String CITY_ID = UUID.randomUUID().toString();
+
 	private static final String CITY_COUNTRY = "Colombia";
 
 	@Mock
@@ -79,7 +80,16 @@ class CityServiceTest {
 		StringBuilder sb = new StringBuilder();
 		sb.append("name,country,subcountry,geonameid\n");
 		for (int i = 0; i < 700; i++) {
-			sb.append("name").append(i).append(",country").append(i).append(",subcountry").append(i).append(",").append(i).append(i).append("\n");
+			sb.append("name")
+				.append(i)
+				.append(",country")
+				.append(i)
+				.append(",subcountry")
+				.append(i)
+				.append(",")
+				.append(i)
+				.append(i)
+				.append("\n");
 		}
 		writeString(tempFile, sb.toString());
 	}
@@ -119,22 +129,16 @@ class CityServiceTest {
 	}
 
 	@ParameterizedTest
-	@CsvSource(value = {
-			"Armenia,Colombia,Quindío",
-			"null,Colombia,Quindío",
-			"Armenia,null,Quindío",
-			"Armenia,Colombia,null",
-			"null,null,null",
-	}, nullValues = "null")
+	@CsvSource(value = { "Armenia,Colombia,Quindío", "null,Colombia,Quindío", "Armenia,null,Quindío",
+			"Armenia,Colombia,null", "null,null,null", }, nullValues = "null")
 	void search(String name, String country, String subcountry) {
 		Pageable pageable = unpaged();
-		var cityHit = new SearchHit<City>(
-				INDEX, UUID.randomUUID().toString(), null, NaN, null, null, null, null, null, null,
-				new City(CITY_ID, name, country, subcountry, 666L));
+		var cityHit = new SearchHit<City>(INDEX, UUID.randomUUID().toString(), null, NaN, null, null, null, null, null,
+				null, new City(CITY_ID, name, country, subcountry, 666L));
 		List<? extends SearchHit<City>> cities = List.of(cityHit);
 
 		given(esTemplate.search(any(Query.class), eq(City.class)))
-				.willReturn(new SearchHitsImpl<City>(1, EQUAL_TO, NaN, "scrollId", "pointInTimeId", cities, null, null));
+			.willReturn(new SearchHitsImpl<City>(1, EQUAL_TO, NaN, "scrollId", "pointInTimeId", cities, null, null));
 
 		var result = service.search(name, country, subcountry, pageable);
 

@@ -16,12 +16,13 @@ class HelloControllerTest {
 	@Test
 	void test() throws Exception {
 		HelloController controller = new HelloController();
-		MockMvc mockMvc = standaloneSetup(controller)
-				.setSingleView(new InternalResourceView("/WEB-INF/jsp/hello.jsp")).build();
+		MockMvc mockMvc = standaloneSetup(controller).setSingleView(new InternalResourceView("/WEB-INF/jsp/hello.jsp"))
+			.build();
 
 		mockMvc.perform(get("/hello/Arny"))
 			.andExpect(view().name("hello"))
 			.andExpect(model().attributeExists("name"))
 			.andExpect(model().attribute("name", "Arny"));
 	}
+
 }

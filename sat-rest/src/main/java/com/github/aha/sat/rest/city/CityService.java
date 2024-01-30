@@ -24,13 +24,15 @@ public class CityService {
 		sort.descending();
 		if (country == null) {
 			return cityRepository.findAll(sort);
-		} else {
+		}
+		else {
 			return cityRepository.findByCountry(country, sort);
 		}
 	}
 
 	public City getOne(Long id) {
-		return cityRepository.findById(id).orElseThrow(() -> new CityNotFoundException(String.format("City [id=%d] was not found!", id)));
+		return cityRepository.findById(id)
+			.orElseThrow(() -> new CityNotFoundException(String.format("City [id=%d] was not found!", id)));
 	}
 
 	public City save(Long cityId, CityBaseResource cityResource) {

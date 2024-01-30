@@ -37,9 +37,11 @@ public class BeverageLogger {
 		try {
 			value = pjp.proceed();
 			log.info("Controller method '{}' returned '{}'", pjp.getSignature().getName(), value);
-		} catch (Throwable e) {
+		}
+		catch (Throwable e) {
 			log.error("AOP around aspect error", e);
 		}
 		return value;
 	}
+
 }

@@ -28,18 +28,18 @@ class CitySwaggerControllerTests {
 
 	@Autowired
 	TestRestTemplate restTemplate;
-	
+
 	@Autowired
 	CityRepository repository;
 
-    @Test
+	@Test
 	void getCityById() {
 		City city = restTemplate.getForObject(ROOT_URL + "/{id}", City.class, "100");
 
 		assertThat(city.getName()).isEqualTo("Prague");
-    }
+	}
 
-    @Test
+	@Test
 	void getCityByCountry() {
 		City[] data = restTemplate.getForObject(ROOT_URL + "?country=UK", City[].class);
 
@@ -52,16 +52,16 @@ class CitySwaggerControllerTests {
 		City[] data = restTemplate.getForObject(ROOT_URL, City[].class);
 
 		assertThat(data).hasSizeGreaterThan(4);
-        verifyCity(data[0], 100L, "Prague");
-    }
+		verifyCity(data[0], 100L, "Prague");
+	}
 
-    @Test
+	@Test
 	void findAllSortedCities() {
 		City[] data = restTemplate.getForObject(ROOT_URL + "?sorting=name", City[].class);
 
 		assertThat(data).hasSizeGreaterThan(4);
-        verifyCity(data[0], 102L, "Barcelona");
-    }
+		verifyCity(data[0], 102L, "Barcelona");
+	}
 
 	@Test
 	void createCity() {
@@ -80,9 +80,7 @@ class CitySwaggerControllerTests {
 	}
 
 	@ParameterizedTest
-	@CsvSource(value = {
-			"London, UK, England",
-			"Chiredzi,Zimbabwe,Masvingo" })
+	@CsvSource(value = { "London, UK, England", "Chiredzi,Zimbabwe,Masvingo" })
 	void updateCity(String name, String country, String state) {
 		var cityId = 103L;
 		var url = ROOT_URL + "/" + cityId + "?name=" + name + "&state=" + state + "&country=" + country;
@@ -108,6 +106,6 @@ class CitySwaggerControllerTests {
 	private void verifyCity(City city, long id, String name) {
 		assertThat(city.getId()).isEqualTo(id);
 		assertThat(city.getName()).isEqualTo(name);
-    }
+	}
 
 }

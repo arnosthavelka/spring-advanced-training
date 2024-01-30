@@ -13,18 +13,18 @@ import org.springframework.test.annotation.Timed;
 @SpringBootTest(classes = { PackageConfig.class })
 class TimedAnnotationTest {
 
-    @Test
-    @Timed(millis = 100)
+	@Test
+	@Timed(millis = 100)
 	void testOkTime() {
 		assertThat(true, equalTo(TRUE));
-    }
+	}
 
-    @Test()
-    @Timed(millis = 100)
+	@Test()
+	@Timed(millis = 100)
 	void testSpringTimeout() throws InterruptedException {
 		Thread.sleep(50); // NOSONAR
 		assertThat(true, equalTo(TRUE));
-    }
+	}
 
 	@Test
 	void testJUnitTimeout() throws InterruptedException {
@@ -32,6 +32,6 @@ class TimedAnnotationTest {
 			Thread.sleep(50); // NOSONAR
 			assertThat(true, equalTo(TRUE));
 		});
-    }
+	}
 
 }

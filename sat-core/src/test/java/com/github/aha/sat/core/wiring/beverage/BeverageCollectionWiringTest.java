@@ -1,6 +1,5 @@
 package com.github.aha.sat.core.wiring.beverage;
 
-
 import static java.util.Arrays.asList;
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -15,7 +14,7 @@ import com.github.aha.sat.core.wiring.trait.Alcoholic;
 
 @SpringBootTest(classes = WiringConfig.class)
 class BeverageCollectionWiringTest {
-	
+
 	@Autowired
 	private Collection<Beverage> beverages;
 

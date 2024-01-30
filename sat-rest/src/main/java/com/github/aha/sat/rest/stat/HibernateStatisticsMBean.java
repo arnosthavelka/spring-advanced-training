@@ -10,11 +10,12 @@ import org.springframework.stereotype.Component;
 @ManagedResource(description = "MBean about Hibernate statistics")
 public class HibernateStatisticsMBean {
 
-    @Autowired
-    private StatService statService;
+	@Autowired
+	private StatService statService;
 
-    @ManagedOperation
-    public Statistics getStatistics() {
-        return statService.getStatistics();
-    }
+	@ManagedOperation
+	public Statistics getStatistics() {
+		return statService.getStatistics();
+	}
+
 }

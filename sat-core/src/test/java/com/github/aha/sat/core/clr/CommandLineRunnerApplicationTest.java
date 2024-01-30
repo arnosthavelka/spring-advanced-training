@@ -19,9 +19,7 @@ public class CommandLineRunnerApplicationTest {
 
 	@Test
 	void run(CapturedOutput output) throws Exception {
-		assertThat(output.getOut())
-			.contains("Starting ...")
-			.contains("Bye!");
+		assertThat(output.getOut()).contains("Starting ...").contains("Bye!");
 	}
 
 }

@@ -10,40 +10,40 @@ import org.springframework.boot.test.context.SpringBootTest;
 @SpringBootTest(classes = TestingConfigApplication.class)
 class JavaConfigTest {
 
-    @Autowired
-    @Qualifier("helloGreeting")
-    private String helloBean;
+	@Autowired
+	@Qualifier("helloGreeting")
+	private String helloBean;
 
-    @Autowired
-    @Qualifier("hiGreeting")
-    private String hiBean;
+	@Autowired
+	@Qualifier("hiGreeting")
+	private String hiBean;
 
-    @Autowired
-    @Qualifier("randomGreeting")
-    private String randomBean;
+	@Autowired
+	@Qualifier("randomGreeting")
+	private String randomBean;
 
-    @Autowired
-    @Qualifier("userArny")
-    private User userArny;
+	@Autowired
+	@Qualifier("userArny")
+	private User userArny;
 
-    @Test
+	@Test
 	void testHello() {
 		assertThat(helloBean).isEqualTo("Hello all!");
-    }
+	}
 
-    @Test
+	@Test
 	void testHi() {
 		assertThat(hiBean).isEqualTo("Hi all!");
-    }
+	}
 
-    @Test
+	@Test
 	void testRandom() {
 		assertThat(randomBean).isNotEmpty();
-    }
+	}
 
-    @Test
+	@Test
 	void testUserInstance() {
 		assertThat(userArny.getName()).isEqualTo("Arny");
-    }
+	}
 
 }

@@ -20,16 +20,17 @@ import org.springframework.data.repository.query.QueryByExampleExecutor;
 
 import lombok.NonNull;
 
-public interface CityRepository extends CityCustomRepository,
-		JpaRepository<City, Long>, JpaSpecificationExecutor<City>, QueryByExampleExecutor<City> {
+public interface CityRepository extends CityCustomRepository, JpaRepository<City, Long>, JpaSpecificationExecutor<City>,
+		QueryByExampleExecutor<City> {
 
 	City getByName(String name);
-	
+
 	City findByNameAndCountryNameAllIgnoringCase(@NonNull String name, @NonNull String country);
 
 	List<City> findByNameLikeAndCountryName(@NonNull String name, @NonNull String country);
 
-	Page<City> findByNameContainingAndCountryNameContainingAllIgnoringCase(String name, String country, Pageable pageable);
+	Page<City> findByNameContainingAndCountryNameContainingAllIgnoringCase(String name, String country,
+			Pageable pageable);
 
 	default List<City> findAllWithState() {
 		return findAll(specWithState(), by(COUNTRY, NAME));

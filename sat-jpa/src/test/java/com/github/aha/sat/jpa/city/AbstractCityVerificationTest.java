@@ -21,8 +21,7 @@ abstract class AbstractCityVerificationTest {
 	}
 
 	void verifyFirstCityInCollection(List<City> result, String name, String countryName) {
-		assertThat(result)
-				.first().satisfies(city -> verifyCity(city, name, countryName));
+		assertThat(result).first().satisfies(city -> verifyCity(city, name, countryName));
 	}
 
 	void verifyCity(City city, String name, String countryName) {

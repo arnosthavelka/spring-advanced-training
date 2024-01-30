@@ -35,10 +35,7 @@ class CityRepositoryExampleTests extends AbstractCityVerificationTest {
 
 	@Test
 	void findByNameAndCountry() {
-		var exampleCity = City.builder()
-				.name("Montreal")
-				.country(buildCountry("Canada"))
-				.build();
+		var exampleCity = City.builder().name("Montreal").country(buildCountry("Canada")).build();
 
 		var cityOptional = cityRepository.findOne(Example.of(exampleCity));
 
@@ -47,13 +44,11 @@ class CityRepositoryExampleTests extends AbstractCityVerificationTest {
 
 	@Test
 	void findByWildcard() {
-		var exampleCity = City.builder()
-				.name("an")
-				.country(buildCountry("usa"))
-				.build();
+		var exampleCity = City.builder().name("an").country(buildCountry("usa")).build();
 		var matcher = ExampleMatcher.matching()
-				.withMatcher("country", exact()).withIgnoreCase()
-				.withMatcher("name", contains());
+			.withMatcher("country", exact())
+			.withIgnoreCase()
+			.withMatcher("name", contains());
 
 		var cities = cityRepository.findAll(Example.of(exampleCity, matcher));
 

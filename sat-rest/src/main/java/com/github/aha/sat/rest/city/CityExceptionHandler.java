@@ -18,8 +18,8 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 public class CityExceptionHandler extends ResponseEntityExceptionHandler {
 
 	@Override
-	protected ResponseEntity<Object> handleMethodArgumentNotValid(
-			MethodArgumentNotValidException exception, HttpHeaders headers, HttpStatusCode status, WebRequest request) {
+	protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException exception,
+			HttpHeaders headers, HttpStatusCode status, WebRequest request) {
 		return buildResponse(BAD_REQUEST, exception);
 	}
 
@@ -34,9 +34,7 @@ public class CityExceptionHandler extends ResponseEntityExceptionHandler {
 	}
 
 	private ResponseEntity<Object> buildResponse(HttpStatus status, Exception exception) {
-		return ResponseEntity
-				.status(status)
-				.body(exception.getMessage());
+		return ResponseEntity.status(status).body(exception.getMessage());
 	}
 
 }

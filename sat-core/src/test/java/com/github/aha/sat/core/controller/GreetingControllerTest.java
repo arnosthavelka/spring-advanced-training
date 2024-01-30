@@ -21,16 +21,17 @@ class GreetingControllerTest {
 	@Test
 	void testArny() throws Exception {
 		mockMvc.perform(get("/arny"))
-				.andExpect(status().isOk())
-				.andExpect(content().contentType(APPLICATION_JSON_VALUE))
-				.andExpect(content().string("Hello!"));
+			.andExpect(status().isOk())
+			.andExpect(content().contentType(APPLICATION_JSON_VALUE))
+			.andExpect(content().string("Hello!"));
 	}
 
 	@Test
 	void testJuan() throws Exception {
 		mockMvc.perform(get("/juan"))
-				.andExpect(status().isOk())
-				.andExpect(content().contentType(APPLICATION_JSON_VALUE))
-				.andExpect(content().string("Cao!"));
+			.andExpect(status().isOk())
+			.andExpect(content().contentType(APPLICATION_JSON_VALUE))
+			.andExpect(content().string("Cao!"));
 	}
+
 }

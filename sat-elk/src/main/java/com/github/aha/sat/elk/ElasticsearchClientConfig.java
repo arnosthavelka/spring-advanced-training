@@ -13,9 +13,7 @@ public class ElasticsearchClientConfig extends ElasticsearchConfiguration {
 
 	@Override
 	public ClientConfiguration clientConfiguration() {
-		return ClientConfiguration.builder()
-				.connectedTo(connectionUrl)
-				.build();
+		return ClientConfiguration.builder().connectedTo(connectionUrl).build();
 	}
 
 }

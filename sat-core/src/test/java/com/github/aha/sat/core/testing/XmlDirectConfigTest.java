@@ -13,16 +13,16 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 import com.github.aha.sat.core.config.User;
 
 @ExtendWith(SpringExtension.class)
-@ContextConfiguration(locations="classpath:spring/xml-config.xml")
+@ContextConfiguration(locations = "classpath:spring/xml-config.xml")
 class XmlDirectConfigTest {
 
-    @Autowired
-    @Qualifier("user")
-    private User user;
+	@Autowired
+	@Qualifier("user")
+	private User user;
 
-    @Test
+	@Test
 	void testHello() {
-        assertThat(user.getName(), equalTo("Arny"));
-    }
+		assertThat(user.getName(), equalTo("Arny"));
+	}
 
 }

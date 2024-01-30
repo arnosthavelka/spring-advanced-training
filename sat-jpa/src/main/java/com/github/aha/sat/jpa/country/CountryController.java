@@ -14,9 +14,8 @@ import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 
 /**
- * Usage: 
- * - search by name		GET http://localhost:8080/countries?name=an
- * - search by cities	GET	http://localhost:8080/countries/by-city?cityName=a&cityState=a&size=2&page=0
+ * Usage: - search by name GET http://localhost:8080/countries?name=an - search by cities
+ * GET http://localhost:8080/countries/by-city?cityName=a&cityState=a&size=2&page=0
  */
 @RestController
 @RequestMapping(value = "/countries", produces = APPLICATION_JSON_VALUE)
@@ -31,7 +30,8 @@ public class CountryController {
 	}
 
 	@GetMapping("/by-city")
-	public Page<Country> findAllCountriesHavingCity(@NonNull String cityName, @NonNull String cityState, Pageable pageable) {
+	public Page<Country> findAllCountriesHavingCity(@NonNull String cityName, @NonNull String cityState,
+			Pageable pageable) {
 		return service.findAllCountriesHavingCity(cityName, cityState, pageable);
 	}
 

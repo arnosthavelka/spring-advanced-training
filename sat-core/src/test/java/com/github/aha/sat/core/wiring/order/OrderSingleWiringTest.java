@@ -42,7 +42,8 @@ class OrderSingleWiringTest {
 
 	@Test
 	void shouldWireBeanByQualifier() {
-		assertThat(((BeverageOrder<Cola>) beverageOrder).takeOrder(new Cola())).isEqualTo("Cola is temporarily not available.");
+		assertThat(((BeverageOrder<Cola>) beverageOrder).takeOrder(new Cola()))
+			.isEqualTo("Cola is temporarily not available.");
 	}
 
 	@Test

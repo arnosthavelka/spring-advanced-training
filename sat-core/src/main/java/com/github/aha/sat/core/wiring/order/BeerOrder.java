@@ -10,5 +10,5 @@ public class BeerOrder implements BeverageOrder<Beer> {
 	public String takeOrder(Beer beverage) {
 		return "Waiting for a new keg ...";
 	}
-	
+
 }

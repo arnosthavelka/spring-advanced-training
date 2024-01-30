@@ -10,9 +10,9 @@ import com.github.aha.sat.core.config.User;
 @Profile("richard")
 public class RichardConfig {
 
-    @Bean
-    User user() {
-        return new User("Richard");
-    }
+	@Bean
+	User user() {
+		return new User("Richard");
+	}
 
 }

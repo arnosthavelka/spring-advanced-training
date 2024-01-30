@@ -10,8 +10,8 @@ import org.springframework.data.querydsl.QuerydslPredicateExecutor;
 import com.querydsl.core.BooleanBuilder;
 import com.querydsl.core.types.Predicate;
 
-public interface CountryRepository extends CountryCustomRepository,
-		JpaRepository<Country, Long>, QuerydslPredicateExecutor<Country> {
+public interface CountryRepository
+		extends CountryCustomRepository, JpaRepository<Country, Long>, QuerydslPredicateExecutor<Country> {
 
 	Country getByName(String name);
 
@@ -22,8 +22,7 @@ public interface CountryRepository extends CountryCustomRepository,
 	}
 
 	default Predicate predicateWithoutCities() {
-		return new BooleanBuilder()
-				.and(country.cities.isEmpty());
+		return new BooleanBuilder().and(country.cities.isEmpty());
 	}
 
 }

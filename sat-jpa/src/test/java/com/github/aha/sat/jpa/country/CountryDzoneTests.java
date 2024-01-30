@@ -36,14 +36,10 @@ class CountryDzoneTests {
 		var country = getCountryByName(countryName);
 
 		assertThat(country.getName()).isEqualTo(countryName);
-    }
+	}
 
 	private Country getCountryByName(String countryName) {
-		return new JPAQuery<Country>(em)
-				.select(country)
-				.from(country)
-				.where(country.name.like(countryName))
-				.fetchOne();		
+		return new JPAQuery<Country>(em).select(country).from(country).where(country.name.like(countryName)).fetchOne();
 	}
 
 	@Test
@@ -55,10 +51,9 @@ class CountryDzoneTests {
 
 		assertThat(pagedResult.getTotalElements()).isEqualTo(7);
 		assertThat(pagedResult.getTotalPages()).isEqualTo(3);
-        assertThat( pagedResult.getContent() )
-				.hasSize(3)
-				.map(Country::getName)
-				.containsExactly("Australia", "Canada", "USA");
+		assertThat(pagedResult.getContent()).hasSize(3)
+			.map(Country::getName)
+			.containsExactly("Australia", "Canada", "USA");
 	}
 
 	private Page<Country> findCountries(String countryName, Pageable pageable) {
@@ -69,8 +64,9 @@ class CountryDzoneTests {
 	}
 
 	private <T> JPAQuery<T> findCountriesQuery(Expression<T> expression, String countryName) {
-		return new JPAQuery<Country>(em).select(expression).from(country)
-				.where(country.name.containsIgnoreCase(countryName));
+		return new JPAQuery<Country>(em).select(expression)
+			.from(country)
+			.where(country.name.containsIgnoreCase(countryName));
 	}
 
 	// org.springframework.data.jpa.repository.support.QuerydslRepositorySupport.getQuerydsl
@@ -88,7 +84,7 @@ class CountryDzoneTests {
 		query.limit(pageable.getPageSize());
 
 		return query;
-//		return applySorting(pageable.getSort(), query);
+		// return applySorting(pageable.getSort(), query);
 	}
 
 }
