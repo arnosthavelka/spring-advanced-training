@@ -13,22 +13,22 @@ import lombok.experimental.UtilityClass;
 @UtilityClass
 public class LogUtils {
 
-	public static ListAppender<ILoggingEvent> getAppenderForLoggerOfClass(Class<?> clazz) {
-		Logger originalLogger = getLogger(clazz);
-		return getAppender((ch.qos.logback.classic.Logger) originalLogger);
-	}
+    public static ListAppender<ILoggingEvent> getAppenderForLoggerOfClass(Class<?> clazz) {
+        Logger originalLogger = getLogger(clazz);
+        return getAppender((ch.qos.logback.classic.Logger) originalLogger);
+    }
 
-	public static ListAppender<ILoggingEvent> getAppenderForRootLogger() {
-		Logger originalLogger = getLogger(ROOT_LOGGER_NAME);
-		return getAppender((ch.qos.logback.classic.Logger) originalLogger);
-	}
+    public static ListAppender<ILoggingEvent> getAppenderForRootLogger() {
+        Logger originalLogger = getLogger(ROOT_LOGGER_NAME);
+        return getAppender((ch.qos.logback.classic.Logger) originalLogger);
+    }
 
-	private static ListAppender<ILoggingEvent> getAppender(ch.qos.logback.classic.Logger originalLogger) {
-		originalLogger.setLevel(DEBUG);
-		var listAppender = new ListAppender<ILoggingEvent>();
-		listAppender.start();
-		originalLogger.addAppender(listAppender);
-		return listAppender;
-	}
+    private static ListAppender<ILoggingEvent> getAppender(ch.qos.logback.classic.Logger originalLogger) {
+        originalLogger.setLevel(DEBUG);
+        var listAppender = new ListAppender<ILoggingEvent>();
+        listAppender.start();
+        originalLogger.addAppender(listAppender);
+        return listAppender;
+    }
 
 }

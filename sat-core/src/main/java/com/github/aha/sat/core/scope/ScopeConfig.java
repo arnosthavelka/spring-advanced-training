@@ -12,20 +12,20 @@ import org.springframework.context.annotation.Scope;
 @Configuration
 public class ScopeConfig {
 
-	@Bean
-	@Scope(value = SCOPE_PROTOTYPE, proxyMode = INTERFACES)
-	TokenBean beanPrototype() {
-		return new TokenBean() {
-			@Override
-			public String getToken() {
-				return UUID.randomUUID().toString();
-			}
-		};
-	}
+    @Bean
+    @Scope(value = SCOPE_PROTOTYPE, proxyMode = INTERFACES)
+    TokenBean beanPrototype() {
+        return new TokenBean() {
+            @Override
+            public String getToken() {
+                return UUID.randomUUID().toString();
+            }
+        };
+    }
 
-	@Bean
-	TokenBean beanSingleton(final TokenBean beanPrototype) {
-		return beanPrototype::toString;
-	}
+    @Bean
+    TokenBean beanSingleton(final TokenBean beanPrototype) {
+        return beanPrototype::toString;
+    }
 
 }

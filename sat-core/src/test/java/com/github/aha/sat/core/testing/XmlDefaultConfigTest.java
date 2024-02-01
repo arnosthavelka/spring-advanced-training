@@ -16,13 +16,13 @@ import com.github.aha.sat.core.config.User;
 @ContextConfiguration
 class XmlDefaultConfigTest {
 
-	@Autowired
-	@Qualifier("user")
-	private User user;
+    @Autowired
+    @Qualifier("user")
+    private User user;
 
-	@Test
-	void testHello() {
-		assertThat(user.getName(), equalTo("Michel"));
-	}
+    @Test
+    void testHello() {
+        assertThat(user.getName(), equalTo("Michel"));
+    }
 
 }

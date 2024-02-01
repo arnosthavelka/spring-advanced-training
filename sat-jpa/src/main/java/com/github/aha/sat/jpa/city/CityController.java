@@ -19,11 +19,11 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class CityController {
 
-	private final CityService service;
+    private final CityService service;
 
-	@GetMapping
-	public List<City> search(String name, String state, String countryName) {
-		return service.findAllBy(name, state, countryName);
-	}
+    @GetMapping
+    public List<City> search(String name, String state, String countryName) {
+        return service.findAllBy(name, state, countryName);
+    }
 
 }

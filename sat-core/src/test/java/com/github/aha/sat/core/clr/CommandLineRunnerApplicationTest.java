@@ -14,12 +14,12 @@ import org.springframework.boot.test.system.OutputCaptureExtension;
 @ExtendWith(OutputCaptureExtension.class)
 public class CommandLineRunnerApplicationTest {
 
-	@Autowired
-	CommandLineRunner bye;
+    @Autowired
+    CommandLineRunner bye;
 
-	@Test
-	void run(CapturedOutput output) throws Exception {
-		assertThat(output.getOut()).contains("Starting ...").contains("Bye!");
-	}
+    @Test
+    void run(CapturedOutput output) throws Exception {
+        assertThat(output.getOut()).contains("Starting ...").contains("Bye!");
+    }
 
 }

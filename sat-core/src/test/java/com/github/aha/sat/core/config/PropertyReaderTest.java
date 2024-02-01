@@ -11,16 +11,16 @@ import org.springframework.boot.test.context.SpringBootTest;
 @EnableConfigurationProperties(PropertyReader.class)
 class PropertyReaderTest {
 
-	@Autowired
-	PropertyReader propertyReader;
+    @Autowired
+    PropertyReader propertyReader;
 
-	@Test
-	void definedValues() {
-		assertThat(propertyReader.getText()).isNotEmpty();
-		assertThat(propertyReader.getSmallNumber()).isNotNull();
-		assertThat(propertyReader.getLongNumber()).isNotNull();
-		assertThat(propertyReader.getNumberLessThanTen()).isLessThanOrEqualTo(10);
-		assertThat(propertyReader.getNumberInRange()).isBetween(1024, 65536);
-	}
+    @Test
+    void definedValues() {
+        assertThat(propertyReader.getText()).isNotEmpty();
+        assertThat(propertyReader.getSmallNumber()).isNotNull();
+        assertThat(propertyReader.getLongNumber()).isNotNull();
+        assertThat(propertyReader.getNumberLessThanTen()).isLessThanOrEqualTo(10);
+        assertThat(propertyReader.getNumberInRange()).isBetween(1024, 65536);
+    }
 
 }

@@ -7,9 +7,9 @@ import org.springframework.stereotype.Component;
 @Component
 public class InfoService implements InfoContributor {
 
-	@Override
-	public void contribute(Info.Builder builder) {
-		builder.withDetail("author", "Arny");
-	}
+    @Override
+    public void contribute(Info.Builder builder) {
+        builder.withDetail("author", "Arny");
+    }
 
 }

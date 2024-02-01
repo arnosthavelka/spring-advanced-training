@@ -15,19 +15,19 @@ import lombok.EqualsAndHashCode;
 @EqualsAndHashCode(callSuper = false)
 public class CityEntityResource extends RepresentationModel<CityEntityResource> {
 
-	private City city;
+    private City city;
 
-	public CityEntityResource(City city) {
-		this.city = city;
-		add(linkTo(methodOn(CityHateoasController.class).getOne(city.getId())).withSelfRel());
-	}
+    public CityEntityResource(City city) {
+        this.city = city;
+        add(linkTo(methodOn(CityHateoasController.class).getOne(city.getId())).withSelfRel());
+    }
 
-	public String getName() {
-		return city.getName();
-	}
+    public String getName() {
+        return city.getName();
+    }
 
-	public String getCountry() {
-		return city.getCountry();
-	}
+    public String getCountry() {
+        return city.getCountry();
+    }
 
 }

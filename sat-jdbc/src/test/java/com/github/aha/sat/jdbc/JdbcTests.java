@@ -10,13 +10,13 @@ import org.springframework.jdbc.core.JdbcTemplate;
 @SpringBootTest(classes = JdbcApplication.class)
 class JdbcTests {
 
-	@Autowired
-	JdbcTemplate jdbcTemplate;
+    @Autowired
+    JdbcTemplate jdbcTemplate;
 
-	@Test
-	void testCount() {
-		Integer count = jdbcTemplate.queryForObject("select count(*) from CATCIS", Integer.class);
-		assertThat(count).isEqualTo(7);
-	}
+    @Test
+    void testCount() {
+        Integer count = jdbcTemplate.queryForObject("select count(*) from CATCIS", Integer.class);
+        assertThat(count).isEqualTo(7);
+    }
 
 }

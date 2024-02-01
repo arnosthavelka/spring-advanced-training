@@ -12,29 +12,29 @@ import org.mockito.junit.jupiter.MockitoExtension;
 @ExtendWith(MockitoExtension.class)
 class CountryServiceTests {
 
-	@Mock
-	CountryRepository repository;
+    @Mock
+    CountryRepository repository;
 
-	@InjectMocks
-	CountryService service;
+    @InjectMocks
+    CountryService service;
 
-	@Test
-	void findAllBy() {
-		var namePattern = "Melbourne";
+    @Test
+    void findAllBy() {
+        var namePattern = "Melbourne";
 
-		service.findAllBy(namePattern);
+        service.findAllBy(namePattern);
 
-		verify(repository).findByNameLikeIgnoreCase("%" + namePattern + "%");
-	}
+        verify(repository).findByNameLikeIgnoreCase("%" + namePattern + "%");
+    }
 
-	@Test
-	void findAllCountriesHavingCity() {
-		var cityName = "aaa";
-		var cityState = "bbb";
+    @Test
+    void findAllCountriesHavingCity() {
+        var cityName = "aaa";
+        var cityState = "bbb";
 
-		service.findAllCountriesHavingCity(cityName, cityState, unpaged());
+        service.findAllCountriesHavingCity(cityName, cityState, unpaged());
 
-		verify(repository).findAllCountriesHavingCity("%" + cityName + "%", "%" + cityState + "%", unpaged());
-	}
+        verify(repository).findAllCountriesHavingCity("%" + cityName + "%", "%" + cityState + "%", unpaged());
+    }
 
 }

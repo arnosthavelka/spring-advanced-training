@@ -9,15 +9,15 @@ import org.springframework.test.context.ActiveProfiles;
 @ActiveProfiles("barbara")
 class BarbaraConfigTest extends AbstractConfigTest {
 
-	@Test
-	void testUserOK() {
-		assertThat(user.getName()).isEqualTo("Barbara");
-	}
+    @Test
+    void testUserOK() {
+        assertThat(user.getName()).isEqualTo("Barbara");
+    }
 
-	@Test
-	@IfProfileValue(name = "test-group", values = { "training" })
-	void testUserFailure() {
-		assertThat(user.getName()).isNotEqualTo("Arny");
-	}
+    @Test
+    @IfProfileValue(name = "test-group", values = { "training" })
+    void testUserFailure() {
+        assertThat(user.getName()).isNotEqualTo("Arny");
+    }
 
 }

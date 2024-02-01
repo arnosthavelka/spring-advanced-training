@@ -9,24 +9,24 @@ import com.github.aha.sat.jpa.country.Country;
 
 abstract class AbstractCityVerificationTest {
 
-	static final String AUSTRALIA = "Australia";
-	static final String USA = "USA";
+    static final String AUSTRALIA = "Australia";
+    static final String USA = "USA";
 
-	Country buildCountry(String countryName) {
-		return Country.builder().name(countryName).build();
-	}
+    Country buildCountry(String countryName) {
+        return Country.builder().name(countryName).build();
+    }
 
-	void verifyOptionalCity(Optional<City> optionalResult, String name, String countryName) {
-		assertThat(optionalResult).get().satisfies(city -> verifyCity(city, name, countryName));
-	}
+    void verifyOptionalCity(Optional<City> optionalResult, String name, String countryName) {
+        assertThat(optionalResult).get().satisfies(city -> verifyCity(city, name, countryName));
+    }
 
-	void verifyFirstCityInCollection(List<City> result, String name, String countryName) {
-		assertThat(result).first().satisfies(city -> verifyCity(city, name, countryName));
-	}
+    void verifyFirstCityInCollection(List<City> result, String name, String countryName) {
+        assertThat(result).first().satisfies(city -> verifyCity(city, name, countryName));
+    }
 
-	void verifyCity(City city, String name, String countryName) {
-		assertThat(city.getName()).isEqualTo(name);
-		assertThat(city.getCountry().getName()).isEqualTo(countryName);
-	}
+    void verifyCity(City city, String name, String countryName) {
+        assertThat(city.getName()).isEqualTo(name);
+        assertThat(city.getCountry().getName()).isEqualTo(countryName);
+    }
 
 }

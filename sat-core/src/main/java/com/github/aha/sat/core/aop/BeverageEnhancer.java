@@ -11,7 +11,7 @@ import lombok.experimental.UtilityClass;
 @UtilityClass
 public class BeverageEnhancer {
 
-	@DeclareParents(value = "com.github.aha.sat.core.aop.EnjoyableBeverage+", defaultImpl = EnjoyableImpl.class)
-	public static Enjoyable enjoyable; // NOSONAR
+    @DeclareParents(value = "com.github.aha.sat.core.aop.EnjoyableBeverage+", defaultImpl = EnjoyableImpl.class)
+    public static Enjoyable enjoyable; // NOSONAR
 
 }

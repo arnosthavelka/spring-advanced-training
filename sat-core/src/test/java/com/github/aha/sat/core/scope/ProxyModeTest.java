@@ -10,13 +10,13 @@ import org.springframework.boot.test.context.SpringBootTest;
 @SpringBootTest(classes = ScopeConfig.class)
 class ProxyModeTest {
 
-	@Autowired
-	@Qualifier("beanSingleton")
-	private TokenBean bean;
+    @Autowired
+    @Qualifier("beanSingleton")
+    private TokenBean bean;
 
-	@Test
-	void contextLoads() {
-		assertThat(bean.getToken()).isNotEqualTo(bean.getToken());
-	}
+    @Test
+    void contextLoads() {
+        assertThat(bean.getToken()).isNotEqualTo(bean.getToken());
+    }
 
 }

@@ -12,14 +12,14 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class Pear implements CommandLineRunner {
 
-	@PostConstruct
-	void init() {
-		log.debug("Initializing Pear bean ...");
-	}
+    @PostConstruct
+    void init() {
+        log.debug("Initializing Pear bean ...");
+    }
 
-	@Override
-	public void run(String... args) throws Exception {
-		log.info("Here's Pear runner");
-	}
+    @Override
+    public void run(String... args) throws Exception {
+        log.info("Here's Pear runner");
+    }
 
 }

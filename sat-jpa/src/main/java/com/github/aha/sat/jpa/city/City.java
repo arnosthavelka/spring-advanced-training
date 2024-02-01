@@ -30,21 +30,21 @@ import lombok.NonNull;
 @EqualsAndHashCode
 public class City implements Serializable {
 
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
-	@Id
-	@GeneratedValue(strategy = IDENTITY)
-	private Long id;
+    @Id
+    @GeneratedValue(strategy = IDENTITY)
+    private Long id;
 
-	@Column(nullable = false)
-	private String name;
+    @Column(nullable = false)
+    private String name;
 
-	@Column(nullable = true)
-	private String state;
+    @Column(nullable = true)
+    private String state;
 
-	@ManyToOne
-	@JoinColumn(name = "COUNTRY_ID")
-	@NonNull
-	private Country country;
+    @ManyToOne
+    @JoinColumn(name = "COUNTRY_ID")
+    @NonNull
+    private Country country;
 
 }

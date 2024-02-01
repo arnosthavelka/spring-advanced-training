@@ -34,39 +34,39 @@ import jakarta.websocket.server.PathParam;
 @RequestMapping("/city/hateoas")
 public class CityHateoasController {
 
-	@Autowired
-	private CityService cityService;
+    @Autowired
+    private CityService cityService;
 
-	@GetMapping(consumes = APPLICATION_JSON_VALUE, produces = HAL_JSON_VALUE)
-	public CollectionModel<CityEntityResource> search(@PathParam("country") String country,
-			@PathParam("sorting") String sorting) {
+    @GetMapping(consumes = APPLICATION_JSON_VALUE, produces = HAL_JSON_VALUE)
+    public CollectionModel<CityEntityResource> search(@PathParam("country") String country,
+            @PathParam("sorting") String sorting) {
 
-		List<City> data = cityService.search(country, sorting);
-		List<CityEntityResource> resources = data.stream().map(CityEntityResource::new).collect(toList());
-		return CollectionModel.of(resources, linkTo(CityHateoasController.class).withSelfRel());
-	}
+        List<City> data = cityService.search(country, sorting);
+        List<CityEntityResource> resources = data.stream().map(CityEntityResource::new).collect(toList());
+        return CollectionModel.of(resources, linkTo(CityHateoasController.class).withSelfRel());
+    }
 
-	@GetMapping(produces = HAL_JSON_VALUE)
-	public CollectionModel<EntityModel<CityResource>> searchAll(@PathParam("country") String country,
-			@PathParam("sorting") String sorting) {
+    @GetMapping(produces = HAL_JSON_VALUE)
+    public CollectionModel<EntityModel<CityResource>> searchAll(@PathParam("country") String country,
+            @PathParam("sorting") String sorting) {
 
-		List<City> data = cityService.search(country, sorting);
-		List<EntityModel<CityResource>> resources = data.stream()
-			.map(c -> new CityResource(c).toResource())
-			.collect(toList());
-		return CollectionModel.of(resources, linkTo(CityHateoasController.class).withSelfRel());
-	}
+        List<City> data = cityService.search(country, sorting);
+        List<EntityModel<CityResource>> resources = data.stream()
+            .map(c -> new CityResource(c).toResource())
+            .collect(toList());
+        return CollectionModel.of(resources, linkTo(CityHateoasController.class).withSelfRel());
+    }
 
-	@GetMapping(value = "/{id}", produces = HAL_JSON_VALUE)
-	public EntityModel<CityResource> getOne(@PathVariable("id") long id) {
-		var city = cityService.getOne(id);
-		return new CityResource(city).toResource();
-	}
+    @GetMapping(value = "/{id}", produces = HAL_JSON_VALUE)
+    public EntityModel<CityResource> getOne(@PathVariable("id") long id) {
+        var city = cityService.getOne(id);
+        return new CityResource(city).toResource();
+    }
 
-	@DeleteMapping(value = "/{id}")
-	@ResponseStatus(NO_CONTENT)
-	public void delete(@PathVariable long id) {
-		cityService.delete(id);
-	}
+    @DeleteMapping(value = "/{id}")
+    @ResponseStatus(NO_CONTENT)
+    public void delete(@PathVariable long id) {
+        cityService.delete(id);
+    }
 
 }

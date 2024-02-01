@@ -12,29 +12,29 @@ import org.mockito.junit.jupiter.MockitoExtension;
 @ExtendWith(MockitoExtension.class)
 class CountryControllerTests {
 
-	@Mock
-	CountryService service;
+    @Mock
+    CountryService service;
 
-	@InjectMocks
-	CountryController controller;
+    @InjectMocks
+    CountryController controller;
 
-	@Test
-	void search() {
-		var name = "Japan";
+    @Test
+    void search() {
+        var name = "Japan";
 
-		controller.search(name);
+        controller.search(name);
 
-		verify(service).findAllBy(name);
-	}
+        verify(service).findAllBy(name);
+    }
 
-	@Test
-	void findAllCountriesHavingCity() {
-		var cityName = "aaa";
-		var cityState = "bbb";
+    @Test
+    void findAllCountriesHavingCity() {
+        var cityName = "aaa";
+        var cityState = "bbb";
 
-		controller.findAllCountriesHavingCity(cityName, cityState, unpaged());
+        controller.findAllCountriesHavingCity(cityName, cityState, unpaged());
 
-		verify(service).findAllCountriesHavingCity(cityName, cityState, unpaged());
-	}
+        verify(service).findAllCountriesHavingCity(cityName, cityState, unpaged());
+    }
 
 }

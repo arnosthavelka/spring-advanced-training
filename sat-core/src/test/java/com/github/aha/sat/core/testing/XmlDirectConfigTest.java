@@ -16,13 +16,13 @@ import com.github.aha.sat.core.config.User;
 @ContextConfiguration(locations = "classpath:spring/xml-config.xml")
 class XmlDirectConfigTest {
 
-	@Autowired
-	@Qualifier("user")
-	private User user;
+    @Autowired
+    @Qualifier("user")
+    private User user;
 
-	@Test
-	void testHello() {
-		assertThat(user.getName(), equalTo("Arny"));
-	}
+    @Test
+    void testHello() {
+        assertThat(user.getName(), equalTo("Arny"));
+    }
 
 }

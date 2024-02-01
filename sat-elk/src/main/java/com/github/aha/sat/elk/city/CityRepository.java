@@ -6,6 +6,6 @@ import org.springframework.data.elasticsearch.repository.ElasticsearchRepository
 
 public interface CityRepository extends ElasticsearchRepository<City, String> {
 
-	Page<City> findByCountry(String country, Pageable pageable);
+    Page<City> findByCountry(String country, Pageable pageable);
 
 }

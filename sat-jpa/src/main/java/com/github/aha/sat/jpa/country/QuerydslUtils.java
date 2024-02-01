@@ -20,21 +20,21 @@ import lombok.experimental.UtilityClass;
 @UtilityClass
 public class QuerydslUtils {
 
-	public static <O> O getIfNotEmpty(String value, Function<String, O> converter) {
-		return nonNull(value) ? converter.apply(value) : null;
-	}
+    public static <O> O getIfNotEmpty(String value, Function<String, O> converter) {
+        return nonNull(value) ? converter.apply(value) : null;
+    }
 
-	public static <T> Page<T> fetchPage(EntityManager em, JPAQuery<T> query, Pageable pageable) {
-		var querydsl = new Querydsl(em, new PathBuilder<>(query.getType(), "alias"));
-		JPQLQuery<T> paginatedQuery = querydsl.applyPagination(pageable, query);
-		return PageableExecutionUtils.getPage(paginatedQuery.fetch(), pageable, paginatedQuery::fetchCount);
-	}
+    public static <T> Page<T> fetchPage(EntityManager em, JPAQuery<T> query, Pageable pageable) {
+        var querydsl = new Querydsl(em, new PathBuilder<>(query.getType(), "alias"));
+        JPQLQuery<T> paginatedQuery = querydsl.applyPagination(pageable, query);
+        return PageableExecutionUtils.getPage(paginatedQuery.fetch(), pageable, paginatedQuery::fetchCount);
+    }
 
-	public static <T> Page<T> fetchProjectedPage(EntityManager em, JPQLQuery<T> query, Pageable pageable,
-			Class<?> rootType) {
-		var querydsl = new Querydsl(em, (new PathBuilderFactory()).create(rootType));
-		JPQLQuery<T> paginatedQuery = querydsl.applyPagination(pageable, query);
-		return PageableExecutionUtils.getPage(paginatedQuery.fetch(), pageable, paginatedQuery::fetchCount);
-	}
+    public static <T> Page<T> fetchProjectedPage(EntityManager em, JPQLQuery<T> query, Pageable pageable,
+            Class<?> rootType) {
+        var querydsl = new Querydsl(em, (new PathBuilderFactory()).create(rootType));
+        JPQLQuery<T> paginatedQuery = querydsl.applyPagination(pageable, query);
+        return PageableExecutionUtils.getPage(paginatedQuery.fetch(), pageable, paginatedQuery::fetchCount);
+    }
 
 }

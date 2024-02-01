@@ -7,6 +7,6 @@ import lombok.RequiredArgsConstructor;
 @Getter
 public class User {
 
-	private final String name;
+    private final String name;
 
 }

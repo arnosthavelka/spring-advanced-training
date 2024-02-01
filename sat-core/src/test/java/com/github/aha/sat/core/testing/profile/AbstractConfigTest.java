@@ -8,7 +8,7 @@ import com.github.aha.sat.core.config.User;
 @SpringBootTest(classes = { RichardConfig.class, BarbaraConfig.class })
 abstract class AbstractConfigTest {
 
-	@Autowired
-	protected User user;
+    @Autowired
+    protected User user;
 
 }

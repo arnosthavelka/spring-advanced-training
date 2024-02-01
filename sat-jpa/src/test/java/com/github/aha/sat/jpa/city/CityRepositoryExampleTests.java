@@ -17,42 +17,42 @@ import com.github.aha.sat.jpa.country.CountryRepository;
 @DataJpaTest
 class CityRepositoryExampleTests extends AbstractCityVerificationTest {
 
-	@Autowired
-	CityRepository cityRepository;
+    @Autowired
+    CityRepository cityRepository;
 
-	@Autowired
-	CountryRepository countryRepository;
+    @Autowired
+    CountryRepository countryRepository;
 
-	@Test
-	void findByState() {
-		var country = countryRepository.getByName(AUSTRALIA);
-		var exampleCity = City.builder().state("Queensland").country(country).build();
+    @Test
+    void findByState() {
+        var country = countryRepository.getByName(AUSTRALIA);
+        var exampleCity = City.builder().state("Queensland").country(country).build();
 
-		var cities = cityRepository.findAll(Example.of(exampleCity));
+        var cities = cityRepository.findAll(Example.of(exampleCity));
 
-		verifyFirstCityInCollection(cities, "Brisbane", AUSTRALIA);
-	}
+        verifyFirstCityInCollection(cities, "Brisbane", AUSTRALIA);
+    }
 
-	@Test
-	void findByNameAndCountry() {
-		var exampleCity = City.builder().name("Montreal").country(buildCountry("Canada")).build();
+    @Test
+    void findByNameAndCountry() {
+        var exampleCity = City.builder().name("Montreal").country(buildCountry("Canada")).build();
 
-		var cityOptional = cityRepository.findOne(Example.of(exampleCity));
+        var cityOptional = cityRepository.findOne(Example.of(exampleCity));
 
-		verifyOptionalCity(cityOptional, "Montreal", "Canada");
-	}
+        verifyOptionalCity(cityOptional, "Montreal", "Canada");
+    }
 
-	@Test
-	void findByWildcard() {
-		var exampleCity = City.builder().name("an").country(buildCountry("usa")).build();
-		var matcher = ExampleMatcher.matching()
-			.withMatcher("country", exact())
-			.withIgnoreCase()
-			.withMatcher("name", contains());
+    @Test
+    void findByWildcard() {
+        var exampleCity = City.builder().name("an").country(buildCountry("usa")).build();
+        var matcher = ExampleMatcher.matching()
+            .withMatcher("country", exact())
+            .withIgnoreCase()
+            .withMatcher("name", contains());
 
-		var cities = cityRepository.findAll(Example.of(exampleCity, matcher));
+        var cities = cityRepository.findAll(Example.of(exampleCity, matcher));
 
-		verifyFirstCityInCollection(cities, "Atlanta", USA);
-	}
+        verifyFirstCityInCollection(cities, "Atlanta", USA);
+    }
 
 }

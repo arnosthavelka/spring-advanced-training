@@ -8,9 +8,9 @@ import com.github.aha.sat.core.wiring.trait.Alcoholic;
 @Alcoholic
 public class Beer extends AbstractCarbonatedBeverage {
 
-	@Override
-	public String getName() {
-		return "Beer";
-	}
+    @Override
+    public String getName() {
+        return "Beer";
+    }
 
 }

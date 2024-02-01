@@ -29,32 +29,32 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class CityController {
 
-	static final String ROOT_PATH = "/api/cities"; // NOSONAR
+    static final String ROOT_PATH = "/api/cities"; // NOSONAR
 
-	@NonNull
-	final CityService service;
+    @NonNull
+    final CityService service;
 
-	@GetMapping("/{id}")
-	public City getById(@PathVariable String id) {
-		return service.findById(id);
-	}
+    @GetMapping("/{id}")
+    public City getById(@PathVariable String id) {
+        return service.findById(id);
+    }
 
-	@GetMapping("/country/{country}")
-	public Page<City> searchByCountry(@PathVariable("country") String country, Pageable pageable) {
-		return service.searchByCountry(country, pageable);
-	}
+    @GetMapping("/country/{country}")
+    public Page<City> searchByCountry(@PathVariable("country") String country, Pageable pageable) {
+        return service.searchByCountry(country, pageable);
+    }
 
-	@GetMapping
-	public Page<City> search(@RequestParam(name = "name", required = false) String name,
-			@RequestParam(name = "country", required = false) String country,
-			@RequestParam(name = "subcountry", required = false) String subcountry, Pageable pageable) {
-		return service.search(name, country, subcountry, pageable);
-	}
+    @GetMapping
+    public Page<City> search(@RequestParam(name = "name", required = false) String name,
+            @RequestParam(name = "country", required = false) String country,
+            @RequestParam(name = "subcountry", required = false) String subcountry, Pageable pageable) {
+        return service.search(name, country, subcountry, pageable);
+    }
 
-	@PostMapping("/upload")
-	@ResponseStatus(code = NO_CONTENT)
-	public void uploadFile(String filename) {
-		service.uploadFile(filename);
-	}
+    @PostMapping("/upload")
+    @ResponseStatus(code = NO_CONTENT)
+    public void uploadFile(String filename) {
+        service.uploadFile(filename);
+    }
 
 }

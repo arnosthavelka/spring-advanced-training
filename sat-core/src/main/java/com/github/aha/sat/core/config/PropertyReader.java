@@ -10,14 +10,14 @@ import lombok.Setter;
 @Setter
 public class PropertyReader {
 
-	private String text;
+    private String text;
 
-	private Long longNumber;
+    private Long longNumber;
 
-	private Integer smallNumber;
+    private Integer smallNumber;
 
-	private Integer numberLessThanTen;
+    private Integer numberLessThanTen;
 
-	private Integer numberInRange;
+    private Integer numberInRange;
 
 }

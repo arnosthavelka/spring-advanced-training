@@ -22,17 +22,17 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class CountryController {
 
-	private final CountryService service;
+    private final CountryService service;
 
-	@GetMapping
-	public List<Country> search(String name) {
-		return service.findAllBy(name);
-	}
+    @GetMapping
+    public List<Country> search(String name) {
+        return service.findAllBy(name);
+    }
 
-	@GetMapping("/by-city")
-	public Page<Country> findAllCountriesHavingCity(@NonNull String cityName, @NonNull String cityState,
-			Pageable pageable) {
-		return service.findAllCountriesHavingCity(cityName, cityState, pageable);
-	}
+    @GetMapping("/by-city")
+    public Page<Country> findAllCountriesHavingCity(@NonNull String cityName, @NonNull String cityState,
+            Pageable pageable) {
+        return service.findAllCountriesHavingCity(cityName, cityState, pageable);
+    }
 
 }

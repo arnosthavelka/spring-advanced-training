@@ -5,9 +5,9 @@ import org.springframework.stereotype.Component;
 @Component
 public class Soda extends AbstractCarbonatedBeverage {
 
-	@Override
-	public String getName() {
-		return "Soda";
-	}
+    @Override
+    public String getName() {
+        return "Soda";
+    }
 
 }

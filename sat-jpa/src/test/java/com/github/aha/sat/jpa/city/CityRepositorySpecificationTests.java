@@ -9,23 +9,23 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 @DataJpaTest
 class CityRepositorySpecificationTests extends AbstractCityVerificationTest {
 
-	@Autowired
-	protected CityRepository cityRepository;
+    @Autowired
+    protected CityRepository cityRepository;
 
-	@Test
-	void findAllWithState() {
-		var cities = cityRepository.findAllWithState();
+    @Test
+    void findAllWithState() {
+        var cities = cityRepository.findAllWithState();
 
-		assertThat(cities).hasSize(9);
-		verifyFirstCityInCollection(cities, "Brisbane", AUSTRALIA);
-	}
+        assertThat(cities).hasSize(9);
+        verifyFirstCityInCollection(cities, "Brisbane", AUSTRALIA);
+    }
 
-	@Test
-	void noState() {
-		var cities = cityRepository.findAllWithoutStateInUsa();
+    @Test
+    void noState() {
+        var cities = cityRepository.findAllWithoutStateInUsa();
 
-		assertThat(cities).hasSize(1);
-		verifyFirstCityInCollection(cities, "New York", USA);
-	}
+        assertThat(cities).hasSize(1);
+        verifyFirstCityInCollection(cities, "New York", USA);
+    }
 
 }

@@ -13,19 +13,19 @@ import org.springframework.test.annotation.Repeat;
 @SpringBootTest(classes = { PackageConfig.class })
 class RepeatAnnotationTest {
 
-	private Random random = new Random();
+    private Random random = new Random();
 
-	@Autowired
-	private Calc calc;
+    @Autowired
+    private Calc calc;
 
-	@Test
-	@Repeat(10)
-	void testRepeatAnnotation() {
-		int a = random.nextInt(10);
-		int b = random.nextInt(10);
-		int result = calc.add(a, b);
+    @Test
+    @Repeat(10)
+    void testRepeatAnnotation() {
+        int a = random.nextInt(10);
+        int b = random.nextInt(10);
+        int result = calc.add(a, b);
 
-		assertThat(result, equalTo(a + b));
-	}
+        assertThat(result, equalTo(a + b));
+    }
 
 }

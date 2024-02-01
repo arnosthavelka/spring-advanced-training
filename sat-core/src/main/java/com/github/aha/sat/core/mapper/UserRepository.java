@@ -4,10 +4,10 @@ import java.util.List;
 
 public interface UserRepository {
 
-	List<UserDTO> fetchAllUsers();
+    List<UserDTO> fetchAllUsers();
 
-	UserDTO firstUser();
+    UserDTO firstUser();
 
-	UserDTO userByFirstNameAndLastName(String firstName, String lastName);
+    UserDTO userByFirstNameAndLastName(String firstName, String lastName);
 
 }
