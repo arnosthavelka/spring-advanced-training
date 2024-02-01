@@ -4,7 +4,7 @@ class CityValidationException extends RuntimeException {
 
 	private static final long serialVersionUID = 1L;
 
-	public CityValidationException(String message) {
+	CityValidationException(String message) {
 		super(message);
 	}
 

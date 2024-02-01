@@ -34,12 +34,12 @@ class Jsr250Test {
 			return new TokenBean() {
 
 				@PostConstruct
-				public void init() {
+				void init() {
 					System.out.println("In init block of token");
 				}
 
 				@PreDestroy
-				public void destroy() {
+				void destroy() {
 					System.out.println("In destroy block of token");
 				}
 
