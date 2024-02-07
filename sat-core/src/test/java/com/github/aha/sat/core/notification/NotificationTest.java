@@ -19,4 +19,5 @@ class NotificationTest {
 		ctx.publishEvent(new CustomEvent(ctx, "Second message"));
 		assertThatNoException();
     }
+
 }

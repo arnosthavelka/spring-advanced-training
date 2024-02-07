@@ -18,4 +18,5 @@ class BppTest {
 	void contextLoads() {
 		assertThat(bean).hasToString("ONE WHO WEARS THE CROWN, BEARS THE CROWN.");
     }
+
 }

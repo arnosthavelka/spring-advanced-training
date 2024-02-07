@@ -33,4 +33,5 @@ class GreetingControllerTest {
 				.andExpect(content().contentType(APPLICATION_JSON_VALUE))
 				.andExpect(content().string("Cao!"));
 	}
+
 }

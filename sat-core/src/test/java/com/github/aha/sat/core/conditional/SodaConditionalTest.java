@@ -10,4 +10,5 @@ class SodaConditionalTest extends AbstractConditionalTest {
 	static void init() {
 		System.setProperty("soda", "aha");
 	}
+
 }
