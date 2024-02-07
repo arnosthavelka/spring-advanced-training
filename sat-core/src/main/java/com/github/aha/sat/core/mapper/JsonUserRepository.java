@@ -35,10 +35,11 @@ public class JsonUserRepository implements UserRepository {
         LOGGER.info("fetching user by firstname and lastname");
 
         Optional<UserDTO> user = users.stream()
-            .filter(p -> p.getFirstName().equals(firstName) && p.getLastName().equals(lastName))
+            .filter(p -> p.getLastName().equals(lastName))
+            .filter(p -> p.getFirstName().equals(firstName))
             .findFirst();
 
-        return user.isPresent() ? user.get() : null;
+        return user.orElse(null);
     }
 
 }
