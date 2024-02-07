@@ -7,4 +7,5 @@ class CityValidationException extends RuntimeException {
 	CityValidationException(String message) {
 		super(message);
 	}
+
 }

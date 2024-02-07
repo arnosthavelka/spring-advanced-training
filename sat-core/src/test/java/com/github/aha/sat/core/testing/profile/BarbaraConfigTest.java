@@ -19,4 +19,5 @@ class BarbaraConfigTest extends AbstractConfigTest {
 	void testUserFailure() {
 		assertThat(user.getName()).isNotEqualTo("Arny");
     }
+
 }

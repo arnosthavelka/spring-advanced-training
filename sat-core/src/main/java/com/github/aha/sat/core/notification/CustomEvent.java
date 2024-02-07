@@ -17,4 +17,5 @@ public class CustomEvent extends ApplicationEvent {
 	public String toString() {
 		return String.format("CustomEvent message: '%s'", this.msg);
 	}
+
 }

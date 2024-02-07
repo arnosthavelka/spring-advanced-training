@@ -10,4 +10,5 @@ class AlcoholicConditionalTest extends AbstractConditionalTest {
 	static void init() {
 		System.setProperty("alcohol", "aha");
 	}
+
 }

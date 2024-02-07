@@ -22,4 +22,5 @@ public class PostProcessorConfig {
     String crown() {
         return "One who wears the crown, bears the crown.";
     }
+
 }

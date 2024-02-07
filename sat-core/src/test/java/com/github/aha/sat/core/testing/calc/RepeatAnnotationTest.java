@@ -27,4 +27,5 @@ class RepeatAnnotationTest {
 
         assertThat(result, equalTo(a + b));
     }
+
 }

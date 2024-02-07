@@ -15,4 +15,5 @@ public class ControllerConfig {
 		resolver.setSuffix(".jsp");
 		return resolver;
 	}
+
 }

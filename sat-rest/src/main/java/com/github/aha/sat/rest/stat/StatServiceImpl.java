@@ -1,7 +1,5 @@
 package com.github.aha.sat.rest.stat;
 
-import jakarta.persistence.EntityManager;
-
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.stat.EntityStatistics;
@@ -9,6 +7,8 @@ import org.hibernate.stat.Statistics;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import jakarta.persistence.EntityManager;
 
 @Service
 @Transactional
@@ -41,4 +41,5 @@ public class StatServiceImpl implements StatService {
     public EntityStatistics getEntityStatistics(String entityName) {
         return getStatistics().getEntityStatistics("com.github.aha.sat.rest.domain." + entityName);
     }
+
 }

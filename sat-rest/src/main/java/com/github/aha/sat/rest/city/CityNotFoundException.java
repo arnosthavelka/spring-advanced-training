@@ -7,4 +7,5 @@ class CityNotFoundException extends RuntimeException {
 	CityNotFoundException(String message) {
 		super(message);
 	}
+
 }

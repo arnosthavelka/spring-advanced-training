@@ -12,4 +12,5 @@ class RichardConfigTest extends AbstractConfigTest {
 	void testUser() {
 		assertThat(user.getName()).isEqualTo("Richard");
     }
+
 }

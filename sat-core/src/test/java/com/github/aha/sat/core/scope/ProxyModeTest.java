@@ -18,4 +18,5 @@ class ProxyModeTest {
 	void contextLoads() {
 		assertThat(bean.getToken()).isNotEqualTo(bean.getToken());
     }
+
 }

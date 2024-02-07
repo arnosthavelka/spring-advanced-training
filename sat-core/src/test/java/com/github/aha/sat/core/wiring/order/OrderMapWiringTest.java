@@ -1,6 +1,5 @@
 package com.github.aha.sat.core.wiring.order;
 
-
 import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.Map;

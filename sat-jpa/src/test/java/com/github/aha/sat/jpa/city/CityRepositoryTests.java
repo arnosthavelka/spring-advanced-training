@@ -45,7 +45,6 @@ class CityRepositoryTests extends AbstractCityVerificationTest {
 	@Nested
 	class FindAllTest {
 
-
 		@Test
 		void pagination() {
 			var pageSize = 5;
