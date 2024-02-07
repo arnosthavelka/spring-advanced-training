@@ -20,7 +20,7 @@ import io.swagger.v3.oas.models.info.License;
 public class SpringdocOpenapiConfig {
 
 	@Bean
-	public OpenAPI springShopOpenAPI() {
+	OpenAPI springShopOpenAPI() {
 		return new OpenAPI()
 				.info(new Info().title("SAT-REST API")
 						.description("Usage of Springdoc Openapi in Spring Boot")

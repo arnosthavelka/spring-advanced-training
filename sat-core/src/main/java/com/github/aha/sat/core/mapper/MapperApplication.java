@@ -1,8 +1,6 @@
 package com.github.aha.sat.core.mapper;
 
 import java.io.IOException;
-import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Value;
@@ -22,7 +20,7 @@ public class MapperApplication {
     List<UserDTO> jsonUsers(ObjectMapper objectMapper) throws IOException {
 		try (var inputStream = usersJsonResource.getInputStream()) {
         	UserDTO[] payloadUsers = objectMapper.readValue(inputStream,UserDTO[].class);
-        	return Collections.unmodifiableList(Arrays.asList(payloadUsers));
+        	return List.of(payloadUsers);
         }    	
     }
 }

@@ -83,7 +83,7 @@ class CityDzoneTests {
 		return new PageImpl<>(pagedData, pageable, totalCount);
 	}
 
-	public static <T> TypedQuery<T> paginateQuery(TypedQuery<T> query, Pageable pageable) {
+	static <T> TypedQuery<T> paginateQuery(TypedQuery<T> query, Pageable pageable) {
 		if (pageable.isPaged()) {
 			query.setFirstResult((int) pageable.getOffset());
 			query.setMaxResults(pageable.getPageSize());
@@ -91,7 +91,7 @@ class CityDzoneTests {
 		return query;
 	}
 
-	public static <T> Page<T> toPage(List<T> fromCollection, @NonNull Pageable pageable) {
+	static <T> Page<T> toPage(List<T> fromCollection, @NonNull Pageable pageable) {
 		try {
 			List<T> resources = emptyIfNull(fromCollection).stream()
 					.skip(pageable.getOffset())

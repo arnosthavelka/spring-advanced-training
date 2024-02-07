@@ -75,7 +75,7 @@ class CountryDzoneTests {
 
 	// org.springframework.data.jpa.repository.support.QuerydslRepositorySupport.getQuerydsl
 	// org.springframework.data.jpa.repository.support.Querydsl.applyPagination
-	public <T> JPAQuery<T> applyPagination(Pageable pageable, JPAQuery<T> query) {
+	<T> JPAQuery<T> applyPagination(Pageable pageable, JPAQuery<T> query) {
 
 		Assert.notNull(pageable, "Pageable must not be null");
 		Assert.notNull(query, "JPQLQuery must not be null");

@@ -18,36 +18,36 @@ import jakarta.annotation.Resource;
 @SpringBootTest
 class Jsr250Test {
 
-    @Resource
-    private TokenBean bean;
+	@Resource
+	private TokenBean bean;
 
-    @Test
+	@Test
 	void contextLoads() {
-        assertThat(bean.getToken(), is(equalTo("token")));
-    }
+		assertThat(bean.getToken(), is(equalTo("token")));
+	}
 
-    @Configuration
+	@Configuration
 	static class Context {
 
-        @Bean
-        TokenBean myBean() {
-            return new TokenBean() {
+		@Bean
+		TokenBean myBean() {
+			return new TokenBean() {
 
-                @PostConstruct
-				public void init() {
-                    System.out.println("In init block of token");
-                }
+				@PostConstruct
+				void init() {
+					System.out.println("In init block of token");
+				}
 
-                @PreDestroy
-				public void destroy() {
-                    System.out.println("In destroy block of token");
-                }
+				@PreDestroy
+				void destroy() {
+					System.out.println("In destroy block of token");
+				}
 
-                @Override
+				@Override
 				public String getToken() {
-                    return "token";
-                }
-            };
-        }
-    }
+					return "token";
+				}
+			};
+		}
+	}
 }
