@@ -8,10 +8,10 @@ import lombok.NonNull;
 
 public interface CityCustomRepository {
 
-	List<City> findAllCitiesBy(@NonNull String name, @NonNull String state, @NonNull String countryName);
+    List<City> findAllCitiesBy(@NonNull String name, @NonNull String state, @NonNull String countryName);
 
-	List<CityProjection> searchByCity(@NonNull String cityName);
+    List<CityProjection> searchByCity(@NonNull String cityName);
 
-	List<Tuple> countCitiesInCountriesLike(@NonNull String countryName);
+    List<Tuple> countCitiesInCountriesLike(@NonNull String countryName);
 
 }

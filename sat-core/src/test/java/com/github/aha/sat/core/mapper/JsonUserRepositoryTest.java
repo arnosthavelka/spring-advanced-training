@@ -13,21 +13,21 @@ class JsonUserRepositoryTest {
 
     @Autowired
     private UserRepository repo;
-    
-	@Test
-	void testUsersCount() {
-		assertThat(repo.fetchAllUsers().size(), is(equalTo(3)));
-	}
 
-	@Test
-	void testFirstUser() {
-		assertThat(repo.firstUser().getUserName(), is(equalTo("aha")));
-	}
+    @Test
+    void testUsersCount() {
+        assertThat(repo.fetchAllUsers().size(), is(equalTo(3)));
+    }
 
-	@Test
-	void testRisator() {
-		UserDTO user = repo.userByFirstNameAndLastName("Richard", "Strauss");
-		assertThat(user.getUserName(), is(equalTo("risator")));
-	}
+    @Test
+    void testFirstUser() {
+        assertThat(repo.firstUser().getUserName(), is(equalTo("aha")));
+    }
+
+    @Test
+    void testRisator() {
+        UserDTO user = repo.userByFirstNameAndLastName("Richard", "Strauss");
+        assertThat(user.getUserName(), is(equalTo("risator")));
+    }
 
 }

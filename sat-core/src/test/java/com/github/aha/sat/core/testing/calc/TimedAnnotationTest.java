@@ -15,23 +15,23 @@ class TimedAnnotationTest {
 
     @Test
     @Timed(millis = 100)
-	void testOkTime() {
-		assertThat(true, equalTo(TRUE));
+    void testOkTime() {
+        assertThat(true, equalTo(TRUE));
     }
 
     @Test()
     @Timed(millis = 100)
-	void testSpringTimeout() throws InterruptedException {
-		Thread.sleep(50); // NOSONAR
-		assertThat(true, equalTo(TRUE));
+    void testSpringTimeout() throws InterruptedException {
+        Thread.sleep(50); // NOSONAR
+        assertThat(true, equalTo(TRUE));
     }
 
-	@Test
-	void testJUnitTimeout() throws InterruptedException {
-		assertTimeout(ofMillis(100), () -> {
-			Thread.sleep(50); // NOSONAR
-			assertThat(true, equalTo(TRUE));
-		});
+    @Test
+    void testJUnitTimeout() throws InterruptedException {
+        assertTimeout(ofMillis(100), () -> {
+            Thread.sleep(50); // NOSONAR
+            assertThat(true, equalTo(TRUE));
+        });
     }
 
 }

@@ -10,20 +10,19 @@ import org.springframework.data.querydsl.QuerydslPredicateExecutor;
 import com.querydsl.core.BooleanBuilder;
 import com.querydsl.core.types.Predicate;
 
-public interface CountryRepository extends CountryCustomRepository,
-		JpaRepository<Country, Long>, QuerydslPredicateExecutor<Country> {
+public interface CountryRepository
+        extends CountryCustomRepository, JpaRepository<Country, Long>, QuerydslPredicateExecutor<Country> {
 
-	Country getByName(String name);
+    Country getByName(String name);
 
-	List<Country> findByNameLikeIgnoreCase(String name);
+    List<Country> findByNameLikeIgnoreCase(String name);
 
-	default Iterable<Country> findAllWithoutCities() {
-		return findAll(predicateWithoutCities(), country.name.asc());
-	}
+    default Iterable<Country> findAllWithoutCities() {
+        return findAll(predicateWithoutCities(), country.name.asc());
+    }
 
-	default Predicate predicateWithoutCities() {
-		return new BooleanBuilder()
-				.and(country.cities.isEmpty());
-	}
+    default Predicate predicateWithoutCities() {
+        return new BooleanBuilder().and(country.cities.isEmpty());
+    }
 
 }

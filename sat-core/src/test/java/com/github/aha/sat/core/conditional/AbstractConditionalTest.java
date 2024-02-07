@@ -16,20 +16,20 @@ import com.github.aha.sat.core.wiring.beverage.Beverage;
 
 abstract class AbstractConditionalTest {
 
-	private static final Logger LOG = LoggerFactory.getLogger(AbstractConditionalTest.class);
+    private static final Logger LOG = LoggerFactory.getLogger(AbstractConditionalTest.class);
 
-	@Autowired
-	private List<Beverage> drinks;
+    @Autowired
+    private List<Beverage> drinks;
 
-	@Test
-	void testDrinks() {
-		assertThat(drinks, not(empty()));
-		assertThat(drinks.size(), equalTo(2));
-		printBeans();
-	}
+    @Test
+    void testDrinks() {
+        assertThat(drinks, not(empty()));
+        assertThat(drinks.size(), equalTo(2));
+        printBeans();
+    }
 
-	private void printBeans() {
-		drinks.stream().forEach(d -> LOG.info("bean {}", d.getName()));
-	}
+    private void printBeans() {
+        drinks.stream().forEach(d -> LOG.info("bean {}", d.getName()));
+    }
 
 }

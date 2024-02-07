@@ -8,9 +8,9 @@ import org.springframework.boot.test.context.SpringBootTest;
 @SpringBootTest(classes = AdminServerApplication.class)
 class AdminServerApplicationTest {
 
-	@Test
-	void contextLoads() {
-		assertThatNoException();
-	}
+    @Test
+    void contextLoads() {
+        assertThatNoException();
+    }
 
 }

@@ -14,16 +14,17 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class CountryService {
 
-	private final CountryRepository repository;
+    private final CountryRepository repository;
 
-	@Transactional(readOnly = true)
-	public List<Country> findAllBy(String name) {
-		return repository.findByNameLikeIgnoreCase("%" + name + "%");
-	}
+    @Transactional(readOnly = true)
+    public List<Country> findAllBy(String name) {
+        return repository.findByNameLikeIgnoreCase("%" + name + "%");
+    }
 
-	@Transactional(readOnly = true)
-	public Page<Country> findAllCountriesHavingCity(@NonNull String cityName, @NonNull String cityState, Pageable pageable) {
-		return repository.findAllCountriesHavingCity("%" + cityName + "%", "%" + cityState + "%", pageable);
-	}
+    @Transactional(readOnly = true)
+    public Page<Country> findAllCountriesHavingCity(@NonNull String cityName, @NonNull String cityState,
+            Pageable pageable) {
+        return repository.findAllCountriesHavingCity("%" + cityName + "%", "%" + cityState + "%", pageable);
+    }
 
 }

@@ -11,21 +11,21 @@ import org.mockito.junit.jupiter.MockitoExtension;
 @ExtendWith(MockitoExtension.class)
 class CityServiceTests {
 
-	@Mock
-	CityRepository repository;
+    @Mock
+    CityRepository repository;
 
-	@InjectMocks
-	protected CityService service;
+    @InjectMocks
+    protected CityService service;
 
     @Test
-	void findAllBy() {
-		var name = "Melbourne";
-		var state = "Victoria";
-		var countryName = "Australia";
+    void findAllBy() {
+        var name = "Melbourne";
+        var state = "Victoria";
+        var countryName = "Australia";
 
-		service.findAllBy(name, state, countryName);
+        service.findAllBy(name, state, countryName);
 
-		verify(repository).findAllCitiesBy(name, state, countryName);
+        verify(repository).findAllCitiesBy(name, state, countryName);
     }
 
 }

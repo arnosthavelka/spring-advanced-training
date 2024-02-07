@@ -10,12 +10,12 @@ public class AopConfig {
 
     @Bean
     Beverage milk() {
-		return () -> "Milk";
+        return () -> "Milk";
     }
 
     @Bean
     EnjoyableBeverage hotChocolade() {
-		return () -> "Hot Chocolade";
+        return () -> "Hot Chocolade";
     }
 
 }

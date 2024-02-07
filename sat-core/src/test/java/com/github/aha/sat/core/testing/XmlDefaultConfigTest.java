@@ -21,7 +21,7 @@ class XmlDefaultConfigTest {
     private User user;
 
     @Test
-	void testHello() {
+    void testHello() {
         assertThat(user.getName(), equalTo("Michel"));
     }
 

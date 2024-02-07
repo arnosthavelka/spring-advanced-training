@@ -12,11 +12,11 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class CityService {
 
-	private final CityRepository repository;
+    private final CityRepository repository;
 
-	@Transactional(readOnly = true)
-	public List<City> findAllBy(@NonNull String cityName, @NonNull String cityState, @NonNull String countryName) {
-		return repository.findAllCitiesBy(cityName, cityState, countryName);
-	}
+    @Transactional(readOnly = true)
+    public List<City> findAllBy(@NonNull String cityName, @NonNull String cityState, @NonNull String countryName) {
+        return repository.findAllCitiesBy(cityName, cityState, countryName);
+    }
 
 }

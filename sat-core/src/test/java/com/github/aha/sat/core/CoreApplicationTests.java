@@ -8,9 +8,9 @@ import org.springframework.boot.test.context.SpringBootTest;
 @SpringBootTest(classes = CoreApplication.class)
 class CoreApplicationTests {
 
-	@Test
-	void contextLoads() {
-		assertThatNoException();
-	}
+    @Test
+    void contextLoads() {
+        assertThatNoException();
+    }
 
 }

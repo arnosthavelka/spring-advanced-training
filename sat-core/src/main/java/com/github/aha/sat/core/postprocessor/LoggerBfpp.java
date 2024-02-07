@@ -13,8 +13,10 @@ public class LoggerBfpp implements BeanFactoryPostProcessor {
     public void postProcessBeanFactory(ConfigurableListableBeanFactory beanFactory) throws BeansException {
         String[] beanNames = beanFactory.getBeanDefinitionNames();
         for (String beanName : beanNames) {
-			var beanDefinition = beanFactory.getBeanDefinition(beanName);
-			log.info("Bean '{}': scope={}, singleton={}", beanName, beanDefinition.getScope(), beanDefinition.isSingleton());
+            var beanDefinition = beanFactory.getBeanDefinition(beanName);
+            log.info("Bean '{}': scope={}, singleton={}", beanName, beanDefinition.getScope(),
+                    beanDefinition.isSingleton());
         }
     }
+
 }

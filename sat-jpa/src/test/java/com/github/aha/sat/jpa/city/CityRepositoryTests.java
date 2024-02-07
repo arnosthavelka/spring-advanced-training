@@ -21,147 +21,144 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 class CityRepositoryTests extends AbstractCityVerificationTest {
 
-	static final int TOTAL_SIZE = 15;
-	static long totalCount = -1;
+    static final int TOTAL_SIZE = 15;
+    static long totalCount = -1;
 
-	@Autowired
-	CityRepository cityRepository;
+    @Autowired
+    CityRepository cityRepository;
 
-	@Autowired
-	CountryRepository countryRepository;
+    @Autowired
+    CountryRepository countryRepository;
 
-	@PostConstruct
-	void init() {
-		if (totalCount < 0) {
-			totalCount = cityRepository.count();
-		}
-	}
-	
-    @Test
-	void countCities() {
-		assertThat(totalCount).isEqualTo(TOTAL_SIZE);
+    @PostConstruct
+    void init() {
+        if (totalCount < 0) {
+            totalCount = cityRepository.count();
+        }
     }
 
-	@Nested
-	class FindAllTest {
+    @Test
+    void countCities() {
+        assertThat(totalCount).isEqualTo(TOTAL_SIZE);
+    }
 
-		@Test
-		void pagination() {
-			var pageSize = 5;
+    @Nested
+    class FindAllTest {
 
-			Page<City> page = cityRepository.findAll(PageRequest.of(0, pageSize));
+        @Test
+        void pagination() {
+            var pageSize = 5;
 
-			assertThat(page.getSize()).isEqualTo(pageSize);
-			assertThat(page.getTotalElements()).isEqualTo(TOTAL_SIZE);
-			assertThat(page.getTotalPages()).isEqualTo(3);
-			log.debug("\n### testPaging output");
-			for (City city : page.getContent()) {
-				log.debug(city.toString());
-			}
-		}
+            Page<City> page = cityRepository.findAll(PageRequest.of(0, pageSize));
 
-		@Test
-		void sorting() {
-			Page<City> page = cityRepository.findAll(PageRequest.of(0, 5, Sort.Direction.DESC, City_.COUNTRY, City_.NAME));
+            assertThat(page.getSize()).isEqualTo(pageSize);
+            assertThat(page.getTotalElements()).isEqualTo(TOTAL_SIZE);
+            assertThat(page.getTotalPages()).isEqualTo(3);
+            log.debug("\n### testPaging output");
+            for (City city : page.getContent()) {
+                log.debug(city.toString());
+            }
+        }
 
-			assertThat(page.getSize()).isEqualTo(5);
-			log.debug("\n### testSorting output");
-			for (City city : page.getContent()) {
-				log.debug(city.toString());
-			}
-		}
+        @Test
+        void sorting() {
+            Page<City> page = cityRepository
+                .findAll(PageRequest.of(0, 5, Sort.Direction.DESC, City_.COUNTRY, City_.NAME));
 
-	}
+            assertThat(page.getSize()).isEqualTo(5);
+            log.debug("\n### testSorting output");
+            for (City city : page.getContent()) {
+                log.debug(city.toString());
+            }
+        }
 
-	@Nested
-	class GetByNameTest {
+    }
 
-		@Test
-		void shouldFindEntity() {
-			var name = "Miami";
+    @Nested
+    class GetByNameTest {
 
-			var city = cityRepository.getByName(name);
+        @Test
+        void shouldFindEntity() {
+            var name = "Miami";
 
-			verifyCity(city, name, USA);
-		}
+            var city = cityRepository.getByName(name);
 
-		@Test
-		void shouldNotFindEntity() {
-			var misspelledName = "prague";
+            verifyCity(city, name, USA);
+        }
 
-			var city = cityRepository.getByName(misspelledName);
+        @Test
+        void shouldNotFindEntity() {
+            var misspelledName = "prague";
 
-			assertThat(city).isNull();
-		}
+            var city = cityRepository.getByName(misspelledName);
 
-	}
+            assertThat(city).isNull();
+        }
 
-	@Test
-	void findByNameLikeAndCountryName() {
-		List<City> result = cityRepository.findByNameLikeAndCountryName("% %", USA);
+    }
 
-		assertThat(result).hasSize(2);
-		verifyFirstCityInCollection(result, "New York", USA);
-	}
+    @Test
+    void findByNameLikeAndCountryName() {
+        List<City> result = cityRepository.findByNameLikeAndCountryName("% %", USA);
 
-	@Test
-	void findByNameAndCountryNameAllIgnoringCase() {
-		City city = cityRepository.findByNameAndCountryNameAllIgnoringCase("Tokyo", "Japan");
+        assertThat(result).hasSize(2);
+        verifyFirstCityInCollection(result, "New York", USA);
+    }
 
-		assertThat(city.getName()).isEqualTo("Tokyo");
-		assertThat(city.getCountry().getName()).isEqualTo("Japan");
-	}
+    @Test
+    void findByNameAndCountryNameAllIgnoringCase() {
+        City city = cityRepository.findByNameAndCountryNameAllIgnoringCase("Tokyo", "Japan");
 
-	@Test
-	void findByNameContainingAndCountryNameContainingAllIgnoringCase() {
-		var pageSize = 2;
+        assertThat(city.getName()).isEqualTo("Tokyo");
+        assertThat(city.getCountry().getName()).isEqualTo("Japan");
+    }
 
-		Page<City> page = cityRepository.findByNameContainingAndCountryNameContainingAllIgnoringCase("an", "usa", PageRequest.of(0, pageSize));
+    @Test
+    void findByNameContainingAndCountryNameContainingAllIgnoringCase() {
+        var pageSize = 2;
 
-		assertThat(page.getSize()).isEqualTo(pageSize);
-		assertThat(page.getTotalElements()).isEqualTo(2);
-		assertThat(page.getTotalPages()).isEqualTo(1);
-		assertThat(page.getContent())
-				.satisfies(c -> log.debug("The page content:"))
-				.allSatisfy(city -> log.debug(city.toString()));
-	}
+        Page<City> page = cityRepository.findByNameContainingAndCountryNameContainingAllIgnoringCase("an", "usa",
+                PageRequest.of(0, pageSize));
 
-	@Test
-	void retrieveByName() {
-		var name = "prague";
+        assertThat(page.getSize()).isEqualTo(pageSize);
+        assertThat(page.getTotalElements()).isEqualTo(2);
+        assertThat(page.getTotalPages()).isEqualTo(1);
+        assertThat(page.getContent()).satisfies(c -> log.debug("The page content:"))
+            .allSatisfy(city -> log.debug(city.toString()));
+    }
 
-		var city = cityRepository.retrieveByName(name);
+    @Test
+    void retrieveByName() {
+        var name = "prague";
 
-		verifyCity(city, "Prague", "Czech Republic");
-	}
+        var city = cityRepository.retrieveByName(name);
 
-	@Nested
-	class ModificationTest {
+        verifyCity(city, "Prague", "Czech Republic");
+    }
 
-		@Test
-		void createEntity() {
-			var country = countryRepository.getByName(AUSTRALIA);
-			var city = City.builder()
-					.name("Darwin")
-					.state("North territory")
-					.country(country)
-					.build();
-			country.getCities().add(city);
+    @Nested
+    class ModificationTest {
 
-			countryRepository.save(country);
+        @Test
+        void createEntity() {
+            var country = countryRepository.getByName(AUSTRALIA);
+            var city = City.builder().name("Darwin").state("North territory").country(country).build();
+            country.getCities().add(city);
 
-			assertThat(cityRepository.count()).isEqualTo(totalCount + 1);
-		}
+            countryRepository.save(country);
 
-		@Test
-		void deleteEntity() {
-			var city = cityRepository.getByName("Prague");
+            assertThat(cityRepository.count()).isEqualTo(totalCount + 1);
+        }
 
-			cityRepository.delete(city);
+        @Test
+        void deleteEntity() {
+            var city = cityRepository.getByName("Prague");
 
-			assertThat(cityRepository.count()).isEqualTo(totalCount - 1);
-		}
+            cityRepository.delete(city);
 
-	}
+            assertThat(cityRepository.count()).isEqualTo(totalCount - 1);
+        }
+
+    }
 
 }

@@ -45,101 +45,105 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 class CityServiceTest {
 
-	private static final String CITY_ID = UUID.randomUUID().toString();
-	private static final String CITY_COUNTRY = "Colombia";
+    private static final String CITY_ID = UUID.randomUUID().toString();
 
-	@Mock
-	CityRepository repository;
+    private static final String CITY_COUNTRY = "Colombia";
 
-	@Mock
-	ElasticsearchOperations esTemplate;
+    @Mock
+    CityRepository repository;
 
-	@InjectMocks
-	@Spy
-	private CityService service;
+    @Mock
+    ElasticsearchOperations esTemplate;
 
-	@Test
-	void uploadFile() throws IOException {
-		var fileName = prepareTestCsv();
+    @InjectMocks
+    @Spy
+    private CityService service;
 
-		service.uploadFile(fileName);
+    @Test
+    void uploadFile() throws IOException {
+        var fileName = prepareTestCsv();
 
-		verify(repository, times(2)).saveAll(any());
-	}
+        service.uploadFile(fileName);
 
-	private String prepareTestCsv() throws IOException {
-		Path tempFile = createTempFile("test-cities", ".csv");
-		tempFile.toFile().deleteOnExit();
-		log.info("Temp file : {}", tempFile);
-		generateCsvContent(tempFile);
-		return tempFile.toAbsolutePath().toString();
-	}
+        verify(repository, times(2)).saveAll(any());
+    }
 
-	private void generateCsvContent(Path tempFile) throws IOException {
-		StringBuilder sb = new StringBuilder();
-		sb.append("name,country,subcountry,geonameid\n");
-		for (int i = 0; i < 700; i++) {
-			sb.append("name").append(i).append(",country").append(i).append(",subcountry").append(i).append(",").append(i).append(i).append("\n");
-		}
-		writeString(tempFile, sb.toString());
-	}
+    private String prepareTestCsv() throws IOException {
+        Path tempFile = createTempFile("test-cities", ".csv");
+        tempFile.toFile().deleteOnExit();
+        log.info("Temp file : {}", tempFile);
+        generateCsvContent(tempFile);
+        return tempFile.toAbsolutePath().toString();
+    }
 
-	@Nested
-	class FindById {
+    private void generateCsvContent(Path tempFile) throws IOException {
+        StringBuilder sb = new StringBuilder();
+        sb.append("name,country,subcountry,geonameid\n");
+        for (int i = 0; i < 700; i++) {
+            sb.append("name")
+                .append(i)
+                .append(",country")
+                .append(i)
+                .append(",subcountry")
+                .append(i)
+                .append(",")
+                .append(i)
+                .append(i)
+                .append("\n");
+        }
+        writeString(tempFile, sb.toString());
+    }
 
-		@Test
-		void shouldReturnCity() {
-			City city = new City();
-			given(repository.findById(CITY_ID)).willReturn(of(city));
+    @Nested
+    class FindById {
 
-			City result = service.findById(CITY_ID);
+        @Test
+        void shouldReturnCity() {
+            City city = new City();
+            given(repository.findById(CITY_ID)).willReturn(of(city));
 
-			assertThat(result).isSameAs(city);
-			verify(repository).findById(CITY_ID);
-		}
+            City result = service.findById(CITY_ID);
 
-		@Test
-		void failWhenCityIsNotFound() {
-			assertThrows(ElkException.class, () -> service.findById(CITY_ID));
+            assertThat(result).isSameAs(city);
+            verify(repository).findById(CITY_ID);
+        }
 
-			verify(repository).findById(CITY_ID);
-		}
+        @Test
+        void failWhenCityIsNotFound() {
+            assertThrows(ElkException.class, () -> service.findById(CITY_ID));
 
-	}
+            verify(repository).findById(CITY_ID);
+        }
 
-	@Test
-	void searchByCountry() {
-		City city = new City();
-		given(repository.findByCountry(eq(CITY_COUNTRY), any())).willReturn(new PageImpl<City>(List.of(city)));
+    }
 
-		Page<City> result = service.searchByCountry(CITY_COUNTRY, unpaged());
+    @Test
+    void searchByCountry() {
+        City city = new City();
+        given(repository.findByCountry(eq(CITY_COUNTRY), any())).willReturn(new PageImpl<City>(List.of(city)));
 
-		assertThat(result.getContent().get(0)).isSameAs(city);
-		verify(repository).findByCountry(eq(CITY_COUNTRY), any());
-	}
+        Page<City> result = service.searchByCountry(CITY_COUNTRY, unpaged());
 
-	@ParameterizedTest
-	@CsvSource(value = {
-			"Armenia,Colombia,Quindío",
-			"null,Colombia,Quindío",
-			"Armenia,null,Quindío",
-			"Armenia,Colombia,null",
-			"null,null,null",
-	}, nullValues = "null")
-	void search(String name, String country, String subcountry) {
-		Pageable pageable = unpaged();
-		var cityHit = new SearchHit<City>(
-				INDEX, UUID.randomUUID().toString(), null, NaN, null, null, null, null, null, null,
-				new City(CITY_ID, name, country, subcountry, 666L));
-		List<? extends SearchHit<City>> cities = List.of(cityHit);
+        assertThat(result.getContent().get(0)).isSameAs(city);
+        verify(repository).findByCountry(eq(CITY_COUNTRY), any());
+    }
 
-		given(esTemplate.search(any(Query.class), eq(City.class)))
-				.willReturn(new SearchHitsImpl<City>(1, EQUAL_TO, NaN, "scrollId", "pointInTimeId", cities, null, null));
+    @ParameterizedTest
+    @CsvSource(value = { "Armenia,Colombia,Quindío", "null,Colombia,Quindío", "Armenia,null,Quindío",
+            "Armenia,Colombia,null", "null,null,null", }, nullValues = "null")
+    void search(String name, String country, String subcountry) {
+        Pageable pageable = unpaged();
+        var cityHit = new SearchHit<City>(INDEX, UUID.randomUUID().toString(), null, NaN, null, null, null, null, null,
+                null, new City(CITY_ID, name, country, subcountry, 666L));
+        List<? extends SearchHit<City>> cities = List.of(cityHit);
 
-		var result = service.search(name, country, subcountry, pageable);
+        given(esTemplate.search(any(Query.class), eq(City.class)))
+            .willReturn(new SearchHitsImpl<City>(1, EQUAL_TO, NaN, "scrollId", "pointInTimeId", cities, null, null));
 
-		assertThat(result.getTotalElements()).isEqualTo(1);
-		verify(esTemplate).search(any(Query.class), eq(City.class));
-	}
+        var result = service.search(name, country, subcountry, pageable);
+
+        assertThat(result.getTotalElements()).isEqualTo(1);
+        verify(esTemplate).search(any(Query.class), eq(City.class));
+    }
 
 }

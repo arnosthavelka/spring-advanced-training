@@ -33,18 +33,18 @@ public class City implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
-	@GeneratedValue(strategy = IDENTITY)
+    @GeneratedValue(strategy = IDENTITY)
     private Long id;
 
     @Column(nullable = false)
     private String name;
 
-	@Column(nullable = true)
+    @Column(nullable = true)
     private String state;
 
-	@ManyToOne
-	@JoinColumn(name = "COUNTRY_ID")
-	@NonNull
-	private Country country;
+    @ManyToOne
+    @JoinColumn(name = "COUNTRY_ID")
+    @NonNull
+    private Country country;
 
 }

@@ -31,76 +31,75 @@ import lombok.NonNull;
 @DataJpaTest
 class CityDzoneTests {
 
-	@PersistenceContext
-	EntityManager em;
+    @PersistenceContext
+    EntityManager em;
 
-	@Test
-	void cityByName() {
-		var cityName = "London";
+    @Test
+    void cityByName() {
+        var cityName = "London";
 
-		var city = getCityByName(cityName);
+        var city = getCityByName(cityName);
 
-		assertThat(city.getName()).isEqualTo(cityName);
+        assertThat(city.getName()).isEqualTo(cityName);
     }
 
-	private City getCityByName(String cityName) {
-		var cb = em.getCriteriaBuilder();
-		var query = cb.createQuery(City.class);
-		var cityRoot = query.from(City.class);
+    private City getCityByName(String cityName) {
+        var cb = em.getCriteriaBuilder();
+        var query = cb.createQuery(City.class);
+        var cityRoot = query.from(City.class);
 
-		query.select(cityRoot).where(cb.like(cityRoot.get(name), cityName));
-		return em.createQuery(query).getSingleResult();
-	}
+        query.select(cityRoot).where(cb.like(cityRoot.get(name), cityName));
+        return em.createQuery(query).getSingleResult();
+    }
 
-	@Test
-	void paginateCitiesInCountry() {
-		var countryName = "USA";
-		var pageable = PageRequest.of(0, 2, Sort.by(ASC, ID));
+    @Test
+    void paginateCitiesInCountry() {
+        var countryName = "USA";
+        var pageable = PageRequest.of(0, 2, Sort.by(ASC, ID));
 
-		var pagedResult = findCitiesByCountry(countryName, pageable);
+        var pagedResult = findCitiesByCountry(countryName, pageable);
 
-		assertThat(pagedResult.getTotalElements()).isEqualTo(5);
-		assertThat(pagedResult.getTotalPages()).isEqualTo(3);
-        assertThat( pagedResult.getContent() )
-	        .hasSize( 2 )
-	        .map( City::getName )
-				.containsExactly("Atlanta", "Chicago");
-	}
+        assertThat(pagedResult.getTotalElements()).isEqualTo(5);
+        assertThat(pagedResult.getTotalPages()).isEqualTo(3);
+        assertThat(pagedResult.getContent()).hasSize(2).map(City::getName).containsExactly("Atlanta", "Chicago");
+    }
 
-	private Page<City> findCitiesByCountry(String countryName, Pageable pageable) {
-		CriteriaBuilder cb = em.getCriteriaBuilder();
+    private Page<City> findCitiesByCountry(String countryName, Pageable pageable) {
+        CriteriaBuilder cb = em.getCriteriaBuilder();
 
-		CriteriaQuery<City> query = cb.createQuery(City.class);
-		Root<City> cityRoot = query.from(City.class);
-		query.select(cityRoot).where(cb.equal(cityRoot.get(country).get(Country_.name), countryName));
-		List<City> pagedData = paginateQuery(em.createQuery(query), pageable).getResultList();
+        CriteriaQuery<City> query = cb.createQuery(City.class);
+        Root<City> cityRoot = query.from(City.class);
+        query.select(cityRoot).where(cb.equal(cityRoot.get(country).get(Country_.name), countryName));
+        List<City> pagedData = paginateQuery(em.createQuery(query), pageable).getResultList();
 
-		CriteriaQuery<Long> countQuery = cb.createQuery(Long.class);
-		Root<City> cityCountRoot = countQuery.from(City.class);
-		countQuery.select(cb.count(cityCountRoot)).where(cb.equal(cityCountRoot.get(country).get(Country_.name), countryName));
-		var totalCount = em.createQuery(countQuery).getSingleResult();
+        CriteriaQuery<Long> countQuery = cb.createQuery(Long.class);
+        Root<City> cityCountRoot = countQuery.from(City.class);
+        countQuery.select(cb.count(cityCountRoot))
+            .where(cb.equal(cityCountRoot.get(country).get(Country_.name), countryName));
+        var totalCount = em.createQuery(countQuery).getSingleResult();
 
-		return new PageImpl<>(pagedData, pageable, totalCount);
-	}
+        return new PageImpl<>(pagedData, pageable, totalCount);
+    }
 
-	static <T> TypedQuery<T> paginateQuery(TypedQuery<T> query, Pageable pageable) {
-		if (pageable.isPaged()) {
-			query.setFirstResult((int) pageable.getOffset());
-			query.setMaxResults(pageable.getPageSize());
-		}
-		return query;
-	}
+    static <T> TypedQuery<T> paginateQuery(TypedQuery<T> query, Pageable pageable) {
+        if (pageable.isPaged()) {
+            query.setFirstResult((int) pageable.getOffset());
+            query.setMaxResults(pageable.getPageSize());
+        }
+        return query;
+    }
 
-	static <T> Page<T> toPage(List<T> fromCollection, @NonNull Pageable pageable) {
-		try {
-			List<T> resources = emptyIfNull(fromCollection).stream()
-					.skip(pageable.getOffset())
-					.limit(pageable.getPageSize())
-					.collect(toList());
-			return new PageImpl<>(resources, pageable, fromCollection.size());
-		} catch (UnsupportedOperationException uoe) {
-			return new PageImpl<>(fromCollection, pageable, fromCollection.size());
-		}
-	}
+    static <T> Page<T> toPage(List<T> fromCollection, @NonNull Pageable pageable) {
+        try {
+            List<T> resources = emptyIfNull(fromCollection).stream()
+                .skip(pageable.getOffset())
+                .limit(pageable.getPageSize())
+                .collect(toList());
+            return new PageImpl<>(resources, pageable, fromCollection.size());
+        }
+        catch (UnsupportedOperationException uoe) {
+            return new PageImpl<>(fromCollection, pageable, fromCollection.size());
+        }
+    }
 
 }

@@ -12,14 +12,14 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class Apple implements CommandLineRunner {
 
-	@PostConstruct
-	void init() {
-		log.debug("Initializing Apple bean ...");
-	}
+    @PostConstruct
+    void init() {
+        log.debug("Initializing Apple bean ...");
+    }
 
-	@Override
-	public void run(String... args) throws Exception {
-		log.info("Here's Apple runner");
-	}
+    @Override
+    public void run(String... args) throws Exception {
+        log.info("Here's Apple runner");
+    }
 
 }

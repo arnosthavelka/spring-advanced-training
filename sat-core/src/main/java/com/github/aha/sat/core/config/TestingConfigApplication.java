@@ -12,7 +12,8 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Component;
 
 @SpringBootApplication
-@ComponentScan(basePackages = "com.github.aha.sat.core.testing", excludeFilters = @ComponentScan.Filter(type = ANNOTATION, value = Component.class))
+@ComponentScan(basePackages = "com.github.aha.sat.core.testing",
+        excludeFilters = @ComponentScan.Filter(type = ANNOTATION, value = Component.class))
 public class TestingConfigApplication {
 
     public static void main(String[] args) {
@@ -31,7 +32,7 @@ public class TestingConfigApplication {
 
     @Bean
     String randomGreeting() {
-		int val = new SecureRandom().nextInt(10) % 2;
+        int val = new SecureRandom().nextInt(10) % 2;
         return val == 0 ? hi() : hello();
     }
 

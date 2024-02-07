@@ -12,26 +12,26 @@ import com.github.aha.sat.core.wiring.beverage.Beverage;
 @SpringBootTest(classes = AopConfig.class)
 class AopTest {
 
-	@Autowired
-	@Qualifier("milk")
-	private Beverage milk;
+    @Autowired
+    @Qualifier("milk")
+    private Beverage milk;
 
-	@Autowired
-	@Qualifier("hotChocolade")
-	private Beverage hotChocolade;
-	
-	@Test
-	void testTea() {
-		assertThat(milk.getName()).isEqualTo("Milk");
-	}
+    @Autowired
+    @Qualifier("hotChocolade")
+    private Beverage hotChocolade;
 
-	@Test
-	void testEnhancedBear() {
-		assertThat(hotChocolade.getName()).isEqualTo("Hot Chocolade");
-		if (hotChocolade instanceof Enjoyable) {
-			Enjoyable en = (Enjoyable) hotChocolade;
-			assertThat(en.enjoy(hotChocolade)).isEqualTo("Wow Hot Chocolade");
-		}
+    @Test
+    void testTea() {
+        assertThat(milk.getName()).isEqualTo("Milk");
+    }
+
+    @Test
+    void testEnhancedBear() {
+        assertThat(hotChocolade.getName()).isEqualTo("Hot Chocolade");
+        if (hotChocolade instanceof Enjoyable) {
+            Enjoyable en = (Enjoyable) hotChocolade;
+            assertThat(en.enjoy(hotChocolade)).isEqualTo("Wow Hot Chocolade");
+        }
     }
 
 }

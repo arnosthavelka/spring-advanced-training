@@ -11,19 +11,19 @@ import org.springframework.web.bind.annotation.RestController;
 import lombok.RequiredArgsConstructor;
 
 /**
- * Usage: 
- * - search	GET	http://localhost:8080/cities?name=Melbourne&state=Victoria&countryName=Australia
+ * Usage: - search GET
+ * http://localhost:8080/cities?name=Melbourne&state=Victoria&countryName=Australia
  */
 @RestController
 @RequestMapping(value = "/cities", produces = APPLICATION_JSON_VALUE)
 @RequiredArgsConstructor
 public class CityController {
 
-	private final CityService service;
+    private final CityService service;
 
-	@GetMapping
-	public List<City> search(String name, String state, String countryName) {
-		return service.findAllBy(name, state, countryName);
-	}
+    @GetMapping
+    public List<City> search(String name, String state, String countryName) {
+        return service.findAllBy(name, state, countryName);
+    }
 
 }

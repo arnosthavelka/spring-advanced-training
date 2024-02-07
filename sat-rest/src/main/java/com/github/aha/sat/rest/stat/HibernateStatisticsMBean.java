@@ -17,4 +17,5 @@ public class HibernateStatisticsMBean {
     public Statistics getStatistics() {
         return statService.getStatistics();
     }
+
 }

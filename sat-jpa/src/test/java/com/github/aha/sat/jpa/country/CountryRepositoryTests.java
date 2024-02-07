@@ -10,44 +10,44 @@ import org.springframework.data.util.Streamable;
 @DataJpaTest
 class CountryRepositoryTests {
 
-	static final String USA = "USA";
+    static final String USA = "USA";
 
-	@Autowired
-	protected CountryRepository countryRepository;
+    @Autowired
+    protected CountryRepository countryRepository;
 
-	@Test
-	void getByName() {
-		var countryName = "Japan";
+    @Test
+    void getByName() {
+        var countryName = "Japan";
 
-		var result = countryRepository.getByName(countryName);
+        var result = countryRepository.getByName(countryName);
 
-		assertThat(result.getId()).isEqualTo(4);
-		assertThat(result.getName()).isEqualTo(countryName);
-		assertThat(result.getCities()).hasSize(1);
-	}
+        assertThat(result.getId()).isEqualTo(4);
+        assertThat(result.getName()).isEqualTo(countryName);
+        assertThat(result.getCities()).hasSize(1);
+    }
 
-	@Test
-	void findByNameLikeIgnoreCase() {
-		var namePattern = "%an%";
+    @Test
+    void findByNameLikeIgnoreCase() {
+        var namePattern = "%an%";
 
-		var result = countryRepository.findByNameLikeIgnoreCase(namePattern);
+        var result = countryRepository.findByNameLikeIgnoreCase(namePattern);
 
-		assertThat(result).map(Country::getName).containsExactly("Canada", "Japan", "France", "Switzerland");
-	}
+        assertThat(result).map(Country::getName).containsExactly("Canada", "Japan", "France", "Switzerland");
+    }
 
-	@Test
-	void countByStateName() {
-		long result = countryRepository.count(countryRepository.predicateWithoutCities());
+    @Test
+    void countByStateName() {
+        long result = countryRepository.count(countryRepository.predicateWithoutCities());
 
-		assertThat(result).isEqualTo(1);
-	}
+        assertThat(result).isEqualTo(1);
+    }
 
-	@Test
-	void findAllWithoutCities() {
-		var iterableResult = countryRepository.findAllWithoutCities();
-		var result = Streamable.of(iterableResult).toList();
+    @Test
+    void findAllWithoutCities() {
+        var iterableResult = countryRepository.findAllWithoutCities();
+        var result = Streamable.of(iterableResult).toList();
 
-		assertThat(result).hasSize(1);
-	}
+        assertThat(result).hasSize(1);
+    }
 
 }

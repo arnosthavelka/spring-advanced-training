@@ -18,12 +18,12 @@ public class StatServiceImpl implements StatService {
     private EntityManager em;
 
     public Statistics getStatistics() {
-		var session = (Session) this.em.getDelegate();
+        var session = (Session) this.em.getDelegate();
         return session.getSessionFactory().getStatistics();
     }
 
     public SessionFactory getSessionFactory() {
-		var session = (Session) this.em.getDelegate();
+        var session = (Session) this.em.getDelegate();
         return session.getSessionFactory();
     }
 

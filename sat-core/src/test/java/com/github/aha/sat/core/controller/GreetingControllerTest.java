@@ -15,23 +15,23 @@ import org.springframework.test.web.servlet.MockMvc;
 @ComponentScan
 class GreetingControllerTest {
 
-	@Autowired
-	private MockMvc mockMvc;
+    @Autowired
+    private MockMvc mockMvc;
 
-	@Test
-	void testArny() throws Exception {
-		mockMvc.perform(get("/arny"))
-				.andExpect(status().isOk())
-				.andExpect(content().contentType(APPLICATION_JSON_VALUE))
-				.andExpect(content().string("Hello!"));
-	}
+    @Test
+    void testArny() throws Exception {
+        mockMvc.perform(get("/arny"))
+            .andExpect(status().isOk())
+            .andExpect(content().contentType(APPLICATION_JSON_VALUE))
+            .andExpect(content().string("Hello!"));
+    }
 
-	@Test
-	void testJuan() throws Exception {
-		mockMvc.perform(get("/juan"))
-				.andExpect(status().isOk())
-				.andExpect(content().contentType(APPLICATION_JSON_VALUE))
-				.andExpect(content().string("Cao!"));
-	}
+    @Test
+    void testJuan() throws Exception {
+        mockMvc.perform(get("/juan"))
+            .andExpect(status().isOk())
+            .andExpect(content().contentType(APPLICATION_JSON_VALUE))
+            .andExpect(content().string("Cao!"));
+    }
 
 }

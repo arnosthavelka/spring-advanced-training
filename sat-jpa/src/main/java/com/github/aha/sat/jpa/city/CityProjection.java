@@ -10,8 +10,11 @@ import lombok.NoArgsConstructor;
 public class CityProjection {
 
     private Long id;
+
     private String name;
+
     private String state;
-	private String countryName;
+
+    private String countryName;
 
 }

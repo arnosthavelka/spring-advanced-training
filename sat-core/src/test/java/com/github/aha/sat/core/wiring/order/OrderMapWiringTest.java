@@ -13,15 +13,13 @@ import com.github.aha.sat.core.wiring.beverage.AbstractCarbonatedBeverage;
 
 @SpringBootTest(classes = WiringConfig.class)
 class OrderMapWiringTest {
-	
-	@Autowired
-	private Map<String, BeverageOrder<? extends AbstractCarbonatedBeverage>> carbonatedOrders;
 
-	@Test
-	void shouldWireAllOrders() {
-		assertThat(carbonatedOrders)
-				.hasSize(3)
-				.containsKeys("beerOrder", "colaOrder", "sodaOrder");
-	}
+    @Autowired
+    private Map<String, BeverageOrder<? extends AbstractCarbonatedBeverage>> carbonatedOrders;
+
+    @Test
+    void shouldWireAllOrders() {
+        assertThat(carbonatedOrders).hasSize(3).containsKeys("beerOrder", "colaOrder", "sodaOrder");
+    }
 
 }

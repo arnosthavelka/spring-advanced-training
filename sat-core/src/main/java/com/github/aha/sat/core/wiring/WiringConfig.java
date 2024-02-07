@@ -12,12 +12,12 @@ public class WiringConfig {
 
     @Bean
     Beverage iceTea() {
-		return () -> "Ice Tea";
-	}
+        return () -> "Ice Tea";
+    }
 
     @Bean
     BeverageOrder<Soda> sodaOrder() {
-		return beverage -> beverage.getName() + " is ready to be served.";
-	}
+        return beverage -> beverage.getName() + " is ready to be served.";
+    }
 
 }

@@ -19,20 +19,20 @@ public class CommandLineRunnerApplication implements CommandLineRunner {
     }
 
     @Bean
-	CommandLineRunner bye() {
-        return new CommandLineRunner () {
+    CommandLineRunner bye() {
+        return new CommandLineRunner() {
 
-			@Override
-			public void run(String... args) throws Exception {
-				log.info("Bye!");
-			}
-        	
-		};
+            @Override
+            public void run(String... args) throws Exception {
+                log.info("Bye!");
+            }
+
+        };
     }
 
-	@Override
-	public void run(String... args) throws Exception {
-		log.info("Starting ...");
-	}
+    @Override
+    public void run(String... args) throws Exception {
+        log.info("Starting ...");
+    }
 
 }

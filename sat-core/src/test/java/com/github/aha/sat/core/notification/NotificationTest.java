@@ -11,13 +11,13 @@ import org.springframework.context.ApplicationContext;
 class NotificationTest {
 
     @Autowired
-	private ApplicationContext ctx;
+    private ApplicationContext ctx;
 
     @Test
-	void contextLoads() {
-		ctx.publishEvent(new CustomEvent(ctx, "First message"));
-		ctx.publishEvent(new CustomEvent(ctx, "Second message"));
-		assertThatNoException();
+    void contextLoads() {
+        ctx.publishEvent(new CustomEvent(ctx, "First message"));
+        ctx.publishEvent(new CustomEvent(ctx, "Second message"));
+        assertThatNoException();
     }
 
 }

@@ -17,18 +17,18 @@ import lombok.Getter;
 @Relation(collectionRelation = "cities")
 public class CityResource extends CityBaseResource {
 
-	private long id;
+    private long id;
 
-	public CityResource(City city) {
-		this.id = city.getId();
-		setName(city.getName());
-		setState(city.getState());
-		setCountry(city.getCountry());
-	}
+    public CityResource(City city) {
+        this.id = city.getId();
+        setName(city.getName());
+        setState(city.getState());
+        setCountry(city.getCountry());
+    }
 
-	public EntityModel<CityResource> toResource() {
-		return EntityModel.of(this,
-				linkTo(methodOn(CityHateoasController.class).getOne(id)).withSelfRel(),
-				linkTo(CityHateoasController.class).slash(id).withRel("delete"));
-	}
+    public EntityModel<CityResource> toResource() {
+        return EntityModel.of(this, linkTo(methodOn(CityHateoasController.class).getOne(id)).withSelfRel(),
+                linkTo(CityHateoasController.class).slash(id).withRel("delete"));
+    }
+
 }

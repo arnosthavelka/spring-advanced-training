@@ -15,26 +15,26 @@ public class ConditionalConfig {
 
     @Bean
     @Conditional(AlcoholCondition.class)
-    Beverage beer()	{
-		return () -> "Beer";
-	}
+    Beverage beer() {
+        return () -> "Beer";
+    }
 
     @Bean
     @Conditional(AlcoholCondition.class)
     Beverage wine() {
-		return () -> "Wine";
-	}
+        return () -> "Wine";
+    }
 
     @Bean
     @Conditional(SodaCondition.class)
     Beverage cola() {
-		return () -> "cola";
-	}
+        return () -> "cola";
+    }
 
     @Bean
     @Conditional(SodaCondition.class)
     Beverage fanta() {
-		return () -> "fanta";
-	}
+        return () -> "fanta";
+    }
 
 }

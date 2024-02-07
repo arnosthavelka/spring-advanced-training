@@ -12,39 +12,39 @@ import com.github.aha.sat.core.wiring.trait.Alcoholic;
 
 @SpringBootTest(classes = WiringConfig.class)
 class BeverageSingleWiringTest {
-	
-	@Autowired
-	private Beverage soda; // it's tea due to @Primary annotation
 
-	@Autowired
-	@Qualifier("soda")
-	private Beverage qualifiedBeverage;
+    @Autowired
+    private Beverage soda; // it's tea due to @Primary annotation
 
-	@Autowired
-	private AbstractCarbonatedBeverage cola;
+    @Autowired
+    @Qualifier("soda")
+    private Beverage qualifiedBeverage;
 
-	@Autowired
-	@Alcoholic
-	private Beverage coldBeer;
+    @Autowired
+    private AbstractCarbonatedBeverage cola;
 
-	@Test
-	void shouldWirePrimaryBean() {
-		assertThat(soda.getName()).isEqualTo("Tea");
-	}
+    @Autowired
+    @Alcoholic
+    private Beverage coldBeer;
 
-	@Test
-	void shouldWireBeanByQualifier() {
-		assertThat(qualifiedBeverage.getName()).isEqualTo("Soda");
-	}
+    @Test
+    void shouldWirePrimaryBean() {
+        assertThat(soda.getName()).isEqualTo("Tea");
+    }
 
-	@Test
-	void shouldWireBeanByName() {
-		assertThat(cola.getName()).isEqualTo("Cola");
-	}
+    @Test
+    void shouldWireBeanByQualifier() {
+        assertThat(qualifiedBeverage.getName()).isEqualTo("Soda");
+    }
 
-	@Test
-	void shouldWireBeanByAnnotation() {
-		assertThat(coldBeer.getName()).isEqualTo("Beer");
-	}
+    @Test
+    void shouldWireBeanByName() {
+        assertThat(cola.getName()).isEqualTo("Cola");
+    }
+
+    @Test
+    void shouldWireBeanByAnnotation() {
+        assertThat(coldBeer.getName()).isEqualTo("Beer");
+    }
 
 }

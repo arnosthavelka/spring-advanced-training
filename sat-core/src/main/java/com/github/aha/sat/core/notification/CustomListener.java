@@ -9,9 +9,9 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class CustomListener implements ApplicationListener<CustomEvent> {
 
-	@Override
-	public void onApplicationEvent(CustomEvent ce) {
-		log.info(ce.toString());
-	}
+    @Override
+    public void onApplicationEvent(CustomEvent ce) {
+        log.info(ce.toString());
+    }
 
 }

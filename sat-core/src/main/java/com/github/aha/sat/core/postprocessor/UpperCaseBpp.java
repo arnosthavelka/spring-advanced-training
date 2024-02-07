@@ -9,7 +9,8 @@ public class UpperCaseBpp implements BeanPostProcessor {
     public Object postProcessBeforeInitialization(Object bean, String beanName) throws BeansException {
         if (beanName.equals("crown")) {
             return ((String) bean).toUpperCase();
-        } else {
+        }
+        else {
             return bean;
         }
     }

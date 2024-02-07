@@ -21,6 +21,7 @@
 		<jacoco.version>0.8.11</jacoco.version>
 		<spring-boot-admin.version>3.2.1</spring-boot-admin.version>
 		<springdoc-openapi.version>2.3.0</springdoc-openapi.version>
+		<spring-javaformat-maven-plugin.version>0.0.41</spring-javaformat-maven-plugin.version>
 	</properties>
 	
 	<dependencies>
@@ -59,6 +60,77 @@
 	                <forceJavacCompilerUse>true</forceJavacCompilerUse>
 	            </configuration>
 			</plugin>
+			<plugin>
+				<groupId>io.spring.javaformat</groupId>
+				<artifactId>spring-javaformat-maven-plugin</artifactId>
+				<version>${spring-javaformat-maven-plugin.version}</version>
+				<executions>
+					<execution>
+						<phase>validate</phase>
+						<inherited>true</inherited>
+						<goals>
+							<goal>validate</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-checkstyle-plugin</artifactId>
+				<version>3.1.1</version>
+				<dependencies>
+					<dependency>
+						<groupId>com.puppycrawl.tools</groupId>
+						<artifactId>checkstyle</artifactId>
+						<version>9.3</version>
+					</dependency>
+					<dependency>
+						<groupId>io.spring.javaformat</groupId>
+						<artifactId>spring-javaformat-checkstyle</artifactId>
+						<version>0.0.41</version>
+					</dependency>
+				</dependencies>
+				<executions>
+					<execution>
+						<id>checkstyle-validation</id>
+						<phase>validate</phase>
+						<inherited>true</inherited>
+						<configuration>
+							<checkstyleRules>
+								<module name="com.puppycrawl.tools.checkstyle.Checker">
+									<module name="io.spring.javaformat.checkstyle.SpringChecks">
+										<property name="excludes" value="com.puppycrawl.tools.checkstyle.checks.annotation.AnnotationUseStyleCheck" />
+										<property name="excludes" value="com.puppycrawl.tools.checkstyle.checks.coding.RequireThisCheck" />
+										<property name="excludes" value="com.puppycrawl.tools.checkstyle.checks.design.InnerTypeLastCheck" />
+										<property name="excludes" value="com.puppycrawl.tools.checkstyle.checks.javadoc.AtclauseOrderCheck" />
+										<property name="excludes" value="com.puppycrawl.tools.checkstyle.checks.javadoc.JavadocPackageCheck" />
+										<property name="excludes" value="com.puppycrawl.tools.checkstyle.checks.javadoc.JavadocStyleCheck" />
+										<property name="excludes" value="com.puppycrawl.tools.checkstyle.checks.javadoc.JavadocTagContinuationIndentationCheck" />
+										<property name="excludes" value="com.puppycrawl.tools.checkstyle.checks.javadoc.JavadocTypeCheck" />
+										<property name="excludes" value="com.puppycrawl.tools.checkstyle.checks.javadoc.JavadocVariableCheck" />
+										<property name="excludes" value="com.puppycrawl.tools.checkstyle.checks.javadoc.NonEmptyAtclauseDescriptionCheck" />
+										<property name="excludes" value="com.puppycrawl.tools.checkstyle.checks.regexp.RegexpSinglelineJavaCheck" />
+										<property name="excludes" value="io.spring.javaformat.checkstyle.check.SpringAvoidStaticImportCheck" />
+										<property name="excludes" value="io.spring.javaformat.checkstyle.check.SpringCatchCheck" />
+										<property name="excludes" value="io.spring.javaformat.checkstyle.check.SpringHeaderCheck" />
+										<property name="excludes" value="io.spring.javaformat.checkstyle.check.SpringHideUtilityClassConstructor" />
+										<property name="excludes" value="io.spring.javaformat.checkstyle.check.SpringJavadocCheck" />
+										<property name="excludes" value="io.spring.javaformat.checkstyle.check.SpringLambdaCheck" />
+										<property name="excludes" value="io.spring.javaformat.checkstyle.check.SpringImportOrderCheck" />
+										<property name="excludes" value="io.spring.javaformat.checkstyle.check.SpringTernaryCheck" />
+										<property name="excludes" value="io.spring.javaformat.checkstyle.check.SpringTestFileNameCheck" />
+									</module>
+								</module>
+							</checkstyleRules>
+							<!-- <configLocation>io/spring/javaformat/checkstyle/checkstyle.xml</configLocation>-->
+							<includeTestSourceDirectory>true</includeTestSourceDirectory>
+						</configuration>
+						<goals>
+							<goal>check</goal>
+						</goals>
+					</execution>
+				</executions>
+		</plugin>
 		</plugins>
 	</build>
 	

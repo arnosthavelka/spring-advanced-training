@@ -12,28 +12,24 @@ import ch.qos.logback.classic.spi.ILoggingEvent;
 import ch.qos.logback.core.read.ListAppender;
 
 public class PearTest {
-	
-	Pear pear = new Pear();
-	
-	@Test
-	void run() throws Exception {
-		ListAppender<ILoggingEvent> logAppender = LogUtils.getAppenderForLoggerOfClass( Pear.class );
-		
-		pear.init();
-		assertThat( logAppender.list )
-			.singleElement()
-			.satisfies(logEntry -> {
-				assertThat( logEntry.getLevel() ).isEqualTo(DEBUG);
-				assertThat( logEntry.getFormattedMessage() ).isEqualTo("Initializing Pear bean ..." );
-			});
 
-		pear.run();
-		assertThat( logAppender.list )
-			.last()
-			.satisfies(logEntry -> {
-				assertThat( logEntry.getLevel() ).isEqualTo(INFO);
-				assertThat( logEntry.getFormattedMessage() ).isEqualTo("Here's Pear runner" );
-			});
-	}
+    Pear pear = new Pear();
+
+    @Test
+    void run() throws Exception {
+        ListAppender<ILoggingEvent> logAppender = LogUtils.getAppenderForLoggerOfClass(Pear.class);
+
+        pear.init();
+        assertThat(logAppender.list).singleElement().satisfies(logEntry -> {
+            assertThat(logEntry.getLevel()).isEqualTo(DEBUG);
+            assertThat(logEntry.getFormattedMessage()).isEqualTo("Initializing Pear bean ...");
+        });
+
+        pear.run();
+        assertThat(logAppender.list).last().satisfies(logEntry -> {
+            assertThat(logEntry.getLevel()).isEqualTo(INFO);
+            assertThat(logEntry.getFormattedMessage()).isEqualTo("Here's Pear runner");
+        });
+    }
 
 }

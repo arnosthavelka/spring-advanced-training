@@ -17,37 +17,38 @@ import com.github.aha.sat.core.wiring.beverage.Tea;
 @SpringBootTest(classes = WiringConfig.class)
 class OrderSingleWiringTest {
 
-	@Autowired
-	private BeverageOrder<Tea> teaOrder;
+    @Autowired
+    private BeverageOrder<Tea> teaOrder;
 
-	@Autowired
-	private BeverageOrder<? extends AbstractCarbonatedBeverage> sodaOrder;
+    @Autowired
+    private BeverageOrder<? extends AbstractCarbonatedBeverage> sodaOrder;
 
-	@Autowired
-	@Qualifier("colaOrder")
-	private BeverageOrder<? extends AbstractCarbonatedBeverage> beverageOrder;
+    @Autowired
+    @Qualifier("colaOrder")
+    private BeverageOrder<? extends AbstractCarbonatedBeverage> beverageOrder;
 
-	@Autowired
-	private BeverageOrder<? extends AbstractCarbonatedBeverage> beerOrder;
+    @Autowired
+    private BeverageOrder<? extends AbstractCarbonatedBeverage> beerOrder;
 
-	@Test
-	void shouldWireBeanByType() {
-		assertThat(teaOrder.takeOrder(new Tea())).isEqualTo("Tea order is taken.");
-	}
+    @Test
+    void shouldWireBeanByType() {
+        assertThat(teaOrder.takeOrder(new Tea())).isEqualTo("Tea order is taken.");
+    }
 
-	@Test
-	void shouldWireBeanByName() {
-		assertThat(((BeverageOrder<Soda>) sodaOrder).takeOrder(new Soda())).isEqualTo("Soda is ready to be served.");
-	}
+    @Test
+    void shouldWireBeanByName() {
+        assertThat(((BeverageOrder<Soda>) sodaOrder).takeOrder(new Soda())).isEqualTo("Soda is ready to be served.");
+    }
 
-	@Test
-	void shouldWireBeanByQualifier() {
-		assertThat(((BeverageOrder<Cola>) beverageOrder).takeOrder(new Cola())).isEqualTo("Cola is temporarily not available.");
-	}
+    @Test
+    void shouldWireBeanByQualifier() {
+        assertThat(((BeverageOrder<Cola>) beverageOrder).takeOrder(new Cola()))
+            .isEqualTo("Cola is temporarily not available.");
+    }
 
-	@Test
-	void shouldWireBeanByAnnotation() {
-		assertThat(((BeverageOrder<Beer>) beerOrder).takeOrder(new Beer())).isEqualTo("Waiting for a new keg ...");
-	}
+    @Test
+    void shouldWireBeanByAnnotation() {
+        assertThat(((BeverageOrder<Beer>) beerOrder).takeOrder(new Beer())).isEqualTo("Waiting for a new keg ...");
+    }
 
 }

@@ -19,24 +19,24 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class City implements Serializable {
 
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
-	public static final String INDEX = "city";
+    public static final String INDEX = "city";
 
-	@Id
-	private String id;
+    @Id
+    private String id;
 
-	@JsonProperty("name")
-	@Field(type = FieldType.Text, fielddata = true)
-	private String name;
+    @JsonProperty("name")
+    @Field(type = FieldType.Text, fielddata = true)
+    private String name;
 
-	@JsonProperty("country")
-	private String country;
+    @JsonProperty("country")
+    private String country;
 
-	@JsonProperty("subcountry")
-	private String subcountry;
+    @JsonProperty("subcountry")
+    private String subcountry;
 
-	@JsonProperty("geonameid")
-	private Long geonameid;
+    @JsonProperty("geonameid")
+    private Long geonameid;
 
 }

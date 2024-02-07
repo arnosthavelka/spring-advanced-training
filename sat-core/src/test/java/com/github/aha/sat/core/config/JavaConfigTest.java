@@ -27,23 +27,23 @@ class JavaConfigTest {
     private User userArny;
 
     @Test
-	void testHello() {
-		assertThat(helloBean).isEqualTo("Hello all!");
+    void testHello() {
+        assertThat(helloBean).isEqualTo("Hello all!");
     }
 
     @Test
-	void testHi() {
-		assertThat(hiBean).isEqualTo("Hi all!");
+    void testHi() {
+        assertThat(hiBean).isEqualTo("Hi all!");
     }
 
     @Test
-	void testRandom() {
-		assertThat(randomBean).isNotEmpty();
+    void testRandom() {
+        assertThat(randomBean).isNotEmpty();
     }
 
     @Test
-	void testUserInstance() {
-		assertThat(userArny.getName()).isEqualTo("Arny");
+    void testUserInstance() {
+        assertThat(userArny.getName()).isEqualTo("Arny");
     }
 
 }

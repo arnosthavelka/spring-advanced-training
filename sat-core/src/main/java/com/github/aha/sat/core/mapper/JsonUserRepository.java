@@ -12,34 +12,34 @@ import org.springframework.stereotype.Service;
 @Service
 public class JsonUserRepository implements UserRepository {
 
-	private static final Logger LOGGER = LoggerFactory.getLogger(JsonUserRepository.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(JsonUserRepository.class);
 
-	@Autowired
-	private List<UserDTO> users;
+    @Autowired
+    private List<UserDTO> users;
 
-	@Override
-	public List<UserDTO> fetchAllUsers() {
-		LOGGER.info("Fetching all users");
-		return users;
-	}
+    @Override
+    public List<UserDTO> fetchAllUsers() {
+        LOGGER.info("Fetching all users");
+        return users;
+    }
 
-	@Override
-	public UserDTO firstUser() {
-		LOGGER.info("fetching firstUser");
+    @Override
+    public UserDTO firstUser() {
+        LOGGER.info("fetching firstUser");
 
-		return users.get(0);
-	}
+        return users.get(0);
+    }
 
-	@Override
-	public UserDTO userByFirstNameAndLastName(String firstName, String lastName) {
-		LOGGER.info("fetching user by firstname and lastname");
+    @Override
+    public UserDTO userByFirstNameAndLastName(String firstName, String lastName) {
+        LOGGER.info("fetching user by firstname and lastname");
 
-		Optional<UserDTO> user = users.stream()
-				.filter(p -> p.getLastName().equals(lastName))
-				.filter(p -> p.getFirstName().equals(firstName))
-				.findFirst();
+        Optional<UserDTO> user = users.stream()
+            .filter(p -> p.getLastName().equals(lastName))
+            .filter(p -> p.getFirstName().equals(firstName))
+            .findFirst();
 
-		return user.orElse(null);
-	}
+        return user.orElse(null);
+    }
 
 }

@@ -14,9 +14,9 @@ class JdbcTests {
     JdbcTemplate jdbcTemplate;
 
     @Test
-	void testCount() {
+    void testCount() {
         Integer count = jdbcTemplate.queryForObject("select count(*) from CATCIS", Integer.class);
-		assertThat(count).isEqualTo(7);
+        assertThat(count).isEqualTo(7);
     }
 
 }

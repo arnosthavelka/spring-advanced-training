@@ -7,9 +7,9 @@ import org.springframework.stereotype.Component;
 @Primary
 public class Tea implements HotBeverage {
 
-	@Override
-	public String getName() {
-		return "Tea";
-	}
+    @Override
+    public String getName() {
+        return "Tea";
+    }
 
 }

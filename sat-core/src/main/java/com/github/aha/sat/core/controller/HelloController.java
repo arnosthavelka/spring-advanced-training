@@ -10,21 +10,21 @@ import org.springframework.web.bind.annotation.PathVariable;
 @Controller
 public class HelloController {
 
-	@GetMapping(value = "hello/{name}")
-	public String sayHello(@PathVariable String name, Model model) {
+    @GetMapping(value = "hello/{name}")
+    public String sayHello(@PathVariable String name, Model model) {
 
-		if (StringUtils.hasText(name) && !"unknown".equals(name)) {
-			model.addAttribute("name", name);
-			return "hello";
-		}
+        if (StringUtils.hasText(name) && !"unknown".equals(name)) {
+            model.addAttribute("name", name);
+            return "hello";
+        }
 
-		throw new IllegalArgumentException("Name not found");
-	}
+        throw new IllegalArgumentException("Name not found");
+    }
 
-	@ExceptionHandler(IllegalArgumentException.class)
-	public String handleNotFoundException() {
-		// do some handling logic
-		return "hello";
-	}
+    @ExceptionHandler(IllegalArgumentException.class)
+    public String handleNotFoundException() {
+        // do some handling logic
+        return "hello";
+    }
 
 }

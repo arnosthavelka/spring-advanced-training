@@ -17,26 +17,24 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 @ControllerAdvice
 public class CityExceptionHandler extends ResponseEntityExceptionHandler {
 
-	@Override
-	protected ResponseEntity<Object> handleMethodArgumentNotValid(
-			MethodArgumentNotValidException exception, HttpHeaders headers, HttpStatusCode status, WebRequest request) {
-		return buildResponse(BAD_REQUEST, exception);
-	}
+    @Override
+    protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException exception,
+            HttpHeaders headers, HttpStatusCode status, WebRequest request) {
+        return buildResponse(BAD_REQUEST, exception);
+    }
 
-	@ExceptionHandler({ CityNotFoundException.class })
-	public final ResponseEntity<Object> handleNotFoundException(Exception exception) {
-		return buildResponse(NOT_FOUND, exception);
-	}
+    @ExceptionHandler({ CityNotFoundException.class })
+    public final ResponseEntity<Object> handleNotFoundException(Exception exception) {
+        return buildResponse(NOT_FOUND, exception);
+    }
 
-	@ExceptionHandler({ CityValidationException.class })
-	public final ResponseEntity<Object> handleValidationException(Exception exception) {
-		return buildResponse(NOT_ACCEPTABLE, exception);
-	}
+    @ExceptionHandler({ CityValidationException.class })
+    public final ResponseEntity<Object> handleValidationException(Exception exception) {
+        return buildResponse(NOT_ACCEPTABLE, exception);
+    }
 
-	private ResponseEntity<Object> buildResponse(HttpStatus status, Exception exception) {
-		return ResponseEntity
-				.status(status)
-				.body(exception.getMessage());
-	}
+    private ResponseEntity<Object> buildResponse(HttpStatus status, Exception exception) {
+        return ResponseEntity.status(status).body(exception.getMessage());
+    }
 
 }

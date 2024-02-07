@@ -12,15 +12,15 @@ import com.github.aha.sat.elk.city.CityRepository;
 @SpringBootTest
 class ElasticsearchClientConfigTest {
 
-	@MockBean
-	CityRepository cityRepository;
+    @MockBean
+    CityRepository cityRepository;
 
-	@Autowired
-	ElasticsearchClientConfig elasticsearchClientConfig;
+    @Autowired
+    ElasticsearchClientConfig elasticsearchClientConfig;
 
-	@Test
-	void clientConfiguration() {
-		assertThat(elasticsearchClientConfig.connectionUrl).contains("oxygen-arnost");
-	}
+    @Test
+    void clientConfiguration() {
+        assertThat(elasticsearchClientConfig.connectionUrl).contains("oxygen-arnost");
+    }
 
 }

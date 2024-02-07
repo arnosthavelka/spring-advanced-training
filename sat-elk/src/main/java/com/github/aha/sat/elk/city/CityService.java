@@ -33,89 +33,87 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class CityService {
 
-	private static final int BULK_SIZE = 500;
+    private static final int BULK_SIZE = 500;
 
-	@NonNull
-	final CityRepository repository;
+    @NonNull
+    final CityRepository repository;
 
-	@NonNull
-	final ElasticsearchOperations esTemplate;
+    @NonNull
+    final ElasticsearchOperations esTemplate;
 
-	final CsvMapper csvMapper = new CsvMapper();
+    final CsvMapper csvMapper = new CsvMapper();
 
-	final CsvSchema schema = csvMapper
-			.typedSchemaFor(City.class)
-			.withHeader()
-			.withColumnReordering(true);
+    final CsvSchema schema = csvMapper.typedSchemaFor(City.class).withHeader().withColumnReordering(true);
 
-	public void uploadFile(String csvFileName) {
-		log.info("loading file {} ...", csvFileName);
-		List<City> csvData = parseFile(csvFileName);
-		log.info("{} entries loaded from CSV file", csvData.size());
-		storeData(csvData);
-		log.info("data loading finish");
-	}
+    public void uploadFile(String csvFileName) {
+        log.info("loading file {} ...", csvFileName);
+        List<City> csvData = parseFile(csvFileName);
+        log.info("{} entries loaded from CSV file", csvData.size());
+        storeData(csvData);
+        log.info("data loading finish");
+    }
 
-	@SuppressWarnings("javasecurity:S2083")
-	List<City> parseFile(String csvFileName) {
-		try {
-			var csvFile = Path.of(csvFileName);
-			return csvMapper
-					.disable(FAIL_ON_MISSING_HEADER_COLUMNS)
-					.readerFor(City.class)
-					.with(schema)
-					.<City>readValues(csvFile.toFile())
-					.readAll();
-		} catch (IOException e) {
-			throw new ElkException(e);
-		}
-	}
+    @SuppressWarnings("javasecurity:S2083")
+    List<City> parseFile(String csvFileName) {
+        try {
+            var csvFile = Path.of(csvFileName);
+            return csvMapper.disable(FAIL_ON_MISSING_HEADER_COLUMNS)
+                .readerFor(City.class)
+                .with(schema)
+                .<City>readValues(csvFile.toFile())
+                .readAll();
+        }
+        catch (IOException e) {
+            throw new ElkException(e);
+        }
+    }
 
-	private void storeData(List<City> cities) {
-		final var counter = new AtomicInteger();
+    private void storeData(List<City> cities) {
+        final var counter = new AtomicInteger();
 
-		final Collection<List<City>> chunks = cities.stream()
-				.collect(Collectors.groupingBy(it -> counter.getAndIncrement() / BULK_SIZE))
-				.values();
-		counter.set(0);
-		chunks.forEach(ch -> {
-			repository.saveAll(ch);
-			log.info("bulk of cities stored [{}/{}] ...", counter.getAndIncrement(), chunks.size());
-		});
-	}
+        final Collection<List<City>> chunks = cities.stream()
+            .collect(Collectors.groupingBy(it -> counter.getAndIncrement() / BULK_SIZE))
+            .values();
+        counter.set(0);
+        chunks.forEach(ch -> {
+            repository.saveAll(ch);
+            log.info("bulk of cities stored [{}/{}] ...", counter.getAndIncrement(), chunks.size());
+        });
+    }
 
-	public City findById(String cityId) {
-		return repository.findById(cityId).orElseThrow(() -> new ElkException("City with ID=" + cityId + " was not found!"));
-	}
+    public City findById(String cityId) {
+        return repository.findById(cityId)
+            .orElseThrow(() -> new ElkException("City with ID=" + cityId + " was not found!"));
+    }
 
-	public Page<City> searchByCountry(String country, Pageable pageable) {
-		return repository.findByCountry(country, pageable);
-	}
+    public Page<City> searchByCountry(String country, Pageable pageable) {
+        return repository.findByCountry(country, pageable);
+    }
 
-	@SuppressWarnings("unchecked")
-	public Page<City> search(String name, String country, String subcountry, Pageable pageable) {
-		return (Page<City>) unwrapSearchHits(searchPageFor(searchHits(name, country, subcountry, pageable), pageable));
-	}
+    @SuppressWarnings("unchecked")
+    public Page<City> search(String name, String country, String subcountry, Pageable pageable) {
+        return (Page<City>) unwrapSearchHits(searchPageFor(searchHits(name, country, subcountry, pageable), pageable));
+    }
 
-	SearchHits<City> searchHits(String name, String country, String subcountry, Pageable pageable) {
-		CriteriaQuery query = buildSearchQuery(name, country, subcountry);
-		query.setPageable(pageable);
+    SearchHits<City> searchHits(String name, String country, String subcountry, Pageable pageable) {
+        CriteriaQuery query = buildSearchQuery(name, country, subcountry);
+        query.setPageable(pageable);
 
-		return esTemplate.search(query, City.class);
-	}
+        return esTemplate.search(query, City.class);
+    }
 
-	private CriteriaQuery buildSearchQuery(String name, String country, String subcountry) {
-		var criteria = new Criteria();
-		if (nonNull(name)) {
-			criteria.and(new Criteria("name").contains(name));
-		}
-		if (nonNull(country)) {
-			criteria.and(new Criteria("country").expression(country));
-		}
-		if (nonNull(subcountry)) {
-			criteria.and(new Criteria("subcountry").is(subcountry));
-		}
-		return new CriteriaQuery(criteria);
-	}
+    private CriteriaQuery buildSearchQuery(String name, String country, String subcountry) {
+        var criteria = new Criteria();
+        if (nonNull(name)) {
+            criteria.and(new Criteria("name").contains(name));
+        }
+        if (nonNull(country)) {
+            criteria.and(new Criteria("country").expression(country));
+        }
+        if (nonNull(subcountry)) {
+            criteria.and(new Criteria("subcountry").is(subcountry));
+        }
+        return new CriteriaQuery(criteria);
+    }
 
 }

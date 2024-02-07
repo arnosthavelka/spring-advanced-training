@@ -33,15 +33,15 @@ public class Country implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
-	@GeneratedValue(strategy = IDENTITY)
+    @GeneratedValue(strategy = IDENTITY)
     private Long id;
 
     @Column(nullable = false)
     private String name;
 
-	@OneToMany(mappedBy = "country", cascade = { PERSIST, MERGE })
-	@JsonBackReference // https://stackoverflow.com/questions/43587133/jackson-serialize-circular-references-stack-overflow-error
-	@ToString.Exclude
-	private List<City> cities;
+    @OneToMany(mappedBy = "country", cascade = { PERSIST, MERGE })
+    @JsonBackReference // https://stackoverflow.com/questions/43587133/jackson-serialize-circular-references-stack-overflow-error
+    @ToString.Exclude
+    private List<City> cities;
 
 }

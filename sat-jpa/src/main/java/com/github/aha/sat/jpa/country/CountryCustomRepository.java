@@ -12,12 +12,12 @@ import lombok.NonNull;
 
 public interface CountryCustomRepository {
 
-	Page<Country> findAllCountriesHavingCity(@NonNull String cityName, @NonNull String cityState, Pageable pageable);
+    Page<Country> findAllCountriesHavingCity(@NonNull String cityName, @NonNull String cityState, Pageable pageable);
 
-	List<CityProjection> searchByCountry(@NonNull String countryName);
+    List<CityProjection> searchByCountry(@NonNull String countryName);
 
-	List<Tuple> countCitiesInCountriesContaining(@NonNull String countryName);
+    List<Tuple> countCitiesInCountriesContaining(@NonNull String countryName);
 
-	long countBy(String cityName, String cityState, String countryName);
+    long countBy(String cityName, String cityState, String countryName);
 
 }

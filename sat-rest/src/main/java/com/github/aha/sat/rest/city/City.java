@@ -23,15 +23,15 @@ import lombok.NoArgsConstructor;
 @EqualsAndHashCode
 public class City implements Serializable {
 
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
-	@Id
+    @Id
     @GeneratedValue
-	@JsonView(Basic.class)
+    @JsonView(Basic.class)
     private Long id;
 
     @Column(nullable = false)
-	@JsonView(Basic.class)
+    @JsonView(Basic.class)
     private String name;
 
     @Column(nullable = true)

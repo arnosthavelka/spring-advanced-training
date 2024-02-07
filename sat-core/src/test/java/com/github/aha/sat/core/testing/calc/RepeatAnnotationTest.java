@@ -20,7 +20,7 @@ class RepeatAnnotationTest {
 
     @Test
     @Repeat(10)
-	void testRepeatAnnotation() {
+    void testRepeatAnnotation() {
         int a = random.nextInt(10);
         int b = random.nextInt(10);
         int result = calc.add(a, b);

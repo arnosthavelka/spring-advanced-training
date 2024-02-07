@@ -13,37 +13,31 @@ import com.github.aha.sat.core.wiring.trait.Alcoholic;
 
 @SpringBootTest(classes = WiringConfig.class)
 class BeverageMapWiringTest {
-	
-	@Autowired
-	private Map<String, Beverage> beverages;
 
-	@Autowired
-	private Map<String, ? extends AbstractCarbonatedBeverage> carbonatedBeverages;
+    @Autowired
+    private Map<String, Beverage> beverages;
 
-	@Autowired
-	@Alcoholic
-	private Map<String, Beverage> alcoholicBeverages;
+    @Autowired
+    private Map<String, ? extends AbstractCarbonatedBeverage> carbonatedBeverages;
 
-	@Test
-	void shouldWireAllBeverages() {
-		assertThat(beverages)
-				.hasSize(6)
-				.containsKeys("beer", "cola", "soda", "coffee", "tea", "iceTea");
-	}
+    @Autowired
+    @Alcoholic
+    private Map<String, Beverage> alcoholicBeverages;
 
-	@Test
-	void shouldWireCarbonatedBeverages() {
-		assertThat(carbonatedBeverages)
-				.hasSize(3)
-				.containsKeys("beer", "cola", "soda");
-	}
+    @Test
+    void shouldWireAllBeverages() {
+        assertThat(beverages).hasSize(6).containsKeys("beer", "cola", "soda", "coffee", "tea", "iceTea");
+    }
 
-	@Test
-	void shouldWireAlcoholicBeverages() {
-		assertThat(alcoholicBeverages)
-				.hasSize(1)
-				.containsKey("beer");
-		assertThat(alcoholicBeverages.get("beer").getName()).contains("Beer");
-	}
+    @Test
+    void shouldWireCarbonatedBeverages() {
+        assertThat(carbonatedBeverages).hasSize(3).containsKeys("beer", "cola", "soda");
+    }
+
+    @Test
+    void shouldWireAlcoholicBeverages() {
+        assertThat(alcoholicBeverages).hasSize(1).containsKey("beer");
+        assertThat(alcoholicBeverages.get("beer").getName()).contains("Beer");
+    }
 
 }

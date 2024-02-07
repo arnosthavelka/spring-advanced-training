@@ -20,47 +20,42 @@ import com.github.aha.sat.rest.city.CityRepository;
 @Transactional(readOnly = true)
 class CityRepositoryTests {
 
-	@Autowired
-	protected CityRepository cityRepository;
+    @Autowired
+    protected CityRepository cityRepository;
 
     @Test
-	void testCount() {
+    void testCount() {
         long count = cityRepository.count();
         assertThat(count, equalTo(6L));
     }
 
     @Test
-	void testCityById() {
+    void testCityById() {
         City city = cityRepository.getReferenceById(102L);
 
-		assertAll(
-				() -> assertThat(city.getName(), equalTo("Barcelona")),
-				() -> assertThat(city.getCountry(), equalTo("Spain")),
-				() -> assertThat(city.getState(), equalTo("Catalunya")));
+        assertAll(() -> assertThat(city.getName(), equalTo("Barcelona")),
+                () -> assertThat(city.getCountry(), equalTo("Spain")),
+                () -> assertThat(city.getState(), equalTo("Catalunya")));
     }
 
     @Test
-	void testCityByName() {
+    void testCityByName() {
         City city = cityRepository.findByName("Bern");
 
-		assertAll(
-				() -> assertThat(city.getId(), equalTo(103L)),
-				() -> assertThat(city.getName(), equalTo("Bern")),
-				() -> assertThat(city.getCountry(), equalTo("Switzerland")),
-				() -> assertThat(city.getState(), equalTo("")));
+        assertAll(() -> assertThat(city.getId(), equalTo(103L)), () -> assertThat(city.getName(), equalTo("Bern")),
+                () -> assertThat(city.getCountry(), equalTo("Switzerland")),
+                () -> assertThat(city.getState(), equalTo("")));
     }
 
     @Test
-	void testCitiesByCountry() {
-		List<City> data = cityRepository.findByCountry("Czech Republic", Sort.by(Sort.Direction.ASC, "name"));
+    void testCitiesByCountry() {
+        List<City> data = cityRepository.findByCountry("Czech Republic", Sort.by(Sort.Direction.ASC, "name"));
 
-		assertThat(data.size(), equalTo(1));
+        assertThat(data.size(), equalTo(1));
         City city = data.get(0);
-		assertAll(
-				() -> assertThat(city.getId(), equalTo(100L)),
-				() -> assertThat(city.getName(), equalTo("Prague")),
-				() -> assertThat(city.getCountry(), equalTo("Czech Republic")),
-				() -> assertThat(city.getState(), equalTo("")));
+        assertAll(() -> assertThat(city.getId(), equalTo(100L)), () -> assertThat(city.getName(), equalTo("Prague")),
+                () -> assertThat(city.getCountry(), equalTo("Czech Republic")),
+                () -> assertThat(city.getState(), equalTo("")));
     }
 
 }
