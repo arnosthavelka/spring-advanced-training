@@ -48,20 +48,19 @@ class CountryDzoneTests {
 
 	@Test
 	void paginateCitiesInCountry() {
-		var countryNamePart = "a";
 		var pageable = PageRequest.of(0, 3, Sort.by(ASC, country.id.getMetadata().getName()));
 
-		var pagedResult = findCountries(countryNamePart, pageable);
+		var pagedResult = findCountriesBy("a", pageable);
 
 		assertThat(pagedResult.getTotalElements()).isEqualTo(7);
 		assertThat(pagedResult.getTotalPages()).isEqualTo(3);
         assertThat( pagedResult.getContent() )
 				.hasSize(3)
-				.map(Country::getName)
+				.extracting(Country::getName)
 				.containsExactly("Australia", "Canada", "USA");
 	}
 
-	private Page<Country> findCountries(String countryName, Pageable pageable) {
+	private Page<Country> findCountriesBy(String countryName, Pageable pageable) {
 		var query = findCountriesQuery(country, countryName);
 		applyPagination(pageable, query);
 		return PageableExecutionUtils.getPage(query.fetch(), pageable,
