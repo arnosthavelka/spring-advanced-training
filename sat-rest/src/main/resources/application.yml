@@ -19,8 +19,7 @@ spring:
     open-in-view: false
     properties:
       hibernate:
-      generate_statistics: true
-
+      "[generate_statistics]": true
 
 springdoc:
   api-docs:
