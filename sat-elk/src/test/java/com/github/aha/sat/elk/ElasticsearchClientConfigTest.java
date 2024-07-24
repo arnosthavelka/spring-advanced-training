@@ -20,7 +20,7 @@ class ElasticsearchClientConfigTest {
 
 	@Test
 	void clientConfiguration() {
-		assertThat(elasticsearchClientConfig.connectionUrl).contains("oxygen-arnost");
+		assertThat(elasticsearchClientConfig.connectionUrl).contains("oxygen-hh310");
 	}
 
 }

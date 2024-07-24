@@ -3,4 +3,4 @@ spring:
     name: @pom.artifactId@
   elasticsearch:
     rest:
-      uris: oxygen-arnost.ifs.dev.fra.aws.dbgcloud.io:9200
+      uris: oxygen-hh310.cfs.dev.gcp.dbgcloud.io
