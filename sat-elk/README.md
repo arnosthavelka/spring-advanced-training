@@ -154,16 +154,19 @@ The availability can be checked from PowerShell console as:_
 
 `Test-NetConnection -ComputerName <ELK_HOST> -Port 9200`
 
-_The used ports can be listed in AWS by:_
+_The used ports can be checked by:_
 
 `netstat -tulpn`
 
 #### Modify Elasticsearch settings
+We can modify ELK properties with this command:
 ```
 docker exec -it <container_id> bash
 cd /usr/share/elasticsearch/config
 echo "xpack.security.enabled: false" >> elasticsearch.yml
 ```
+
+_Note: this was needed in the previous version, but it's not needed any more (with the latest Elasticsearch 8.13.4)_
 
 #### Add ElasticHQ GUI
 `docker run -d --name sat-elastichq --net sat-elk-net -p 5000:5000 elastichq/elasticsearch-hq`
