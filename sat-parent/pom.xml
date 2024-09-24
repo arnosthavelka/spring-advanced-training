@@ -3,7 +3,7 @@
 
 	<groupId>com.github.aha.sat</groupId>
 	<artifactId>sat-parent</artifactId>
-	<version>0.6.3-SNAPSHOT</version>
+	<version>0.6.4-SNAPSHOT</version>
 	<packaging>pom</packaging>
 
 	<description>Parent POM for SAT projects</description>
@@ -11,13 +11,14 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>3.3.3</version>
+		<version>3.3.4</version>
 		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<java.version>22</java.version>
+		<java.version>23</java.version>
+		<maven.compiler.proc>full</maven.compiler.proc>
 		<jacoco.version>0.8.12</jacoco.version>
 		<spring-boot-admin.version>3.3.3</spring-boot-admin.version>
 		<springdoc-openapi.version>2.6.0</springdoc-openapi.version>
