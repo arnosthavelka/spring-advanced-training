@@ -4,6 +4,7 @@ import static com.github.aha.sat.elk.city.City.INDEX;
 import static java.lang.Float.NaN;
 import static java.nio.file.Files.createTempFile;
 import static java.nio.file.Files.writeString;
+import static java.time.Duration.ofSeconds;
 import static java.util.Optional.of;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -134,7 +135,7 @@ class CityServiceTest {
 		List<? extends SearchHit<City>> cities = List.of(cityHit);
 
 		given(esTemplate.search(any(Query.class), eq(City.class)))
-				.willReturn(new SearchHitsImpl<City>(1, EQUAL_TO, NaN, "scrollId", "pointInTimeId", cities, null, null, null));
+				.willReturn(new SearchHitsImpl<City>(1, EQUAL_TO, NaN, ofSeconds(5L), "scrollId", "pointInTimeId", cities, null, null, null));
 
 		var result = service.search(name, country, subcountry, pageable);
 
