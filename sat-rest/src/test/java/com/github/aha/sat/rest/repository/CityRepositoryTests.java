@@ -26,6 +26,7 @@ class CityRepositoryTests {
     @Test
 	void testCount() {
         long count = cityRepository.count();
+        
         assertThat(count, equalTo(6L));
     }
 

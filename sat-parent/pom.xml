@@ -11,7 +11,7 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>3.4.0</version>
+		<version>3.4.1</version>
 		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
 
@@ -20,7 +20,7 @@
 		<java.version>23</java.version>
 		<maven.compiler.proc>full</maven.compiler.proc>
 		<jacoco.version>0.8.12</jacoco.version>
-		<spring-boot-admin.version>3.4.0</spring-boot-admin.version>
+		<spring-boot-admin.version>3.4.1</spring-boot-admin.version>
 		<springdoc-openapi.version>2.7.0</springdoc-openapi.version>
 	</properties>
 	
