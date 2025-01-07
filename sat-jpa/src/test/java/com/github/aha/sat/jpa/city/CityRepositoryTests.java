@@ -1,6 +1,8 @@
 package com.github.aha.sat.jpa.city;
 
+import static java.util.Comparator.reverseOrder;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.springframework.data.domain.Sort.Direction.ASC;
 import static org.springframework.data.domain.Sort.Direction.DESC;
 
 import java.util.List;
@@ -39,7 +41,7 @@ class CityRepositoryTests extends AbstractCityVerificationTest {
 	
     @Test
 	void countCities() {
-		assertThat(totalCount).isEqualTo(TOTAL_SIZE);
+    	assertThat(totalCount).isEqualTo(TOTAL_SIZE);
     }
 
 	@Nested
@@ -48,8 +50,9 @@ class CityRepositoryTests extends AbstractCityVerificationTest {
 		@Test
 		void pagination() {
 			var pageSize = 5;
+			var pageable = PageRequest.of(0, pageSize);
 
-			Page<City> page = cityRepository.findAll(PageRequest.of(0, pageSize));
+			Page<City> page = cityRepository.findAll(pageable);
 
 			assertThat(page).hasSize(pageSize);
 			assertThat(page.getTotalElements()).isEqualTo(TOTAL_SIZE);
@@ -61,14 +64,27 @@ class CityRepositoryTests extends AbstractCityVerificationTest {
 		}
 
 		@Test
-		void sorting() {
-			Page<City> page = cityRepository.findAll(PageRequest.of(0, 5, DESC, City_.COUNTRY, City_.NAME));
+		void sortingByNameAscending() {
+			var pageable = PageRequest.of(0, 5, ASC, City_.NAME);
+			
+			Page<City> page = cityRepository.findAll(pageable);
 
-			assertThat(page).hasSize(5);
-			log.debug("\n### testSorting output");
-			for (City city : page.getContent()) {
-				log.debug(city.toString());
-			}
+			assertThat(page.getContent())
+				.hasSize(5)
+				.map(City::getName)
+				.isSorted();
+		}
+		
+		@Test
+		void sortingByNameDescending() {
+			var pageable = PageRequest.of(0, 5, DESC, City_.NAME);
+			
+			Page<City> page = cityRepository.findAll(pageable);
+
+			assertThat(page.getContent())
+				.hasSize(5)
+				.map(City::getName)
+				.isSortedAccordingTo( reverseOrder() );
 		}
 
 	}
@@ -115,8 +131,9 @@ class CityRepositoryTests extends AbstractCityVerificationTest {
 	@Test
 	void findByNameContainingAndCountryNameContainingAllIgnoringCase() {
 		var pageSize = 2;
+		var pageable = PageRequest.of(0, pageSize);
 
-		Page<City> page = cityRepository.findByNameContainingAndCountryNameContainingAllIgnoringCase("an", "usa", PageRequest.of(0, pageSize));
+		Page<City> page = cityRepository.findByNameContainingAndCountryNameContainingAllIgnoringCase("an", "usa", pageable);
 
 		assertThat(page).hasSize(pageSize);
 		assertThat(page.getTotalElements()).isEqualTo(2);

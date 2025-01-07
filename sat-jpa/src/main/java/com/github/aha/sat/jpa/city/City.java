@@ -16,7 +16,6 @@ import jakarta.persistence.NamedQuery;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
 
@@ -27,7 +26,6 @@ import lombok.NonNull;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@EqualsAndHashCode
 public class City implements Serializable {
 
     private static final long serialVersionUID = 1L;
