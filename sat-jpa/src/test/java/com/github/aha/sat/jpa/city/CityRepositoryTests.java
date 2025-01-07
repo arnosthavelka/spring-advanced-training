@@ -1,6 +1,7 @@
 package com.github.aha.sat.jpa.city;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.springframework.data.domain.Sort.Direction.DESC;
 
 import java.util.List;
 
@@ -10,7 +11,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Sort;
 
 import com.github.aha.sat.jpa.country.CountryRepository;
 
@@ -51,7 +51,7 @@ class CityRepositoryTests extends AbstractCityVerificationTest {
 
 			Page<City> page = cityRepository.findAll(PageRequest.of(0, pageSize));
 
-			assertThat(page.getSize()).isEqualTo(pageSize);
+			assertThat(page).hasSize(pageSize);
 			assertThat(page.getTotalElements()).isEqualTo(TOTAL_SIZE);
 			assertThat(page.getTotalPages()).isEqualTo(3);
 			log.debug("\n### testPaging output");
@@ -62,9 +62,9 @@ class CityRepositoryTests extends AbstractCityVerificationTest {
 
 		@Test
 		void sorting() {
-			Page<City> page = cityRepository.findAll(PageRequest.of(0, 5, Sort.Direction.DESC, City_.COUNTRY, City_.NAME));
+			Page<City> page = cityRepository.findAll(PageRequest.of(0, 5, DESC, City_.COUNTRY, City_.NAME));
 
-			assertThat(page.getSize()).isEqualTo(5);
+			assertThat(page).hasSize(5);
 			log.debug("\n### testSorting output");
 			for (City city : page.getContent()) {
 				log.debug(city.toString());
@@ -118,7 +118,7 @@ class CityRepositoryTests extends AbstractCityVerificationTest {
 
 		Page<City> page = cityRepository.findByNameContainingAndCountryNameContainingAllIgnoringCase("an", "usa", PageRequest.of(0, pageSize));
 
-		assertThat(page.getSize()).isEqualTo(pageSize);
+		assertThat(page).hasSize(pageSize);
 		assertThat(page.getTotalElements()).isEqualTo(2);
 		assertThat(page.getTotalPages()).isEqualTo(1);
 		assertThat(page.getContent())
