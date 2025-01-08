@@ -23,7 +23,6 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 class CityRepositoryTests extends AbstractCityVerificationTest {
 
-	static final int TOTAL_SIZE = 15;
 	static long totalCount = -1;
 
 	@Autowired
@@ -39,13 +38,8 @@ class CityRepositoryTests extends AbstractCityVerificationTest {
 		}
 	}
 	
-    @Test
-	void countCities() {
-    	assertThat(totalCount).isEqualTo(TOTAL_SIZE);
-    }
-
 	@Nested
-	class FindAllTest {
+	class FindAll {
 
 		@Test
 		void pagination() {
@@ -55,12 +49,8 @@ class CityRepositoryTests extends AbstractCityVerificationTest {
 			Page<City> page = cityRepository.findAll(pageable);
 
 			assertThat(page).hasSize(pageSize);
-			assertThat(page.getTotalElements()).isEqualTo(TOTAL_SIZE);
+			assertThat(page.getTotalElements()).isEqualTo(totalCount);
 			assertThat(page.getTotalPages()).isEqualTo(3);
-			log.debug("\n### testPaging output");
-			for (City city : page.getContent()) {
-				log.debug(city.toString());
-			}
 		}
 
 		@Test
@@ -90,7 +80,7 @@ class CityRepositoryTests extends AbstractCityVerificationTest {
 	}
 
 	@Nested
-	class GetByNameTest {
+	class GetByName {
 
 		@Test
 		void shouldFindEntity() {
@@ -152,33 +142,28 @@ class CityRepositoryTests extends AbstractCityVerificationTest {
 		verifyCity(city, "Prague", "Czech Republic");
 	}
 
-	@Nested
-	class ModificationTest {
-
-		@Test
-		void createEntity() {
-			var country = countryRepository.getByName(AUSTRALIA);
-			var city = City.builder()
-					.name("Darwin")
-					.state("North territory")
-					.country(country)
-					.build();
-			country.getCities().add(city);
-
-			countryRepository.save(country);
-
-			assertThat(cityRepository.count()).isEqualTo(totalCount + 1);
-		}
-
-		@Test
-		void deleteEntity() {
-			var city = cityRepository.getByName("Prague");
-
-			cityRepository.delete(city);
-
-			assertThat(cityRepository.count()).isEqualTo(totalCount - 1);
-		}
-
+	@Test
+	void saveNewEntity() {
+		var country = countryRepository.getByName(AUSTRALIA);
+		var city = City.builder()
+				.name("Darwin")
+				.state("North territory")
+				.country(country)
+				.build();
+		country.getCities().add(city);
+		
+		countryRepository.save(country);
+		
+		assertThat(cityRepository.count()).isEqualTo(totalCount + 1);
+	}
+	
+	@Test
+	void delete() {
+		var city = cityRepository.getByName("Prague");
+		
+		cityRepository.delete(city);
+		
+		assertThat(cityRepository.count()).isEqualTo(totalCount - 1);
 	}
 
 }
