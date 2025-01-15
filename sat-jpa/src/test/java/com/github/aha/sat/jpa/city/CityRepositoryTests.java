@@ -1,10 +1,10 @@
 package com.github.aha.sat.jpa.city;
 
 import static java.lang.String.CASE_INSENSITIVE_ORDER;
+import static java.util.Collections.reverseOrder;
 import static java.util.Comparator.naturalOrder;
 import static java.util.Comparator.nullsFirst;
 import static java.util.Comparator.nullsLast;
-import static java.util.Comparator.reverseOrder;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.springframework.data.domain.Sort.Direction.ASC;
 import static org.springframework.data.domain.Sort.Direction.DESC;
@@ -95,6 +95,7 @@ class CityRepositoryTests extends AbstractCityVerificationTest {
 		                .thenComparing( City::getName ));
 		}
 		
+		@Test
 		void sortingByStateAscending() {
 			var pageable = PageRequest.of(0, 15, ASC, City_.STATE);
 			
@@ -105,6 +106,7 @@ class CityRepositoryTests extends AbstractCityVerificationTest {
 				.isSortedAccordingTo(nullsFirst(naturalOrder()));
 		}
 		
+		@Test
 		void sortingByStateDescending() {
 			var pageable = PageRequest.of(0, 15, DESC, City_.STATE);
 			
@@ -112,7 +114,7 @@ class CityRepositoryTests extends AbstractCityVerificationTest {
 
 			assertThat(page.getContent())
 				.map(City::getState)
-				.isSortedAccordingTo(nullsLast(CASE_INSENSITIVE_ORDER));
+				.isSortedAccordingTo(nullsLast(reverseOrder(CASE_INSENSITIVE_ORDER)));
 		}
 		
 		private Comparator<City> getCountryNameComparator() {
