@@ -127,7 +127,7 @@ Simple feature to demonstrate CRUD operations with ElasticSearch. The root API c
 http://oxygen-arnost.ifs.dev.dbgcloud.io:9200/city/_mapping
 
 
-## Running Elasticsearch by Docker in Linux AWS
+## Running Elasticsearch in Docker
 See https://hub.docker.com/_/elasticsearch.
 
 #### Add docker network
@@ -142,7 +142,7 @@ _Note: the available networks can be listed by._
 #### Add Elasticsearch cluster
 Run Elasticsearch:
 
-`docker run -d --name sat-elasticsearch --net sat-elk-net -p 9200:9200 -p 9300:9300 -e "discovery.type=single-node" -e "xpack.security.enabled=false" elasticsearch:8.13.4` (as supported by Spring Data - docker has already newer version)
+`docker run -d --name sat-elasticsearch --net sat-elk-net -p 9200:9200 -p 9300:9300 -e "discovery.type=single-node" -e "xpack.security.enabled=false" elasticsearch:8.15.5` (as supported by Spring Data - docker has already newer version)
 
 _Note: see the compatibility matrix https://docs.spring.io/spring-data/elasticsearch/reference/elasticsearch/versions.html._
 
@@ -165,8 +165,6 @@ docker exec -it <container_id> bash
 cd /usr/share/elasticsearch/config
 echo "xpack.security.enabled: false" >> elasticsearch.yml
 ```
-
-_Note: this was needed in the previous version, but it's not needed any more (with the latest Elasticsearch 8.13.4)_
 
 #### Add ElasticHQ GUI
 `docker run -d --name sat-elastichq --net sat-elk-net -p 5000:5000 elastichq/elasticsearch-hq`
