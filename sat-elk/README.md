@@ -127,7 +127,7 @@ Simple feature to demonstrate CRUD operations with ElasticSearch. The root API c
 http://oxygen-arnost.ifs.dev.dbgcloud.io:9200/city/_mapping
 
 
-## Running Elasticsearch in Docker
+## Running Elasticsearch in Docker (Unsecured)
 See https://hub.docker.com/_/elasticsearch.
 
 #### Add docker network
@@ -159,7 +159,8 @@ _The used ports can be checked by:_
 `netstat -tulpn`
 
 #### Modify Elasticsearch settings
-We can modify ELK properties with this command:
+Disable X-Pack security by modifying ELK properties with this command:
+
 ```
 docker exec -it <container_id> bash
 cd /usr/share/elasticsearch/config
@@ -179,3 +180,23 @@ The GUI is accessed on http://<ELK_HOST>:5000 (we need to pass http://<ELK_HOST>
 
 #### List available images
 `docker image ls`
+
+## Running Elasticsearch in Docker (Secured)
+
+#### Create Elasticsearch cluster
+Run Elasticsearch:
+
+`docker run -d --name sat-elasticsearch --net sat-elk-net -p 9200:9200 -p 9300:9300 -e "discovery.type=single-node" elasticsearch:8.15.5`
+
+#### Change the default password
+Disable X-Pack security by modifying ELK properties with this command:
+
+```
+docker exec -it <container_id> bash
+elasticsearch-setup-passwords interactive
+```
+
+_Note: the default password is `changeme`._
+
+The Elasticsearch instance can be verified by REST call
+`curl -k -u elastic:<new_password> https://<ELK_HOST>:9200`

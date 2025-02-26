@@ -1,8 +1,8 @@
 package com.github.aha.sat.elk;
 
-import javax.net.ssl.HostnameVerifier;
 import javax.net.ssl.SSLContext;
 
+import org.apache.http.conn.ssl.NoopHostnameVerifier;
 import org.apache.http.conn.ssl.TrustAllStrategy;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
@@ -20,10 +20,9 @@ public class ElasticsearchClientConfig extends ElasticsearchConfiguration {
 
 	@Override
 	public ClientConfiguration clientConfiguration() {
-		HostnameVerifier verifier = (hostname, session) -> true;
 		return ClientConfiguration.builder()
 				.connectedTo(connectionUrl)
-				.usingSsl(createSSLContext(), verifier )
+				.usingSsl(createSSLContext(), new NoopHostnameVerifier() )
 				.withBasicAuth("elastic", "elastic")
 				.build();
 	}
