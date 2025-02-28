@@ -1,6 +1,9 @@
 spring:
   application:
     name: @pom.artifactId@
-  elasticsearch:
-    rest:
-      uris: oxygen-hh310.cfs.dev.gcp.dbgcloud.io
+
+elk:
+  security-enabled: true 
+  host: oxygen-hh310.cfs.dev.gcp.dbgcloud.io
+  username: elastic
+  password: elastic

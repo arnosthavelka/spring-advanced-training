@@ -63,7 +63,6 @@ class CityControllerTest {
 				new City(CITY_ID, CITY_NAME, CITY_COUNTRY, CITY_SUBCOUNTRY, CITY_GEONAMEID.longValue()),
 				new City(randomUUID().toString(), secondCity, CITY_COUNTRY, secondCity, 3117735L)
 				);
-		// FIXME new PageImpl<City>(cities) -> https://github.com/spring-projects/spring-data-commons/issues/2987#issuecomment-1827613130
 		given(service.searchByCountry(eq(CITY_COUNTRY), any())).willReturn(new PageImpl<City>(cities, ofSize(PAGE_SIZE), cities.size()));
 
 		mvc.perform(get(ROOT_PATH + "/country/" + CITY_COUNTRY))
@@ -72,9 +71,9 @@ class CityControllerTest {
 				.andExpect(jsonPath("$.content[0].id", is(CITY_ID)))
 				.andExpect(jsonPath("$.content[0].name", is(CITY_NAME)))
 				.andExpect(jsonPath("$.content[1].name", is(secondCity)))
-				.andExpect(jsonPath("$.totalElements", is(cities.size())))
-				.andExpect(jsonPath("$.totalPages", is(1)))
-				.andExpect(jsonPath("$.number", is(0)));
+				.andExpect(jsonPath("$.page.totalElements", is(cities.size())))
+				.andExpect(jsonPath("$.page.totalPages", is(1)))
+				.andExpect(jsonPath("$.page.number", is(0)));
 	}
 
 	@Test
@@ -87,9 +86,8 @@ class CityControllerTest {
 		mvc.perform(get(ROOT_PATH + "?name=" + cityNameParamValue + "&country=" + CITY_COUNTRY + "&size=" + PAGE_SIZE + "&sort=name"))
 				.andExpect(status().isOk())
 				.andExpect(content().contentTypeCompatibleWith(APPLICATION_JSON))
-				.andExpect(jsonPath("$.numberOfElements", is(1)))
-				.andExpect(jsonPath("$.pageable.pageSize", is(PAGE_SIZE)))
-				.andExpect(jsonPath("$.pageable.paged", is(true)))
+				.andExpect(jsonPath("$.page.totalElements", is(1)))
+				.andExpect(jsonPath("$.page.size", is(PAGE_SIZE)))
 				.andExpect(jsonPath("$.content[0].id", notNullValue()))
 				.andExpect(jsonPath("$.content[0].name", is(CITY_NAME)))
 				.andExpect(jsonPath("$.content[0].country", is(CITY_COUNTRY)))

@@ -8,6 +8,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 
 import com.github.aha.sat.elk.city.CityRepository;
+import com.github.aha.sat.elk.config.ElasticsearchSecuredConfig;
 
 @SpringBootTest
 class ElasticsearchClientConfigTest {
@@ -16,11 +17,11 @@ class ElasticsearchClientConfigTest {
 	CityRepository cityRepository;
 
 	@Autowired
-	ElasticsearchClientConfig elasticsearchClientConfig;
+	ElasticsearchSecuredConfig elasticsearchClientConfig;
 
 	@Test
 	void clientConfiguration() {
-		assertThat(elasticsearchClientConfig.connectionUrl).contains("oxygen-hh310");
+		assertThat(elasticsearchClientConfig.getElkProperties().getHost()).contains("oxygen-hh310");
 	}
 
 }

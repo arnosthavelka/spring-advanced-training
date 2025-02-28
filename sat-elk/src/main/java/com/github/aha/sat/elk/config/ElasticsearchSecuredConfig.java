@@ -1,29 +1,33 @@
-package com.github.aha.sat.elk;
+package com.github.aha.sat.elk.config;
 
 import javax.net.ssl.SSLContext;
 
 import org.apache.http.conn.ssl.NoopHostnameVerifier;
 import org.apache.http.conn.ssl.TrustAllStrategy;
-import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.elasticsearch.client.ClientConfiguration;
 import org.springframework.data.elasticsearch.client.elc.ElasticsearchConfiguration;
 
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 @Configuration
+@ConditionalOnProperty(name = "elk.security-enabled", havingValue = "true")
+@RequiredArgsConstructor
 @Slf4j
-public class ElasticsearchClientConfig extends ElasticsearchConfiguration {
+public class ElasticsearchSecuredConfig extends ElasticsearchConfiguration {
 
-	@Value("${spring.elasticsearch.rest.uris}")
-	String connectionUrl;
+	@Getter
+	private final ElasticsearchProperties elkProperties;
 
 	@Override
 	public ClientConfiguration clientConfiguration() {
 		return ClientConfiguration.builder()
-				.connectedTo(connectionUrl)
+				.connectedTo(elkProperties.getHost())
 				.usingSsl(createSSLContext(), new NoopHostnameVerifier() )
-				.withBasicAuth("elastic", "elastic")
+				.withBasicAuth(elkProperties.getUsername(), elkProperties.getPassword())
 				.build();
 	}
 	
