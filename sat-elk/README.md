@@ -183,12 +183,17 @@ The GUI is accessed on http://<ELK_HOST>:5000 (we need to pass http://<ELK_HOST>
 
 ## Running Elasticsearch in Docker (Secured)
 
-#### Create Elasticsearch cluster
+#### Create Elasticsearch cluster (with a defined password)
 Run Elasticsearch:
+
+`docker run -d --name sat-elasticsearch --net sat-elk-net -p 9200:9200 -p 9300:9300 -e "discovery.type=single-node" -e "ELASTIC_PASSWORD=elastic" elasticsearch:8.15.5`
+
+#### Create Elasticsearch cluster (with the default configuration)
+**Run Elasticsearch**
 
 `docker run -d --name sat-elasticsearch --net sat-elk-net -p 9200:9200 -p 9300:9300 -e "discovery.type=single-node" elasticsearch:8.15.5`
 
-#### Change the default password
+**Change the default password**
 Disable X-Pack security by modifying ELK properties with this command:
 
 ```

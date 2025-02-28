@@ -1,4 +1,4 @@
-package com.github.aha.sat.elk;
+package com.github.aha.sat.elk.config;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -8,20 +8,20 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.bean.override.mockito.MockitoBean;
 
 import com.github.aha.sat.elk.city.CityRepository;
-import com.github.aha.sat.elk.config.ElasticsearchSecuredConfig;
 
 @SpringBootTest
-class ElasticsearchClientConfigTest {
+class ElasticsearchSecuredConfigTest {
 
 	@MockitoBean
 	CityRepository cityRepository;
 
 	@Autowired
-	ElasticsearchSecuredConfig elasticsearchClientConfig;
+	ElasticsearchSecuredConfig config;
 
 	@Test
 	void clientConfiguration() {
-		assertThat(elasticsearchClientConfig.getElkProperties().getHost()).contains("oxygen-hh310");
+		assertThat(config.clientConfiguration().getSslContext()).isNotNull();
+		assertThat(config.getElkProperties().getHost()).contains("oxygen-hh310");
 	}
 
 }
