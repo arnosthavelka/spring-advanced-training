@@ -9,7 +9,7 @@ import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
 @Configuration
-@ConditionalOnProperty(name = "elk.security-enabled", havingValue = "false")
+@ConditionalOnProperty(name = "elk.security-enabled", havingValue = "false", matchIfMissing = true)
 @RequiredArgsConstructor
 public class ElasticsearchUnsecuredConfig extends ElasticsearchConfiguration {
 
@@ -18,9 +18,7 @@ public class ElasticsearchUnsecuredConfig extends ElasticsearchConfiguration {
 
 	@Override
 	public ClientConfiguration clientConfiguration() {
-		return ClientConfiguration.builder()
-				.connectedTo(elkProperties.getHost())
-				.build();
+		return ClientConfiguration.builder().connectedTo(elkProperties.getHost()).build();
 	}
-	
+
 }

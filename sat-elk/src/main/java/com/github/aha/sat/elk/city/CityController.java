@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 
 /**
@@ -30,7 +29,6 @@ public class CityController {
 
 	static final String ROOT_PATH = "/api/cities"; // NOSONAR
 
-	@NonNull
 	final CityService service;
 
 	@GetMapping("/{id}")

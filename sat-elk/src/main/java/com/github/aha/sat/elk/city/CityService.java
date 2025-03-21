@@ -24,7 +24,6 @@ import com.fasterxml.jackson.dataformat.csv.CsvMapper;
 import com.fasterxml.jackson.dataformat.csv.CsvSchema;
 import com.github.aha.sat.elk.ElkException;
 
-import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
@@ -35,12 +34,8 @@ public class CityService {
 
 	private static final int BULK_SIZE = 500;
 
-	@NonNull
 	final CityRepository repository;
-
-	@NonNull
 	final ElasticsearchOperations esTemplate;
-
 	final CsvMapper csvMapper = new CsvMapper();
 
 	final CsvSchema schema = csvMapper
@@ -56,7 +51,6 @@ public class CityService {
 		log.info("data loading finish");
 	}
 
-	@SuppressWarnings("javasecurity:S2083")
 	List<City> parseFile(String csvFileName) {
 		try {
 			var csvFile = Path.of(csvFileName);
