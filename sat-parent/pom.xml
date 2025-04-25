@@ -11,7 +11,7 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>3.4.4</version>
+		<version>3.4.5</version>
 		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
 
@@ -19,9 +19,9 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<java.version>23</java.version>
 		<maven.compiler.proc>full</maven.compiler.proc>
-		<jacoco.version>0.8.12</jacoco.version>
-		<spring-boot-admin.version>3.4.4</spring-boot-admin.version>
-		<springdoc-openapi.version>2.8.5</springdoc-openapi.version>
+		<jacoco.version>0.8.13</jacoco.version>
+		<spring-boot-admin.version>3.4.5</spring-boot-admin.version>
+		<springdoc-openapi.version>2.8.6</springdoc-openapi.version>
 	</properties>
 	
 	<dependencies>
