@@ -16,8 +16,7 @@
 		<module>sat-core</module>
 		<module>sat-jdbc</module>
 		<module>sat-jpa</module>
-<!--		Temporarily disable due to https://github.com/springdoc/springdoc-openapi/issues/3005-->
-<!--		<module>sat-rest</module>-->
+		<module>sat-rest</module>
 		<module>sat-elk</module>
 		<module>sat-spring-boot-admin</module>
 	</modules>
