@@ -1,7 +1,6 @@
 package com.github.aha.sat.elk.city;
 
 import static com.fasterxml.jackson.dataformat.csv.CsvParser.Feature.FAIL_ON_MISSING_HEADER_COLUMNS;
-import static java.util.Objects.nonNull;
 import static org.springframework.data.elasticsearch.core.SearchHitSupport.searchPageFor;
 import static org.springframework.data.elasticsearch.core.SearchHitSupport.unwrapSearchHits;
 
@@ -100,13 +99,13 @@ public class CityService {
 
 	private CriteriaQuery buildSearchQuery(String name, String country, String subcountry) {
 		var criteria = new Criteria();
-		if (nonNull(name)) {
+		if (name!=null) {
 			criteria.and(new Criteria("name").contains(name));
 		}
-		if (nonNull(country)) {
+		if (country!=null) {
 			criteria.and(new Criteria("country").expression(country));
 		}
-		if (nonNull(subcountry)) {
+		if (subcountry!=null) {
 			criteria.and(new Criteria("subcountry").is(subcountry));
 		}
 		return new CriteriaQuery(criteria);
