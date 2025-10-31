@@ -23,12 +23,9 @@ import java.util.UUID;
 
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.mockito.Spy;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
@@ -36,27 +33,27 @@ import org.springframework.data.elasticsearch.core.ElasticsearchOperations;
 import org.springframework.data.elasticsearch.core.SearchHit;
 import org.springframework.data.elasticsearch.core.SearchHitsImpl;
 import org.springframework.data.elasticsearch.core.query.Query;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
+import org.springframework.test.context.bean.override.mockito.MockitoBean;
+import org.springframework.test.context.bean.override.mockito.MockitoSpyBean;
 
 import com.github.aha.sat.elk.ElkException;
 
 import lombok.extern.slf4j.Slf4j;
 
-@ExtendWith(SpringExtension.class)
+@SpringBootTest
 @Slf4j
 class CityServiceTest {
 
 	private static final String CITY_ID = UUID.randomUUID().toString();
 	private static final String CITY_COUNTRY = "Colombia";
 
-	@Mock
+	@MockitoBean
 	CityRepository repository;
 
-	@Mock
+	@MockitoBean
 	ElasticsearchOperations esTemplate;
 
-	@InjectMocks
-	@Spy
+	@MockitoSpyBean
 	private CityService service;
 
 	@Test

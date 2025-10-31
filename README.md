@@ -3,7 +3,11 @@
 [![Java CI with Maven][github-image]][github-url-main] [![Sonar quality gate][sonar-quality-gate]][sonar-url] [![Sonar coverage][sonar-coverage]][sonar-url] [![Sonar bugs][sonar-bugs]][sonar-url] [![Sonar vulnerabilities][sonar-vulnerabilities]][sonar-url] [![MIT licensed][mit-badge]](./LICENSE)
 
 Sample projects (source codes) for my training [Spring - Advanced](http://arnosthavelka.github.io/presentation/spring-advanced/index.html) and [Spring Boot](http://arnosthavelka.github.io/presentation/spring-boot/index.html). 
+<<<<<<< Upstream, based on origin/develop
 All these projects are based on Spring Boot 3.5 & Java 25.
+=======
+All these projects are based on Spring Boot 4.0 & Java 25.
+>>>>>>> c4a669f issue #73 last compilation issues fixed
 
 #Agenda
 * Spring Core - some necessary basics and hints

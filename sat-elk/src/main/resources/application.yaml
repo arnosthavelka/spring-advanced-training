@@ -4,6 +4,6 @@ spring:
 
 elk:
   security-enabled: true
-  host: oxygen-hh310.cfs.dev.gcp.dbgcloud.io
+  host: hh310-oxygen.cfs.dev.gcp.dbgcloud.io
   username: elastic
   password: elastic

@@ -8,20 +8,20 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.core.io.Resource;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
+import tools.jackson.databind.ObjectMapper;
 
 @SpringBootApplication
 public class MapperApplication {
 
-    @Value("classpath:/users.json")
-    private Resource usersJsonResource;
+	@Value("classpath:/users.json")
+	private Resource usersJsonResource;
 
-    @Bean
-    List<UserDTO> jsonUsers(ObjectMapper objectMapper) throws IOException {
+	@Bean
+	List<UserDTO> jsonUsers(ObjectMapper objectMapper) throws IOException {
 		try (var inputStream = usersJsonResource.getInputStream()) {
-        	UserDTO[] payloadUsers = objectMapper.readValue(inputStream,UserDTO[].class);
-        	return List.of(payloadUsers);
-        }    	
-    }
+			UserDTO[] payloadUsers = objectMapper.readValue(inputStream, UserDTO[].class);
+			return List.of(payloadUsers);
+		}
+	}
 
 }

@@ -23,7 +23,7 @@ class ElasticsearchSecuredConfigTest {
 	@Test
 	void clientConfiguration() {
 		assertThat(config.clientConfiguration().getSslContext()).isNotNull();
-		assertThat(config.getElkProperties().getHost()).contains("oxygen-hh310");
+		assertThat(config.getElkProperties().getHost()).contains("hh310-oxygen");
 	}
 
 }

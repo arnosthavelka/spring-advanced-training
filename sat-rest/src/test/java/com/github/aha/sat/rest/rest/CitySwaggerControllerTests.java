@@ -12,8 +12,9 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.resttestclient.TestRestTemplate;
+import org.springframework.boot.resttestclient.autoconfigure.AutoConfigureTestRestTemplate;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
@@ -22,6 +23,7 @@ import com.github.aha.sat.rest.city.City;
 import com.github.aha.sat.rest.city.CityRepository;
 
 @SpringBootTest(webEnvironment = RANDOM_PORT)
+@AutoConfigureTestRestTemplate
 class CitySwaggerControllerTests {
 
 	static final String ROOT_URL = "/city/swagger";

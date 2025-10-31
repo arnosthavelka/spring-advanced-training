@@ -142,7 +142,7 @@ _Note: the available networks can be listed by._
 #### Add Elasticsearch cluster
 Run Elasticsearch:
 
-`docker run -d --name sat-elasticsearch --net sat-elk-net -p 9200:9200 -p 9300:9300 -e "discovery.type=single-node" -e "xpack.security.enabled=false" elasticsearch:8.15.5` (as supported by Spring Data - docker has already newer version)
+`docker run -d --name sat-elasticsearch --net sat-elk-net -p 9200:9200 -p 9300:9300 -e "discovery.type=single-node" -e "xpack.security.enabled=false" elasticsearch:9.2.6` (as supported by Spring Data - docker has already newer version)
 
 _Note: see the compatibility matrix https://docs.spring.io/spring-data/elasticsearch/reference/elasticsearch/versions.html._
 

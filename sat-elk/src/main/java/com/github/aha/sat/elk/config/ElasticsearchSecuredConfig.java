@@ -2,8 +2,9 @@ package com.github.aha.sat.elk.config;
 
 import javax.net.ssl.SSLContext;
 
-import org.apache.http.conn.ssl.NoopHostnameVerifier;
-import org.apache.http.conn.ssl.TrustAllStrategy;
+import org.apache.hc.client5.http.ssl.NoopHostnameVerifier;
+import org.apache.hc.client5.http.ssl.TrustAllStrategy;
+import org.apache.hc.core5.ssl.SSLContexts;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.elasticsearch.client.ClientConfiguration;
@@ -33,7 +34,7 @@ public class ElasticsearchSecuredConfig extends ElasticsearchConfiguration {
 	
     private SSLContext createSSLContext() {
         try {
-			return org.apache.http.ssl.SSLContexts.custom()
+			return SSLContexts.custom()
 					.loadTrustMaterial(new TrustAllStrategy())
 					.build();
         } catch (Exception e) {
