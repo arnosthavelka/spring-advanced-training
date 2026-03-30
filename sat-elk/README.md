@@ -142,17 +142,17 @@ _Note: the available networks can be listed by._
 #### Add Elasticsearch cluster
 Run Elasticsearch:
 
-`docker run -d --name sat-elasticsearch --net sat-elk-net -p 9200:9200 -p 9300:9300 -e "discovery.type=single-node" -e "xpack.security.enabled=false" elasticsearch:8.15.5` (as supported by Spring Data - docker has already newer version)
+`docker run -d --name sat-elasticsearch --net sat-elk-net -p 9200:9200 -p 9300:9300 -e "discovery.type=single-node" -e "xpack.security.enabled=false" elasticsearch:9.2.6` (as supported by Spring Data - docker has already newer version)
 
 _Note: see the compatibility matrix https://docs.spring.io/spring-data/elasticsearch/reference/elasticsearch/versions.html._
 
 The Elasticsearch instance can be verified by REST call
-`GET http://<ELK_HOST>:9200`
+`curl http://localhost:9200`
 
 _Note: the port mapping is important otherwise we cannot connect there (the port is not available). 
 The availability can be checked from PowerShell console as:_
 
-`Test-NetConnection -ComputerName <ELK_HOST> -Port 9200`
+`Test-NetConnection -ComputerName loclahost -Port 9200`
 
 _The used ports can be checked by:_
 

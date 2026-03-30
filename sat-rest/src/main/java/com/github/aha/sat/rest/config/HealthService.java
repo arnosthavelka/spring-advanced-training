@@ -1,7 +1,7 @@
 package com.github.aha.sat.rest.config;
 
-import org.springframework.boot.actuate.health.AbstractHealthIndicator;
-import org.springframework.boot.actuate.health.Health.Builder;
+import org.springframework.boot.health.contributor.AbstractHealthIndicator;
+import org.springframework.boot.health.contributor.Health.Builder;
 import org.springframework.stereotype.Component;
 
 @Component
