@@ -170,7 +170,7 @@ echo "xpack.security.enabled: false" >> elasticsearch.yml
 #### Add ElasticHQ GUI
 `docker run -d --name sat-elastichq --net sat-elk-net -p 5000:5000 elastichq/elasticsearch-hq`
 
-The GUI is accessed on http://<ELK_HOST>:5000 (we need to pass http://<ELK_HOST>:9200).
+The GUI is accessed on http://localhost:5000 (we need to pass http://localhost:9200).
 
 #### Start/Stop container
 `docker start sat-elasticsearch` | `docker stop sat-elasticsearch`
@@ -191,7 +191,7 @@ Run Elasticsearch:
 #### Create Elasticsearch cluster (with the default configuration)
 **Run Elasticsearch**
 
-`docker run -d --name sat-elasticsearch --net sat-elk-net -p 9200:9200 -p 9300:9300 -e "discovery.type=single-node" elasticsearch:8.15.5`
+`docker run -d --name sat-elasticsearch --net sat-elk-net -p 9200:9200 -p 9300:9300 -e "discovery.type=single-node" elasticsearch:9.2.6`
 
 **Change the default password**
 Disable X-Pack security by modifying ELK properties with this command:
@@ -204,4 +204,4 @@ elasticsearch-setup-passwords interactive
 _Note: the default password is `changeme`._
 
 The Elasticsearch instance can be verified by REST call
-`curl -k -u elastic:<new_password> https://<ELK_HOST>:9200`
+`curl -k -u elastic:<new_password> https://localhost:9200`
