@@ -22,6 +22,7 @@
 		<jacoco.version>0.8.15</jacoco.version>
 		<spring-boot-admin.version>4.0.4</spring-boot-admin.version>
 		<springdoc-openapi.version>3.0.3</springdoc-openapi.version>
+		<querydsl-openfeign.version>7.4.0</querydsl-openfeign.version>
 	</properties>
 	
 	<dependencies>
