@@ -8,6 +8,7 @@ import static com.github.aha.sat.jpa.city.City_.state;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.aot.hint.annotation.RegisterReflectionForBinding;
 import org.springframework.stereotype.Repository;
 
 import com.github.aha.sat.jpa.country.Country_;
@@ -22,6 +23,7 @@ import lombok.RequiredArgsConstructor;
 
 @Repository
 @RequiredArgsConstructor
+@RegisterReflectionForBinding({ City.class, City_.class, Country_.class })
 public class CityCustomRepositoryImpl implements CityCustomRepository {
 
 	@PersistenceContext
