@@ -9,9 +9,9 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class CityProjection {
 
-    private Long id;
-    private String name;
-    private String state;
+	private Long id;
+	private String name;
+	private String state;
 	private String countryName;
 
 }

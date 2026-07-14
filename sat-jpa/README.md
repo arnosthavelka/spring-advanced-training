@@ -1,24 +1,24 @@
 # sat-jpa
 
-#Goal
+# Goal
 * demonstrate Querydsl usage - see https://openfeign.github.io/querydsl/tutorials/jpa/
 * demonstrate GraalVM usage - see https://www.graalvm.org/latest/getting-started/
 
-#Rough Metrics
+# Rough Metrics
 
 | Metric | Java        | GraalVM     |
 | ------ | ----------- |------------ |
 | Build  | 8 seconds   | 14 minutes  |
 | Start  | 6.5 seconds | 1.6 seconds |
 
-#Build
-##Standard
+# Build
+## Standard
 
 ```
 mvn clean package
 ```
 
-##GraalVM
+## GraalVM
 
 
 ### Compile with a native Executable

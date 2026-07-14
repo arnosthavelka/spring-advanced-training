@@ -148,9 +148,9 @@ class CountryRepositoryOtherTests {
 
 		private Page<CityProjection> findAllProjectionSortedBy(Pageable pageable, Class<?> pathType) {
 			var query = new JPAQuery<CityProjection>(em)
-					.select(Projections.constructor(CityProjection.class, city.id, city.name, city.state, country.name))
+					.select(Projections.bean(CityProjection.class, city.id, city.name, city.state, country.name.as("countryName")))
+//					.select(Projections.constructor(CityProjection.class, city.id, city.name, city.state, country.name))
 					.from(city)
-//					.innerJoin(country.cities, city)
 					.innerJoin(country)
 					.on(country.id.eq(city.country.id))
 					.where(country.name.eq(USA));
