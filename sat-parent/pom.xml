@@ -22,7 +22,6 @@
 		
 		<jacoco.version>0.8.15</jacoco.version>
 		<querydsl-openfeign.version>7.5</querydsl-openfeign.version>
-		<sonar-maven-plugin.version>5.7.0.6970</sonar-maven-plugin.version>
 		<spring-boot-admin.version>4.1.2</spring-boot-admin.version>
 		<springdoc-openapi.version>3.1.0</springdoc-openapi.version>
 	</properties>
@@ -57,11 +56,6 @@
 	                <target>${java.version}</target>
 	                <forceJavacCompilerUse>true</forceJavacCompilerUse>
 	            </configuration>
-			</plugin>
-			<plugin>
-				<groupId>org.sonarsource.scanner.maven</groupId>
-				<artifactId>sonar-maven-plugin</artifactId>
-			    <version>${sonar-maven-plugin.version}</version>
 			</plugin>
 		</plugins>
 	</build>
